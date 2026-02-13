@@ -1,0 +1,45 @@
+{
+  "name": "@libretexts/davis-core",
+  "version": "1.0.0",
+  "description": "Shared variant definitions and utilities for Davis UI library",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "README.md",
+    "dist",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "dependencies": {
+    "tailwind-variants": "^0.3.0",
+    "clsx": "^2.1.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "dev": "tsc --project tsconfig.build.json --watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "ui",
+    "components",
+    "variants",
+    "tailwind",
+    "design-system"
+  ],
+  "author": "LibreTexts, Inc.",
+  "license": "MIT"
+}

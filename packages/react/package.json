@@ -1,0 +1,53 @@
+{
+  "name": "@libretexts/davis-react",
+  "version": "1.0.0",
+  "description": "An a11y-first UI library for React",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "README.md",
+    "dist",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "peerDependencies": {
+    "react": "^18 || ^19 || ^19.0.0-rc",
+    "react-dom": "^18 || ^19 || ^19.0.0-rc"
+  },
+  "dependencies": {
+    "@headlessui/react": "^2.2.0",
+    "@libretexts/davis-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.6.0"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "dev": "tsc --project tsconfig.build.json --watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "react",
+    "ui",
+    "components",
+    "headlessui",
+    "tailwind",
+    "accessibility",
+    "a11y"
+  ],
+  "author": "LibreTexts, Inc.",
+  "license": "MIT"
+}

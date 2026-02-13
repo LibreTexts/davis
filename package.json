@@ -1,0 +1,32 @@
+{
+  "name": "davis",
+  "version": "0.0.0",
+  "private": true,
+  "description": "An a11y-first UI library for React and Vue",
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "clean": "npm run clean --workspaces --if-present",
+    "dev": "npm run dev --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LibreTexts/davis.git"
+  },
+  "author": "LibreTexts, Inc.",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "bugs": {
+    "url": "https://github.com/LibreTexts/davis/issues"
+  },
+  "homepage": "https://github.com/LibreTexts/davis#readme",
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.6.0"
+  }
+}
