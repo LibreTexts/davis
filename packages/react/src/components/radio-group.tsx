@@ -62,9 +62,9 @@ export function RadioGroup({
       )}
       <HeadlessRadioGroup
         name={name}
-        value={value}
-        defaultValue={defaultValue}
-        onChange={onChange}
+        {...(value !== undefined ? { value } : {})}
+        {...(defaultValue !== undefined ? { defaultValue } : {})}
+        {...(onChange !== undefined ? { onChange } : {})}
         disabled={disabled}
         className={clsx(
           "flex",

@@ -9,7 +9,7 @@ import {
 } from "react";
 import { button } from "./variants";
 
-type ButtonVariant = "primary" | "secondary" | "tertiary" | "destructive" | "ghost" | "outline";
+type ButtonVariant = "primary" | "secondary" | "tertiary" | "destructive" | "warning" | "ghost" | "outline";
 type ButtonSize = "sm" | "md" | "lg";
 type IconPosition = "left" | "right";
 
@@ -146,7 +146,7 @@ export const Button = forwardRef(function Button<C extends ElementType = "button
 
   return (
     <Component
-      ref={ref}
+      ref={ref as React.LegacyRef<HTMLButtonElement>}
       disabled={Component === "button" ? isDisabled : undefined}
       aria-disabled={isDisabled}
       aria-busy={loading}

@@ -59,5 +59,9 @@ export const DisabledOn: Story = {
 };
 
 export const NoLabel: Story = {
-  args: { checked: false, label: undefined },
+  render: () => {
+    const [checked, setChecked] = useState(false);
+    return <Switch checked={checked} onChange={setChecked} />;
+  },
+  args: {},
 };
