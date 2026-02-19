@@ -5,7 +5,13 @@ import {
   MenuItems,
 } from "@headlessui/react";
 import clsx from "clsx";
-import { type ReactNode, forwardRef, type ButtonHTMLAttributes } from "react";
+import {
+  type ReactNode,
+  forwardRef,
+  type ElementType,
+  type MouseEventHandler,
+  type KeyboardEventHandler,
+} from "react";
 
 // ============================================
 // Menu Root
@@ -28,18 +34,49 @@ export function Menu({ children, className }: MenuProps) {
 // Menu Button (Trigger)
 // ============================================
 
-export type MenuTriggerProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+export type MenuTriggerProps = {
   children: ReactNode;
   className?: string;
-  as?: React.ElementType;
+  as?: ElementType;
+  disabled?: boolean;
+  type?: "button" | "submit" | "reset";
+  id?: string;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  onKeyDown?: KeyboardEventHandler<HTMLButtonElement>;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+  "aria-controls"?: string;
+  "aria-expanded"?: boolean | "true" | "false";
 };
 
 const MenuTrigger = forwardRef<HTMLButtonElement, MenuTriggerProps>(
-  ({ children, className, as, ...props }, ref) => {
+  ({
+    children,
+    className,
+    as,
+    disabled,
+    type,
+    id,
+    onClick,
+    onKeyDown,
+    "aria-label": ariaLabel,
+    "aria-describedby": ariaDescribedBy,
+    "aria-controls": ariaControls,
+    "aria-expanded": ariaExpanded,
+  }, ref) => {
     return (
       <MenuButton
         ref={ref}
-        as={as}
+        {...(as !== undefined ? { as } : {})}
+        {...(disabled !== undefined ? { disabled } : {})}
+        {...(type !== undefined ? { type } : {})}
+        {...(id !== undefined ? { id } : {})}
+        {...(onClick !== undefined ? { onClick } : {})}
+        {...(onKeyDown !== undefined ? { onKeyDown } : {})}
+        {...(ariaLabel !== undefined ? { "aria-label": ariaLabel } : {})}
+        {...(ariaDescribedBy !== undefined ? { "aria-describedby": ariaDescribedBy } : {})}
+        {...(ariaControls !== undefined ? { "aria-controls": ariaControls } : {})}
+        {...(ariaExpanded !== undefined ? { "aria-expanded": ariaExpanded } : {})}
         className={clsx(
           "inline-flex items-center justify-center gap-2",
           "px-4 py-2 text-sm font-medium",
@@ -49,7 +86,6 @@ const MenuTrigger = forwardRef<HTMLButtonElement, MenuTriggerProps>(
           "disabled:opacity-50 disabled:cursor-not-allowed",
           className
         )}
-        {...props}
       >
         {children}
         <ChevronDownIcon className="w-4 h-4 text-gray-500" aria-hidden="true" />

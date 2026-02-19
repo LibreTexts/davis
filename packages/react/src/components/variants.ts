@@ -44,6 +44,12 @@ export const BUTTON_VARIANTS = {
     'hover:bg-red-700',
     'focus:ring-danger',
   ].join(' '),
+  warning: [
+    'bg-amber-500',
+    'text-white',
+    'hover:bg-amber-600',
+    'focus:ring-amber-500',
+  ].join(' '),
   ghost: [
     'bg-transparent',
     'text-gray-700',
@@ -369,6 +375,43 @@ export const dialog = tv({
   },
   defaultVariants: {
     size: 'md' as const,
+  },
+});
+
+// ===========================================================
+// Notification/Toast component
+// ===========================================================
+export const notification = tv({
+  slots: {
+    container: [
+      'w-80 max-w-full pointer-events-auto',
+      'bg-white rounded-lg shadow-lg',
+      'border border-gray-200 border-l-4',
+      'p-4',
+    ].join(' '),
+    body: 'flex items-start gap-3',
+    icon: 'shrink-0 size-5 mt-0.5',
+    content: 'flex-1 min-w-0',
+    title: 'text-sm font-semibold text-gray-900',
+    message: 'text-sm text-gray-600',
+    action: 'mt-2',
+    closeBtn: [
+      'shrink-0 self-start rounded p-0.5 -mt-0.5 -mr-0.5',
+      'text-gray-400 hover:text-gray-600 hover:bg-gray-100',
+      'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1',
+      'transition-colors duration-150',
+    ].join(' '),
+  },
+  variants: {
+    variant: {
+      success: { container: 'border-l-success', icon: 'text-success' },
+      error:   { container: 'border-l-danger',  icon: 'text-danger'  },
+      warning: { container: 'border-l-warning', icon: 'text-warning' },
+      info:    { container: 'border-l-primary', icon: 'text-primary' },
+    },
+  },
+  defaultVariants: {
+    variant: 'info' as const,
   },
 });
 
