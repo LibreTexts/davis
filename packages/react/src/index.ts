@@ -37,6 +37,17 @@ export type {
   MenuLabelProps,
 } from "./components/menu";
 
+export { Dialog } from "./components/dialog";
+export type {
+  DialogProps,
+  DialogSize,
+  DialogHeaderProps,
+  DialogTitleProps,
+  DialogDescriptionProps,
+  DialogFooterProps,
+  DialogCloseProps,
+} from "./components/dialog";
+
 export { Link } from "./components/link";
 export type { LinkProps } from "./components/link";
 

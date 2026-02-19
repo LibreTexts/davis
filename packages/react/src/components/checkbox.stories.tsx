@@ -57,7 +57,7 @@ export const Indeterminate: Story = {
               key={item}
               name={`item-${i}`}
               label={item}
-              checked={checked[i]}
+              checked={checked[i] ?? false}
               onChange={(val) => {
                 const next = [...checked];
                 next[i] = val;
@@ -97,5 +97,6 @@ export const LargeSize: Story = {
 };
 
 export const WithoutLabel: Story = {
-  args: { label: undefined },
+  render: () => <Checkbox name="terms" />,
+  args: {},
 };

@@ -352,6 +352,27 @@ export const badge = tv({
 });
 
 // ===========================================================
+// Dialog component
+// ===========================================================
+export const DIALOG_SIZE_VARIANTS = {
+  sm: 'max-w-sm',
+  md: 'max-w-md',
+  lg: 'max-w-lg',
+  xl: 'max-w-xl',
+  full: 'max-w-full',
+};
+
+export const dialog = tv({
+  base: 'relative w-full bg-white rounded-lg shadow-xl',
+  variants: {
+    size: DIALOG_SIZE_VARIANTS,
+  },
+  defaultVariants: {
+    size: 'md' as const,
+  },
+});
+
+// ===========================================================
 // Card component
 // ===========================================================
 export const card = tv({
