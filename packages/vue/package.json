@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.0",
-    "@libretexts/davis-core": "workspace:*"
+    "@libretexts/davis-core": "*"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
