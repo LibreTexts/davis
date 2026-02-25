@@ -333,27 +333,105 @@ export const switchToggle = tv({
 });
 
 // ===========================================================
-// Badge component
+// Alert/Banner component
 // ===========================================================
-export const badge = tv({
-  base: 'inline-flex items-center rounded-full font-medium',
+export const alert = tv({
+  slots: {
+    container: 'flex gap-3 rounded-md border p-4',
+    icon:      'shrink-0 size-5 mt-0.5',
+    body:      'flex-1 min-w-0',
+    title:     'text-sm font-semibold mb-0.5',
+    message:   'text-sm',
+    action:    'mt-2',
+    closeBtn: [
+      'shrink-0 self-start rounded p-0.5 -mt-0.5 -mr-0.5',
+      'focus:outline-none focus:ring-2 focus:ring-offset-1',
+      'transition-colors duration-150',
+    ].join(' '),
+  },
   variants: {
     variant: {
-      default: 'bg-gray-100 text-gray-800',
-      primary: 'bg-blue-100 text-primary',
-      success: 'bg-green-100 text-success',
-      warning: 'bg-amber-100 text-warning',
-      danger: 'bg-red-100 text-danger',
-    },
-    size: {
-      sm: 'px-2 py-0.5 text-xs',
-      md: 'px-3 py-1 text-sm',
-      lg: 'px-4 py-1.5 text-base',
+      info: {
+        container: 'bg-blue-50 border-blue-200',
+        icon:      'text-primary',
+        title:     'text-primary',
+        message:   'text-blue-700',
+        closeBtn:  'text-blue-400 hover:text-blue-600 hover:bg-blue-100 focus:ring-primary',
+      },
+      success: {
+        container: 'bg-green-50 border-green-200',
+        icon:      'text-success',
+        title:     'text-success',
+        message:   'text-green-700',
+        closeBtn:  'text-green-400 hover:text-green-600 hover:bg-green-100 focus:ring-success',
+      },
+      warning: {
+        container: 'bg-amber-50 border-amber-200',
+        icon:      'text-warning',
+        title:     'text-warning',
+        message:   'text-amber-700',
+        closeBtn:  'text-amber-400 hover:text-amber-600 hover:bg-amber-100 focus:ring-warning',
+      },
+      error: {
+        container: 'bg-red-50 border-red-200',
+        icon:      'text-danger',
+        title:     'text-danger',
+        message:   'text-red-700',
+        closeBtn:  'text-red-400 hover:text-red-600 hover:bg-red-100 focus:ring-danger',
+      },
     },
   },
   defaultVariants: {
-    variant: 'default',
-    size: 'md',
+    variant: 'info' as const,
+  },
+});
+
+// ===========================================================
+// Badge component
+// ===========================================================
+export const badge = tv({
+  slots: {
+    root:   'inline-flex items-center gap-1.5 rounded-full font-medium',
+    dot:    'rounded-full shrink-0',
+    remove: 'inline-flex items-center justify-center rounded hover:bg-black/10 focus:outline-none focus:ring-1 focus:ring-inset transition-colors duration-150',
+  },
+  variants: {
+    variant: {
+      default: {
+        root:   'bg-gray-100 text-gray-800',
+        dot:    'bg-gray-500',
+        remove: 'text-gray-500 focus:ring-gray-400',
+      },
+      primary: {
+        root:   'bg-blue-100 text-primary',
+        dot:    'bg-primary',
+        remove: 'text-primary/70 focus:ring-primary',
+      },
+      success: {
+        root:   'bg-green-100 text-success',
+        dot:    'bg-success',
+        remove: 'text-success/70 focus:ring-success',
+      },
+      warning: {
+        root:   'bg-amber-100 text-warning',
+        dot:    'bg-warning',
+        remove: 'text-warning/70 focus:ring-warning',
+      },
+      danger: {
+        root:   'bg-red-100 text-danger',
+        dot:    'bg-danger',
+        remove: 'text-danger/70 focus:ring-danger',
+      },
+    },
+    size: {
+      sm: { root: 'px-2 py-0.5 text-xs',    dot: 'size-1.5', remove: 'size-3.5 -mr-0.5' },
+      md: { root: 'px-3 py-1 text-sm',       dot: 'size-2',   remove: 'size-4 -mr-1'     },
+      lg: { root: 'px-4 py-1.5 text-base',   dot: 'size-2.5', remove: 'size-5 -mr-1'     },
+    },
+  },
+  defaultVariants: {
+    variant: 'default' as const,
+    size: 'md' as const,
   },
 });
 
@@ -416,25 +494,51 @@ export const notification = tv({
 });
 
 // ===========================================================
+// Tooltip component
+// ===========================================================
+export const tooltip = tv({
+  slots: {
+    content: [
+      'absolute z-50',
+      'w-max max-w-xs',
+      'rounded-md px-2.5 py-1.5',
+      'bg-gray-900 text-white text-xs font-medium',
+      'shadow-sm',
+      'pointer-events-none',
+    ].join(' '),
+  },
+});
+
+// ===========================================================
 // Card component
 // ===========================================================
 export const card = tv({
-  base: 'border bg-white rounded-lg shadow-sm',
+  slots: {
+    root:          'border bg-white rounded-lg shadow-sm overflow-hidden',
+    header:        'border-b border-gray-100',
+    headerContent: '',
+    body:          '',
+    footer:        'border-t border-gray-100 bg-gray-50/50',
+    image:         'w-full object-cover block',
+  },
   variants: {
     variant: {
-      default: 'border-gray-200',
-      elevated: 'border-gray-200 shadow-md',
-      outline: 'border-gray-300',
+      default:  { root: 'border-gray-200' },
+      elevated: { root: 'border-gray-200 shadow-md' },
+      outline:  { root: 'border-gray-300' },
     },
     padding: {
-      none: '',
-      sm: 'p-4',
-      md: 'p-6',
-      lg: 'p-8',
+      none: { headerContent: '',           body: '',           footer: ''           },
+      sm:   { headerContent: 'px-4 py-3', body: 'px-4 py-3', footer: 'px-4 py-3' },
+      md:   { headerContent: 'px-6 py-4', body: 'px-6 py-4', footer: 'px-6 py-4' },
+      lg:   { headerContent: 'px-8 py-6', body: 'px-8 py-6', footer: 'px-8 py-6' },
+    },
+    clickable: {
+      true: { root: 'cursor-pointer transition-shadow duration-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2' },
     },
   },
   defaultVariants: {
-    variant: 'default',
-    padding: 'md',
+    variant: 'default' as const,
+    padding: 'md' as const,
   },
 });
