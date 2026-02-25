@@ -101,4 +101,11 @@ export type {
   AvatarGroupProps,
 } from "./components/avatar";
 
+export { Spinner } from "./components/spinner";
+export type {
+  SpinnerProps,
+  SpinnerSize,
+  SpinnerColor,
+} from "./components/spinner";
+
 export * from "./components/variants";
