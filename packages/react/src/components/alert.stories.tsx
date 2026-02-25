@@ -22,20 +22,12 @@ export default meta;
 
 type Story = StoryObj<typeof Alert>;
 
-// ============================================
-// Default (fully controllable)
-// ============================================
-
 export const Default: Story = {
   args: {
     variant: "info",
     message: "A new version of the application is available.",
   },
 };
-
-// ============================================
-// All Variants
-// ============================================
 
 export const AllVariants: Story = {
   render: () => (
@@ -49,10 +41,6 @@ export const AllVariants: Story = {
   args: {},
 };
 
-// ============================================
-// With Title
-// ============================================
-
 export const WithTitle: Story = {
   render: () => (
     <div className="flex flex-col gap-4 max-w-xl">
@@ -64,10 +52,6 @@ export const WithTitle: Story = {
   ),
   args: {},
 };
-
-// ============================================
-// Dismissible
-// ============================================
 
 export const Dismissible: Story = {
   render: () => {
@@ -85,10 +69,6 @@ export const Dismissible: Story = {
   },
   args: {},
 };
-
-// ============================================
-// With Action
-// ============================================
 
 export const WithAction: Story = {
   render: () => (
@@ -108,10 +88,6 @@ export const WithAction: Story = {
   ),
   args: {},
 };
-
-// ============================================
-// Custom Icon
-// ============================================
 
 function StarIcon({ className }: { className?: string }) {
   return (
@@ -134,10 +110,6 @@ export const CustomIcon: Story = {
   ),
   args: {},
 };
-
-// ============================================
-// No Icon
-// ============================================
 
 export const NoIcon: Story = {
   render: () => (

@@ -13,10 +13,6 @@ import {
   type KeyboardEventHandler,
 } from "react";
 
-// ============================================
-// Menu Root
-// ============================================
-
 export type MenuProps = {
   children: ReactNode;
   className?: string;
@@ -29,10 +25,6 @@ export function Menu({ children, className }: MenuProps) {
     </HeadlessMenu>
   );
 }
-
-// ============================================
-// Menu Button (Trigger)
-// ============================================
 
 export type MenuTriggerProps = {
   children: ReactNode;
@@ -96,16 +88,10 @@ const MenuTrigger = forwardRef<HTMLButtonElement, MenuTriggerProps>(
 
 MenuTrigger.displayName = "Menu.Button";
 
-// ============================================
-// Menu Items Container
-// ============================================
-
 export type MenuItemsContainerProps = {
   children: ReactNode;
   className?: string;
-  /** Alignment of the dropdown */
   align?: "left" | "right";
-  /** Width of the dropdown */
   width?: "auto" | "sm" | "md" | "lg" | "full";
 };
 
@@ -145,10 +131,6 @@ function MenuItemsContainer({
 }
 
 MenuItemsContainer.displayName = "Menu.Items";
-
-// ============================================
-// Menu Item
-// ============================================
 
 export type MenuItemProps = {
   children: ReactNode;
@@ -202,10 +184,6 @@ function MenuItemComponent({
 
 MenuItemComponent.displayName = "Menu.Item";
 
-// ============================================
-// Menu Divider
-// ============================================
-
 export type MenuDividerProps = {
   className?: string;
 };
@@ -221,10 +199,6 @@ function MenuDivider({ className }: MenuDividerProps) {
 }
 
 MenuDivider.displayName = "Menu.Divider";
-
-// ============================================
-// Menu Label (non-interactive header)
-// ============================================
 
 export type MenuLabelProps = {
   children: ReactNode;
@@ -246,10 +220,6 @@ function MenuLabel({ children, className }: MenuLabelProps) {
 
 MenuLabel.displayName = "Menu.Label";
 
-// ============================================
-// Chevron Icon
-// ============================================
-
 function ChevronDownIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -267,17 +237,12 @@ function ChevronDownIcon({ className }: { className?: string }) {
   );
 }
 
-// ============================================
-// Attach subcomponents to Menu
-// ============================================
-
 Menu.Button = MenuTrigger;
 Menu.Items = MenuItemsContainer;
 Menu.Item = MenuItemComponent;
 Menu.Divider = MenuDivider;
 Menu.Label = MenuLabel;
 
-// Export types
 export type {
   MenuProps as MenuRootProps,
   MenuTriggerProps as MenuButtonProps,

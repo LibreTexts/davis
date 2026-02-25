@@ -25,15 +25,10 @@ export type TextareaProps = Omit<
     textareaClassName?: string;
     error?: boolean;
     required?: boolean;
-    /** Helper text displayed below the textarea */
     helperText?: string;
-    /** Error message displayed below the textarea (overrides helperText when error is true) */
     errorMessage?: string;
-    /** Enable auto-resize based on content */
     autoResize?: boolean;
-    /** Show character count (requires maxLength to be set) */
     showCharacterCount?: boolean;
-    /** Number of visible text rows */
     rows?: number;
   };
 

@@ -17,10 +17,6 @@ export default meta;
 
 type Story = StoryObj<typeof Card>;
 
-// ============================================
-// Default — simple card with body only
-// ============================================
-
 export const Default: Story = {
   render: (args) => (
     <Card {...args} className="max-w-sm">
@@ -36,10 +32,6 @@ export const Default: Story = {
     padding: "md",
   },
 };
-
-// ============================================
-// With Subcomponents
-// ============================================
 
 export const WithSubcomponents: Story = {
   render: () => (
@@ -67,10 +59,6 @@ export const WithSubcomponents: Story = {
   ),
   args: {},
 };
-
-// ============================================
-// With Image Header
-// ============================================
 
 export const WithImageHeader: Story = {
   render: () => (
@@ -101,10 +89,6 @@ export const WithImageHeader: Story = {
   args: {},
 };
 
-// ============================================
-// Clickable
-// ============================================
-
 export const Clickable: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4">
@@ -130,10 +114,6 @@ export const Clickable: Story = {
   args: {},
 };
 
-// ============================================
-// All Variants
-// ============================================
-
 export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4">
@@ -149,10 +129,6 @@ export const AllVariants: Story = {
   ),
   args: {},
 };
-
-// ============================================
-// Padding Sizes
-// ============================================
 
 export const PaddingSizes: Story = {
   render: () => (

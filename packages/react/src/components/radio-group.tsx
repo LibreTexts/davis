@@ -17,11 +17,8 @@ export type RadioGroupProps = {
   error?: boolean;
   className?: string;
   labelClassName?: string;
-  /** Layout direction for radio options */
   orientation?: "vertical" | "horizontal";
-  /** Helper text displayed below the radio group */
   helperText?: string;
-  /** Error message displayed below the radio group */
   errorMessage?: string;
   children: ReactNode;
 };

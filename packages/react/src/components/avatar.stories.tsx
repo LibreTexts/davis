@@ -16,16 +16,11 @@ export default meta;
 
 type Story = StoryObj<typeof Avatar>;
 
-// Sample avatar images (using placeholder URLs)
 const IMG_1 = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face";
 const IMG_2 = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face";
 const IMG_3 = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face";
 const IMG_4 = "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=face";
 const IMG_5 = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face";
-
-// ============================================
-// Basic Stories
-// ============================================
 
 export const WithImage: Story = {
   args: {
@@ -61,10 +56,6 @@ export const DefaultFallback: Story = {
   args: {},
 };
 
-// ============================================
-// Size Variants
-// ============================================
-
 export const AllSizes: Story = {
   render: () => (
     <div className="flex items-end gap-4">
@@ -89,20 +80,12 @@ export const InitialsSizes: Story = {
   ),
 };
 
-// ============================================
-// Fallback Behavior
-// ============================================
-
 export const ImageLoadError: Story = {
   args: {
     src: "https://invalid-image-url.com/broken.jpg",
     name: "Fallback User",
   },
 };
-
-// ============================================
-// Avatar Group Stories
-// ============================================
 
 type GroupStory = StoryObj<typeof AvatarGroup>;
 
@@ -197,10 +180,6 @@ export const GroupWithInitials: GroupStory = {
     </AvatarGroup>
   ),
 };
-
-// ============================================
-// Real-World Examples
-// ============================================
 
 export const UserCard: Story = {
   render: () => (

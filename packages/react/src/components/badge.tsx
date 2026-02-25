@@ -2,31 +2,19 @@ import clsx from "clsx";
 import { type ReactNode } from "react";
 import { badge as badgeVariants } from "./variants";
 
-// ============================================
-// Types
-// ============================================
-
 export type BadgeVariant = "default" | "primary" | "success" | "warning" | "danger";
-export type BadgeSize    = "sm" | "md" | "lg";
+export type BadgeSize = "sm" | "md" | "lg";
 
 export type BadgeProps = {
   label: string;
   variant?: BadgeVariant;
   size?: BadgeSize;
-  /** Leading icon node */
   icon?: ReactNode;
-  /** Show a status dot before the label */
   dot?: boolean;
-  /** Called when the remove (×) button is clicked */
   onRemove?: () => void;
-  /** Accessible label for the remove button (default: "Remove {label}") */
   removeLabel?: string;
   className?: string;
 };
-
-// ============================================
-// XMark icon (inline, no external dep)
-// ============================================
 
 function XMarkIcon({ className }: { className?: string }) {
   return (
@@ -41,10 +29,6 @@ function XMarkIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-
-// ============================================
-// Badge
-// ============================================
 
 export function Badge({
   label,

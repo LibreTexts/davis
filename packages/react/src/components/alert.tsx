@@ -2,10 +2,6 @@ import clsx from "clsx";
 import { type ReactNode } from "react";
 import { alert as alertVariants } from "./variants";
 
-// ============================================
-// Types
-// ============================================
-
 export type AlertVariant = "info" | "success" | "warning" | "error";
 
 export type AlertAction = {
@@ -15,26 +11,15 @@ export type AlertAction = {
 
 export type AlertProps = {
   variant?: AlertVariant;
-  /** Optional bold heading above the message. */
   title?: string;
-  /** Main alert body text. */
   message: string;
-  /** Replace the default variant icon with a custom node. */
   icon?: ReactNode;
-  /** Set to false to hide the icon entirely. Default: true. */
   showIcon?: boolean;
-  /** Show an × dismiss button. Pair with onDismiss to control visibility. */
   dismissible?: boolean;
-  /** Called when the dismiss button is clicked. */
   onDismiss?: () => void;
-  /** Optional inline action button rendered below the message. */
   action?: AlertAction;
   className?: string;
 };
-
-// ============================================
-// Icons (Heroicons 20/solid)
-// ============================================
 
 function CheckCircleIcon({ className }: { className?: string }) {
   return (
@@ -92,10 +77,6 @@ const ACTION_TEXT_CLASSES: Record<AlertVariant, string> = {
   error:   "text-danger",
 };
 
-// ============================================
-// Alert
-// ============================================
-
 export function Alert({
   variant = "info",
   title,
@@ -110,7 +91,6 @@ export function Alert({
   const styles = alertVariants({ variant });
   const DefaultIcon = VARIANT_ICONS[variant];
 
-  // icon prop absent → default; icon prop present (incl. null) → custom/none
   const iconElement = showIcon
     ? (icon !== undefined
         ? <span className={styles.icon()}>{icon}</span>

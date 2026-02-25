@@ -21,7 +21,6 @@ export type IconButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "chi
   iconClassName?: string;
 };
 
-// Spinner component for loading state
 function Spinner({ className }: { className?: string }) {
   return (
     <svg
@@ -47,14 +46,12 @@ function Spinner({ className }: { className?: string }) {
   );
 }
 
-// Icon size mapping based on button size
 const iconSizeClasses: Record<IconButtonSize, string> = {
   sm: "h-4 w-4",
   md: "h-5 w-5",
   lg: "h-6 w-6",
 };
 
-// Tooltip position classes
 const tooltipPositionClasses: Record<string, string> = {
   top: "bottom-full left-1/2 -translate-x-1/2 mb-2",
   bottom: "top-full left-1/2 -translate-x-1/2 mt-2",
@@ -111,7 +108,6 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
           )}
         </button>
 
-        {/* Tooltip - only shown when tooltip prop is provided */}
         {hasTooltip && showTooltip && !isDisabled && (
           <div
             role="tooltip"
@@ -121,7 +117,6 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
             )}
           >
             {tooltip}
-            {/* Tooltip arrow */}
             <div
               className={clsx(
                 "absolute w-2 h-2 bg-gray-900 transform rotate-45",

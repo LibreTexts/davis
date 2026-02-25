@@ -1,44 +1,16 @@
 import clsx from "clsx";
 import { spinner as spinnerVariants } from "./variants";
 
-// ============================================
-// Types
-// ============================================
-
 export type SpinnerSize = "xs" | "sm" | "md" | "lg" | "xl";
 export type SpinnerColor = "primary" | "secondary" | "white" | "current" | "success" | "warning" | "danger";
 
 export type SpinnerProps = {
-  /** Size of the spinner */
   size?: SpinnerSize;
-  /** Color of the spinner */
   color?: SpinnerColor;
-  /** Optional visible text to display next to the spinner */
   text?: string;
-  /** Additional class name */
   className?: string;
 };
 
-// ============================================
-// Spinner Component
-// ============================================
-
-/**
- * Loading spinner component for indicating async operations.
- *
- * @example
- * // Default spinner
- * <Spinner />
- *
- * // Large primary spinner
- * <Spinner size="lg" color="primary" />
- *
- * // White spinner (for dark backgrounds)
- * <Spinner color="white" />
- *
- * // With visible text
- * <Spinner text="Saving..." />
- */
 export function Spinner({
   size = "md",
   color = "primary",

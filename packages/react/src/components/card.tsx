@@ -2,10 +2,6 @@ import clsx from "clsx";
 import { type ReactNode, createContext, useContext } from "react";
 import { card as cardVariants } from "./variants";
 
-// ============================================
-// Types
-// ============================================
-
 export type CardVariant = "default" | "elevated" | "outline";
 export type CardPadding = "none" | "sm" | "md" | "lg";
 
@@ -19,18 +15,14 @@ export type CardProps = {
   children: ReactNode;
   variant?: CardVariant;
   padding?: CardPadding;
-  /** Makes the card clickable — renders a <div role="button"> with keyboard support */
   onClick?: () => void;
-  /** Makes the card a link — renders an <a> element */
   href?: string;
-  /** Target for href links */
   target?: string;
   className?: string;
 };
 
 export type CardHeaderProps = {
   children?: ReactNode;
-  /** When provided, renders a full-width <img> above the children */
   image?: CardImageProps;
   className?: string;
 };
@@ -45,10 +37,6 @@ export type CardFooterProps = {
   className?: string;
 };
 
-// ============================================
-// Context
-// ============================================
-
 type CardStyles = ReturnType<typeof cardVariants>;
 
 const CardContext = createContext<CardStyles | null>(null);
@@ -60,10 +48,6 @@ function useCardStyles(): CardStyles {
   }
   return ctx;
 }
-
-// ============================================
-// Card Root
-// ============================================
 
 export function Card({
   children,
@@ -124,10 +108,6 @@ export function Card({
 
 Card.displayName = "Card";
 
-// ============================================
-// Card Header
-// ============================================
-
 function CardHeader({ children, image, className }: CardHeaderProps) {
   const styles = useCardStyles();
 
@@ -152,10 +132,6 @@ function CardHeader({ children, image, className }: CardHeaderProps) {
 
 CardHeader.displayName = "Card.Header";
 
-// ============================================
-// Card Body
-// ============================================
-
 function CardBody({ children, className }: CardBodyProps) {
   const styles = useCardStyles();
   return (
@@ -166,10 +142,6 @@ function CardBody({ children, className }: CardBodyProps) {
 }
 
 CardBody.displayName = "Card.Body";
-
-// ============================================
-// Card Footer
-// ============================================
 
 function CardFooter({ children, className }: CardFooterProps) {
   const styles = useCardStyles();
@@ -182,10 +154,6 @@ function CardFooter({ children, className }: CardFooterProps) {
 
 CardFooter.displayName = "Card.Footer";
 
-// ============================================
-// Attach subcomponents
-// ============================================
-
 Card.Header = CardHeader;
-Card.Body   = CardBody;
+Card.Body = CardBody;
 Card.Footer = CardFooter;

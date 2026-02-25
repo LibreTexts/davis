@@ -18,9 +18,7 @@ export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size"> &
     rightIcon?: ReactNode;
     error?: boolean;
     required?: boolean;
-    /** Helper text displayed below the input */
     helperText?: string;
-    /** Error message displayed below the input (overrides helperText when error is true) */
     errorMessage?: string;
   };
 

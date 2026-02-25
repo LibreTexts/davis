@@ -13,7 +13,6 @@ type ButtonVariant = "primary" | "secondary" | "tertiary" | "destructive" | "war
 type ButtonSize = "sm" | "md" | "lg";
 type IconPosition = "left" | "right";
 
-// Polymorphic component types
 type AsProp<C extends ElementType> = {
   as?: C;
 };
@@ -27,7 +26,6 @@ type PolymorphicComponentProp<
 > = React.PropsWithChildren<Props & AsProp<C>> &
   Omit<ComponentPropsWithoutRef<C>, PropsToOmit<C, Props>>;
 
-// Base button props
 type ButtonBaseProps = {
   variant?: ButtonVariant;
   size?: ButtonSize;
@@ -35,11 +33,8 @@ type ButtonBaseProps = {
   disabled?: boolean;
   fullWidth?: boolean;
   className?: string;
-  /** Icon element to display */
   icon?: ReactNode;
-  /** Position of the icon */
   iconPosition?: IconPosition;
-  /** Additional classes for the icon wrapper */
   iconClassName?: string;
 };
 
@@ -48,11 +43,9 @@ export type ButtonProps<C extends ElementType = "button"> = PolymorphicComponent
   ButtonBaseProps
 >;
 
-// Suppress unused import warnings - these are used via PolymorphicComponentProp
 void (null as unknown as ButtonHTMLAttributes<HTMLButtonElement>);
 void (null as unknown as AnchorHTMLAttributes<HTMLAnchorElement>);
 
-// Spinner component for loading state
 function Spinner({ className }: { className?: string }) {
   return (
     <svg
@@ -78,30 +71,12 @@ function Spinner({ className }: { className?: string }) {
   );
 }
 
-// Icon size mapping based on button size
 const iconSizeClasses: Record<ButtonSize, string> = {
   sm: "h-4 w-4",
   md: "h-5 w-5",
   lg: "h-6 w-6",
 };
 
-/**
- * Button component with polymorphic rendering support.
- * Can render as button, link, or any other element.
- *
- * @example
- * // Default button
- * <Button>Click me</Button>
- *
- * // As a link
- * <Button as="a" href="/path">Go somewhere</Button>
- *
- * // With icon
- * <Button icon={<IconPlus />}>Add item</Button>
- *
- * // Loading state
- * <Button loading>Saving...</Button>
- */
 export const Button = forwardRef(function Button<C extends ElementType = "button">(
   {
     as,
@@ -122,7 +97,6 @@ export const Button = forwardRef(function Button<C extends ElementType = "button
   const Component = as || "button";
   const isDisabled = disabled || loading;
 
-  // Build icon wrapper
   const iconElement = icon && !loading && (
     <span
       className={clsx(
@@ -137,7 +111,6 @@ export const Button = forwardRef(function Button<C extends ElementType = "button
     </span>
   );
 
-  // Build spinner for loading state
   const spinnerElement = loading && (
     <span className={clsx("flex shrink-0", iconSizeClasses[size], children && "mr-2")}>
       <Spinner className={iconSizeClasses[size]} />
@@ -168,5 +141,4 @@ export const Button = forwardRef(function Button<C extends ElementType = "button
   props: ButtonProps<C> & { ref?: React.Ref<Element> }
 ) => React.ReactElement;
 
-// For better debugging
 (Button as { displayName?: string }).displayName = "Button";

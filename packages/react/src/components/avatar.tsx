@@ -2,48 +2,26 @@ import clsx from "clsx";
 import { useState, type ReactNode, type ImgHTMLAttributes } from "react";
 import { avatar as avatarVariants, avatarGroup as avatarGroupVariants } from "./variants";
 
-// ============================================
-// Types
-// ============================================
-
 export type AvatarSize = "xs" | "sm" | "md" | "lg" | "xl";
 
 export type AvatarProps = {
-  /** Image source URL */
   src?: string;
-  /** Alt text for the image */
   alt?: string;
-  /** User's name - used to generate initials fallback */
   name?: string;
-  /** Explicit initials to display (overrides name-derived initials) */
   initials?: string;
-  /** Icon to display as fallback (overrides initials) */
   icon?: ReactNode;
-  /** Size variant */
   size?: AvatarSize;
-  /** Additional class name */
   className?: string;
-  /** Additional props for the img element */
   imgProps?: Omit<ImgHTMLAttributes<HTMLImageElement>, "src" | "alt">;
 };
 
 export type AvatarGroupProps = {
   children: ReactNode;
-  /** Maximum number of avatars to show before +N indicator */
   max?: number;
-  /** Size variant (applies to all avatars and overflow indicator) */
   size?: AvatarSize;
-  /** Additional class name */
   className?: string;
 };
 
-// ============================================
-// Helpers
-// ============================================
-
-/**
- * Extract initials from a name (up to 2 characters)
- */
 function getInitials(name: string): string {
   const parts = name.trim().split(/\s+/).filter(Boolean);
   if (parts.length === 0) return "";
@@ -55,9 +33,6 @@ function getInitials(name: string): string {
   return ((first[0] ?? "") + (last[0] ?? "")).toUpperCase();
 }
 
-/**
- * Default user icon fallback
- */
 function UserIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -76,26 +51,6 @@ function UserIcon({ className }: { className?: string }) {
   );
 }
 
-// ============================================
-// Avatar Component
-// ============================================
-
-/**
- * Avatar component for user representation.
- *
- * Supports image, initials, and icon fallbacks with size variants.
- *
- * @example
- * // With image
- * <Avatar src="/user.jpg" alt="John Doe" name="John Doe" />
- *
- * // With initials fallback
- * <Avatar name="John Doe" />
- *
- * // With custom icon
- * <Avatar icon={<CustomIcon />} />
- *
- */
 export function Avatar({
   src,
   alt,
@@ -141,21 +96,6 @@ export function Avatar({
 
 Avatar.displayName = "Avatar";
 
-// ============================================
-// Avatar Group Component
-// ============================================
-
-/**
- * Avatar group component for displaying multiple avatars with overlap.
- *
- * @example
- * <AvatarGroup max={3}>
- *   <Avatar src="/user1.jpg" name="Alice" />
- *   <Avatar src="/user2.jpg" name="Bob" />
- *   <Avatar src="/user3.jpg" name="Charlie" />
- *   <Avatar src="/user4.jpg" name="Diana" />
- * </AvatarGroup>
- */
 export function AvatarGroup({
   children,
   max,
@@ -165,7 +105,6 @@ export function AvatarGroup({
   const styles = avatarGroupVariants({ size });
   const avatarStyles = avatarVariants({ size });
 
-  // Convert children to array for manipulation
   const childArray = Array.isArray(children) ? children : [children];
   const visibleAvatars = max !== undefined ? childArray.slice(0, max) : childArray;
   const overflowCount = max !== undefined ? childArray.length - max : 0;

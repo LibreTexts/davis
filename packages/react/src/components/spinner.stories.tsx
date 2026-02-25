@@ -20,10 +20,6 @@ export default meta;
 
 type Story = StoryObj<typeof Spinner>;
 
-// ============================================
-// Basic Stories
-// ============================================
-
 export const Default: Story = {
   args: {},
 };
@@ -39,10 +35,6 @@ export const Secondary: Story = {
     color: "secondary",
   },
 };
-
-// ============================================
-// Size Variants
-// ============================================
 
 export const AllSizes: Story = {
   render: () => (
@@ -86,10 +78,6 @@ export const ExtraLarge: Story = {
   },
 };
 
-// ============================================
-// Color Variants
-// ============================================
-
 export const AllColors: Story = {
   render: () => (
     <div className="flex items-center gap-4">
@@ -128,19 +116,11 @@ export const Danger: Story = {
   },
 };
 
-// ============================================
-// With Text
-// ============================================
-
 export const WithText: Story = {
   args: {
     text: "Loading...",
   },
 };
-
-// ============================================
-// Real-World Examples
-// ============================================
 
 export const LoadingButton: Story = {
   render: () => (
