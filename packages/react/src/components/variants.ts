@@ -597,3 +597,32 @@ export const avatarGroup = tv({
     size: 'md' as const,
   },
 });
+
+// ===========================================================
+// Spinner component
+// ===========================================================
+export const spinner = tv({
+  base: 'animate-spin',
+  variants: {
+    size: {
+      xs: 'size-3',
+      sm: 'size-4',
+      md: 'size-6',
+      lg: 'size-8',
+      xl: 'size-12',
+    },
+    color: {
+      primary: 'text-primary',
+      secondary: 'text-gray-500',
+      white: 'text-white',
+      current: 'text-current',
+      success: 'text-success',
+      warning: 'text-warning',
+      danger: 'text-danger',
+    },
+  },
+  defaultVariants: {
+    size: 'md' as const,
+    color: 'primary' as const,
+  },
+});
