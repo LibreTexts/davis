@@ -37,6 +37,13 @@ export type {
   MenuLabelProps,
 } from "./components/menu";
 
+export { Alert } from "./components/alert";
+export type {
+  AlertProps,
+  AlertVariant,
+  AlertAction,
+} from "./components/alert";
+
 export { Dialog } from "./components/dialog";
 export type {
   DialogProps,
@@ -69,5 +76,22 @@ export type { NotificationsProviderProps } from "./providers/notifications-provi
 
 export { Link } from "./components/link";
 export type { LinkProps } from "./components/link";
+
+export { Tooltip } from "./components/tooltip";
+export type { TooltipProps, TooltipPlacement } from "./components/tooltip";
+
+export { Badge } from "./components/badge";
+export type { BadgeProps, BadgeVariant, BadgeSize } from "./components/badge";
+
+export { Card } from "./components/card";
+export type {
+  CardProps,
+  CardHeaderProps,
+  CardBodyProps,
+  CardFooterProps,
+  CardVariant,
+  CardPadding,
+  CardImageProps,
+} from "./components/card";
 
 export * from "./components/variants";
