@@ -542,3 +542,58 @@ export const card = tv({
     padding: 'md' as const,
   },
 });
+
+// ===========================================================
+// Avatar component
+// ===========================================================
+export const AVATAR_SIZE_VARIANTS = {
+  xs: 'size-6 text-xs',
+  sm: 'size-8 text-sm',
+  md: 'size-10 text-base',
+  lg: 'size-12 text-lg',
+  xl: 'size-16 text-xl',
+};
+
+export const avatar = tv({
+  slots: {
+    root: [
+      'relative inline-flex items-center justify-center',
+      'rounded-full',
+      'bg-gray-200 text-gray-600',
+      'font-medium uppercase',
+      'overflow-hidden',
+      'select-none',
+      'shrink-0',
+    ].join(' '),
+    image: 'w-full h-full object-cover',
+    fallback: 'flex items-center justify-center w-full h-full',
+  },
+  variants: {
+    size: {
+      xs: { root: AVATAR_SIZE_VARIANTS.xs },
+      sm: { root: AVATAR_SIZE_VARIANTS.sm },
+      md: { root: AVATAR_SIZE_VARIANTS.md },
+      lg: { root: AVATAR_SIZE_VARIANTS.lg },
+      xl: { root: AVATAR_SIZE_VARIANTS.xl },
+    },
+  },
+  defaultVariants: {
+    size: 'md' as const,
+  },
+});
+
+export const avatarGroup = tv({
+  base: 'flex -space-x-3',
+  variants: {
+    size: {
+      xs: '-space-x-1.5',
+      sm: '-space-x-2',
+      md: '-space-x-3',
+      lg: '-space-x-4',
+      xl: '-space-x-5',
+    },
+  },
+  defaultVariants: {
+    size: 'md' as const,
+  },
+});
