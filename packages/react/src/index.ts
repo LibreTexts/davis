@@ -94,4 +94,11 @@ export type {
   CardImageProps,
 } from "./components/card";
 
+export { Avatar, AvatarGroup } from "./components/avatar";
+export type {
+  AvatarProps,
+  AvatarSize,
+  AvatarGroupProps,
+} from "./components/avatar";
+
 export * from "./components/variants";
