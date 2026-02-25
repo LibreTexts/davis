@@ -10,9 +10,10 @@ const meta: Meta<typeof Badge> = {
     label: "Badge",
   },
   argTypes: {
-    variant: { control: "select", options: ["default", "primary", "success", "warning", "danger"] },
-    size:    { control: "select", options: ["sm", "md", "lg"] },
-    dot:     { control: "boolean" },
+    variant:  { control: "select", options: ["default", "primary", "success", "warning", "danger"] },
+    size:     { control: "select", options: ["sm", "md", "lg"] },
+    dot:      { control: "boolean" },
+    onRemove: { action: false },
   },
 };
 
@@ -25,10 +26,19 @@ type Story = StoryObj<typeof Badge>;
 // ============================================
 
 export const Default: Story = {
+  render: ({ label, variant, size, dot }) => (
+    <Badge
+      label={label ?? "Badge"}
+      {...(variant !== undefined ? { variant } : {})}
+      {...(size !== undefined ? { size } : {})}
+      {...(dot !== undefined ? { dot } : {})}
+    />
+  ),
   args: {
     variant: "default",
     label:   "Badge",
     size:    "md",
+    dot:     false,
   },
 };
 
