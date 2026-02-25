@@ -1,8 +1,5 @@
 import { tv } from 'tailwind-variants';
 
-// ===========================================================
-// Standardized values across different button types
-// ===========================================================
 export const BUTTON_BASE_CLASSES = [
   'inline-flex items-center justify-center',
   'font-medium',
@@ -77,9 +74,6 @@ export const BUTTON_DEFAULT_VARIANTS = {
   size: 'md' as const,
 };
 
-// ===========================================================
-// Standardized values across different input types
-// ===========================================================
 export const INPUTS_FOCUS = 'focus:outline-2 focus:-outline-offset-2 focus:outline-primary';
 export const INPUTS_DISABLED = 'disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-gray-100';
 
@@ -111,9 +105,6 @@ export const TOGGLE_DEFAULT_VARIANTS = {
   size: 'md' as const,
 };
 
-// ===========================================================
-// Button components
-// ===========================================================
 export const button = tv({
   base: BUTTON_BASE_CLASSES,
   variants: {
@@ -139,9 +130,6 @@ export const iconButton = tv({
   defaultVariants: BUTTON_DEFAULT_VARIANTS,
 });
 
-// ===========================================================
-// Input components
-// ===========================================================
 export const input = tv({
   base: [
     'block w-full',
@@ -244,9 +232,6 @@ export const select = tv({
   defaultVariants: INPUT_DEFAULT_VARIANTS,
 });
 
-// ===========================================================
-// Checkbox & Radio components
-// ===========================================================
 export const checkbox = tv({
   base: [
     'rounded border bg-white',
@@ -282,9 +267,6 @@ export const radio = tv({
   defaultVariants: INPUT_DEFAULT_VARIANTS,
 });
 
-// ===========================================================
-// Switch/Toggle component
-// ===========================================================
 export const switchToggle = tv({
   slots: {
     track: [
@@ -332,9 +314,6 @@ export const switchToggle = tv({
   ],
 });
 
-// ===========================================================
-// Alert/Banner component
-// ===========================================================
 export const alert = tv({
   slots: {
     container: 'flex gap-3 rounded-md border p-4',
@@ -386,9 +365,6 @@ export const alert = tv({
   },
 });
 
-// ===========================================================
-// Badge component
-// ===========================================================
 export const badge = tv({
   slots: {
     root:   'inline-flex items-center gap-1.5 rounded-full font-medium',
@@ -435,9 +411,6 @@ export const badge = tv({
   },
 });
 
-// ===========================================================
-// Dialog component
-// ===========================================================
 export const DIALOG_SIZE_VARIANTS = {
   sm: 'max-w-sm',
   md: 'max-w-md',
@@ -456,9 +429,6 @@ export const dialog = tv({
   },
 });
 
-// ===========================================================
-// Notification/Toast component
-// ===========================================================
 export const notification = tv({
   slots: {
     container: [
@@ -493,9 +463,6 @@ export const notification = tv({
   },
 });
 
-// ===========================================================
-// Tooltip component
-// ===========================================================
 export const tooltip = tv({
   slots: {
     content: [
@@ -509,9 +476,6 @@ export const tooltip = tv({
   },
 });
 
-// ===========================================================
-// Card component
-// ===========================================================
 export const card = tv({
   slots: {
     root:          'border bg-white rounded-lg shadow-sm overflow-hidden',
@@ -543,9 +507,6 @@ export const card = tv({
   },
 });
 
-// ===========================================================
-// Avatar component
-// ===========================================================
 export const AVATAR_SIZE_VARIANTS = {
   xs: 'size-6 text-xs',
   sm: 'size-8 text-sm',
@@ -598,9 +559,6 @@ export const avatarGroup = tv({
   },
 });
 
-// ===========================================================
-// Spinner component
-// ===========================================================
 export const spinner = tv({
   base: 'animate-spin',
   variants: {

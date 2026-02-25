@@ -7,10 +7,6 @@ import type {
 } from "../context/notification-context";
 import { notification as notificationVariants } from "./variants";
 
-// ============================================
-// Position classes
-// ============================================
-
 const POSITION_CLASSES: Record<NotificationPosition, string> = {
   "top-right":    "top-4 right-4 flex-col items-end",
   "top-center":   "top-4 left-1/2 -translate-x-1/2 flex-col items-center",
@@ -19,10 +15,6 @@ const POSITION_CLASSES: Record<NotificationPosition, string> = {
   "bottom-center":"bottom-4 left-1/2 -translate-x-1/2 flex-col-reverse items-center",
   "bottom-left":  "bottom-4 left-4 flex-col-reverse items-start",
 };
-
-// ============================================
-// Icons (inline SVG — Heroicons 20/solid)
-// ============================================
 
 function CheckCircleIcon({ className }: { className?: string }) {
   return (
@@ -71,10 +63,6 @@ const VARIANT_ICONS: Record<NotificationVariant, (p: { className?: string }) => 
   info:    InformationCircleIcon,
 };
 
-// ============================================
-// Toast (single notification)
-// ============================================
-
 type ToastProps = {
   notification: Notification;
   onRemove: (id: string) => void;
@@ -86,20 +74,17 @@ export function Toast({ notification, onRemove }: ToastProps) {
 
   const styles = notificationVariants({ variant: notification.variant });
 
-  // Trigger entry animation on first render
   useEffect(() => {
     const frame = requestAnimationFrame(() => setMounted(true));
     return () => cancelAnimationFrame(frame);
   }, []);
 
-  // Auto-dismiss timer
   useEffect(() => {
     if (notification.duration <= 0) return;
     const timer = setTimeout(() => setClosing(true), notification.duration);
     return () => clearTimeout(timer);
   }, [notification.duration]);
 
-  // Remove from state after exit animation completes
   useEffect(() => {
     if (!closing) return;
     const timer = setTimeout(() => onRemove(notification.id), 300);
@@ -161,10 +146,6 @@ export function Toast({ notification, onRemove }: ToastProps) {
 }
 
 Toast.displayName = "Toast";
-
-// ============================================
-// ToastContainer
-// ============================================
 
 export type ToastContainerProps = {
   notifications: Notification[];

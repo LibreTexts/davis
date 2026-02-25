@@ -9,10 +9,6 @@ import clsx from "clsx";
 import { type ReactNode, createContext, useContext } from "react";
 import { dialog as dialogVariants } from "./variants";
 
-// ============================================
-// Dialog Context (shared onClose handler)
-// ============================================
-
 type DialogContextValue = {
   onClose: () => void;
 };
@@ -26,10 +22,6 @@ function useDialogContext() {
   }
   return ctx;
 }
-
-// ============================================
-// Dialog Root
-// ============================================
 
 export type DialogSize = "sm" | "md" | "lg" | "xl" | "full";
 
@@ -51,7 +43,6 @@ export function Dialog({
   return (
     <DialogContext.Provider value={{ onClose: () => onClose(false) }}>
       <HeadlessDialog open={open} onClose={onClose} className="relative z-50">
-        {/* Backdrop */}
         <DialogBackdrop
           transition
           className={clsx(
@@ -61,7 +52,6 @@ export function Dialog({
             "data-[enter]:opacity-100"
           )}
         />
-        {/* Scroll container */}
         <div className="fixed inset-0 flex items-center justify-center overflow-y-auto p-4">
           <DialogPanel
             transition
@@ -83,10 +73,6 @@ export function Dialog({
 
 Dialog.displayName = "Dialog";
 
-// ============================================
-// Dialog Header
-// ============================================
-
 export type DialogHeaderProps = {
   children: ReactNode;
   className?: string;
@@ -107,10 +93,6 @@ function DialogHeader({ children, className }: DialogHeaderProps) {
 
 DialogHeader.displayName = "Dialog.Header";
 
-// ============================================
-// Dialog Title
-// ============================================
-
 export type DialogTitleProps = {
   children: ReactNode;
   className?: string;
@@ -128,10 +110,6 @@ function DialogTitle({ children, className }: DialogTitleProps) {
 
 DialogTitle.displayName = "Dialog.Title";
 
-// ============================================
-// Dialog Description
-// ============================================
-
 export type DialogDescriptionProps = {
   children: ReactNode;
   className?: string;
@@ -148,10 +126,6 @@ function DialogDescription({ children, className }: DialogDescriptionProps) {
 }
 
 DialogDescription.displayName = "Dialog.Description";
-
-// ============================================
-// Dialog Footer
-// ============================================
 
 export type DialogFooterProps = {
   children: ReactNode;
@@ -172,10 +146,6 @@ function DialogFooter({ children, className }: DialogFooterProps) {
 }
 
 DialogFooter.displayName = "Dialog.Footer";
-
-// ============================================
-// Dialog Close Button
-// ============================================
 
 export type DialogCloseProps = {
   className?: string;
@@ -206,10 +176,6 @@ function DialogClose({
 
 DialogClose.displayName = "Dialog.Close";
 
-// ============================================
-// X Mark Icon
-// ============================================
-
 function XMarkIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -224,13 +190,8 @@ function XMarkIcon({ className }: { className?: string }) {
   );
 }
 
-// ============================================
-// Attach subcomponents to Dialog
-// ============================================
-
 Dialog.Header = DialogHeader;
 Dialog.Title = DialogTitle;
 Dialog.Description = DialogDescription;
 Dialog.Footer = DialogFooter;
 Dialog.Close = DialogClose;
-

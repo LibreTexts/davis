@@ -19,7 +19,6 @@ export type CheckboxProps = CheckboxVariants & {
   required?: boolean;
   error?: boolean;
   onChange?: (checked: boolean) => void;
-  /** Description text displayed below the label */
   description?: string;
 };
 
@@ -96,7 +95,6 @@ export function Checkbox({
               error && "stroke-danger"
             )}
           >
-            {/* Checkmark */}
             <path
               d="M3 8L6 11L11 3.5"
               strokeWidth={2}
@@ -104,7 +102,6 @@ export function Checkbox({
               strokeLinejoin="round"
               className="opacity-0 group-data-[checked]:opacity-100 group-data-[indeterminate]:opacity-0"
             />
-            {/* Indeterminate dash */}
             <path
               d="M3 7H11"
               strokeWidth={2}

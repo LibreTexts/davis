@@ -108,4 +108,7 @@ export type {
   SpinnerColor,
 } from "./components/spinner";
 
+export { EmptyState } from "./components/empty-state";
+export type { EmptyStateProps } from "./components/empty-state";
+
 export * from "./components/variants";

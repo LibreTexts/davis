@@ -21,10 +21,6 @@ export default meta;
 
 type Story = StoryObj<typeof Badge>;
 
-// ============================================
-// Default (fully controllable)
-// ============================================
-
 export const Default: Story = {
   render: ({ label, variant, size, dot }) => (
     <Badge
@@ -42,10 +38,6 @@ export const Default: Story = {
   },
 };
 
-// ============================================
-// All Variants
-// ============================================
-
 export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-wrap gap-3 items-center">
@@ -59,10 +51,6 @@ export const AllVariants: Story = {
   args: {},
 };
 
-// ============================================
-// Sizes
-// ============================================
-
 export const Sizes: Story = {
   render: () => (
     <div className="flex flex-wrap gap-3 items-center">
@@ -73,10 +61,6 @@ export const Sizes: Story = {
   ),
   args: {},
 };
-
-// ============================================
-// With Dot
-// ============================================
 
 export const WithDot: Story = {
   render: () => (
@@ -89,10 +73,6 @@ export const WithDot: Story = {
   ),
   args: {},
 };
-
-// ============================================
-// Removable
-// ============================================
 
 const INITIAL_TAGS = ["React", "TypeScript", "Tailwind", "Storybook", "Vite"];
 
@@ -117,10 +97,6 @@ export const Removable: Story = {
   },
   args: {},
 };
-
-// ============================================
-// With Icon
-// ============================================
 
 function StarIcon({ className }: { className?: string }) {
   return (
