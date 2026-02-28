@@ -1,13 +1,46 @@
 name: Deploy Docs
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
+  authorize:
+    name: Authorize User
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if user is authorized
+        run: |
+          AUTHORIZED_USERS="${{ secrets.DEPLOYMENT_AUTHORIZED_USERS }}"
+          CURRENT_USER="${{ github.actor }}"
+
+          if [ -z "$AUTHORIZED_USERS" ]; then
+            echo "❌ DEPLOYMENT_AUTHORIZED_USERS secret is not set"
+            exit 1
+          fi
+
+          # Convert comma-separated list to array and check if user is in list
+          IFS=',' read -ra USERS <<< "$AUTHORIZED_USERS"
+          AUTHORIZED=false
+
+          for user in "${USERS[@]}"; do
+            # Trim whitespace
+            user=$(echo "$user" | xargs)
+            if [ "$user" = "$CURRENT_USER" ]; then
+              AUTHORIZED=true
+              break
+            fi
+          done
+
+          if [ "$AUTHORIZED" = true ]; then
+            echo "✅ User '$CURRENT_USER' is authorized to run this workflow"
+          else
+            echo "❌ User '$CURRENT_USER' is not authorized to run this workflow"
+            echo "Authorized users: $AUTHORIZED_USERS"
+            exit 1
+          fi
+
   deploy:
+    needs: authorize
     name: Deploy Docs to Cloudflare
     runs-on: ubuntu-latest
 
