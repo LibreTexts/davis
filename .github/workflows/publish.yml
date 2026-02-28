@@ -1,0 +1,149 @@
+name: Publish to NPM
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package to publish'
+        required: true
+        type: choice
+        options:
+          - 'core'
+          - 'react'
+          - 'vue'
+          - 'all'
+
+jobs:
+  authorize:
+    name: Authorize User
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if user is authorized
+        run: |
+          AUTHORIZED_USERS="${{ secrets.DEPLOYMENT_AUTHORIZED_USERS }}"
+          CURRENT_USER="${{ github.actor }}"
+
+          if [ -z "$AUTHORIZED_USERS" ]; then
+            echo "❌ DEPLOYMENT_AUTHORIZED_USERS secret is not set"
+            exit 1
+          fi
+
+          # Convert comma-separated list to array and check if user is in list
+          IFS=',' read -ra USERS <<< "$AUTHORIZED_USERS"
+          AUTHORIZED=false
+
+          for user in "${USERS[@]}"; do
+            # Trim whitespace
+            user=$(echo "$user" | xargs)
+            if [ "$user" = "$CURRENT_USER" ]; then
+              AUTHORIZED=true
+              break
+            fi
+          done
+
+          if [ "$AUTHORIZED" = true ]; then
+            echo "✅ User '$CURRENT_USER' is authorized to run this workflow"
+          else
+            echo "❌ User '$CURRENT_USER' is not authorized to run this workflow"
+            echo "Authorized users: $AUTHORIZED_USERS"
+            exit 1
+          fi
+
+  publish-core:
+    name: Publish Core to NPM
+    needs: authorize
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.package == 'core' || github.event.inputs.package == 'all' }}
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build core package
+        run: npm run build -w @libretexts/davis-core
+
+      - name: Publish core to NPM
+        run: npm publish --workspace @libretexts/davis-core --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-react:
+    name: Publish React to NPM
+    needs: [authorize, publish-core]
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.package == 'react' || github.event.inputs.package == 'all' }}
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build core package
+        run: npm run build -w @libretexts/davis-core
+
+      - name: Build react package
+        run: npm run build -w @libretexts/davis-react
+
+      - name: Publish react to NPM
+        run: npm publish --workspace @libretexts/davis-react --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-vue:
+    name: Publish Vue to NPM
+    needs: [authorize, publish-core]
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.package == 'vue' || github.event.inputs.package == 'all' }}
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build core package
+        run: npm run build -w @libretexts/davis-core
+
+      - name: Build vue package
+        run: npm run build -w @libretexts/davis-vue
+
+      - name: Publish vue to NPM
+        run: npm publish --workspace @libretexts/davis-vue --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
