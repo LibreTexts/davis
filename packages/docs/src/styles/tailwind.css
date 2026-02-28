@@ -1,0 +1,5 @@
+@import 'tailwindcss';
+@import '@libretexts/davis-core/theme.css';
+@import '@libretexts/davis-core/base.css';
+
+@plugin '@tailwindcss/typography';

@@ -111,4 +111,10 @@ export type {
 export { EmptyState } from "./components/empty-state";
 export type { EmptyStateProps } from "./components/empty-state";
 
-export * from "./components/variants";
+export { DavisProvider } from "./providers/davis-provider";
+export type { DavisProviderProps } from "./providers/davis-provider";
+
+export { DavisContext, useDavisContext } from "./context/davis-context";
+export type { DavisContextType } from "./context/davis-context";
+
+export * from "@libretexts/davis-core";

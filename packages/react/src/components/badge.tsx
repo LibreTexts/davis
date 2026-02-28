@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { type ReactNode } from "react";
-import { badge as badgeVariants } from "./variants";
+import { badge as badgeVariants } from "@libretexts/davis-core";
 
 export type BadgeVariant = "default" | "primary" | "success" | "warning" | "danger";
 export type BadgeSize = "sm" | "md" | "lg";

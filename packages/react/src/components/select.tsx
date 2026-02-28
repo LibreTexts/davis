@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { forwardRef, type SelectHTMLAttributes, useEffect } from "react";
-import { select } from "./variants";
+import { select } from "@libretexts/davis-core";
 
 type SelectVariants = {
   variant?: "default" | "error";

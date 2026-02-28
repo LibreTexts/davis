@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { useState, type ReactNode, type ImgHTMLAttributes } from "react";
-import { avatar as avatarVariants, avatarGroup as avatarGroupVariants } from "./variants";
+import { avatar as avatarVariants, avatarGroup as avatarGroupVariants } from "@libretexts/davis-core";
 
 export type AvatarSize = "xs" | "sm" | "md" | "lg" | "xl";
 

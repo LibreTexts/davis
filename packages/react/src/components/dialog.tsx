@@ -7,7 +7,8 @@ import {
 } from "@headlessui/react";
 import clsx from "clsx";
 import { type ReactNode, createContext, useContext } from "react";
-import { dialog as dialogVariants } from "./variants";
+import { dialog as dialogVariants } from "@libretexts/davis-core";
+import { useDavisContext } from "../context/davis-context";
 
 type DialogContextValue = {
   onClose: () => void;
@@ -40,33 +41,43 @@ export function Dialog({
   size = "md",
   className,
 }: DialogProps) {
-  return (
-    <DialogContext.Provider value={{ onClose: () => onClose(false) }}>
-      <HeadlessDialog open={open} onClose={onClose} className="relative z-50">
-        <DialogBackdrop
+  const { standalone } = useDavisContext();
+
+  const dialogContent = (
+    <HeadlessDialog open={open} onClose={onClose} className="relative z-50">
+      <DialogBackdrop
+        transition
+        className={clsx(
+          "fixed inset-0 bg-black/50",
+          "transition duration-200 ease-out",
+          "data-[closed]:opacity-0",
+          "data-[enter]:opacity-100"
+        )}
+      />
+      <div className="fixed inset-0 flex items-center justify-center overflow-y-auto p-4">
+        <DialogPanel
           transition
           className={clsx(
-            "fixed inset-0 bg-black/50",
             "transition duration-200 ease-out",
-            "data-[closed]:opacity-0",
-            "data-[enter]:opacity-100"
+            "data-[closed]:opacity-0 data-[closed]:scale-95",
+            "data-[enter]:opacity-100 data-[enter]:scale-100",
+            dialogVariants({ size }),
+            className
           )}
-        />
-        <div className="fixed inset-0 flex items-center justify-center overflow-y-auto p-4">
-          <DialogPanel
-            transition
-            className={clsx(
-              "transition duration-200 ease-out",
-              "data-[closed]:opacity-0 data-[closed]:scale-95",
-              "data-[enter]:opacity-100 data-[enter]:scale-100",
-              dialogVariants({ size }),
-              className
-            )}
-          >
-            {children}
-          </DialogPanel>
-        </div>
-      </HeadlessDialog>
+        >
+          {children}
+        </DialogPanel>
+      </div>
+    </HeadlessDialog>
+  );
+
+  return (
+    <DialogContext.Provider value={{ onClose: () => onClose(false) }}>
+      {standalone ? (
+        <div className="davis">{dialogContent}</div>
+      ) : (
+        dialogContent
+      )}
     </DialogContext.Provider>
   );
 }

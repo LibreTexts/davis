@@ -5,7 +5,7 @@ import {
   type ReactNode,
   useState,
 } from "react";
-import { iconButton } from "./variants";
+import { iconButton } from "@libretexts/davis-core";
 
 type IconButtonVariant = "primary" | "secondary" | "tertiary" | "destructive" | "ghost" | "outline";
 type IconButtonSize = "sm" | "md" | "lg";

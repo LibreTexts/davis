@@ -5,7 +5,7 @@ import type {
   NotificationPosition,
   NotificationVariant,
 } from "../context/notification-context";
-import { notification as notificationVariants } from "./variants";
+import { notification as notificationVariants } from "@libretexts/davis-core";
 
 const POSITION_CLASSES: Record<NotificationPosition, string> = {
   "top-right":    "top-4 right-4 flex-col items-end",

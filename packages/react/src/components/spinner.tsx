@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { spinner as spinnerVariants } from "./variants";
+import { spinner as spinnerVariants } from "@libretexts/davis-core";
 
 export type SpinnerSize = "xs" | "sm" | "md" | "lg" | "xl";
 export type SpinnerColor = "primary" | "secondary" | "white" | "current" | "success" | "warning" | "danger";
