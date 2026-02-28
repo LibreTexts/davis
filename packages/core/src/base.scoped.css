@@ -37,6 +37,18 @@
   --davis-ring-width: 2px;
   --davis-ring-color: #127BC4;
   --davis-ring-offset: 2px;
+
+  /* Motion */
+  --davis-motion-duration-fast: 150ms;
+  --davis-motion-duration-default: 200ms;
+  --davis-motion-duration-slow: 300ms;
+  --davis-motion-ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --davis-motion-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --davis-motion-ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+  /* Target Size (WCAG 2.2) */
+  --davis-target-size-minimum: 24px;
+  --davis-target-size-comfortable: 44px;
 }
 
 /* ─── Scoped Preflight replacements ──────────────────────────── */
@@ -167,4 +179,17 @@
 
 .davis *:focus:not(:focus-visible) {
   outline: none;
+}
+
+/* ─── Reduced Motion (scoped) ────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .davis *,
+  .davis *::before,
+  .davis *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

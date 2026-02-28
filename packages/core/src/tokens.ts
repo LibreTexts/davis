@@ -248,3 +248,32 @@ export const FOCUS_RING = {
   color: '#127BC4',
   offset: '2px',
 } as const;
+
+// ─── Motion ─────────────────────────────────────────────────────
+
+/**
+ * Motion tokens for transitions and animations.
+ * Used with `prefers-reduced-motion` to disable animations for users
+ * who are sensitive to motion.
+ */
+export const MOTION = {
+  durationFast: '150ms',
+  durationDefault: '200ms',
+  durationSlow: '300ms',
+  durationNone: '0ms',
+  easeDefault: 'cubic-bezier(0.4, 0, 0.2, 1)',
+  easeIn: 'cubic-bezier(0.4, 0, 1, 1)',
+  easeOut: 'cubic-bezier(0, 0, 0.2, 1)',
+} as const;
+
+// ─── Target Size ────────────────────────────────────────────────
+
+/**
+ * Minimum interactive target sizes per WCAG 2.2.
+ * - minimum: 24×24 CSS px — WCAG 2.5.8 Target Size (Minimum) (AA)
+ * - comfortable: 44×44 CSS px — WCAG 2.5.5 Target Size (Enhanced) (AAA)
+ */
+export const TARGET_SIZE = {
+  minimum: '24px',
+  comfortable: '44px',
+} as const;

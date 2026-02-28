@@ -170,4 +170,15 @@
   /* ─── Focus Ring ──────────────────────────────────────────── */
 
   --ring-color: #127BC4;
+
+  /* ─── Motion ─────────────────────────────────────────────── */
+
+  --davis-motion-duration-fast: 150ms;
+  --davis-motion-duration-default: 200ms;
+  --davis-motion-duration-slow: 300ms;
+
+  /* ─── Target Size (WCAG 2.2) ─────────────────────────────── */
+
+  --davis-target-size-minimum: 24px;
+  --davis-target-size-comfortable: 44px;
 }

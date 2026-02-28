@@ -577,6 +577,48 @@ export const avatarGroup = tv({
   },
 });
 
+export const visuallyHidden = tv({
+  base: [
+    'absolute',
+    'w-px h-px',
+    'overflow-hidden',
+    'whitespace-nowrap',
+    'border-0',
+    'p-0',
+    'm-[-1px]',
+    '[clip:rect(0,0,0,0)]',
+  ].join(' '),
+  variants: {
+    focusable: {
+      true: 'focus:static focus:w-auto focus:h-auto focus:overflow-visible focus:whitespace-normal focus:[clip:auto] focus:m-0',
+    },
+  },
+  defaultVariants: {
+    focusable: false as const,
+  },
+});
+
+export const skipLink = tv({
+  base: [
+    'absolute',
+    'w-px h-px',
+    'overflow-hidden',
+    'whitespace-nowrap',
+    'border-0',
+    'p-0',
+    'm-[-1px]',
+    '[clip:rect(0,0,0,0)]',
+    // Visible on focus
+    'focus:static focus:w-auto focus:h-auto focus:overflow-visible focus:whitespace-normal focus:[clip:auto] focus:m-0',
+    'focus:z-[9999] focus:fixed focus:top-4 focus:left-4',
+    'focus:inline-block focus:px-4 focus:py-2',
+    'focus:bg-primary focus:text-white focus:font-semibold focus:text-sm',
+    'focus:rounded-md focus:shadow-lg',
+    'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary',
+    'focus:no-underline',
+  ].join(' '),
+});
+
 export const spinner = tv({
   base: 'animate-spin',
   variants: {
