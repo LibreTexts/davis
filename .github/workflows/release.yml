@@ -70,8 +70,12 @@ jobs:
 
       - name: Release core package
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.LIBREBOT_ACCESS_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GIT_COMMITTER_NAME: libretexts-bot
+          GIT_COMMITTER_EMAIL: dev@libretexts.org
+          GIT_AUTHOR_NAME: libretexts-bot
+          GIT_AUTHOR_EMAIL: dev@libretexts.org
         run: npx semantic-release
         working-directory: packages/core
 
@@ -106,8 +110,12 @@ jobs:
 
       - name: Release react package
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.LIBREBOT_ACCESS_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GIT_COMMITTER_NAME: libretexts-bot
+          GIT_COMMITTER_EMAIL: dev@libretexts.org
+          GIT_AUTHOR_NAME: libretexts-bot
+          GIT_AUTHOR_EMAIL: dev@libretexts.org
         run: npx semantic-release
         working-directory: packages/react
 
@@ -142,8 +150,12 @@ jobs:
 
       - name: Release vue package
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.LIBREBOT_ACCESS_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GIT_COMMITTER_NAME: libretexts-bot
+          GIT_COMMITTER_EMAIL: dev@libretexts.org
+          GIT_AUTHOR_NAME: libretexts-bot
+          GIT_AUTHOR_EMAIL: dev@libretexts.org
         run: npx semantic-release
         working-directory: packages/vue
 
@@ -178,6 +190,10 @@ jobs:
 
       - name: Version docs package
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.LIBREBOT_ACCESS_TOKEN }}
+          GIT_COMMITTER_NAME: libretexts-bot
+          GIT_COMMITTER_EMAIL: dev@libretexts.org
+          GIT_AUTHOR_NAME: libretexts-bot
+          GIT_AUTHOR_EMAIL: dev@libretexts.org
         run: npx semantic-release
         working-directory: packages/docs
