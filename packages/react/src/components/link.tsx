@@ -30,7 +30,7 @@ export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
 
 // Variant classes
 const variantClasses: Record<LinkVariant, string> = {
-  default: "text-primary hover:text-primary-hover",
+  default: "text-primary hover:text-primary-600",
   muted: "text-gray-500 hover:text-gray-700",
   danger: "text-danger hover:text-red-700",
 };

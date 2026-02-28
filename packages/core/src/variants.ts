@@ -1,3 +1,21 @@
+/**
+ * Davis Design System — Component Variant Definitions
+ *
+ * Framework-agnostic variant definitions using tailwind-variants.
+ * These produce class strings consumed by React and Vue components.
+ *
+ * Elevation levels used in variants:
+ *   Level 0: none        — Flat elements (disabled, inline)
+ *   Level 1: sm/DEFAULT  — Cards, dropdowns at rest
+ *   Level 2: md          — Hovered cards, active dropdowns
+ *   Level 3: lg          — Dialogs, popovers, floating panels (max for most UI)
+ *   Level 4: xl/2xl      — Reserved for rare high-emphasis overlays
+ *
+ * Focus patterns:
+ *   - Buttons/controls: focus:ring-2 focus:ring-offset-2 focus:ring-{color}
+ *   - Inputs: focus:outline-2 focus:-outline-offset-2 focus:outline-primary
+ *   - Links: focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2
+ */
 import { tv } from 'tailwind-variants';
 
 export const BUTTON_BASE_CLASSES = [
@@ -17,7 +35,7 @@ export const BUTTON_VARIANTS = {
   primary: [
     'bg-primary',
     'text-white',
-    'hover:bg-primary-hover',
+    'hover:bg-primary-600',
     'focus:ring-primary',
   ].join(' '),
   secondary: [
@@ -420,7 +438,7 @@ export const DIALOG_SIZE_VARIANTS = {
 };
 
 export const dialog = tv({
-  base: 'relative w-full bg-white rounded-lg shadow-xl',
+  base: 'relative w-full bg-white rounded-lg shadow-lg',
   variants: {
     size: DIALOG_SIZE_VARIANTS,
   },

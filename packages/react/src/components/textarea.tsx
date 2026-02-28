@@ -6,7 +6,7 @@ import {
   useRef,
   useCallback,
 } from "react";
-import { textarea } from "./variants";
+import { textarea } from "@libretexts/davis-core";
 
 type TextareaVariants = {
   variant?: "default" | "error";

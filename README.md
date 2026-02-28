@@ -3,13 +3,13 @@
 height="150" />
 </div>
 
-# Davis UI Library
+# Davis Design System
 
-An accessibility-first UI component library for React and Vue, built on top of HeadlessUI with opinionated styling using Tailwind CSS.
+An accessibility-first, opinionated design system with full TypeScript support for React and Vue, built on top of HeadlessUI and Tailwind CSS.
 
 ## Architecture
 
-This is a monorepo containing three packages:
+This is a monorepo containing four packages:
 
 ### 📦 Packages
 
@@ -30,6 +30,9 @@ React implementation using `@headlessui/react`
 
 Vue 3 implementation using `@headlessui/vue`
 
+#### `@libretexts/davis-docs`
+Documentation site built with Next.js, showcasing usage guides and Storybook examples.
+
 ## Workspace Structure
 
 ```
@@ -37,7 +40,9 @@ davis/
 ├── packages/
 │   ├── core/          # Shared variants and utilities
 │   ├── react/         # React components
-│   └── vue/           # Vue components
+│   ├── vue/           # Vue components
+│   └── docs/          # Documentation site
+│
 ├── package.json       # Root workspace config
 └── tsconfig.base.json # Shared TypeScript config
 ```
@@ -79,12 +84,15 @@ npm run build -w @libretexts/davis-vue
 
 # Build only core package
 npm run build -w @libretexts/davis-core
+
+# Build only docs
+npm run build -w @libretexts/davis-docs
 ```
 
 ## Design Principles
 
 1. **Accessibility First**: Built on HeadlessUI for rock-solid a11y foundations
-2. **Customizable**: Tailwind-based styling allows easy customization
+2. **Opinionated Defaults**: A well-curated set of components and variants to reduce decision fatigue and promote consistency
 3. **Type-safe**: Full TypeScript support across all packages
 4. **Framework Agnostic Core**: Share variant definitions between React and Vue
 5. **Tree-shakeable**: Optimized bundle size with ESM and proper exports

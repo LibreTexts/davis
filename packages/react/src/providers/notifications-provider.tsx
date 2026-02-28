@@ -6,6 +6,7 @@ import {
   type NotificationPosition,
 } from "../context/notification-context";
 import { ToastContainer } from "../components/notification";
+import { useDavisContext } from "../context/davis-context";
 
 export type NotificationsProviderProps = {
   children: ReactNode;
@@ -19,6 +20,7 @@ export function NotificationsProvider({
   children,
   position = "top-right",
 }: NotificationsProviderProps) {
+  const { standalone } = useDavisContext();
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
   const addNotification = useCallback(
@@ -47,6 +49,14 @@ export function NotificationsProvider({
     setNotifications([]);
   }, []);
 
+  const toastContainer = (
+    <ToastContainer
+      notifications={notifications}
+      onRemove={removeNotification}
+      position={position}
+    />
+  );
+
   return (
     <NotificationContext.Provider
       value={{
@@ -57,11 +67,11 @@ export function NotificationsProvider({
       }}
     >
       {children}
-      <ToastContainer
-        notifications={notifications}
-        onRemove={removeNotification}
-        position={position}
-      />
+      {standalone ? (
+        <div className="davis">{toastContainer}</div>
+      ) : (
+        toastContainer
+      )}
     </NotificationContext.Provider>
   );
 }

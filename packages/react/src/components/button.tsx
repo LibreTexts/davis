@@ -7,7 +7,7 @@ import {
   type ComponentPropsWithoutRef,
   type ReactNode,
 } from "react";
-import { button } from "./variants";
+import { button } from "@libretexts/davis-core";
 
 type ButtonVariant = "primary" | "secondary" | "tertiary" | "destructive" | "warning" | "ghost" | "outline";
 type ButtonSize = "sm" | "md" | "lg";

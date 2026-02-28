@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  presets: [require("./tailwind.preset.js")],
+  presets: [require("@libretexts/davis-core/tailwind.preset")],
   content: ["./src/**/*.{ts,tsx}"],
 };

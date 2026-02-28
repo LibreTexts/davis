@@ -1,0 +1,4 @@
+@import "../../core/src/base.scoped.css";
+
+@tailwind components;
+@tailwind utilities;

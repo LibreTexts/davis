@@ -7,7 +7,7 @@ import {
   type ReactElement,
   type ReactNode,
 } from "react";
-import { tooltip as tooltipVariants } from "./variants";
+import { tooltip as tooltipVariants } from "@libretexts/davis-core";
 
 // ============================================
 // Types

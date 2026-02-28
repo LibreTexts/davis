@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { type ReactNode, createContext, useContext } from "react";
-import { card as cardVariants } from "./variants";
+import { card as cardVariants } from "@libretexts/davis-core";
 
 export type CardVariant = "default" | "elevated" | "outline";
 export type CardPadding = "none" | "sm" | "md" | "lg";

@@ -4,10 +4,14 @@ import { resolve } from "path";
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, "src/index.ts"),
+      entry: {
+        index: resolve(__dirname, "src/index.ts"),
+        "index.standalone": resolve(__dirname, "src/index.standalone.ts"),
+      },
       name: "DavisReact",
       formats: ["es", "cjs"],
-      fileName: (format) => (format === "es" ? "index.mjs" : "index.cjs"),
+      fileName: (format, entryName) =>
+        format === "es" ? `${entryName}.mjs` : `${entryName}.cjs`,
     },
     rollupOptions: {
       external: ["react", "react-dom", "@headlessui/react", "tailwindcss"],

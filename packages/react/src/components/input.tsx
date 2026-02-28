@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { forwardRef, type InputHTMLAttributes, type ReactNode } from "react";
-import { input } from "./variants";
+import { input } from "@libretexts/davis-core";
 
 type InputVariants = {
   variant?: "default" | "error";

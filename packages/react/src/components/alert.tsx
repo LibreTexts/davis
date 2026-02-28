@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { type ReactNode } from "react";
-import { alert as alertVariants } from "./variants";
+import { alert as alertVariants } from "@libretexts/davis-core";
 
 export type AlertVariant = "info" | "success" | "warning" | "error";
 
