@@ -2,6 +2,11 @@
   "name": "@libretexts/davis-docs",
   "version": "1.0.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LibreTexts/davis.git",
+    "directory": "packages/docs"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
