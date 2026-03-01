@@ -14,7 +14,7 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = join(__dirname, '..');
 
-const { COLORS, FONT_FAMILY_SANS, FONT_SIZE, RADIUS, SHADOWS } = await import(
+const { COLORS, FONT_FAMILY_SANS, FONT_SIZE, RADIUS, SHADOWS, MOTION, TARGET_SIZE } = await import(
   '../dist/index.js'
 );
 
@@ -178,6 +178,17 @@ ${shadowVars}
   /* ─── Focus Ring ──────────────────────────────────────────── */
 
   --ring-color: ${COLORS.primary[500]};
+
+  /* ─── Motion ─────────────────────────────────────────────── */
+
+  --davis-motion-duration-fast: ${MOTION.durationFast};
+  --davis-motion-duration-default: ${MOTION.durationDefault};
+  --davis-motion-duration-slow: ${MOTION.durationSlow};
+
+  /* ─── Target Size (WCAG 2.2) ─────────────────────────────── */
+
+  --davis-target-size-minimum: ${TARGET_SIZE.minimum};
+  --davis-target-size-comfortable: ${TARGET_SIZE.comfortable};
 }
 `;
 
@@ -233,6 +244,18 @@ function generateBaseCSS() {
     --davis-ring-width: 2px;
     --davis-ring-color: ${COLORS.primary[500]};
     --davis-ring-offset: 2px;
+
+    /* Motion */
+    --davis-motion-duration-fast: ${MOTION.durationFast};
+    --davis-motion-duration-default: ${MOTION.durationDefault};
+    --davis-motion-duration-slow: ${MOTION.durationSlow};
+    --davis-motion-ease-default: ${MOTION.easeDefault};
+    --davis-motion-ease-in: ${MOTION.easeIn};
+    --davis-motion-ease-out: ${MOTION.easeOut};
+
+    /* Target Size (WCAG 2.2) */
+    --davis-target-size-minimum: ${TARGET_SIZE.minimum};
+    --davis-target-size-comfortable: ${TARGET_SIZE.comfortable};
   }
 
   /* ─── Typography Defaults ───────────────────────────────────── */
@@ -294,6 +317,21 @@ function generateBaseCSS() {
   *:focus:not(:focus-visible) {
     outline: none;
   }
+
+  /* ─── Reduced Motion ──────────────────────────────────────── */
+  /* Disables transitions and animations for users who prefer    */
+  /* reduced motion. Respects prefers-reduced-motion: reduce.    */
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
 `;
 
@@ -346,6 +384,18 @@ function generateScopedBaseCSS() {
   --davis-ring-width: 2px;
   --davis-ring-color: ${COLORS.primary[500]};
   --davis-ring-offset: 2px;
+
+  /* Motion */
+  --davis-motion-duration-fast: ${MOTION.durationFast};
+  --davis-motion-duration-default: ${MOTION.durationDefault};
+  --davis-motion-duration-slow: ${MOTION.durationSlow};
+  --davis-motion-ease-default: ${MOTION.easeDefault};
+  --davis-motion-ease-in: ${MOTION.easeIn};
+  --davis-motion-ease-out: ${MOTION.easeOut};
+
+  /* Target Size (WCAG 2.2) */
+  --davis-target-size-minimum: ${TARGET_SIZE.minimum};
+  --davis-target-size-comfortable: ${TARGET_SIZE.comfortable};
 }
 
 /* ─── Scoped Preflight replacements ──────────────────────────── */
@@ -476,6 +526,19 @@ function generateScopedBaseCSS() {
 
 .davis *:focus:not(:focus-visible) {
   outline: none;
+}
+
+/* ─── Reduced Motion (scoped) ────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .davis *,
+  .davis *::before,
+  .davis *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 `;
 
