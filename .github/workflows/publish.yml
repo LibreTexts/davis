@@ -53,7 +53,7 @@ jobs:
     name: Publish Core to NPM
     needs: authorize
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.package == 'core' || github.event.inputs.package == 'all' }}
+    if: ${{ github.event.inputs.package == 'core' || github.event.inputs.package == 'all' || github.event.inputs.package == 'react' || github.event.inputs.package == 'vue' }}
     permissions:
       contents: read
       id-token: write
@@ -76,6 +76,7 @@ jobs:
         run: npm run build -w @libretexts/davis-core
 
       - name: Publish core to NPM
+        if: ${{ github.event.inputs.package == 'core' || github.event.inputs.package == 'all' }}
         run: npm publish --workspace @libretexts/davis-core --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

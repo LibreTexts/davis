@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '@libretexts/davis-react';
 
 export default function HomePage() {
   return (
@@ -24,9 +23,7 @@ export default function HomePage() {
             href="/docs/getting-started/overview"
             className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-medium"
           >
-            <Button variant='primary'>
-              Get Started
-            </Button>
+            Get Started
           </Link>
           <Link
             href="/docs/design-tokens/colors"
