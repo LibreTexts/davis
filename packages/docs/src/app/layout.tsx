@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import '@/styles/tailwind.css';
+import '@/styles/global.css';
 
 const SITE_NAME = 'Davis Design System';
 const SITE_DESCRIPTION =

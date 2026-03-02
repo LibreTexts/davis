@@ -1,3 +1,5 @@
+"use client";
+
 import { Checkbox as HeadlessCheckbox, Field, Label } from "@headlessui/react";
 import clsx from "clsx";
 import { useState } from "react";

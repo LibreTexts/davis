@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, useContext } from "react";
 
 export type NotificationVariant = "success" | "error" | "warning" | "info";

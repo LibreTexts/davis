@@ -51,7 +51,8 @@ This gives your project the full Davis design token system: colors, typography s
 
 ## Import Styles
 
-In your app's entry CSS file:
+### Tailwind v3 Apps
+In your app's entry CSS file, import the Davis base styles and Tailwind directives:
 
 ```css
 @import "@libretexts/davis-core/base.css";
@@ -61,10 +62,13 @@ In your app's entry CSS file:
 @tailwind utilities;
 ```
 
-Or import the pre-built stylesheet from the React package:
 
-```js
-import "@libretexts/davis-react/styles.css";
+### Tailwind v4+ Apps
+In your app's entry CSS file, import the Davis base styles and Tailwind directives:
+
+```css
+@import 'tailwindcss';
+@import "@libretexts/davis-core/base.css";
 ```
 
 ---
@@ -114,5 +118,5 @@ Ready to build? Explore our design foundations and component patterns:
 - [Typography](/docs/design-tokens/typography) - Major Third typographic scale
 - [Spacing](/docs/design-tokens/spacing) - 4px grid spacing system
 - [Layout](/docs/design-tokens/layout) - Page structure and responsive patterns
-- [Accessibility](/docs/guides/accessibility) - WCAG 2.1 AA guidelines
+- [Accessibility](/docs/guides/accessibility) - WCAG 2.2 AA guidelines
 - [Component Patterns](/docs/guides/patterns) - Real-world usage examples
