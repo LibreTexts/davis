@@ -14,6 +14,7 @@ export const navigation: NavGroup[] = [
     links: [
       { title: 'Overview', href: '/docs/getting-started/overview' },
       { title: 'Installation', href: '/docs/getting-started/installation' },
+      { title: 'Fonts', href: '/docs/getting-started/fonts' },
       { title: 'License', href: '/docs/getting-started/license' },
     ],
   },

@@ -1,5 +1,13 @@
 import type { Metadata } from 'next';
+import { Atkinson_Hyperlegible } from 'next/font/google';
 import '@/styles/global.css';
+
+const atkinsonHyperlegible = Atkinson_Hyperlegible({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sans',
+});
 
 const SITE_NAME = 'Davis Design System';
 const SITE_DESCRIPTION =
@@ -63,7 +71,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={atkinsonHyperlegible.variable}>
       <body>
         {children}
       </body>

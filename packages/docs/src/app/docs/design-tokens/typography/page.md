@@ -11,14 +11,14 @@ Davis uses a **Major Third** typographic scale (ratio 1.250, base 16px) to creat
 
 ## Font Family
 
-The primary font is **Inter**, with a system font stack fallback:
+The primary font is **Atkinson Hyperlegible**, with a system font stack fallback:
 
 ```
-Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
+Atkinson Hyperlegible, ui-sans-serif, system-ui, -apple-system,
+BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
 ```
 
-Inter is loaded via the base CSS. If Inter is not available, the system sans-serif font is used.
+Atkinson Hyperlegible was designed by the Braille Institute specifically for legibility and accessibility, making it ideal for Davis's a11y-first approach. See the [Fonts guide](/docs/getting-started/fonts) for loading instructions.
 
 ---
 
