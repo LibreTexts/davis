@@ -1,4 +1,4 @@
-@import "../../core/src/base.scoped.css";
+@import "@libretexts/davis-core/base.scoped.css";
 
 @tailwind components;
 @tailwind utilities;

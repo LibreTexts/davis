@@ -125,5 +125,3 @@ export type { DavisProviderProps } from "./providers/davis-provider";
 
 export { DavisContext, useDavisContext } from "./context/davis-context";
 export type { DavisContextType } from "./context/davis-context";
-
-export * from "@libretexts/davis-core";

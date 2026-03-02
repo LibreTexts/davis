@@ -192,9 +192,9 @@ ${shadowVars}
 }
 `;
 
-  const outputPath = join(rootDir, 'src', 'theme.css');
+  const outputPath = join(rootDir, 'dist', 'theme.css');
   writeFileSync(outputPath, theme);
-  console.log('✓ Generated src/theme.css');
+  console.log('✓ Generated dist/theme.css');
 }
 
 // ─── Generate Base CSS ───────────────────────────────────────────────
@@ -335,9 +335,9 @@ function generateBaseCSS() {
 }
 `;
 
-  const outputPath = join(rootDir, 'src', 'base.css');
+  const outputPath = join(rootDir, 'dist', 'base.css');
   writeFileSync(outputPath, css);
-  console.log('✓ Generated src/base.css');
+  console.log('✓ Generated dist/base.css');
 }
 
 // ─── Generate Scoped Base CSS ────────────────────────────────────────
@@ -542,14 +542,19 @@ function generateScopedBaseCSS() {
 }
 `;
 
-  const outputPath = join(rootDir, 'src', 'base.scoped.css');
+  const outputPath = join(rootDir, 'dist', 'base.scoped.css');
   writeFileSync(outputPath, css);
-  console.log('✓ Generated src/base.scoped.css');
+  console.log('✓ Generated dist/base.scoped.css');
 }
 
 // ─── Main ────────────────────────────────────────────────────────────
 
 try {
+  // Ensure the dist directory exists
+  if (!existsSync(join(rootDir, 'dist'))) {
+    mkdirSync(join(rootDir, 'dist'));
+  }
+
   generateTailwindV3Preset();
   generateTailwindV4Theme();
   generateBaseCSS();
