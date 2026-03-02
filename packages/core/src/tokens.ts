@@ -277,3 +277,183 @@ export const TARGET_SIZE = {
   minimum: '24px',
   comfortable: '44px',
 } as const;
+
+// ─── Z-Index Scale ──────────────────────────────────────────────
+
+/**
+ * Layered z-index scale to prevent z-index wars.
+ * Each layer reserves space for the category of UI it represents.
+ *
+ * | Token          | Value | Use                             |
+ * |----------------|-------|---------------------------------|
+ * | dropdown       | 1000  | Select menus, menu dropdowns    |
+ * | sticky         | 1100  | Sticky headers, toolbars        |
+ * | fixed          | 1200  | Fixed navbars, FABs             |
+ * | modalBackdrop  | 1300  | Modal/drawer backdrop overlay   |
+ * | modal          | 1400  | Modal dialogs, drawers          |
+ * | popover        | 1500  | Popovers, floating panels       |
+ * | toast          | 1600  | Toast notifications             |
+ * | tooltip        | 1700  | Tooltips (always on top)        |
+ */
+export const Z_INDEX = {
+  dropdown: '1000',
+  sticky: '1100',
+  fixed: '1200',
+  modalBackdrop: '1300',
+  modal: '1400',
+  popover: '1500',
+  toast: '1600',
+  tooltip: '1700',
+} as const;
+
+// ─── Opacity ────────────────────────────────────────────────────
+
+/**
+ * Semantic opacity tokens for consistent transparency across components.
+ *
+ * | Token       | Value | Use                                 |
+ * |-------------|-------|-------------------------------------|
+ * | disabled    | 0.5   | Disabled controls and text          |
+ * | placeholder | 0.6   | Placeholder text in inputs          |
+ * | overlay     | 0.5   | Modal/drawer backdrop overlays      |
+ * | hoverLight  | 0.04  | Subtle hover background tint        |
+ * | hoverMedium | 0.08  | Medium hover background tint        |
+ */
+export const OPACITY = {
+  disabled: '0.5',
+  placeholder: '0.6',
+  overlay: '0.5',
+  hoverLight: '0.04',
+  hoverMedium: '0.08',
+} as const;
+
+// ─── Border Width ───────────────────────────────────────────────
+
+/**
+ * Border width tokens for dividers, outlines, and component borders.
+ *
+ * | Token   | Value | Use                            |
+ * |---------|-------|--------------------------------|
+ * | none    | 0px   | No border                      |
+ * | thin    | 1px   | Default borders, dividers      |
+ * | medium  | 2px   | Emphasis borders, focus rings  |
+ * | thick   | 3px   | Heavy emphasis, active states  |
+ */
+export const BORDER_WIDTH = {
+  none: '0px',
+  thin: '1px',
+  medium: '2px',
+  thick: '3px',
+} as const;
+
+// ─── Font Weight ────────────────────────────────────────────────
+
+/**
+ * Font weight tokens formalizing which weights the design system uses.
+ *
+ * | Token    | Value | Use                                |
+ * |----------|-------|------------------------------------|
+ * | light    | 300   | De-emphasized text                 |
+ * | regular  | 400   | Body text, default                 |
+ * | medium   | 500   | Labels, buttons, UI controls       |
+ * | semibold | 600   | Subheadings, emphasis              |
+ * | bold     | 700   | Headings, strong emphasis          |
+ */
+export const FONT_WEIGHT = {
+  light: '300',
+  regular: '400',
+  medium: '500',
+  semibold: '600',
+  bold: '700',
+} as const;
+
+// ─── Letter Spacing ─────────────────────────────────────────────
+
+/**
+ * Letter spacing tokens for typographic refinement.
+ *
+ * | Token   | Value     | Use                              |
+ * |---------|-----------|----------------------------------|
+ * | tighter | -0.05em   | Large display text               |
+ * | tight   | -0.025em  | Headings                         |
+ * | normal  | 0em       | Body text (default)              |
+ * | wide    | 0.025em   | Buttons, labels                  |
+ * | wider   | 0.05em    | All-caps text, overlines         |
+ * | widest  | 0.1em     | Extreme letter-spaced styles     |
+ */
+export const LETTER_SPACING = {
+  tighter: '-0.05em',
+  tight: '-0.025em',
+  normal: '0em',
+  wide: '0.025em',
+  wider: '0.05em',
+  widest: '0.1em',
+} as const;
+
+// ─── Breakpoints ────────────────────────────────────────────────
+
+/**
+ * Responsive breakpoint tokens. Formalizes breakpoints for JS consumers,
+ * documentation, and server-side rendering logic.
+ *
+ * Matches Tailwind's default breakpoints.
+ *
+ * | Token | px   | Use                              |
+ * |-------|------|----------------------------------|
+ * | sm    | 640  | Large phones, landscape          |
+ * | md    | 768  | Tablets                          |
+ * | lg    | 1024 | Small laptops                    |
+ * | xl    | 1280 | Desktops                         |
+ * | 2xl   | 1536 | Large desktops                   |
+ */
+export const BREAKPOINTS = {
+  sm: '640px',
+  md: '768px',
+  lg: '1024px',
+  xl: '1280px',
+  '2xl': '1536px',
+} as const;
+
+// ─── Icon Size ──────────────────────────────────────────────────
+
+/**
+ * Icon size tokens for consistent icon scaling across all components.
+ *
+ * | Token | px | Use                                    |
+ * |-------|-----|---------------------------------------|
+ * | xs    | 12  | Inline indicators, tiny badges        |
+ * | sm    | 16  | Small buttons, form helper icons      |
+ * | md    | 20  | Default buttons, menu items           |
+ * | lg    | 24  | Large buttons, card icons             |
+ * | xl    | 32  | Feature icons, empty states           |
+ */
+export const ICON_SIZE = {
+  xs: '0.75rem',
+  sm: '1rem',
+  md: '1.25rem',
+  lg: '1.5rem',
+  xl: '2rem',
+} as const;
+
+// ─── Container / Content Width ──────────────────────────────────
+
+/**
+ * Max-width tokens for page containers and content areas.
+ *
+ * | Token | Value  | Use                              |
+ * |-------|--------|----------------------------------|
+ * | sm    | 640px  | Narrow content (auth forms)      |
+ * | md    | 768px  | Medium content                   |
+ * | lg    | 1024px | Default page content             |
+ * | xl    | 1280px | Wide page content                |
+ * | 2xl   | 1536px | Full-width page content          |
+ * | prose | 65ch   | Optimal reading width            |
+ */
+export const CONTAINER = {
+  sm: '640px',
+  md: '768px',
+  lg: '1024px',
+  xl: '1280px',
+  '2xl': '1536px',
+  prose: '65ch',
+} as const;

@@ -14,7 +14,10 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = join(__dirname, '..');
 
-const { COLORS, FONT_FAMILY_SANS, FONT_SIZE, RADIUS, SHADOWS, MOTION, TARGET_SIZE } = await import(
+const {
+  COLORS, FONT_FAMILY_SANS, FONT_SIZE, RADIUS, SHADOWS, MOTION, TARGET_SIZE,
+  Z_INDEX, OPACITY, BORDER_WIDTH, FONT_WEIGHT, LETTER_SPACING, BREAKPOINTS, ICON_SIZE, CONTAINER,
+} = await import(
   '../dist/index.js'
 );
 
@@ -90,6 +93,18 @@ ${colorEntries(COLORS.neutral)}
       },
 
       borderRadius: ${JSON.stringify(RADIUS, null, 8)},
+
+      zIndex: ${JSON.stringify(Z_INDEX, null, 8)},
+
+      opacity: ${JSON.stringify(OPACITY, null, 8)},
+
+      borderWidth: ${JSON.stringify(BORDER_WIDTH, null, 8)},
+
+      fontWeight: ${JSON.stringify(FONT_WEIGHT, null, 8)},
+
+      letterSpacing: ${JSON.stringify(LETTER_SPACING, null, 8)},
+
+      maxWidth: ${JSON.stringify(CONTAINER, null, 8)},
     },
   },
 };
@@ -189,6 +204,38 @@ ${shadowVars}
 
   --davis-target-size-minimum: ${TARGET_SIZE.minimum};
   --davis-target-size-comfortable: ${TARGET_SIZE.comfortable};
+
+  /* ─── Z-Index ──────────────────────────────────────────────── */
+
+${Object.entries(Z_INDEX).map(([name, value]) => `  --z-index-${name}: ${value};`).join('\n')}
+
+  /* ─── Opacity ──────────────────────────────────────────────── */
+
+${Object.entries(OPACITY).map(([name, value]) => `  --opacity-${name}: ${value};`).join('\n')}
+
+  /* ─── Border Width ─────────────────────────────────────────── */
+
+${Object.entries(BORDER_WIDTH).map(([name, value]) => `  --border-width-${name}: ${value};`).join('\n')}
+
+  /* ─── Font Weight ──────────────────────────────────────────── */
+
+${Object.entries(FONT_WEIGHT).map(([name, value]) => `  --font-weight-${name}: ${value};`).join('\n')}
+
+  /* ─── Letter Spacing ───────────────────────────────────────── */
+
+${Object.entries(LETTER_SPACING).map(([name, value]) => `  --letter-spacing-${name}: ${value};`).join('\n')}
+
+  /* ─── Breakpoints ──────────────────────────────────────────── */
+
+${Object.entries(BREAKPOINTS).map(([name, value]) => `  --breakpoint-${name}: ${value};`).join('\n')}
+
+  /* ─── Icon Size ────────────────────────────────────────────── */
+
+${Object.entries(ICON_SIZE).map(([name, value]) => `  --icon-size-${name}: ${value};`).join('\n')}
+
+  /* ─── Container / Content Width ────────────────────────────── */
+
+${Object.entries(CONTAINER).map(([name, value]) => `  --container-${name}: ${value};`).join('\n')}
 }
 `;
 
@@ -256,6 +303,30 @@ function generateBaseCSS() {
     /* Target Size (WCAG 2.2) */
     --davis-target-size-minimum: ${TARGET_SIZE.minimum};
     --davis-target-size-comfortable: ${TARGET_SIZE.comfortable};
+
+    /* Z-Index */
+${Object.entries(Z_INDEX).map(([name, value]) => `    --davis-z-${name}: ${value};`).join('\n')}
+
+    /* Opacity */
+${Object.entries(OPACITY).map(([name, value]) => `    --davis-opacity-${name}: ${value};`).join('\n')}
+
+    /* Border Width */
+${Object.entries(BORDER_WIDTH).map(([name, value]) => `    --davis-border-width-${name}: ${value};`).join('\n')}
+
+    /* Font Weight */
+${Object.entries(FONT_WEIGHT).map(([name, value]) => `    --davis-font-weight-${name}: ${value};`).join('\n')}
+
+    /* Letter Spacing */
+${Object.entries(LETTER_SPACING).map(([name, value]) => `    --davis-letter-spacing-${name}: ${value};`).join('\n')}
+
+    /* Breakpoints */
+${Object.entries(BREAKPOINTS).map(([name, value]) => `    --davis-breakpoint-${name}: ${value};`).join('\n')}
+
+    /* Icon Size */
+${Object.entries(ICON_SIZE).map(([name, value]) => `    --davis-icon-size-${name}: ${value};`).join('\n')}
+
+    /* Container / Content Width */
+${Object.entries(CONTAINER).map(([name, value]) => `    --davis-container-${name}: ${value};`).join('\n')}
   }
 
   /* ─── Typography Defaults ───────────────────────────────────── */
@@ -396,6 +467,30 @@ function generateScopedBaseCSS() {
   /* Target Size (WCAG 2.2) */
   --davis-target-size-minimum: ${TARGET_SIZE.minimum};
   --davis-target-size-comfortable: ${TARGET_SIZE.comfortable};
+
+  /* Z-Index */
+${Object.entries(Z_INDEX).map(([name, value]) => `  --davis-z-${name}: ${value};`).join('\n')}
+
+  /* Opacity */
+${Object.entries(OPACITY).map(([name, value]) => `  --davis-opacity-${name}: ${value};`).join('\n')}
+
+  /* Border Width */
+${Object.entries(BORDER_WIDTH).map(([name, value]) => `  --davis-border-width-${name}: ${value};`).join('\n')}
+
+  /* Font Weight */
+${Object.entries(FONT_WEIGHT).map(([name, value]) => `  --davis-font-weight-${name}: ${value};`).join('\n')}
+
+  /* Letter Spacing */
+${Object.entries(LETTER_SPACING).map(([name, value]) => `  --davis-letter-spacing-${name}: ${value};`).join('\n')}
+
+  /* Breakpoints */
+${Object.entries(BREAKPOINTS).map(([name, value]) => `  --davis-breakpoint-${name}: ${value};`).join('\n')}
+
+  /* Icon Size */
+${Object.entries(ICON_SIZE).map(([name, value]) => `  --davis-icon-size-${name}: ${value};`).join('\n')}
+
+  /* Container / Content Width */
+${Object.entries(CONTAINER).map(([name, value]) => `  --davis-container-${name}: ${value};`).join('\n')}
 }
 
 /* ─── Scoped Preflight replacements ──────────────────────────── */
