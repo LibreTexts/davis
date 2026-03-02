@@ -73,6 +73,21 @@ In your app's entry CSS file, import the Davis base styles and Tailwind directiv
 
 ---
 
+## Load Fonts
+
+Davis uses **Atkinson Hyperlegible** for optimal legibility. You can load it via Google Fonts or self-host it for better performance and privacy.
+
+### Google Fonts CDN
+
+```css
+/* In your main CSS file */
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap');
+```
+
+See the [Fonts](/docs/getting-started/fonts) guide for self-hosting, performance optimization, and framework-specific instructions.
+
+---
+
 ## Quick Start Example
 
 ```tsx

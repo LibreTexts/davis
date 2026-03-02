@@ -17,7 +17,7 @@
 // ─── Typography ──────────────────────────────────────────────────
 
 export const FONT_FAMILY_SANS = [
-  'Inter',
+  'Atkinson Hyperlegible',
   'ui-sans-serif',
   'system-ui',
   '-apple-system',
