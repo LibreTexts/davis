@@ -200,6 +200,58 @@ module.exports = {
         "3xl": "1.5rem",
         "full": "9999px"
 },
+
+      zIndex: {
+        "dropdown": "1000",
+        "sticky": "1100",
+        "fixed": "1200",
+        "modalBackdrop": "1300",
+        "modal": "1400",
+        "popover": "1500",
+        "toast": "1600",
+        "tooltip": "1700"
+},
+
+      opacity: {
+        "disabled": "0.5",
+        "placeholder": "0.6",
+        "overlay": "0.5",
+        "hoverLight": "0.04",
+        "hoverMedium": "0.08"
+},
+
+      borderWidth: {
+        "none": "0px",
+        "thin": "1px",
+        "medium": "2px",
+        "thick": "3px"
+},
+
+      fontWeight: {
+        "light": "300",
+        "regular": "400",
+        "medium": "500",
+        "semibold": "600",
+        "bold": "700"
+},
+
+      letterSpacing: {
+        "tighter": "-0.05em",
+        "tight": "-0.025em",
+        "normal": "0em",
+        "wide": "0.025em",
+        "wider": "0.05em",
+        "widest": "0.1em"
+},
+
+      maxWidth: {
+        "sm": "640px",
+        "md": "768px",
+        "lg": "1024px",
+        "xl": "1280px",
+        "2xl": "1536px",
+        "prose": "65ch"
+},
     },
   },
 };
