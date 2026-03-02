@@ -39,8 +39,35 @@ jobs:
             exit 1
           fi
 
-  release-core:
+  validate-all:
+    name: Validate All Packages
     needs: authorize
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build all packages
+        run: |
+          npm run build -w @libretexts/davis-core
+          npm run build -w @libretexts/davis-react
+          npm run build -w @libretexts/davis-vue
+          npm run build -w @libretexts/davis-docs
+
+  release-core:
+    needs: [authorize, validate-all]
     name: Release Core Package
     runs-on: ubuntu-latest
     permissions:
@@ -82,7 +109,7 @@ jobs:
   release-react:
     name: Release React Package
     runs-on: ubuntu-latest
-    needs: [authorize, release-core]
+    needs: [authorize, validate-all, release-core]
     permissions:
       contents: write
       issues: write
@@ -125,7 +152,7 @@ jobs:
   release-vue:
     name: Release Vue Package
     runs-on: ubuntu-latest
-    needs: [authorize, release-core]
+    needs: [authorize, validate-all, release-core]
     permissions:
       contents: write
       issues: write
@@ -168,7 +195,7 @@ jobs:
   version-docs:
     name: Version Docs Package
     runs-on: ubuntu-latest
-    needs: [authorize, release-react, release-vue]
+    needs: [authorize, validate-all, release-react, release-vue]
     permissions:
       contents: write
       issues: write
