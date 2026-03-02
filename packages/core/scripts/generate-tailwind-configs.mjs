@@ -6,7 +6,7 @@
  * Run this script whenever tokens.ts changes.
  */
 
-import { writeFileSync } from 'fs';
+import { writeFileSync, existsSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
