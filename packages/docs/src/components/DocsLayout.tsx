@@ -32,6 +32,13 @@ export function DocsLayout({ children }: DocsLayoutProps) {
                 >
                   Documentation
                 </Link>
+                <Link
+                  href="/quick-reference.svg"
+                  className="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors"
+                  target='_blank'
+                >
+                  Quick Reference
+                </Link>
                 <a
                   href="https://github.com/LibreTexts/davis"
                   target="_blank"
