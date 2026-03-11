@@ -63,10 +63,11 @@ The **core** package is framework-agnostic — it exports design tokens, the Tai
 Ready to start using Davis? Check out the [Installation](/docs/getting-started/installation) guide to get started.
 
 Explore our design foundations:
-- [Colors](/docs/design-tokens/colors)
-- [Typography](/docs/design-tokens/typography)
-- [Spacing](/docs/design-tokens/spacing)
-- [Layout](/docs/design-tokens/layout)
+- [Architecture](/docs/foundation/architecture)
+- [Colors](/docs/foundation/colors)
+- [Typography](/docs/foundation/typography)
+- [Spacing](/docs/foundation/spacing)
+- [Layout](/docs/foundation/layout)
 
 Learn about best practices:
 - [Accessibility](/docs/guides/accessibility)

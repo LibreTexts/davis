@@ -15,7 +15,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = join(__dirname, '..');
 
 const {
-  COLORS, FONT_FAMILY_SANS, FONT_SIZE, RADIUS, SHADOWS, MOTION, TARGET_SIZE,
+  COLORS, SURFACE, FONT_FAMILY_SANS, FONT_SIZE, RADIUS, SHADOWS, MOTION, TARGET_SIZE,
   Z_INDEX, OPACITY, BORDER_WIDTH, FONT_WEIGHT, LETTER_SPACING, BREAKPOINTS, ICON_SIZE, CONTAINER,
 } = await import(
   '../dist/index.js'
@@ -77,10 +77,15 @@ ${colorEntries(COLORS.danger)}
           DEFAULT: '${COLORS.neutral[900]}',
 ${colorEntries(COLORS.neutral)}
         },
+        text: {
+          DEFAULT: '${COLORS.text.DEFAULT}',
+          neutral: '${COLORS.text.neutral}',
+          white: '${COLORS.text.white}',
+        },
         surface: {
-          DEFAULT: '#FFFFFF',
-          muted: '#F9FAFB',
-          subtle: '#F4F4F5',
+          DEFAULT: '${SURFACE.DEFAULT}',
+          muted: '${SURFACE.muted}',
+          subtle: '${SURFACE.subtle}',
         },
       },
 
@@ -130,8 +135,8 @@ function generateTailwindV4Theme() {
         .map(([shade, color]) => `  --color-${name}-${shade}: ${color};`)
         .join('\n');
 
-      // Add DEFAULT mapping to 500 shade
-      const defaultVar = `  --color-${name}: ${shades[500]};`;
+      // Add DEFAULT mapping to 500 shade or "DEFAULT" shade if available
+      const defaultVar = shades[500] ? `  --color-${name}: ${shades[500]};` : shades["DEFAULT"] ? `  --color-${name}: ${shades["DEFAULT"]};` : '';
 
       return `  /* ${name.charAt(0).toUpperCase() + name.slice(1)} */\n${shadeVars}\n${defaultVar}`;
     })
@@ -642,6 +647,107 @@ ${Object.entries(CONTAINER).map(([name, value]) => `  --davis-container-${name}:
   console.log('✓ Generated dist/base.scoped.css');
 }
 
+// ─── Generate Tailwind v4 Base CSS ──────────────────────────────────
+
+function generateTailwindV4BaseCSS() {
+  const css = `/**
+ * Davis Design System — Tailwind CSS v4 Base Styles
+ *
+ * AUTO-GENERATED from tokens.ts — DO NOT EDIT MANUALLY
+ * Run 'npm run generate:configs' to regenerate
+ *
+ * Base styles for Tailwind CSS v4 (without @layer directive).
+ * Contains typography defaults, heading hierarchy, focus management,
+ * and reduced motion support.
+ *
+ * Import this along with theme.css for full v4 support:
+ * @import "@libretexts/davis-core/theme.css";
+ * @import "@libretexts/davis-core/base.v4.css";
+ */
+
+/* ─── Typography Defaults ───────────────────────────────── */
+
+html {
+  font-family: ${Array.from(FONT_FAMILY_SANS).map(f =>
+    f.includes(' ') ? `'${f}'` : f
+  ).join(', ')};
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Heading Hierarchy (Major Third Scale) ─────────────────── */
+
+h1 {
+  font-size: ${FONT_SIZE['4xl'][0]};
+  line-height: ${FONT_SIZE['4xl'][1].lineHeight};
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+h2 {
+  font-size: ${FONT_SIZE['3xl'][0]};
+  line-height: ${FONT_SIZE['3xl'][1].lineHeight};
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  font-size: ${FONT_SIZE['2xl'][0]};
+  line-height: ${FONT_SIZE['2xl'][1].lineHeight};
+  font-weight: 600;
+}
+
+h4 {
+  font-size: ${FONT_SIZE.xl[0]};
+  line-height: ${FONT_SIZE.xl[1].lineHeight};
+  font-weight: 600;
+}
+
+h5 {
+  font-size: ${FONT_SIZE.lg[0]};
+  line-height: ${FONT_SIZE.lg[1].lineHeight};
+  font-weight: 600;
+}
+
+h6 {
+  font-size: ${FONT_SIZE.lg[0]};
+  line-height: ${FONT_SIZE.lg[1].lineHeight};
+  font-weight: 600;
+}
+
+/* ─── Focus Management ──────────────────────────────────────── */
+
+*:focus-visible {
+  outline: 2px solid ${COLORS.primary[500]};
+  outline-offset: 2px;
+}
+
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ─── Reduced Motion ──────────────────────────────────────── */
+/* Disables transitions and animations for users who prefer    */
+/* reduced motion. Respects prefers-reduced-motion: reduce.    */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+`;
+
+  const outputPath = join(rootDir, 'dist', 'base.v4.css');
+  writeFileSync(outputPath, css);
+  console.log('✓ Generated dist/base.v4.css');
+}
+
 // ─── Main ────────────────────────────────────────────────────────────
 
 try {
@@ -654,8 +760,9 @@ try {
   generateTailwindV4Theme();
   generateBaseCSS();
   generateScopedBaseCSS();
+  generateTailwindV4BaseCSS();
   console.log('\n✨ All configs and base styles generated successfully!');
 } catch (error) {
-  console.error('❌ Error generating files:', error);
+  console.error('❌ Error generating files (did you run npm run build?):', error);
   process.exit(1);
 }

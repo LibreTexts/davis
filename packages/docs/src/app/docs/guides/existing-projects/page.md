@@ -33,6 +33,9 @@ Standalone mode scopes all Davis styles under a `.davis` CSS class. Nothing leak
 
 ### 1. Install Packages
 
+{% framework-tabs %}
+{% tab framework="react" %}
+
 Same packages as standard mode:
 
 ```bash
@@ -45,7 +48,32 @@ Peer dependencies:
 npm install @headlessui/react react react-dom tailwindcss
 ```
 
+{% /tab %}
+{% tab framework="vue" %}
+
+{% callout type="info" title="Coming Soon" %}
+Vue components are in development. This guide will be updated with Vue-specific instructions when the component library is available.
+{% /callout %}
+
+Once available:
+
+```bash
+npm install @libretexts/davis-vue @libretexts/davis-core
+```
+
+Peer dependencies:
+
+```bash
+npm install @headlessui/vue vue tailwindcss
+```
+
+{% /tab %}
+{% /framework-tabs %}
+
 ### 2. Import Standalone Styles
+
+{% framework-tabs %}
+{% tab framework="react" %}
 
 Import the standalone stylesheet instead of the standard one. In your app's entry point:
 
@@ -59,6 +87,20 @@ This stylesheet:
 - Initializes `--tw-*` variables only within `.davis` so utilities work correctly
 
 **Do not** import `base.css` or `styles.css` — those are for standard mode.
+
+{% /tab %}
+{% tab framework="vue" %}
+
+Once available, import the standalone stylesheet in your app's entry point:
+
+```js
+import "@libretexts/davis-vue/styles.standalone.css";
+```
+
+Coming soon
+
+{% /tab %}
+{% /framework-tabs %}
 
 ### 3. Configure Tailwind
 
@@ -89,6 +131,9 @@ No Tailwind config needed. The standalone CSS ships pre-built with all the utili
 
 ### 4. Wrap Components with DavisProvider
 
+{% framework-tabs %}
+{% tab framework="react" %}
+
 Every Davis component must be rendered inside a `DavisProvider`. The provider creates the `.davis` wrapper `<div>` that activates scoped styles:
 
 ```tsx
@@ -107,6 +152,33 @@ function App() {
   );
 }
 ```
+
+{% /tab %}
+{% tab framework="vue" %}
+
+Every Davis component must be rendered inside a `DavisProvider`. The provider creates the `.davis` wrapper that activates scoped styles:
+
+```vue
+<script setup>
+import { DavisProvider, Button } from '@libretexts/davis-vue';
+</script>
+
+<template>
+  <div>
+    <h1>My Existing App</h1>
+    <!-- This heading keeps your app's original styles -->
+
+    <DavisProvider>
+      <Button>This button is styled by Davis</Button>
+    </DavisProvider>
+  </div>
+</template>
+```
+
+Coming soon
+
+{% /tab %}
+{% /framework-tabs %}
 
 ---
 

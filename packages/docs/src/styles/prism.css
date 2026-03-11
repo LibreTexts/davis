@@ -1,47 +1,117 @@
+/**
+ * Syntax highlighting theme for Davis docs
+ * Based on popular dark editor themes (VS Code Dark+ / GitHub Dark)
+ * Uses generic colors since Davis design system focuses on UI, not code highlighting
+ */
+
+/* Base text color for code */
 pre[class*='language-'] {
-  color: var(--color-slate-50);
+  color: #e4e4e7; /* Light gray for readability on dark background */
 }
 
-.token.tag,
-.token.class-name,
-.token.selector,
-.token.selector .class,
-.token.selector.class,
-.token.function {
-  color: var(--color-pink-400);
+/* Comments - muted gray */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #6b7280;
+  font-style: italic;
 }
 
-.token.attr-name,
+/* Keywords - purple/violet */
 .token.keyword,
+.token.control,
+.token.directive,
+.token.unit,
 .token.rule,
 .token.pseudo-class,
 .token.important {
-  color: var(--color-slate-300);
+  color: #c084fc;
 }
 
-.token.module {
-  color: var(--color-pink-400);
-}
-
-.token.attr-value,
-.token.class,
+/* Strings and text - green */
 .token.string,
-.token.property {
-  color: var(--color-sky-300);
+.token.attr-value,
+.token.char {
+  color: #86efac;
 }
 
+/* Functions and methods - yellow */
+.token.function,
+.token.function-name,
+.token.method {
+  color: #fbbf24;
+}
+
+/* Class names and types - cyan/blue */
+.token.class-name,
+.token.type,
+.token.builtin,
+.token.selector {
+  color: #7dd3fc;
+}
+
+/* Properties and attributes - light blue */
+.token.property,
+.token.attr-name,
+.token.constant,
+.token.symbol {
+  color: #60a5fa;
+}
+
+/* Numbers and booleans - orange */
+.token.number,
+.token.boolean {
+  color: #fb923c;
+}
+
+/* Operators and punctuation - subtle gray */
+.token.operator,
 .token.punctuation,
 .token.attr-equals {
-  color: var(--color-slate-500);
+  color: #9ca3af;
 }
 
-.token.unit,
-.language-css .token.function {
-  color: var(--color-teal-200);
+/* Tags - red/pink for HTML/JSX */
+.token.tag {
+  color: #f87171;
 }
 
-.token.comment,
-.token.operator,
-.token.combinator {
-  color: var(--color-slate-400);
+/* Regex and special - magenta */
+.token.regex,
+.token.important,
+.token.variable {
+  color: #e879f9;
+}
+
+/* Deleted text in diffs */
+.token.deleted {
+  color: #fca5a5;
+}
+
+/* Inserted text in diffs */
+.token.inserted {
+  color: #86efac;
+}
+
+/* URLs and links */
+.token.url {
+  color: #60a5fa;
+  text-decoration: underline;
+}
+
+/* Make certain tokens bold */
+.token.bold,
+.token.important {
+  font-weight: bold;
+}
+
+/* Italic tokens */
+.token.italic {
+  font-style: italic;
+}
+
+/* Namespace opacity */
+.token.namespace {
+  opacity: 0.7;
 }
