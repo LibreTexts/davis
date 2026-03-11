@@ -619,6 +619,114 @@ export const skipLink = tv({
   ].join(' '),
 });
 
+export const tabs = tv({
+  slots: {
+    list:   'flex',
+    tab: [
+      'relative inline-flex items-center justify-center whitespace-nowrap',
+      'font-medium transition-all duration-200',
+      'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm',
+      'disabled:opacity-50 disabled:cursor-not-allowed',
+    ].join(' '),
+    panels: 'mt-4',
+    panel:  'focus:outline-none',
+  },
+  variants: {
+    variant: {
+      line: {
+        list: 'border-b border-gray-200',
+        tab: [
+          'px-4 py-2.5 -mb-px border-b-2 border-transparent',
+          'text-gray-500 hover:text-gray-700 hover:border-gray-300',
+          'data-[selected]:border-primary data-[selected]:text-primary',
+        ].join(' '),
+      },
+      pills: {
+        list: 'inline-flex bg-gray-100 p-1 rounded-lg gap-1',
+        tab: [
+          'px-4 py-2 rounded-md',
+          'text-gray-500 hover:text-gray-700',
+        ].join(' '),
+      },
+    },
+    color: {
+      white:   {},
+      primary: {},
+    },
+    size: {
+      sm: { tab: 'text-sm'   },
+      md: { tab: 'text-base' },
+      lg: { tab: 'text-lg'   },
+    },
+  },
+  compoundVariants: [
+    {
+      variant: 'pills',
+      color: 'white',
+      class: {
+        tab: 'data-[selected]:bg-white data-[selected]:text-gray-900 data-[selected]:shadow-sm data-[selected]:ring-1 data-[selected]:ring-black/5',
+      },
+    },
+    {
+      variant: 'pills',
+      color: 'primary',
+      class: {
+        tab: 'data-[selected]:bg-primary data-[selected]:text-white data-[selected]:shadow-sm',
+      },
+    },
+  ],
+  defaultVariants: {
+    variant: 'line'  as const,
+    color:   'white' as const,
+    size:    'md'    as const,
+  },
+});
+
+export const accordion = tv({
+  slots: {
+    root:    '',
+    item:    '',
+    trigger: [
+      'group flex w-full items-center justify-between',
+      'text-left font-medium text-gray-900 bg-white',
+      'hover:bg-gray-50 transition-colors duration-200',
+      'focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary',
+      'disabled:opacity-50 disabled:cursor-not-allowed',
+    ].join(' '),
+    icon:  'shrink-0 ml-2 text-gray-400 transition-transform duration-200 group-data-[open]:rotate-180',
+    panel: 'text-gray-600 bg-white',
+  },
+  variants: {
+    variant: {
+      default: {
+        root:    'divide-y divide-gray-200 border border-gray-200 rounded-lg overflow-hidden',
+        trigger: 'px-4 py-4',
+        panel:   'px-4 pb-4',
+      },
+      flush: {
+        root:    'divide-y divide-gray-200',
+        trigger: 'px-0 py-4',
+        panel:   'pb-4',
+      },
+      bordered: {
+        root:    'flex flex-col gap-2',
+        item:    'border border-gray-200 rounded-lg overflow-hidden',
+        trigger: 'px-4 py-4',
+        panel:   'px-4 pb-4',
+      },
+    },
+    size: {
+      sm: { trigger: 'text-sm',  panel: 'text-xs',  icon: 'size-4' },
+      md: { trigger: 'text-base', panel: 'text-sm',  icon: 'size-5' },
+      lg: { trigger: 'text-lg',  panel: 'text-base', icon: 'size-6' },
+    },
+  },
+  defaultVariants: {
+    variant: 'default' as const,
+    size:    'md'      as const,
+  },
+});
+
 export const spinner = tv({
   base: 'animate-spin',
   variants: {

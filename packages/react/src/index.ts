@@ -118,6 +118,28 @@ export type { SkipLinkProps } from "./components/skip-link";
 export { LiveAnnouncerProvider, useAnnounce } from "./components/live-announcer";
 export type { LiveAnnouncerProviderProps } from "./components/live-announcer";
 
+export { Tabs } from "./components/tabs";
+export type {
+  TabsProps,
+  TabsVariant,
+  TabsSize,
+  TabsColor,
+  TabsListProps,
+  TabProps,
+  TabsPanelsProps,
+  TabPanelProps,
+} from "./components/tabs";
+
+export { Accordion } from "./components/accordion";
+export type {
+  AccordionProps,
+  AccordionVariant,
+  AccordionSize,
+  AccordionItemProps,
+  AccordionTriggerProps,
+  AccordionPanelProps,
+} from "./components/accordion";
+
 export { DavisProvider } from "./providers/davis-provider";
 export type { DavisProviderProps } from "./providers/davis-provider";
 
