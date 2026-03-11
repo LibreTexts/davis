@@ -37,7 +37,7 @@ The Major Third scale multiplies each step by 1.250x:
 | `3xl` | `text-3xl` | 2.441rem (39.1px) | 2.75rem | h2 |
 | `4xl` | `text-4xl` | 3.052rem (48.8px) | 3.25rem | h1, page titles |
 
-**Note:** `text-5xl` through `text-9xl` are not available. The scale caps at `text-4xl` to prevent visual noise.
+**Note:** `text-5xl` through `text-9xl` are not available. The scale caps at `text-4xl` to prevent abnormally large headings that can disrupt layout and readability. If you truly need larger display text, consider using `text-4xl` with a custom font size or weight for emphasis, but use this sparingly.
 
 ### Visual Scale
 

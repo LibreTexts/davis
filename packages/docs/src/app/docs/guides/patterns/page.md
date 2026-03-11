@@ -13,8 +13,12 @@ Composable examples showing how Davis components work together in real-world sce
 
 A complete form with field validation, error states, and submission:
 
+{% framework-tabs %}
+{% tab framework="react" %}
+
 ```tsx
 import { Input, Textarea, Select, Button, Alert } from "@libretexts/davis-react";
+import { useState } from "react";
 
 function ContactForm() {
   const [errors, setErrors] = useState({});
@@ -30,25 +34,28 @@ function ContactForm() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Input
+          name="firstName"
           label="First Name"
           required
           variant={errors.firstName ? "error" : "default"}
-          error={errors.firstName}
+          errorMessage={errors.firstName}
         />
         <Input
+          name="lastName"
           label="Last Name"
           required
           variant={errors.lastName ? "error" : "default"}
-          error={errors.lastName}
+          errorMessage={errors.lastName}
         />
       </div>
 
       <Input
+        name="email"
         label="Email"
         type="email"
         required
         variant={errors.email ? "error" : "default"}
-        error={errors.email}
+        errorMessage={errors.email}
       />
 
       <Select
@@ -61,11 +68,12 @@ function ContactForm() {
       />
 
       <Textarea
+        name="message"
         label="Message"
         required
         rows={4}
         variant={errors.message ? "error" : "default"}
-        error={errors.message}
+        errorMessage={errors.message}
       />
 
       <div className="flex gap-3 justify-end">
@@ -77,11 +85,93 @@ function ContactForm() {
 }
 ```
 
+{% /tab %}
+{% tab framework="vue" %}
+
+```vue
+<script setup>
+import { Input, Textarea, Select, Button, Alert } from '@libretexts/davis-vue';
+import { ref } from 'vue';
+
+const errors = ref({});
+const submitted = ref(false);
+
+function handleSubmit(event) {
+  // Handle form submission
+}
+</script>
+
+<template>
+  <form class="max-w-2xl space-y-6" @submit="handleSubmit">
+    <Alert v-if="submitted" variant="success" title="Message sent!">
+      We'll get back to you within 24 hours.
+    </Alert>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <Input
+        name="firstName"
+        label="First Name"
+        required
+        :variant="errors.firstName ? 'error' : 'default'"
+        :error-message="errors.firstName"
+      />
+      <Input
+        name="lastName"
+        label="Last Name"
+        required
+        :variant="errors.lastName ? 'error' : 'default'"
+        :error-message="errors.lastName"
+      />
+    </div>
+
+    <Input
+      name="email"
+      label="Email"
+      type="email"
+      required
+      :variant="errors.email ? 'error' : 'default'"
+      :error-message="errors.email"
+    />
+
+    <Select
+      label="Subject"
+      :options="[
+        { value: 'general', label: 'General Inquiry' },
+        { value: 'support', label: 'Technical Support' },
+        { value: 'feedback', label: 'Feedback' },
+      ]"
+    />
+
+    <Textarea
+      name="message"
+      label="Message"
+      required
+      :rows="4"
+      :variant="errors.message ? 'error' : 'default'"
+      :error-message="errors.message"
+    />
+
+    <div class="flex gap-3 justify-end">
+      <Button variant="outline" type="button">Cancel</Button>
+      <Button type="submit">Send Message</Button>
+    </div>
+  </form>
+</template>
+```
+
+Coming soon
+
+{% /tab %}
+{% /framework-tabs %}
+
 ---
 
 ## Card Grid
 
 A responsive grid of cards, typical for course listings or resource libraries:
+
+{% framework-tabs %}
+{% tab framework="react" %}
 
 ```tsx
 import { Card, Badge, Avatar } from "@libretexts/davis-react";
@@ -91,7 +181,7 @@ function CourseGrid({ courses }) {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {courses.map((course) => (
         <Card key={course.id} variant="default">
-          <Card.Image src={course.image} alt={course.title} />
+          <Card.Header image={{ src: course.image, alt: course.title }} />
           <Card.Body>
             <div className="flex items-center gap-2 mb-2">
               <Badge variant="primary" size="sm">{course.subject}</Badge>
@@ -111,11 +201,52 @@ function CourseGrid({ courses }) {
 }
 ```
 
+{% /tab %}
+{% tab framework="vue" %}
+
+```vue
+<script setup>
+import { Card, CardHeader, CardBody, Badge, Avatar } from '@libretexts/davis-vue';
+
+defineProps({
+  courses: Array
+});
+</script>
+
+<template>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <Card v-for="course in courses" :key="course.id" variant="default">
+      <CardHeader :image="{ src: course.image, alt: course.title }" />
+      <CardBody>
+        <div class="flex items-center gap-2 mb-2">
+          <Badge variant="primary" size="sm">{{ course.subject }}</Badge>
+          <Badge variant="default" size="sm">{{ course.level }}</Badge>
+        </div>
+        <h3 class="font-semibold text-lg mb-1">{{ course.title }}</h3>
+        <p class="text-sm text-gray-600 mb-3">{{ course.description }}</p>
+        <div class="flex items-center gap-2">
+          <Avatar size="xs" :name="course.instructor" />
+          <span class="text-sm text-gray-500">{{ course.instructor }}</span>
+        </div>
+      </CardBody>
+    </Card>
+  </div>
+</template>
+```
+
+Coming soon
+
+{% /tab %}
+{% /framework-tabs %}
+
 ---
 
 ## Confirmation Dialog
 
 A destructive action confirmation with proper focus management:
+
+{% framework-tabs %}
+{% tab framework="react" %}
 
 ```tsx
 import { Dialog, Button } from "@libretexts/davis-react";
@@ -142,6 +273,47 @@ function DeleteConfirmation({ open, onClose, onConfirm, itemName }) {
   );
 }
 ```
+
+{% /tab %}
+{% tab framework="vue" %}
+
+```vue
+<script setup>
+import { Dialog, DialogHeader, DialogTitle, DialogDescription, DialogFooter, Button } from '@libretexts/davis-vue';
+
+defineProps({
+  open: Boolean,
+  itemName: String
+});
+
+const emit = defineEmits(['close', 'confirm']);
+</script>
+
+<template>
+  <Dialog :open="open" @close="emit('close')" size="sm">
+    <DialogHeader>
+      <DialogTitle>Delete {{ itemName }}?</DialogTitle>
+      <DialogDescription>
+        This action cannot be undone. The item and all associated data
+        will be permanently removed.
+      </DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+      <Button variant="outline" @click="emit('close')">
+        Cancel
+      </Button>
+      <Button variant="destructive" @click="emit('confirm')">
+        Delete
+      </Button>
+    </DialogFooter>
+  </Dialog>
+</template>
+```
+
+Coming soon
+
+{% /tab %}
+{% /framework-tabs %}
 
 ---
 

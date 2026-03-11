@@ -20,6 +20,7 @@
     "./tailwind.preset": "./tailwind.preset.cjs",
     "./base.css": "./dist/base.css",
     "./base.scoped.css": "./dist/base.scoped.css",
+    "./base.v4.css": "./dist/base.v4.css",
     "./theme.css": "./dist/theme.css",
     "./package.json": "./package.json"
   },

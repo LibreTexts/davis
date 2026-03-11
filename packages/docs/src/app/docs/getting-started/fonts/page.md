@@ -83,9 +83,14 @@ For full control, self-host the font files:
 
 ---
 
-### Next.js
+### Framework-Specific Optimization
 
-Next.js provides automatic font optimization with zero configuration. Use the built-in `next/font/google` module to load Atkinson Hyperlegible:
+{% framework-tabs %}
+{% tab framework="react" %}
+
+**Next.js Automatic Font Optimization**
+
+Next.js provides automatic font optimization with zero configuration. Use the built-in `next/font/google` module:
 
 ```tsx
 // app/layout.tsx or pages/_app.tsx
@@ -112,6 +117,43 @@ export default function RootLayout({ children }) {
 - Automatic subsetting (~30-40% smaller)
 - Zero layout shift
 - Optimal caching
+
+**Other React Frameworks**
+
+For Create React App, Vite, or other React frameworks, use the Google Fonts CDN approach above.
+
+{% /tab %}
+{% tab framework="vue" %}
+
+**Nuxt Font Optimization**
+
+Nuxt provides font optimization through the `@nuxtjs/google-fonts` module:
+
+```bash
+npm install @nuxtjs/google-fonts
+```
+
+Then configure in `nuxt.config.ts`:
+
+```ts
+export default defineNuxtConfig({
+  modules: ['@nuxtjs/google-fonts'],
+  googleFonts: {
+    families: {
+      'Atkinson Hyperlegible': [400, 700],
+    },
+    display: 'swap',
+    preload: true,
+  },
+});
+```
+
+**Other Vue Frameworks**
+
+For standard Vue or Vite + Vue, use the Google Fonts CDN approach above.
+
+{% /tab %}
+{% /framework-tabs %}
 
 ---
 
@@ -191,6 +233,6 @@ The Tailwind preset automatically applies this to all text using `font-sans` (th
 
 ## Next Steps
 
-- [Typography](/docs/design-tokens/typography) - See the full type scale and usage guidelines
+- [Typography](/docs/foundation/typography) - See the full type scale and usage guidelines
 - [Accessibility](/docs/guides/accessibility) - Learn about WCAG 2.2 compliance
 - [Installation](/docs/getting-started/installation) - Complete setup guide

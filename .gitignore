@@ -147,3 +147,6 @@ Thumbs.db
 .open-next
 .dev.vars
 wrangler.toml.local
+
+# Example app (for local testing only)
+example-app/

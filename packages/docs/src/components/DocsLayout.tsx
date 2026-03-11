@@ -1,85 +1,41 @@
-import Link from 'next/link';
+import { type Node } from '@markdoc/markdoc';
+
 import { Navigation } from './Navigation';
 import { TableOfContents } from './TableOfContents';
-import Image from 'next/image';
+import { Prose } from './Prose';
+import { collectSections } from '@/lib/sections';
 
 interface DocsLayoutProps {
   children: React.ReactNode;
+  nodes: Array<Node>;
 }
 
-export function DocsLayout({ children }: DocsLayoutProps) {
+export function DocsLayout({ children, nodes }: DocsLayoutProps) {
+  const tableOfContents = collectSections(nodes || []);
+
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white">
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-8">
-              <Link href="/" className="flex items-center gap-2">
-                <Image
-                  src="https://cdn.libretexts.net/Icons/libretexts.png"
-                  alt="LibreTexts Icon"
-                  width={800}
-                  height={800}
-                  className='size-14'
-                />
-                <span className="text-xl font-bold">Davis Design System</span>
-              </Link>
-              <nav className="hidden md:flex items-center gap-6">
-                <Link
-                  href="/docs/getting-started/overview"
-                  className="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors"
-                >
-                  Documentation
-                </Link>
-                <Link
-                  href="/quick-reference.svg"
-                  className="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors"
-                  target='_blank'
-                >
-                  Quick Reference
-                </Link>
-                <a
-                  href="https://github.com/LibreTexts/davis"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors"
-                >
-                  GitHub
-                </a>
-              </nav>
-            </div>
+    <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+      <div className="flex gap-8 py-8">
+        {/* Left sidebar - Navigation */}
+        <aside className="hidden lg:block w-64 shrink-0">
+          <div className="sticky top-24">
+            <Navigation />
           </div>
-        </div>
-      </header>
+        </aside>
 
-      {/* Main Content */}
-      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex gap-8 py-8">
-          {/* Sidebar */}
-          <aside className="hidden lg:block w-64 flex-shrink-0">
-            <div className="sticky top-24">
-              <Navigation />
-            </div>
-          </aside>
+        {/* Main content area */}
+        <main className="min-w-0 flex-1 max-w-3xl">
+          <article>
+            <Prose>{children}</Prose>
+          </article>
+        </main>
 
-          {/* Content */}
-          <main className="flex-1 min-w-0">
-            <article className="prose prose-neutral max-w-none">
-              {children}
-            </article>
-          </main>
-
-          {/* Table of Contents */}
-          <aside className="hidden xl:block w-64 flex-shrink-0">
-            <div className="sticky top-24">
-              <h3 className="text-sm font-semibold text-neutral-900 mb-2">
-                On this page
-              </h3>
-              <TableOfContents />
-            </div>
-          </aside>
-        </div>
+        {/* Right sidebar - Table of Contents */}
+        <aside className="hidden xl:block w-64 shrink-0">
+          <div className="sticky top-24">
+            <TableOfContents tableOfContents={tableOfContents} />
+          </div>
+        </aside>
       </div>
     </div>
   );
