@@ -30,53 +30,18 @@ This package is framework-agnostic and includes:
 
 ---
 
-## Tailwind Preset Setup
-
-In your project's `tailwind.config.js`, add the Davis preset:
-
-```js
-// tailwind.config.js
-module.exports = {
-  presets: [require("@libretexts/davis-core/tailwind.preset")],
-  content: [
-    "./src/**/*.{html,js,ts,jsx,tsx,vue,svelte}",
-    // Adjust the glob patterns to match your project structure
-  ],
-};
-```
-
-This preset provides:
-- **Colors** - Seven semantic colors (primary, secondary, tertiary, success, warning, danger, neutral) with 50-950 shade ranges
-- **Typography** - Major Third type scale with responsive font sizes
-- **Spacing** - 4px grid system (0-96)
-- **Shadows** - Consistent shadow elevation system
-- **Border Radius** - Consistent border radius scale
-- **Font Family** - Atkinson Hyperlegible font stack
-
----
-
 ## Import Styles
 
-### Tailwind v3 Apps
-
-In your app's entry CSS file, import the Davis base styles and Tailwind directives:
-
-```css
-@import "@libretexts/davis-core/base.css";
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-
-### Tailwind v4+ Apps
-
-In your app's entry CSS file:
+In your app's CSS entry file, import Tailwind and the Davis core styles:
 
 ```css
 @import 'tailwindcss';
-@import "@libretexts/davis-core/base.css";
+@import "@libretexts/davis-core/theme.css";
+@import "@libretexts/davis-core/base.v4.css";
 ```
+
+- **`theme.css`** — Configures Tailwind v4 utility classes: `bg-primary`, `text-sm`, `shadow-md`, `rounded-lg`, etc.
+- **`base.v4.css`** — CSS custom properties, heading scale, focus rings, typography defaults
 
 ---
 

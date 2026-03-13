@@ -57,7 +57,6 @@ All Davis design tokens (colors, typography, spacing, shadows, etc.) are defined
 tokens.ts (EDIT THIS)
     ↓ npm run generate:configs
     ↓
-    ├─→ tailwind.preset.cjs    (Tailwind v3 config)
     ├─→ theme.css              (Tailwind v4 theme)
     ├─→ base.css               (Global base styles)
     └─→ base.scoped.css        (Scoped base styles)
@@ -65,12 +64,11 @@ tokens.ts (EDIT THIS)
 
 ### 📁 Understanding the Files
 
-| File | Purpose | Provides | Scope | Tailwind Version |
-|------|---------|----------|-------|------------------|
-| **`tailwind.preset.cjs`** | Tailwind v3 config | Utility classes (`bg-primary`, etc.) | N/A | v3 |
-| **`theme.css`** | Tailwind v4 theme | Utility classes (`bg-primary`, etc.) | N/A | v4 |
-| **`base.css`** | Global base styles | CSS vars, resets, heading styles, focus | Global (`:root`) | Any |
-| **`base.scoped.css`** | Scoped base styles | CSS vars, resets, heading styles, focus | Scoped (`.davis`) | Any |
+| File | Purpose | Provides | Scope |
+|------|---------|----------|-------|
+| **`theme.css`** | Tailwind v4 theme | Utility classes (`bg-primary`, etc.) | N/A |
+| **`base.css`** | Global base styles | CSS vars, resets, heading styles, focus | Global (`:root`) |
+| **`base.scoped.css`** | Scoped base styles | CSS vars, resets, heading styles, focus | Scoped (`.davis`) |
 
 > ⚠️ **All CSS files are auto-generated from `tokens.ts`** — Do not edit manually!
 
@@ -86,16 +84,6 @@ tokens.ts (EDIT THIS)
 | **Reduced motion** | ❌ | ✅ Global | ✅ Scoped to `.davis` |
 
 #### Detailed Descriptions
-
-<details>
-<summary><strong>tailwind.preset.cjs</strong> - Tailwind v3 Configuration</summary>
-
-- **For:** Tailwind CSS v3 users
-- **Purpose:** Tailwind v3 configuration preset
-- **Used by:** `@libretexts/davis-react`
-- **Import:** Add to `tailwind.config.js` `presets` array
-
-</details>
 
 <details>
 <summary><strong>theme.css</strong> - Tailwind v4 Theme</summary>
@@ -155,15 +143,14 @@ See `packages/core/scripts/README.md` for detailed architecture documentation.
 
 ### 📦 For Consuming Applications
 
-#### Scenario 1: Full Integration (Tailwind v4)
+#### Scenario 1: Full Integration (React)
 
 ```css
-/* Your app's main CSS file */
+/* Your app's CSS entry file (e.g. globals.css) */
 @import 'tailwindcss';
-@import '@libretexts/davis-core/theme.css';    /* ← Tailwind utilities */
-@import '@libretexts/davis-core/base.css';     /* ← Base styles */
+@import '@libretexts/davis-react/styles.css';
 
-@plugin '@tailwindcss/typography'; /* Optional: Tailwind Typography plugin for non-controlled/dynamic HTML, Markdown, etc. content */
+@plugin '@tailwindcss/typography'; /* Optional: for Markdown/dynamic HTML content */
 ```
 
 ```tsx
@@ -173,25 +160,13 @@ See `packages/core/scripts/README.md` for detailed architecture documentation.
 </div>
 ```
 
-#### Scenario 2: Full Integration (Tailwind v3)
-
-```js
-// tailwind.config.js
-module.exports = {
-  presets: [
-    require('@libretexts/davis-core/tailwind.preset')
-  ],
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
-}
-```
+#### Scenario 2: Tokens Only (no React components)
 
 ```css
-/* Your app's main CSS file */
-@import '@libretexts/davis-core/base.css';
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Your app's CSS entry file */
+@import 'tailwindcss';
+@import '@libretexts/davis-core/theme.css';   /* ← Tailwind utilities */
+@import '@libretexts/davis-core/base.v4.css'; /* ← Base styles */
 ```
 
 #### Scenario 3: Embedded/Widget Mode
@@ -215,7 +190,7 @@ module.exports = {
 /* All Davis styles scoped under .davis */
 ```
 
-#### Scenario 4: CSS Variables Only
+#### Scenario 4: CSS Custom Properties Only
 
 If you just need access to design tokens via CSS custom properties:
 
@@ -234,7 +209,7 @@ If you just need access to design tokens via CSS custom properties:
 }
 ```
 
-#### Scenario 5: Gradual Migration from Another Design System
+#### Scenario 5: Gradual Migration
 
 Use **scoped mode** to run both systems side-by-side during the transition.
 
@@ -340,15 +315,14 @@ Once migration is complete, switch from scoped to global mode:
    npm uninstall @mantine/core @mantine/hooks
    ```
 
-2. **Replace** `base.scoped.css` with `base.css`:
+2. **Replace** scoped imports with full integration:
    ```css
    /* Before: Scoped mode */
    @import '@libretexts/davis-core/base.scoped.css';
 
-   /* After: Full integration */
-   @import '@libretexts/davis-core/base.css';
-   /* If using Tailwind v4 */
-   @import '@libretexts/davis-core/theme.css';
+   /* After: Full integration (React) */
+   @import 'tailwindcss';
+   @import '@libretexts/davis-react/styles.css';
    ```
 
 3. **Remove** `.davis` wrapper divs:
@@ -362,15 +336,6 @@ Once migration is complete, switch from scoped to global mode:
    <Button>Click me</Button>
    ```
 
-4. **Add** Tailwind config (if using Tailwind v3):
-   ```js
-   // tailwind.config.js
-   module.exports = {
-     presets: [require('@libretexts/davis-core/tailwind.preset')],
-     content: ['./src/**/*.{js,jsx,ts,tsx}'],
-   }
-   ```
-
 ##### Migration Checklist
 
 - [ ] Install Davis packages
@@ -380,10 +345,9 @@ Once migration is complete, switch from scoped to global mode:
 - [ ] Test for style conflicts between systems
 - [ ] Gradually replace old components with Davis equivalents
 - [ ] Monitor bundle size (remove old dependencies as you go)
-- [ ] Switch to `base.css` when migration is complete
+- [ ] Switch to full integration CSS when migration is complete
 - [ ] Remove `.davis` wrapper divs
 - [ ] Uninstall old design system packages
-- [ ] Update Tailwind config for full Davis integration (if using Tailwind v3)
 
 ##### Tips for Smooth Migration
 
@@ -400,12 +364,11 @@ Once migration is complete, switch from scoped to global mode:
 
 | Your Setup | Import |
 |------------|--------|
-| **Next.js + Tailwind v4** | `theme.css` + `base.css` |
-| **React + Tailwind v3** | `tailwind.preset.cjs` + `base.css` |
-| **Vue + Tailwind v3** | `tailwind.preset.cjs` + `base.css` |
-| **Embedded widget** | `base.scoped.css` |
-| **CSS-only** | `base.css` or `base.scoped.css` |
-| **Migrating from another design system** | `base.scoped.css` (during migration) → `base.css` (when complete) |
+| **React app (Next.js, Remix, etc.)** | `@libretexts/davis-react/styles.css` |
+| **Tokens only (any framework)** | `@libretexts/davis-core/theme.css` + `@libretexts/davis-core/base.v4.css` |
+| **Embedded widget / scoped mode** | `@libretexts/davis-core/base.scoped.css` |
+| **CSS custom properties only** | `@libretexts/davis-core/base.css` or `base.scoped.css` |
+| **Migrating from another design system** | `base.scoped.css` (during migration) → `@libretexts/davis-react/styles.css` (when complete) |
 
 ## Development
 
@@ -455,20 +418,11 @@ npm run build -w @libretexts/davis-docs
 
 **Problem:** Tailwind utilities like `bg-primary`, `text-secondary-500` are not being imported.
 
-**Solution:**
-- **Tailwind v4:** Import `theme.css` in your CSS file
-- **Tailwind v3:** Add Davis preset to `tailwind.config.js`
+**Solution:** Import `@libretexts/davis-react/styles.css` (or `@libretexts/davis-core/theme.css` for tokens-only) in your CSS entry file:
 
 ```css
-/* Tailwind v4 */
-@import '@libretexts/davis-core/theme.css';
-```
-
-```js
-/* Tailwind v3 */
-module.exports = {
-  presets: [require('@libretexts/davis-core/tailwind.preset')],
-}
+@import 'tailwindcss';
+@import '@libretexts/davis-react/styles.css';
 ```
 
 #### Headings look wrong or unstyled

@@ -2,6 +2,7 @@ import { defineConfig, Plugin } from "vite";
 import { resolve } from "path";
 import fs from "fs";
 import path from "path";
+import tailwindcss from "@tailwindcss/vite";
 
 // Plugin to preserve "use client" directives
 function preserveDirectives(): Plugin {
@@ -34,12 +35,12 @@ function preserveDirectives(): Plugin {
 }
 
 export default defineConfig({
+  plugins: [tailwindcss()],
   build: {
     emptyOutDir: false,
     lib: {
       entry: {
         index: resolve(__dirname, "src/index.ts"),
-        "index.standalone": resolve(__dirname, "src/index.standalone.ts"),
       },
       name: "DavisReact",
       formats: ["es", "cjs"],

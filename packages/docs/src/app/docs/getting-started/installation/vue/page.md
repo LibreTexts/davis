@@ -33,48 +33,16 @@ npm install @headlessui/vue vue tailwindcss
 
 ---
 
-## Tailwind Preset Setup
-
-In your project's `tailwind.config.js`, add the Davis preset:
-
-```js
-// tailwind.config.js
-module.exports = {
-  presets: [require("@libretexts/davis-core/tailwind.preset")],
-  content: [
-    "./src/**/*.{vue,ts}",
-    // Include Davis component classes in content scan
-    "./node_modules/@libretexts/davis-vue/dist/**/*.{js,mjs}",
-  ],
-};
-```
-
-This gives your project the full Davis design token system: colors, typography scale, shadows, border radius, and font family.
-
----
-
 ## Import Styles
 
-### Tailwind v3 Apps
-
-In your app's entry CSS file, import the Davis base styles and Tailwind directives:
-
-```css
-@import "@libretexts/davis-core/base.css";
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-
-### Tailwind v4+ Apps
-
-In your app's entry CSS file, import the Davis base styles and Tailwind directives:
+In your app's CSS entry file, add:
 
 ```css
 @import 'tailwindcss';
-@import "@libretexts/davis-core/base.css";
+@import "@libretexts/davis-vue/styles.css";
 ```
+
+`@libretexts/davis-vue/styles.css` will handle the Tailwind v4 theme, base styles, and component class sources in one import (same pattern as the React package).
 
 ---
 

@@ -33,47 +33,24 @@ npm install @headlessui/react react react-dom tailwindcss
 
 ---
 
-## Tailwind Preset Setup
-
-In your project's `tailwind.config.js`, add the Davis preset:
-
-```js
-// tailwind.config.js
-module.exports = {
-  presets: [require("@libretexts/davis-core/tailwind.preset")],
-  content: [
-    "./src/**/*.{ts,tsx}",
-    // Include Davis component classes in content scan
-    "./node_modules/@libretexts/davis-react/dist/**/*.{js,mjs}",
-  ],
-};
-```
-
-This gives your project the full Davis design token system: colors, typography scale, shadows, border radius, and font family.
-
----
-
 ## Import Styles
 
-### Tailwind v3 Apps
-
-In your app's entry CSS file, import the Davis base styles and Tailwind directives:
-
-```css
-@import "@libretexts/davis-core/base.css";
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-
-### Tailwind v4+ Apps
-
-In your app's entry CSS file, import the Davis base styles and Tailwind directives:
+In your app's CSS entry file (e.g. `globals.css`), add:
 
 ```css
 @import 'tailwindcss';
-@import "@libretexts/davis-core/base.css";
+@import "@libretexts/davis-react/styles.css";
+```
+
+`@libretexts/davis-react/styles.css` handles everything in one import: it pulls in the Tailwind v4 theme (colors, typography, shadows, etc.), the base styles (CSS custom properties, heading scale, focus rings), and configures Tailwind to scan all Davis component files for utility classes.
+
+Optionally, add the Tailwind Typography plugin if you render dynamic/Markdown content:
+
+```css
+@import 'tailwindcss';
+@import "@libretexts/davis-react/styles.css";
+
+@plugin '@tailwindcss/typography';
 ```
 
 ---
