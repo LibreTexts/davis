@@ -756,10 +756,7 @@ try {
     mkdirSync(join(rootDir, 'dist'));
   }
 
-  generateTailwindV3Preset();
   generateTailwindV4Theme();
-  generateBaseCSS();
-  generateScopedBaseCSS();
   generateTailwindV4BaseCSS();
   console.log('\n✨ All configs and base styles generated successfully!');
 } catch (error) {

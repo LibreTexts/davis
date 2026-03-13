@@ -102,34 +102,7 @@ Coming soon
 {% /tab %}
 {% /framework-tabs %}
 
-### 3. Configure Tailwind
-
-Your Tailwind configuration depends on whether your host application already uses Tailwind.
-
-#### Host app uses Tailwind
-
-Add the Davis preset and content paths to your existing config. The key settings are `important: '.davis'` (scopes Davis utilities) and `preflight: false` in a separate Davis-specific context:
-
-```js
-// tailwind.config.js
-module.exports = {
-  // Your existing config stays the same
-  presets: [require("@libretexts/davis-core/tailwind.preset")],
-  content: [
-    "./src/**/*.{ts,tsx}",
-    // Include Davis component classes in content scan
-    "./node_modules/@libretexts/davis-react/dist/**/*.{js,mjs}",
-  ],
-};
-```
-
-The standalone CSS is pre-built with `important: '.davis'` and Preflight disabled, so your host Tailwind config doesn't need those settings — they only apply to Davis's own build.
-
-#### Host app doesn't use Tailwind
-
-No Tailwind config needed. The standalone CSS ships pre-built with all the utility classes Davis components use. Just import the stylesheet and you're done.
-
-### 4. Wrap Components with DavisProvider
+### 3. Wrap Components with DavisProvider
 
 {% framework-tabs %}
 {% tab framework="react" %}
@@ -316,9 +289,12 @@ If your app already uses a CSS class called `.davis`, you'll get style collision
 
 When your app is fully using Davis and you're ready to remove the scoping layer:
 
-1. Replace `styles.standalone.css` with `styles.css` (or import `base.css` + Tailwind directives)
+1. Replace the standalone stylesheet import with the standard one:
+   ```css
+   @import 'tailwindcss';
+   @import '@libretexts/davis-react/styles.css';
+   ```
 2. Remove `DavisProvider` wrappers — components work without them in standard mode
-3. Remove `important: '.davis'` and re-enable `preflight` in your Tailwind config (if you added those settings)
-4. Test thoroughly — global base styles will now apply to your entire app
+3. Test thoroughly — global base styles will now apply to your entire app
 
 This is a one-way migration. Once you switch to standard mode, all elements in your app will inherit Davis's global styles (font family, heading scale, focus rings, Preflight resets).

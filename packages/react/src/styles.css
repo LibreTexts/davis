@@ -1,5 +1,13 @@
-@import "@libretexts/davis-core/base.css";
+/**
+ * Davis Design System — Tailwind v4 CSS
+ *
+ * Import this in your app's Tailwind v4 CSS entry point:
+ *   @import "tailwindcss";
+ *   @import "@libretexts/davis-react/styles.css";
+ */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "@libretexts/davis-core/theme.css";
+@import "@libretexts/davis-core/base.v4.css";
+
+@source "./**/*.mjs";
+@source "@libretexts/davis-core/dist/variants.js";
