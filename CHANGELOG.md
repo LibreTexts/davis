@@ -1,3 +1,19 @@
+# [1.2.0](https://github.com/LibreTexts/davis/compare/v1.1.0...v1.2.0) (2026-03-13)
+
+
+### Bug Fixes
+
+* various bundling issues and drop tailwind v3 support ([d48b642](https://github.com/LibreTexts/davis/commit/d48b6425cf4fd34a0ef11bd08e70e905c931366e))
+* various type error fixes ([71672a7](https://github.com/LibreTexts/davis/commit/71672a72a85570ab1f37f0214912694a631bde99))
+
+
+### Features
+
+* added accordion and tabs for storybook ([bd8c98f](https://github.com/LibreTexts/davis/commit/bd8c98f168322c32a42e70cf977d06e2f3cd077e))
+* **core:** add 8 missing design token categories ([8a5c246](https://github.com/LibreTexts/davis/commit/8a5c2467775509978b9aeb2b30fea448d6d45fb1))
+* **Docs:** add quick reference guide ([d125b20](https://github.com/LibreTexts/davis/commit/d125b204fd97fa91e66f7007ac6c25c0c9166845))
+* refine colors and improve framework-specific docs ([3b58cfd](https://github.com/LibreTexts/davis/commit/3b58cfd597e32ee66b20ca2b800f90da8ef7ff20))
+
 # [1.1.0](https://github.com/LibreTexts/davis/compare/v1.0.0...v1.1.0) (2026-03-02)
 
 
