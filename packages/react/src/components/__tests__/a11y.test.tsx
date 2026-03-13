@@ -60,9 +60,10 @@ describe("Button", () => {
 describe("IconButton", () => {
   it("has no a11y violations with aria-label", async () => {
     await expectNoA11yViolations(
-      <IconButton aria-label="Close">
-        <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M6 6l8 8M6 14l8-8" /></svg>
-      </IconButton>
+      <IconButton
+        aria-label="Close"
+        icon={<svg aria-hidden="true" viewBox="0 0 20 20"><path d="M6 6l8 8M6 14l8-8" /></svg>}
+      />
     );
   });
 });
@@ -70,25 +71,19 @@ describe("IconButton", () => {
 describe("Input", () => {
   it("has no a11y violations with label", async () => {
     await expectNoA11yViolations(
-      <div>
-        <label htmlFor="test-input">Email</label>
-        <Input id="test-input" />
-      </div>
+      <Input name="test-input" label="Email" />
     );
   });
 
   it("has no a11y violations with aria-label", async () => {
-    await expectNoA11yViolations(<Input aria-label="Search" />);
+    await expectNoA11yViolations(<Input name="search" label="Search" aria-label="Search" />);
   });
 });
 
 describe("Textarea", () => {
   it("has no a11y violations with label", async () => {
     await expectNoA11yViolations(
-      <div>
-        <label htmlFor="test-textarea">Message</label>
-        <Textarea id="test-textarea" />
-      </div>
+      <Textarea name="test-textarea" label="Message" />
     );
   });
 });
@@ -96,34 +91,31 @@ describe("Textarea", () => {
 describe("Select", () => {
   it("has no a11y violations with label", async () => {
     await expectNoA11yViolations(
-      <div>
-        <label htmlFor="test-select">Country</label>
-        <Select
-          id="test-select"
-          options={[
-            { value: "us", label: "United States" },
-            { value: "uk", label: "United Kingdom" },
-          ]}
-        />
-      </div>
+      <Select
+        name="test-select"
+        label="Country"
+        placeholder="Select a country"
+        options={[
+          { value: "us", label: "United States" },
+          { value: "uk", label: "United Kingdom" },
+        ]}
+      />
     );
   });
 });
 
 describe("Checkbox", () => {
   it("has no a11y violations with label", async () => {
-    await expectNoA11yViolations(<Checkbox label="Accept terms" />);
+    await expectNoA11yViolations(<Checkbox name="accept-terms" label="Accept terms" />);
   });
 });
 
 describe("Radio", () => {
   it("has no a11y violations within RadioGroup", async () => {
     await expectNoA11yViolations(
-      <RadioGroup
-        label="Pick one"
-        name="test-radio-single"
-        options={[{ value: "a", label: "Option A" }]}
-      />
+      <RadioGroup label="Pick one" name="test-radio-single">
+        <Radio value="a" label="Option A" />
+      </RadioGroup>
     );
   });
 });
@@ -131,21 +123,17 @@ describe("Radio", () => {
 describe("RadioGroup", () => {
   it("has no a11y violations", async () => {
     await expectNoA11yViolations(
-      <RadioGroup
-        label="Choose an option"
-        name="test-group"
-        options={[
-          { value: "a", label: "Option A" },
-          { value: "b", label: "Option B" },
-        ]}
-      />
+      <RadioGroup label="Choose an option" name="test-group">
+        <Radio value="a" label="Option A" />
+        <Radio value="b" label="Option B" />
+      </RadioGroup>
     );
   });
 });
 
 describe("Switch", () => {
   it("has no a11y violations", async () => {
-    await expectNoA11yViolations(<Switch label="Enable notifications" />);
+    await expectNoA11yViolations(<Switch label="Enable notifications" checked={false} onChange={() => {}} />);
   });
 });
 
@@ -162,7 +150,7 @@ describe("Alert", () => {
 
 describe("Badge", () => {
   it("has no a11y violations", async () => {
-    await expectNoA11yViolations(<Badge>New</Badge>);
+    await expectNoA11yViolations(<Badge label="New" />);
   });
 });
 
