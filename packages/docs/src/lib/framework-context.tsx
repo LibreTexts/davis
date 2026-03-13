@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, Suspense } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export type Framework = 'react' | 'vue' | 'all';
@@ -15,20 +15,34 @@ const FrameworkContext = createContext<FrameworkContextType | undefined>(undefin
 const STORAGE_KEY = 'davis-docs-framework';
 const DEFAULT_FRAMEWORK: Framework = 'react';
 
+function SearchParamsSync({ 
+  framework, 
+  setFrameworkState 
+}: { 
+  framework: Framework;
+  setFrameworkState: (framework: Framework) => void;
+}) {
+  const searchParams = useSearchParams();
+
+  // Sync with URL changes (e.g., browser back/forward)
+  useEffect(() => {
+    const urlFramework = searchParams.get('framework') as Framework | null;
+    if (urlFramework && ['react', 'vue', 'all'].includes(urlFramework) && urlFramework !== framework) {
+      setFrameworkState(urlFramework);
+      localStorage.setItem(STORAGE_KEY, urlFramework);
+    }
+  }, [searchParams, framework, setFrameworkState]);
+
+  return null;
+}
+
 export function FrameworkProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
-  // Initialize framework from URL > localStorage > default
+  // Initialize framework from localStorage > default
   const [framework, setFrameworkState] = useState<Framework>(() => {
     if (typeof window === 'undefined') return DEFAULT_FRAMEWORK;
-
-    // Check URL first
-    const urlFramework = searchParams.get('framework') as Framework | null;
-    if (urlFramework && ['react', 'vue', 'all'].includes(urlFramework)) {
-      return urlFramework;
-    }
 
     // Check localStorage
     const stored = localStorage.getItem(STORAGE_KEY) as Framework | null;
@@ -47,22 +61,16 @@ export function FrameworkProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem(STORAGE_KEY, newFramework);
 
     // Update URL query parameter
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(window.location.search);
     params.set('framework', newFramework);
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
-  // Sync with URL changes (e.g., browser back/forward)
-  useEffect(() => {
-    const urlFramework = searchParams.get('framework') as Framework | null;
-    if (urlFramework && ['react', 'vue', 'all'].includes(urlFramework) && urlFramework !== framework) {
-      setFrameworkState(urlFramework);
-      localStorage.setItem(STORAGE_KEY, urlFramework);
-    }
-  }, [searchParams, framework]);
-
   return (
     <FrameworkContext.Provider value={{ framework, setFramework }}>
+      <Suspense fallback={null}>
+        <SearchParamsSync framework={framework} setFrameworkState={setFrameworkState} />
+      </Suspense>
       {children}
     </FrameworkContext.Provider>
   );
