@@ -83,17 +83,17 @@
   --color-tertiary: #4076a4;
 
   /* Success */
-  --color-success-50: #;
-  --color-success-100: #;
-  --color-success-200: #;
-  --color-success-300: #;
-  --color-success-400: #;
+  --color-success-50: #eaf1eb;
+  --color-success-100: #dbebdf;
+  --color-success-200: #b6ddc0;
+  --color-success-300: #86d09a;
+  --color-success-400: #42c264;
   --color-success-500: #207537;
-  --color-success-600: #;
-  --color-success-700: #;
-  --color-success-800: #;
-  --color-success-900: #;
-  --color-success-950: #;
+  --color-success-600: #1a5b2b;
+  --color-success-700: #164623;
+  --color-success-800: #13351c;
+  --color-success-900: #0f2415;
+  --color-success-950: #0c180f;
   --color-success: #207537;
 
   /* Warning */
@@ -139,8 +139,9 @@
   --color-neutral: #71717A;
 
   /* Text */
-  --color-text: #162032;
   --color-text-neutral: #71717A;
+  --color-text-white: #FFFFFF;
+  --color-text: #162032;
 
   /* Surface */
   --color-surface: #FFFFFF;
@@ -185,4 +186,72 @@
 
   --davis-target-size-minimum: 24px;
   --davis-target-size-comfortable: 44px;
+
+  /* ─── Z-Index ──────────────────────────────────────────────── */
+
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1100;
+  --z-index-fixed: 1200;
+  --z-index-modalBackdrop: 1300;
+  --z-index-modal: 1400;
+  --z-index-popover: 1500;
+  --z-index-toast: 1600;
+  --z-index-tooltip: 1700;
+
+  /* ─── Opacity ──────────────────────────────────────────────── */
+
+  --opacity-disabled: 0.5;
+  --opacity-placeholder: 0.6;
+  --opacity-overlay: 0.5;
+  --opacity-hoverLight: 0.04;
+  --opacity-hoverMedium: 0.08;
+
+  /* ─── Border Width ─────────────────────────────────────────── */
+
+  --border-width-none: 0px;
+  --border-width-thin: 1px;
+  --border-width-medium: 2px;
+  --border-width-thick: 3px;
+
+  /* ─── Font Weight ──────────────────────────────────────────── */
+
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* ─── Letter Spacing ───────────────────────────────────────── */
+
+  --letter-spacing-tighter: -0.05em;
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0em;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  --letter-spacing-widest: 0.1em;
+
+  /* ─── Breakpoints ──────────────────────────────────────────── */
+
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* ─── Icon Size ────────────────────────────────────────────── */
+
+  --icon-size-xs: 0.75rem;
+  --icon-size-sm: 1rem;
+  --icon-size-md: 1.25rem;
+  --icon-size-lg: 1.5rem;
+  --icon-size-xl: 2rem;
+
+  /* ─── Container / Content Width ────────────────────────────── */
+
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1536px;
+  --container-prose: 65ch;
 }

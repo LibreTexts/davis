@@ -4,12 +4,12 @@
  * AUTO-GENERATED from tokens.ts — DO NOT EDIT MANUALLY
  * Run 'npm run generate:configs' to regenerate
  *
- * Framework-agnostic base CSS imported by consuming packages.
+ * Framework-agnostic base CSS for consuming packages.
  * Contains CSS custom properties, typography defaults, heading hierarchy,
  * and focus-visible patterns.
  *
- * Does NOT include @tailwind directives — each consuming package adds those
- * to its own stylesheet.
+ * Scope: global (affects entire page via :root).
+ * For scoped/embedded usage, import base.scoped.css instead.
  */
 
 @layer base {
@@ -18,9 +18,9 @@
   :root {
     /* Colors */
     --davis-color-primary: #127BC4;
-    --davis-color-secondary: #0D8483;
-    --davis-color-tertiary: #5F65F5;
-    --davis-color-success: #338650;
+    --davis-color-secondary: #0F67A6;
+    --davis-color-tertiary: #4076a4;
+    --davis-color-success: #207537;
     --davis-color-warning: #BB5C21;
     --davis-color-danger: #DC3838;
     --davis-color-neutral: #18181B;
@@ -52,6 +52,66 @@
     /* Target Size (WCAG 2.2) */
     --davis-target-size-minimum: 24px;
     --davis-target-size-comfortable: 44px;
+
+    /* Z-Index */
+    --davis-z-dropdown: 1000;
+    --davis-z-sticky: 1100;
+    --davis-z-fixed: 1200;
+    --davis-z-modalBackdrop: 1300;
+    --davis-z-modal: 1400;
+    --davis-z-popover: 1500;
+    --davis-z-toast: 1600;
+    --davis-z-tooltip: 1700;
+
+    /* Opacity */
+    --davis-opacity-disabled: 0.5;
+    --davis-opacity-placeholder: 0.6;
+    --davis-opacity-overlay: 0.5;
+    --davis-opacity-hoverLight: 0.04;
+    --davis-opacity-hoverMedium: 0.08;
+
+    /* Border Width */
+    --davis-border-width-none: 0px;
+    --davis-border-width-thin: 1px;
+    --davis-border-width-medium: 2px;
+    --davis-border-width-thick: 3px;
+
+    /* Font Weight */
+    --davis-font-weight-light: 300;
+    --davis-font-weight-regular: 400;
+    --davis-font-weight-medium: 500;
+    --davis-font-weight-semibold: 600;
+    --davis-font-weight-bold: 700;
+
+    /* Letter Spacing */
+    --davis-letter-spacing-tighter: -0.05em;
+    --davis-letter-spacing-tight: -0.025em;
+    --davis-letter-spacing-normal: 0em;
+    --davis-letter-spacing-wide: 0.025em;
+    --davis-letter-spacing-wider: 0.05em;
+    --davis-letter-spacing-widest: 0.1em;
+
+    /* Breakpoints */
+    --davis-breakpoint-sm: 640px;
+    --davis-breakpoint-md: 768px;
+    --davis-breakpoint-lg: 1024px;
+    --davis-breakpoint-xl: 1280px;
+    --davis-breakpoint-2xl: 1536px;
+
+    /* Icon Size */
+    --davis-icon-size-xs: 0.75rem;
+    --davis-icon-size-sm: 1rem;
+    --davis-icon-size-md: 1.25rem;
+    --davis-icon-size-lg: 1.5rem;
+    --davis-icon-size-xl: 2rem;
+
+    /* Container / Content Width */
+    --davis-container-sm: 640px;
+    --davis-container-md: 768px;
+    --davis-container-lg: 1024px;
+    --davis-container-xl: 1280px;
+    --davis-container-2xl: 1536px;
+    --davis-container-prose: 65ch;
   }
 
   /* ─── Typography Defaults ───────────────────────────────────── */
@@ -115,8 +175,6 @@
   }
 
   /* ─── Reduced Motion ──────────────────────────────────────── */
-  /* Disables transitions and animations for users who prefer    */
-  /* reduced motion. Respects prefers-reduced-motion: reduce.    */
 
   @media (prefers-reduced-motion: reduce) {
     *,

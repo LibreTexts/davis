@@ -10,4 +10,15 @@
 @import "@libretexts/davis-core/base.v4.css";
 
 @source "./**/*.mjs";
-@source "@libretexts/davis-core/dist/variants.js";
+
+/* Safelist semantic color utilities. The variant class strings live in @libretexts/davis-core,
+   which is external to this package and cannot be reliably targeted with @source file paths
+   across both dev and consumer contexts. @source inline() ensures they are always generated. */
+@source inline("{bg,text,border,ring,outline}-{primary,secondary,tertiary,success,warning,danger,neutral}");
+@source inline("bg-{primary,secondary,tertiary,success,warning,danger,neutral}-{50,100,200,300,400,500,600,700,800,900,950}");
+@source inline("text-{primary,secondary,tertiary,success,warning,danger,neutral}-{50,100,200,300,400,500,600,700,800,900,950}");
+@source inline("border-{primary,secondary,tertiary,success,warning,danger,neutral}-{50,100,200,300,400,500,600,700,800,900,950}");
+@source inline("ring-{primary,secondary,tertiary,success,warning,danger,neutral}-{50,100,200,300,400,500,600,700,800,900,950}");
+@source inline("hover:{bg,text,border}-{primary,secondary,tertiary,success,warning,danger,neutral}");
+@source inline("hover:bg-{primary,secondary,tertiary,success,warning,danger,neutral}-{50,100,200,300,400,500,600,700,800,900,950}");
+@source inline("focus:{ring,outline,border}-{primary,secondary,tertiary,success,warning,danger,neutral}");

@@ -4,10 +4,10 @@
  * AUTO-GENERATED from tokens.ts — DO NOT EDIT MANUALLY
  * Run 'npm run generate:configs' to regenerate
  *
- * Standalone variant of base.css where every rule is scoped under `.davis`.
- * This prevents style leakage into host applications.
+ * Variant of base.css where every rule is scoped under `.davis`.
+ * Prevents style leakage when Davis components are embedded in host applications.
  *
- * Used by the standalone CSS bundle — the full-integration base.css is unchanged.
+ * Wrap Davis components in a `.davis` container to activate these styles.
  */
 
 /* ─── CSS Custom Properties (scoped to .davis) ───────────────── */
@@ -15,9 +15,9 @@
 .davis {
   /* Colors */
   --davis-color-primary: #127BC4;
-  --davis-color-secondary: #0D8483;
-  --davis-color-tertiary: #5F65F5;
-  --davis-color-success: #338650;
+  --davis-color-secondary: #0F67A6;
+  --davis-color-tertiary: #4076a4;
+  --davis-color-success: #207537;
   --davis-color-warning: #BB5C21;
   --davis-color-danger: #DC3838;
   --davis-color-neutral: #18181B;
@@ -49,12 +49,71 @@
   /* Target Size (WCAG 2.2) */
   --davis-target-size-minimum: 24px;
   --davis-target-size-comfortable: 44px;
+
+  /* Z-Index */
+  --davis-z-dropdown: 1000;
+  --davis-z-sticky: 1100;
+  --davis-z-fixed: 1200;
+  --davis-z-modalBackdrop: 1300;
+  --davis-z-modal: 1400;
+  --davis-z-popover: 1500;
+  --davis-z-toast: 1600;
+  --davis-z-tooltip: 1700;
+
+  /* Opacity */
+  --davis-opacity-disabled: 0.5;
+  --davis-opacity-placeholder: 0.6;
+  --davis-opacity-overlay: 0.5;
+  --davis-opacity-hoverLight: 0.04;
+  --davis-opacity-hoverMedium: 0.08;
+
+  /* Border Width */
+  --davis-border-width-none: 0px;
+  --davis-border-width-thin: 1px;
+  --davis-border-width-medium: 2px;
+  --davis-border-width-thick: 3px;
+
+  /* Font Weight */
+  --davis-font-weight-light: 300;
+  --davis-font-weight-regular: 400;
+  --davis-font-weight-medium: 500;
+  --davis-font-weight-semibold: 600;
+  --davis-font-weight-bold: 700;
+
+  /* Letter Spacing */
+  --davis-letter-spacing-tighter: -0.05em;
+  --davis-letter-spacing-tight: -0.025em;
+  --davis-letter-spacing-normal: 0em;
+  --davis-letter-spacing-wide: 0.025em;
+  --davis-letter-spacing-wider: 0.05em;
+  --davis-letter-spacing-widest: 0.1em;
+
+  /* Breakpoints */
+  --davis-breakpoint-sm: 640px;
+  --davis-breakpoint-md: 768px;
+  --davis-breakpoint-lg: 1024px;
+  --davis-breakpoint-xl: 1280px;
+  --davis-breakpoint-2xl: 1536px;
+
+  /* Icon Size */
+  --davis-icon-size-xs: 0.75rem;
+  --davis-icon-size-sm: 1rem;
+  --davis-icon-size-md: 1.25rem;
+  --davis-icon-size-lg: 1.5rem;
+  --davis-icon-size-xl: 2rem;
+
+  /* Container / Content Width */
+  --davis-container-sm: 640px;
+  --davis-container-md: 768px;
+  --davis-container-lg: 1024px;
+  --davis-container-xl: 1280px;
+  --davis-container-2xl: 1536px;
+  --davis-container-prose: 65ch;
 }
 
 /* ─── Scoped Preflight replacements ──────────────────────────── */
-/* These --tw-* variables are normally set by Tailwind's Preflight on *.
-   Since we disable Preflight in standalone mode, we initialize them here
-   so ring, shadow, transform, and filter utilities work correctly.       */
+/* Initialize box model and Tailwind internals within .davis so   */
+/* utility classes work correctly without the global Preflight.   */
 
 .davis *,
 .davis *::before,
@@ -63,62 +122,6 @@
   border-width: 0;
   border-style: solid;
   border-color: currentColor;
-}
-
-.davis *,
-.davis ::before,
-.davis ::after {
-  --tw-border-spacing-x: 0;
-  --tw-border-spacing-y: 0;
-  --tw-translate-x: 0;
-  --tw-translate-y: 0;
-  --tw-rotate: 0;
-  --tw-skew-x: 0;
-  --tw-skew-y: 0;
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
-  --tw-pan-x: ;
-  --tw-pan-y: ;
-  --tw-pinch-zoom: ;
-  --tw-scroll-snap-strictness: proximity;
-  --tw-gradient-from-position: ;
-  --tw-gradient-via-position: ;
-  --tw-gradient-to-position: ;
-  --tw-ordinal: ;
-  --tw-slashed-zero: ;
-  --tw-numeric-figure: ;
-  --tw-numeric-spacing: ;
-  --tw-numeric-fraction: ;
-  --tw-ring-inset: ;
-  --tw-ring-offset-width: 0px;
-  --tw-ring-offset-color: #fff;
-  --tw-ring-color: rgb(59 130 246 / 0.5);
-  --tw-ring-offset-shadow: 0 0 #0000;
-  --tw-ring-shadow: 0 0 #0000;
-  --tw-shadow: 0 0 #0000;
-  --tw-shadow-colored: 0 0 #0000;
-  --tw-blur: ;
-  --tw-brightness: ;
-  --tw-contrast: ;
-  --tw-grayscale: ;
-  --tw-hue-rotate: ;
-  --tw-invert: ;
-  --tw-saturate: ;
-  --tw-sepia: ;
-  --tw-drop-shadow: ;
-  --tw-backdrop-blur: ;
-  --tw-backdrop-brightness: ;
-  --tw-backdrop-contrast: ;
-  --tw-backdrop-grayscale: ;
-  --tw-backdrop-hue-rotate: ;
-  --tw-backdrop-invert: ;
-  --tw-backdrop-opacity: ;
-  --tw-backdrop-saturate: ;
-  --tw-backdrop-sepia: ;
-  --tw-contain-size: ;
-  --tw-contain-layout: ;
-  --tw-contain-paint: ;
-  --tw-contain-style: ;
 }
 
 /* ─── Typography Defaults (scoped) ───────────────────────────── */
@@ -181,7 +184,7 @@
   outline: none;
 }
 
-/* ─── Reduced Motion (scoped) ────────────────────────────── */
+/* ─── Reduced Motion (scoped) ────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
   .davis *,
