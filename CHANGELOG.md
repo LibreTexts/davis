@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/LibreTexts/davis/compare/v1.2.0...v1.2.1) (2026-03-19)
+
+
+### Bug Fixes
+
+* various import and styling fixes ([949bcec](https://github.com/LibreTexts/davis/commit/949bceca2ccc0d74d05e7cd0471ccd9f1ed28662))
+
 # [1.2.0](https://github.com/LibreTexts/davis/compare/v1.1.0...v1.2.0) (2026-03-13)
 
 
