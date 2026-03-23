@@ -77,6 +77,13 @@ Coming soon
 
 ---
 
+---
+
+## When to use
+
+- **Select** — Use for closed lists of 4–15 options where all options are known and filtering is not needed. The native `<select>` element is accessible and familiar.
+- **Combobox** — Use when the list has many options (15+), when users benefit from type-ahead filtering, or when options can be dynamically fetched (e.g., country search, user lookup).
+
 {% callout type="info" title="Documentation in Progress" %}
 Full documentation for this component is being written. Check back soon for complete API reference, examples, and accessibility guidelines.
 {% /callout %}

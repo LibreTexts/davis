@@ -65,6 +65,13 @@ Coming soon
 
 ---
 
+---
+
+## When to use
+
+- **Tooltip** — Use for brief, text-only supplementary information that appears on hover or focus. Must not contain interactive elements (links, buttons). Ideal for icon button labels and truncated text.
+- **Popover** — Use when the floating content needs to be interactive (forms, action lists, date pickers) or requires click-to-open behavior. Popover traps focus and stays open until explicitly dismissed.
+
 {% callout type="info" title="Documentation in Progress" %}
 Full documentation for this component is being written. Check back soon for complete API reference, examples, and accessibility guidelines.
 {% /callout %}

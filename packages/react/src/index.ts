@@ -197,3 +197,35 @@ export type { PaginationProps, PaginationSize } from "./components/pagination";
 
 export { Stepper } from "./components/stepper";
 export type { StepperProps, StepperOrientation, StepperSize, StepItem } from "./components/stepper";
+
+export { Drawer } from "./components/drawer";
+export type {
+  DrawerProps,
+  DrawerSide,
+  DrawerSize,
+  DrawerHeaderProps,
+  DrawerTitleProps,
+  DrawerBodyProps,
+  DrawerFooterProps,
+  DrawerCloseProps,
+} from "./components/drawer";
+
+export { Popover } from "./components/popover";
+export type {
+  PopoverProps,
+  PopoverPlacement,
+  PopoverButtonProps,
+  PopoverPanelProps,
+} from "./components/popover";
+
+export { Table } from "./components/table";
+export type {
+  TableProps,
+  TableAlign,
+  TableHeadProps,
+  TableBodyProps,
+  TableRowProps,
+  TableCellProps,
+  TableHeaderCellProps,
+  TableCaptionProps,
+} from "./components/table";

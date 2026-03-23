@@ -81,6 +81,13 @@ Coming soon
 
 ---
 
+---
+
+## When to use
+
+- **Notification (Toast)** — Use for brief, ephemeral feedback in response to a user action (file saved, item created, error on submit). It appears as a floating toast and auto-dismisses after a few seconds.
+- **Alert** — Use for persistent, inline feedback that must remain visible until the condition is resolved (form validation errors, page-level warnings).
+
 {% callout type="info" title="Documentation in Progress" %}
 Full documentation for this component is being written. Check back soon for complete API reference, examples, and accessibility guidelines.
 {% /callout %}

@@ -86,6 +86,13 @@ Coming soon
 
 ---
 
+---
+
+## When to use
+
+- **Badge** — Use to convey a status, count, or categorical attribute alongside an element (e.g., "Active", "3 pending", "Beta"). Badges are non-interactive labels.
+- **Tag / removable Badge** — Use the removable Badge variant when users need to add or remove labels (e.g., filter chips, tag selectors).
+
 {% callout type="info" title="Documentation in Progress" %}
 Full documentation for this component is being written. Check back soon for complete API reference, examples, and accessibility guidelines.
 {% /callout %}

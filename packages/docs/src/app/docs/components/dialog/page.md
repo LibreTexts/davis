@@ -91,6 +91,13 @@ Coming soon
 
 ---
 
+---
+
+## When to use
+
+- **Dialog** — Use for interactions that require the user's full attention before returning to the page: confirmation prompts, data entry forms that replace existing state, or critical warnings. Dialog blocks the page with a backdrop.
+- **Drawer** — Use for contextual detail panels, filter sidebars, and settings that the user may want to reference while keeping the underlying page partially visible. Drawer is less disruptive than Dialog.
+
 {% callout type="info" title="Documentation in Progress" %}
 Full documentation for this component is being written. Check back soon for complete API reference, examples, and accessibility guidelines.
 {% /callout %}

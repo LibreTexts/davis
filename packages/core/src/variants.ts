@@ -1144,3 +1144,62 @@ export const stepper = tv({
     size:        'md'         as const,
   },
 });
+
+// ─── Overlays ────────────────────────────────────────────────────────────────
+
+export const drawer = tv({
+  base: 'fixed inset-y-0 flex flex-col bg-white shadow-xl overflow-y-auto',
+  variants: {
+    side: {
+      left:  'left-0',
+      right: 'right-0',
+    },
+    size: {
+      sm:   'w-72',
+      md:   'w-96',
+      lg:   'w-[32rem]',
+      full: 'w-full',
+    },
+  },
+  defaultVariants: {
+    side: 'right' as const,
+    size: 'md'    as const,
+  },
+});
+
+export const popover = tv({
+  base: 'absolute z-50 bg-white rounded-lg border border-gray-200 shadow-lg p-4 min-w-48',
+  variants: {
+    side: {
+      top:    'bottom-full mb-2',
+      bottom: 'top-full mt-2',
+      left:   'right-full mr-2 top-0',
+      right:  'left-full ml-2 top-0',
+    },
+  },
+  defaultVariants: {
+    side: 'bottom' as const,
+  },
+});
+
+// ─── Data Display ─────────────────────────────────────────────────────────────
+
+export const table = tv({
+  base: 'w-full text-sm text-left border-collapse',
+});
+
+export const tableHead = tv({
+  base: 'border-b border-gray-200 bg-gray-50',
+});
+
+export const tableRow = tv({
+  base: 'border-b border-gray-100 hover:bg-gray-50 transition-colors',
+});
+
+export const tableCell = tv({
+  base: 'px-4 py-3 text-gray-700',
+});
+
+export const tableHeaderCell = tv({
+  base: 'px-4 py-3 font-medium text-gray-900',
+});

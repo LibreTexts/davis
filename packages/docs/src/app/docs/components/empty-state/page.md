@@ -71,6 +71,13 @@ Coming soon
 
 ---
 
+---
+
+## When to use
+
+- **Empty State** — Use when a list, table, or container has no data to display. Provides context and a call-to-action to help users get started (e.g., "No records found. Add your first item.").
+- **Alert** — Use to communicate an error, warning, or informational message about the page state. Alert is not specific to empty data — it addresses conditions like failed requests or permission issues.
+
 {% callout type="info" title="Documentation in Progress" %}
 Full documentation for this component is being written. Check back soon for complete API reference, examples, and accessibility guidelines.
 {% /callout %}
