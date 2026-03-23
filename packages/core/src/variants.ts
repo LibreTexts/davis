@@ -883,3 +883,264 @@ export const spinner = tv({
     color: 'primary' as const,
   },
 });
+
+// ─── Typography ─────────────────────────────────────────────────────────────
+
+export const text = tv({
+  base: '',
+  variants: {
+    size: {
+      xs:   'text-xs',
+      sm:   'text-sm',
+      base: 'text-base',
+      lg:   'text-lg',
+      xl:   'text-xl',
+      '2xl': 'text-2xl',
+    },
+    weight: {
+      normal:   'font-normal',
+      medium:   'font-medium',
+      semibold: 'font-semibold',
+      bold:     'font-bold',
+    },
+    color: {
+      default: 'text-gray-900',
+      muted:   'text-gray-500',
+      primary: 'text-primary',
+      danger:  'text-danger',
+      success: 'text-success',
+      warning: 'text-warning',
+      inherit: 'text-inherit',
+    },
+    align: {
+      left:   'text-left',
+      center: 'text-center',
+      right:  'text-right',
+    },
+    truncate: {
+      true: 'truncate',
+    },
+    italic: {
+      true: 'italic',
+    },
+  },
+  defaultVariants: {
+    size:   'base'    as const,
+    weight: 'normal'  as const,
+    color:  'default' as const,
+  },
+});
+
+export const heading = tv({
+  base: 'text-gray-900 leading-tight',
+  variants: {
+    level: {
+      1: 'text-4xl font-bold',
+      2: 'text-3xl font-bold',
+      3: 'text-2xl font-semibold',
+      4: 'text-xl  font-semibold',
+      5: 'text-lg  font-semibold',
+      6: 'text-base font-semibold',
+    },
+    color: {
+      default: 'text-gray-900',
+      muted:   'text-gray-500',
+      primary: 'text-primary',
+      inherit: 'text-inherit',
+    },
+    align: {
+      left:   'text-left',
+      center: 'text-center',
+      right:  'text-right',
+    },
+    truncate: {
+      true: 'truncate',
+    },
+  },
+  defaultVariants: {
+    level: 1 as const,
+    color: 'default' as const,
+  },
+});
+
+// ─── Form Ecosystem ──────────────────────────────────────────────────────────
+
+export const formSection = tv({
+  slots: {
+    root:        'border border-gray-200 rounded-lg p-6 min-w-0',
+    legend:      'px-1 text-base font-semibold text-gray-900 float-left',
+    description: 'clear-both mt-1 mb-4 text-sm text-gray-500',
+    content:     'flex flex-col gap-4',
+  },
+});
+
+export const inputGroup = tv({
+  slots: {
+    root:         'flex',
+    addon: [
+      'inline-flex shrink-0 items-center',
+      'border border-gray-400 bg-gray-50 text-gray-500',
+      'transition-colors duration-200',
+    ].join(' '),
+    prefix: 'rounded-l-md border-r-0 rounded-r-none',
+    suffix: 'rounded-r-md border-l-0 rounded-l-none',
+    inputSlot: 'flex-1 min-w-0 [&>div]:mt-0 [&_input]:rounded-none',
+    inputFirst: '[&_input]:rounded-l-none',
+    inputLast:  '[&_input]:rounded-r-none',
+  },
+  variants: {
+    size: {
+      sm: { addon: 'px-2.5 py-1.5 text-sm' },
+      md: { addon: 'px-3 py-2 text-base' },
+      lg: { addon: 'px-4 py-3 text-lg' },
+    },
+  },
+  defaultVariants: {
+    size: 'md' as const,
+  },
+});
+
+export const numberInput = tv({
+  slots: {
+    root:      'inline-flex w-full',
+    stepper: [
+      'inline-flex items-center justify-center shrink-0',
+      'border border-gray-400 bg-white text-gray-600',
+      'hover:bg-gray-50 active:bg-gray-100',
+      'transition-colors duration-200',
+      'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+      'disabled:opacity-50 disabled:cursor-not-allowed',
+      'select-none',
+    ].join(' '),
+    decrement: 'rounded-l-md border-r-0',
+    increment: 'rounded-r-md border-l-0',
+    input:     'rounded-none text-center flex-1 min-w-0',
+  },
+  variants: {
+    size: {
+      sm: { stepper: 'px-2 py-1.5 text-sm' },
+      md: { stepper: 'px-3 py-2 text-base' },
+      lg: { stepper: 'px-4 py-3 text-lg' },
+    },
+  },
+  defaultVariants: {
+    size: 'md' as const,
+  },
+});
+
+export const combobox = tv({
+  slots: {
+    root:      'relative w-full',
+    inputWrap: 'relative',
+    button:    'absolute inset-y-0 right-0 flex items-center pr-2 text-gray-400 hover:text-gray-600 focus:outline-none',
+    options: [
+      'absolute z-10 mt-1 w-full overflow-auto rounded-md bg-white py-1',
+      'shadow-lg ring-1 ring-black/5 focus:outline-none',
+      'max-h-60',
+    ].join(' '),
+    option: [
+      'relative cursor-default select-none px-4 py-2 text-sm',
+      'data-[focus]:bg-primary data-[focus]:text-white',
+      'text-gray-900',
+    ].join(' '),
+    noResults: 'px-4 py-2 text-sm text-gray-500 text-center',
+  },
+});
+
+// ─── Navigation ──────────────────────────────────────────────────────────────
+
+export const breadcrumb = tv({
+  slots: {
+    root:      '',
+    list:      'flex items-center flex-wrap',
+    item:      'flex items-center',
+    link: [
+      'text-sm text-gray-500 hover:text-gray-700',
+      'rounded focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-primary',
+      'transition-colors duration-150',
+    ].join(' '),
+    current:   'text-sm font-medium text-gray-900',
+    separator: 'mx-2 text-gray-400 select-none',
+  },
+});
+
+export const pagination = tv({
+  slots: {
+    root:    'flex items-center justify-center',
+    list:    'flex items-center gap-1',
+    button: [
+      'inline-flex items-center justify-center rounded-md',
+      'border border-gray-300 bg-white text-gray-700',
+      'hover:bg-gray-50 hover:border-gray-400',
+      'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+      'disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-gray-300',
+      'transition-colors duration-200 select-none font-medium',
+    ].join(' '),
+    current:  'bg-primary! text-white! border-primary! hover:bg-primary-600!',
+    ellipsis: 'inline-flex items-center justify-center text-gray-400 select-none',
+  },
+  variants: {
+    size: {
+      sm: { button: 'size-8 text-sm',  ellipsis: 'size-8 text-sm'  },
+      md: { button: 'size-9 text-sm',  ellipsis: 'size-9 text-sm'  },
+      lg: { button: 'size-10 text-base', ellipsis: 'size-10 text-base' },
+    },
+  },
+  defaultVariants: {
+    size: 'md' as const,
+  },
+});
+
+export const stepper = tv({
+  slots: {
+    root:        'flex',
+    step:        'flex items-center',
+    stepContent: 'flex flex-col',
+    connector:   'border-gray-200',
+    circle: [
+      'inline-flex items-center justify-center rounded-full shrink-0',
+      'font-medium transition-colors duration-200',
+    ].join(' '),
+    label:       'font-medium',
+    description: 'text-gray-500',
+  },
+  variants: {
+    orientation: {
+      horizontal: {
+        root:        'flex-row w-full',
+        step:        'flex-col items-center flex-1 relative',
+        stepContent: 'items-center text-center mt-2',
+        connector:   'absolute top-4 left-[calc(50%+1.25rem)] right-[calc(-50%+1.25rem)] border-t',
+      },
+      vertical: {
+        root:        'flex-col',
+        step:        'flex-row gap-3 items-start',
+        stepContent: 'pt-0.5 pb-4',
+        connector:   'ml-4 border-l h-6 w-0',
+      },
+    },
+    status: {
+      complete: {
+        circle: 'bg-primary text-white',
+        label:  'text-gray-900',
+      },
+      current: {
+        circle: 'bg-primary text-white ring-4 ring-primary/20',
+        label:  'text-primary',
+      },
+      upcoming: {
+        circle: 'bg-white text-gray-400 border-2 border-gray-300',
+        label:  'text-gray-400',
+      },
+    },
+    size: {
+      sm: { circle: 'size-6 text-xs',  label: 'text-xs', description: 'text-xs'  },
+      md: { circle: 'size-8 text-sm',  label: 'text-sm', description: 'text-xs'  },
+      lg: { circle: 'size-10 text-base', label: 'text-base', description: 'text-sm' },
+    },
+  },
+  defaultVariants: {
+    orientation: 'horizontal' as const,
+    size:        'md'         as const,
+  },
+});
