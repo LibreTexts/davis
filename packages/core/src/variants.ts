@@ -1203,3 +1203,58 @@ export const tableCell = tv({
 export const tableHeaderCell = tv({
   base: 'px-4 py-3 font-medium text-gray-900',
 });
+
+export const statCard = tv({
+  slots: {
+    root:        'rounded-lg border border-gray-200 bg-white p-6 shadow-sm',
+    header:      'flex items-start justify-between',
+    body:        'mt-2',
+    label:       'text-sm font-medium uppercase tracking-wide text-gray-500',
+    value:       'mt-2 text-3xl font-bold text-gray-900',
+    trend:       'mt-2 flex items-center gap-1 text-sm font-medium',
+    trendLabel:  'ml-1 font-normal text-gray-500',
+    icon:        'size-8 shrink-0',
+  },
+  variants: {
+    variant: {
+      default: { icon: 'text-primary'  },
+      success: { icon: 'text-success'  },
+      warning: { icon: 'text-warning'  },
+      danger:  { icon: 'text-danger'   },
+    },
+    trendDirection: {
+      up:      { trend: 'text-success' },
+      down:    { trend: 'text-danger'  },
+      neutral: { trend: 'text-gray-500' },
+    },
+  },
+  defaultVariants: {
+    variant: 'default' as const,
+  },
+});
+
+export const timeline = tv({
+  slots: {
+    root:        'flex flex-col',
+    item:        'relative flex gap-4 pb-8 last:pb-0',
+    connector:   'absolute left-[15px] top-8 bottom-0 w-px bg-gray-200 last:hidden',
+    indicator: [
+      'relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full border-2 bg-white',
+      'transition-colors duration-200',
+    ].join(' '),
+    content:     'min-w-0 flex-1 pt-1',
+    title:       'text-sm font-semibold text-gray-900',
+    description: 'mt-0.5 text-sm text-gray-500',
+    timestamp:   'mt-1 text-xs text-gray-400',
+  },
+  variants: {
+    status: {
+      complete: { indicator: 'border-primary bg-primary text-white' },
+      current:  { indicator: 'border-primary bg-white text-primary ring-4 ring-primary/10' },
+      pending:  { indicator: 'border-gray-300 bg-white text-gray-400' },
+    },
+  },
+  defaultVariants: {
+    status: 'pending' as const,
+  },
+});
