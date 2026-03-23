@@ -163,3 +163,37 @@ export type { SkeletonProps, SkeletonVariant } from "./components/skeleton";
 
 export { Progress } from "./components/progress";
 export type { ProgressProps, ProgressVariant, ProgressSize } from "./components/progress";
+
+export { FormSection } from "./components/form-section";
+export type { FormSectionProps } from "./components/form-section";
+
+export { InputGroup } from "./components/input-group";
+export type { InputGroupProps, InputGroupSize } from "./components/input-group";
+
+export { NumberInput } from "./components/number-input";
+export type { NumberInputProps, NumberInputSize } from "./components/number-input";
+
+export { Text } from "./components/text";
+export type { TextProps, TextSize, TextWeight, TextColor, TextAlign } from "./components/text";
+
+export { Heading } from "./components/heading";
+export type { HeadingProps, HeadingLevel, HeadingColor, HeadingAlign } from "./components/heading";
+
+export { Combobox } from "./components/combobox";
+export type {
+  ComboboxProps,
+  ComboboxInputProps,
+  ComboboxOptionsProps,
+  ComboboxOptionItemProps,
+  ComboboxEmptyProps,
+  ComboboxOption,
+} from "./components/combobox";
+
+export { Breadcrumb } from "./components/breadcrumb";
+export type { BreadcrumbProps, BreadcrumbItemProps } from "./components/breadcrumb";
+
+export { Pagination } from "./components/pagination";
+export type { PaginationProps, PaginationSize } from "./components/pagination";
+
+export { Stepper } from "./components/stepper";
+export type { StepperProps, StepperOrientation, StepperSize, StepItem } from "./components/stepper";
