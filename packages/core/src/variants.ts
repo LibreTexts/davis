@@ -724,6 +724,140 @@ export const accordion = tv({
   },
 });
 
+// ─── Layout Primitives ─────────────────────────────────────────────────────
+
+const GAP_VARIANTS = {
+  none: 'gap-0',
+  xs:   'gap-1',
+  sm:   'gap-2',
+  md:   'gap-4',
+  lg:   'gap-6',
+  xl:   'gap-8',
+  '2xl':'gap-12',
+};
+
+export const stack = tv({
+  base: 'flex',
+  variants: {
+    direction: {
+      vertical:   'flex-col',
+      horizontal: 'flex-row',
+    },
+    gap: GAP_VARIANTS,
+    align: {
+      start:    'items-start',
+      center:   'items-center',
+      end:      'items-end',
+      stretch:  'items-stretch',
+      baseline: 'items-baseline',
+    },
+    justify: {
+      start:   'justify-start',
+      center:  'justify-center',
+      end:     'justify-end',
+      between: 'justify-between',
+      around:  'justify-around',
+      evenly:  'justify-evenly',
+    },
+    wrap: {
+      true:  'flex-wrap',
+      false: 'flex-nowrap',
+    },
+  },
+  defaultVariants: {
+    direction: 'vertical',
+    gap: 'md',
+    wrap: false,
+  },
+});
+
+export const grid = tv({
+  base: 'grid',
+  variants: {
+    cols: {
+      1:  'grid-cols-1',
+      2:  'grid-cols-2',
+      3:  'grid-cols-3',
+      4:  'grid-cols-4',
+      6:  'grid-cols-6',
+      12: 'grid-cols-12',
+    },
+    gap: GAP_VARIANTS,
+  },
+  defaultVariants: { cols: 1, gap: 'md' },
+});
+
+export const container = tv({
+  base: 'w-full',
+  variants: {
+    size: {
+      sm:    'max-w-screen-sm',
+      md:    'max-w-screen-md',
+      lg:    'max-w-screen-lg',
+      xl:    'max-w-screen-xl',
+      '2xl': 'max-w-screen-2xl',
+      prose: 'max-w-prose',
+    },
+    centered: { true: 'mx-auto' },
+    padded:   { true: 'px-4 sm:px-6 lg:px-8' },
+  },
+  defaultVariants: { size: 'xl', centered: true, padded: true },
+});
+
+export const divider = tv({
+  slots: {
+    root:  'flex items-center',
+    line:  'flex-1 border-gray-200',
+    label: 'mx-3 text-sm text-neutral whitespace-nowrap select-none',
+  },
+  variants: {
+    orientation: {
+      horizontal: { root: 'w-full flex-row', line: 'border-t' },
+      vertical:   { root: 'h-full flex-col', line: 'border-l w-0 flex-none' },
+    },
+  },
+  defaultVariants: { orientation: 'horizontal' },
+});
+
+// ─── Loading State Components ───────────────────────────────────────────────
+
+export const skeleton = tv({
+  base: 'animate-pulse bg-gray-200 block',
+  variants: {
+    variant: {
+      text:        'rounded h-4',
+      circular:    'rounded-full',
+      rectangular: 'rounded-none',
+      rounded:     'rounded-md',
+    },
+  },
+  defaultVariants: { variant: 'rounded' },
+});
+
+export const progress = tv({
+  slots: {
+    root: 'w-full overflow-hidden rounded-full bg-gray-200',
+    bar:  'h-full rounded-full transition-[width] duration-300 ease-in-out',
+  },
+  variants: {
+    variant: {
+      default: { bar: 'bg-primary' },
+      success: { bar: 'bg-success' },
+      warning: { bar: 'bg-warning' },
+      danger:  { bar: 'bg-danger'  },
+    },
+    size: {
+      sm: { root: 'h-1' },
+      md: { root: 'h-2' },
+      lg: { root: 'h-3' },
+    },
+    indeterminate: {
+      true: { bar: 'w-1/3 animate-[davis-indeterminate_1.5s_ease-in-out_infinite]' },
+    },
+  },
+  defaultVariants: { variant: 'default', size: 'md' },
+});
+
 export const spinner = tv({
   base: 'animate-spin',
   variants: {

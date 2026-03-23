@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { forwardRef, type SelectHTMLAttributes, useEffect } from "react";
+import { forwardRef, type SelectHTMLAttributes } from "react";
 import { select } from "@libretexts/davis-core";
 
 type SelectVariants = {
@@ -27,6 +27,7 @@ export type SelectProps = Omit<SelectHTMLAttributes<HTMLSelectElement>, "size" |
     required?: boolean;
     helperText?: string;
     errorMessage?: string;
+    value?: string;
   };
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
@@ -46,6 +47,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       helperText,
       errorMessage,
       defaultValue,
+      value,
       onChange,
       ...props
     },
@@ -53,17 +55,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ) => {
     const showError = error && errorMessage;
     const showHelper = !showError && helperText;
-    const effectiveDefaultValue = defaultValue ?? "";
 
-    useEffect(() => {
-      console.log(effectiveDefaultValue || null);
-    }, []);
-
-    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      const selectedValue = e.target.value;
-      console.log(selectedValue || null);
-      onChange?.(e);
-    };
+    const controlledProps = value !== undefined
+      ? { value }
+      : { defaultValue: defaultValue ?? "" };
 
     return (
       <div className={clsx(className)}>
@@ -86,8 +81,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             aria-describedby={
               showError ? `${name}-error` : showHelper ? `${name}-helper` : undefined
             }
-            defaultValue={effectiveDefaultValue}
-            onChange={handleChange}
+            {...controlledProps}
+            onChange={onChange}
             className={clsx(
               select({ variant: error ? "error" : variant, size }),
               selectClassName
