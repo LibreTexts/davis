@@ -90,6 +90,13 @@ Coming soon
 
 ---
 
+---
+
+## When to use
+
+- **Alert** — Use for persistent, inline feedback that is part of the page content (form errors, field validation, system warnings). It does not dismiss automatically and is always visible.
+- **Notification (Toast)** — Use for ephemeral feedback triggered by a user action (saved successfully, item deleted). It appears as a floating toast and auto-dismisses. It does not block the user.
+
 {% callout type="info" title="Documentation in Progress" %}
 Full documentation for this component is being written. Check back soon for complete API reference, examples, and accessibility guidelines.
 {% /callout %}

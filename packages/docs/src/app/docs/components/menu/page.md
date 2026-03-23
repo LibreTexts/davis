@@ -79,6 +79,13 @@ Coming soon
 
 ---
 
+---
+
+## When to use
+
+- **Menu** — Use for a list of actions triggered from a button (edit, delete, export). Menu items are actions, not data values. Selecting an item triggers a command.
+- **Select** — Use when the user is choosing a data value from a list of options (country, status, category). The selected value is submitted as part of a form.
+
 {% callout type="info" title="Documentation in Progress" %}
 Full documentation for this component is being written. Check back soon for complete API reference, examples, and accessibility guidelines.
 {% /callout %}
