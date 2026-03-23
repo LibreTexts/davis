@@ -229,3 +229,9 @@ export type {
   TableHeaderCellProps,
   TableCaptionProps,
 } from "./components/table";
+
+export { StatCard } from "./components/stat-card";
+export type { StatCardProps, StatCardVariant, StatCardTrend } from "./components/stat-card";
+
+export { Timeline } from "./components/timeline";
+export type { TimelineProps, TimelineItemProps, TimelineStatus } from "./components/timeline";

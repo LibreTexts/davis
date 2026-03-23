@@ -178,9 +178,13 @@
 
   /* ─── Motion ─────────────────────────────────────────────── */
 
-  --davis-motion-duration-fast: 150ms;
-  --davis-motion-duration-default: 200ms;
-  --davis-motion-duration-slow: 300ms;
+  --duration-fast: 150ms;
+  --duration-default: 200ms;
+  --duration-slow: 300ms;
+
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
 
   /* ─── Target Size (WCAG 2.2) ─────────────────────────────── */
 

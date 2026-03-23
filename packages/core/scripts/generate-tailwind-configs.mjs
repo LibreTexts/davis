@@ -117,9 +117,13 @@ ${shadowVars}
 
   /* ─── Motion ─────────────────────────────────────────────── */
 
-  --davis-motion-duration-fast: ${MOTION.durationFast};
-  --davis-motion-duration-default: ${MOTION.durationDefault};
-  --davis-motion-duration-slow: ${MOTION.durationSlow};
+  --duration-fast: ${MOTION.durationFast};
+  --duration-default: ${MOTION.durationDefault};
+  --duration-slow: ${MOTION.durationSlow};
+
+  --ease-default: ${MOTION.easeDefault};
+  --ease-in: ${MOTION.easeIn};
+  --ease-out: ${MOTION.easeOut};
 
   /* ─── Target Size (WCAG 2.2) ─────────────────────────────── */
 

@@ -98,7 +98,9 @@ export const navigation: NavGroup[] = [
       { title: 'Card', href: '/docs/components/card' },
       { title: 'Icon Button', href: '/docs/components/icon-button' },
       { title: 'Link', href: '/docs/components/link' },
+      { title: 'Stat Card', href: '/docs/components/stat-card' },
       { title: 'Table', href: '/docs/components/table' },
+      { title: 'Timeline', href: '/docs/components/timeline' },
       { title: 'Tooltip', href: '/docs/components/tooltip' },
     ],
   },
@@ -117,6 +119,7 @@ export const navigation: NavGroup[] = [
       { title: 'Accessibility', href: '/docs/guides/accessibility' },
       { title: 'Component Patterns', href: '/docs/guides/patterns' },
       { title: 'React Hook Form', href: '/docs/guides/react-hook-form' },
+      { title: 'Theming', href: '/docs/guides/theming' },
     ],
   },
   {

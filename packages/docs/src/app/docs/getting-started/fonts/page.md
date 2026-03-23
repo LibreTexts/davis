@@ -32,7 +32,7 @@ For most frameworks, use the Google Fonts CDN for easy setup and optimal perform
 
 ```css
 /* In your main CSS file */
-@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@300;400;500;600;700&display=swap');
 ```
 
 Or in your HTML `<head>`:
@@ -40,7 +40,7 @@ Or in your HTML `<head>`:
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 ```
 
 **Benefits:**
@@ -62,9 +62,33 @@ For full control, self-host the font files:
 @font-face {
   font-family: 'Atkinson Hyperlegible';
   font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/fonts/atkinson-hyperlegible-light.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
   font-weight: 400;
   font-display: swap;
   src: url('/fonts/atkinson-hyperlegible-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/atkinson-hyperlegible-medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/atkinson-hyperlegible-semibold.woff2') format('woff2');
 }
 
 @font-face {
@@ -97,7 +121,7 @@ Next.js provides automatic font optimization with zero configuration. Use the bu
 import { Atkinson_Hyperlegible } from 'next/font/google';
 
 const atkinsonHyperlegible = Atkinson_Hyperlegible({
-  weight: ['400', '700'],
+  weight: ['300', '400', '500', '600', '700'],
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-sans',
@@ -140,7 +164,7 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/google-fonts'],
   googleFonts: {
     families: {
-      'Atkinson Hyperlegible': [400, 700],
+      'Atkinson Hyperlegible': [300, 400, 500, 600, 700],
     },
     display: 'swap',
     preload: true,
@@ -159,14 +183,17 @@ For standard Vue or Vite + Vue, use the Google Fonts CDN approach above.
 
 ## Font Weights
 
-Davis uses only **two font weights** to keep bundle sizes minimal and visual hierarchy clear:
+Davis uses five font weights across its components and heading hierarchy:
 
-| Weight | Use Case |
-|--------|----------|
-| **400 (Regular)** | Body text, descriptions, secondary content |
-| **700 (Bold)** | Headings (h1–h2), strong emphasis, key actions |
+| Weight | Tailwind Class | Use Case |
+|--------|----------------|----------|
+| **300 (Light)** | `font-light` | De-emphasized text, captions |
+| **400 (Regular)** | `font-normal` | Body text, descriptions, secondary content |
+| **500 (Medium)** | `font-medium` | Labels, buttons, UI control text |
+| **600 (Semibold)** | `font-semibold` | Subheadings (h3–h6), emphasis, form labels |
+| **700 (Bold)** | `font-bold` | Primary headings (h1–h2), strong emphasis |
 
-Additional weights (500, 600) can be used via Tailwind utilities (e.g., `font-medium`, `font-semibold`), but they'll fall back to these two loaded weights.
+All five weights must be loaded to prevent browser font synthesis, which degrades rendering quality especially at smaller sizes.
 
 ---
 
@@ -195,8 +222,8 @@ If self-hosting, preload the regular weight for faster initial render:
 ### 2. Use `font-display: swap`
 Always use `font-display: swap` to show text immediately with fallback fonts while the custom font loads. This is included in all examples above.
 
-### 3. Load Only What You Need
-Davis requires only 2 weights (400, 700). Avoid loading additional weights or italic variants unless your design specifically needs them.
+### 3. Load the Required Weight Set
+Davis requires all five weights (300, 400, 500, 600, 700) — components and heading styles use all of them. Avoid loading italic variants unless your design specifically needs them.
 
 ---
 
