@@ -150,3 +150,7 @@ wrangler.toml.local
 
 # Example app (for local testing only)
 example-app/
+
+# Storybook build output
+**/storybook-static/
+**/storybook-static/*
