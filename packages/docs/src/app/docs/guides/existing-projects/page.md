@@ -75,18 +75,13 @@ npm install @headlessui/vue vue tailwindcss
 {% framework-tabs %}
 {% tab framework="react" %}
 
-Import the standalone stylesheet instead of the standard one. In your app's entry point:
+Import the stylesheet in your app's entry point:
 
 ```js
-import "@libretexts/davis-react/styles.standalone.css";
+import "@libretexts/davis-react/styles.css";
 ```
 
-This stylesheet:
-- Scopes all base styles under `.davis` (headings, focus rings, font family)
-- Includes Tailwind `components` and `utilities` layers (but **not** `base`/Preflight)
-- Initializes `--tw-*` variables only within `.davis` so utilities work correctly
-
-**Do not** import `base.css` or `styles.css` — those are for standard mode.
+This stylesheet includes all Davis styles. `DavisProvider` handles scoping automatically — wrapping your components in `DavisProvider` creates the `.davis` boundary that keeps styles contained. You do not need a separate standalone stylesheet.
 
 {% /tab %}
 {% tab framework="vue" %}
@@ -94,7 +89,7 @@ This stylesheet:
 Once available, import the standalone stylesheet in your app's entry point:
 
 ```js
-import "@libretexts/davis-vue/styles.standalone.css";
+import "@libretexts/davis-vue/styles.css";
 ```
 
 Coming soon
