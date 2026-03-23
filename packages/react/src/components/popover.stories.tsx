@@ -45,14 +45,8 @@ export const WithForm: Story = {
       <Popover.Panel className="w-72">
         <p className="text-sm font-medium text-gray-900 mb-3">Select date range</p>
         <div className="flex flex-col gap-3">
-          <div>
-            <label className="block text-xs text-gray-500 mb-1">Start date</label>
-            <Input type="date" />
-          </div>
-          <div>
-            <label className="block text-xs text-gray-500 mb-1">End date</label>
-            <Input type="date" />
-          </div>
+          <Input name="startDate" label="Start date" type="date" />
+          <Input name="endDate" label="End date" type="date" />
           <Button size="sm" className="w-full">Apply</Button>
         </div>
       </Popover.Panel>

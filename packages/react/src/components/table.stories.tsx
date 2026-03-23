@@ -41,9 +41,7 @@ export const Default: Story = {
             <Table.Cell>{row.name}</Table.Cell>
             <Table.Cell>{row.role}</Table.Cell>
             <Table.Cell>
-              <Badge variant={row.status === "active" ? "success" : "default"}>
-                {row.status}
-              </Badge>
+              <Badge variant={row.status === "active" ? "success" : "default"} label={row.status} />
             </Table.Cell>
             <Table.Cell>{row.joined}</Table.Cell>
           </Table.Row>
@@ -81,9 +79,7 @@ export const WithSorting: Story = {
             <Table.Cell>{row.name}</Table.Cell>
             <Table.Cell>{row.role}</Table.Cell>
             <Table.Cell>
-              <Badge variant={row.status === "active" ? "success" : "default"}>
-                {row.status}
-              </Badge>
+              <Badge variant={row.status === "active" ? "success" : "default"} label={row.status} />
             </Table.Cell>
             <Table.Cell align="right">{row.joined}</Table.Cell>
           </Table.Row>
@@ -114,9 +110,7 @@ export const WithActions: Story = {
             <Table.Cell>{row.name}</Table.Cell>
             <Table.Cell>{row.role}</Table.Cell>
             <Table.Cell>
-              <Badge variant={row.status === "active" ? "success" : "default"}>
-                {row.status}
-              </Badge>
+              <Badge variant={row.status === "active" ? "success" : "default"} label={row.status} />
             </Table.Cell>
             <Table.Cell align="right">
               <div className="flex justify-end gap-2">
@@ -152,7 +146,6 @@ export const EmptyStateStory: Story = {
             <EmptyState
               title="No team members"
               description="Get started by adding your first team member."
-              action={{ label: "Add Member", onClick: () => {} }}
             />
           </Table.Cell>
         </Table.Row>

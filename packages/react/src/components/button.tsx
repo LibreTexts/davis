@@ -1,8 +1,9 @@
+"use client";
+
+import { Button as HeadlessButton } from "@headlessui/react";
 import clsx from "clsx";
 import {
   forwardRef,
-  type ButtonHTMLAttributes,
-  type AnchorHTMLAttributes,
   type ElementType,
   type ComponentPropsWithoutRef,
   type ReactNode,
@@ -42,9 +43,6 @@ export type ButtonProps<C extends ElementType = "button"> = PolymorphicComponent
   C,
   ButtonBaseProps
 >;
-
-void (null as unknown as ButtonHTMLAttributes<HTMLButtonElement>);
-void (null as unknown as AnchorHTMLAttributes<HTMLAnchorElement>);
 
 function Spinner({ className }: { className?: string }) {
   return (
@@ -94,7 +92,6 @@ export const Button = forwardRef(function Button<C extends ElementType = "button
   }: ButtonProps<C>,
   ref: React.Ref<Element>
 ) {
-  const Component = as || "button";
   const isDisabled = disabled || loading;
 
   const iconElement = icon && !loading && (
@@ -118,24 +115,23 @@ export const Button = forwardRef(function Button<C extends ElementType = "button
   );
 
   return (
-    <Component
-      ref={ref as React.LegacyRef<HTMLButtonElement>}
-      disabled={Component === "button" ? isDisabled : undefined}
-      aria-disabled={isDisabled}
-      aria-busy={loading}
+    <HeadlessButton
+      as={as as ElementType}
+      ref={ref as React.Ref<HTMLButtonElement>}
+      disabled={isDisabled}
+      aria-busy={loading || undefined}
       className={clsx(
         button({ variant, size, fullWidth }),
         loading && "cursor-wait",
-        isDisabled && "pointer-events-none",
         className
       )}
-      {...props}
+      {...(props as object)}
     >
       {spinnerElement}
       {iconPosition === "left" && iconElement}
       {children}
       {iconPosition === "right" && iconElement}
-    </Component>
+    </HeadlessButton>
   );
 }) as <C extends ElementType = "button">(
   props: ButtonProps<C> & { ref?: React.Ref<Element> }

@@ -136,24 +136,17 @@ export const WithForm: Story = {
           </Drawer.Header>
           <Drawer.Body>
             <div className="flex flex-col gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Search
-                </label>
-                <Input placeholder="Search..." />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Status
-                </label>
-                <Select
-                  options={[
-                    { value: "all", label: "All" },
-                    { value: "active", label: "Active" },
-                    { value: "inactive", label: "Inactive" },
-                  ]}
-                />
-              </div>
+              <Input name="search" label="Search" placeholder="Search..." />
+              <Select
+                name="status"
+                label="Status"
+                placeholder="Select Status"
+                options={[
+                  { value: "all", label: "All" },
+                  { value: "active", label: "Active" },
+                  { value: "inactive", label: "Inactive" },
+                ]}
+              />
             </div>
           </Drawer.Body>
           <Drawer.Footer>

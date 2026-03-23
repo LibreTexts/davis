@@ -6,7 +6,7 @@
  * Run this script whenever tokens.ts changes.
  */
 
-import { writeFileSync, existsSync, mkdirSync } from 'fs';
+import { writeFileSync, readFileSync, existsSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -615,6 +615,46 @@ ${Object.entries(CONTAINER).map(([name, value]) => `  --davis-container-${name}:
   console.log('✓ Generated base.scoped.css');
 }
 
+// ─── Generate Tailwind v4 Safelist ──────────────────────────────────
+
+function generateSafelist() {
+  // variants.ts is the single source of truth for all component utility classes.
+  // We parse its string literals directly so the safelist is always in sync —
+  // no manual maintenance required.
+  const source = readFileSync(join(rootDir, 'src', 'variants.ts'), 'utf-8');
+
+  // Extract every single- and double-quoted string literal, then split on
+  // whitespace to get individual class tokens. Non-class tokens (e.g. 'primary',
+  // 'sm', 'default') are included harmlessly — Tailwind ignores anything that
+  // doesn't resolve to a known utility.
+  const tokens = new Set();
+  const pattern = /'([^'\n\\]*)'|"([^"\n\\]*)"/g;
+  let match;
+  while ((match = pattern.exec(source)) !== null) {
+    const content = match[1] ?? match[2];
+    if (content.trim()) {
+      content.split(/\s+/).filter(Boolean).forEach(t => tokens.add(t));
+    }
+  }
+
+  const css = `/**
+ * Davis Design System — Tailwind v4 Component Safelist
+ *
+ * AUTO-GENERATED from variants.ts — DO NOT EDIT MANUALLY
+ * Run 'npm run generate:configs' in packages/core to regenerate.
+ *
+ * In PostCSS-based consumer builds (Next.js, etc.), @source file directives
+ * inside @imported CSS are not propagated to the root Tailwind compilation.
+ * This file uses @source inline() — which IS propagated — to guarantee every
+ * utility class emitted by component variants is present in the final bundle.
+ */
+@source inline("${[...tokens].join(' ')}");
+`;
+
+  writeFileSync(join(rootDir, 'dist', 'safelist.css'), css);
+  console.log('✓ Generated dist/safelist.css');
+}
+
 // ─── Main ────────────────────────────────────────────────────────────
 
 try {
@@ -626,6 +666,7 @@ try {
   generateTailwindV4BaseCSS();
   generateBaseCSS();
   generateScopedBaseCSS();
+  generateSafelist();
 
   console.log('\n✨ All configs and base styles generated successfully!');
 } catch (error) {
