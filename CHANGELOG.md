@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/LibreTexts/davis/compare/v1.3.0...v1.3.1) (2026-03-23)
+
+
+### Bug Fixes
+
+* button hover state and Card header height ([5684129](https://github.com/LibreTexts/davis/commit/56841299b82b99d68674b3161a7209b127ccd513))
+
 # [1.3.0](https://github.com/LibreTexts/davis/compare/v1.2.1...v1.3.0) (2026-03-23)
 
 
