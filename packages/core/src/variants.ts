@@ -26,6 +26,7 @@ export const BUTTON_BASE_CLASSES = [
   'focus:outline-none',
   'focus:ring-2',
   'focus:ring-offset-2',
+  'hover:cursor-pointer',
   // Native <button disabled> pseudo-class
   'disabled:opacity-50',
   'disabled:cursor-not-allowed',
@@ -502,7 +503,7 @@ export const card = tv({
     headerContent: '',
     body:          '',
     footer:        'border-t border-gray-100 bg-gray-50/50',
-    image:         'w-full object-cover block',
+    image:         'w-full h-48 object-cover block',
   },
   variants: {
     variant: {
