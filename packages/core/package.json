@@ -19,6 +19,7 @@
     "./base.css": "./dist/base.css",
     "./base.v4.css": "./dist/base.v4.css",
     "./theme.css": "./dist/theme.css",
+    "./safelist.css": "./dist/safelist.css",
     "./package.json": "./package.json"
   },
   "sideEffects": false,

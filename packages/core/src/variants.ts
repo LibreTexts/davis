@@ -26,8 +26,12 @@ export const BUTTON_BASE_CLASSES = [
   'focus:outline-none',
   'focus:ring-2',
   'focus:ring-offset-2',
+  // Native <button disabled> pseudo-class
   'disabled:opacity-50',
   'disabled:cursor-not-allowed',
+  // HeadlessUI data-disabled attribute (e.g. when rendered as <a>)
+  'data-[disabled]:opacity-50',
+  'data-[disabled]:cursor-not-allowed',
   'rounded-md',
 ].join(' ');
 

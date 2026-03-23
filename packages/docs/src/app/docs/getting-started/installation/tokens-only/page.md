@@ -25,8 +25,9 @@ npm install @libretexts/davis-core
 This package is framework-agnostic and includes:
 - Design tokens (colors, typography, spacing, layout)
 - CSS custom properties
-- Tailwind CSS preset
-- Base styles and CSS reset
+- Tailwind v4 theme (`theme.css`) and base styles (`base.v4.css`)
+- Component variant functions via `tailwind-variants` (`variants.ts`)
+- Auto-generated component safelist (`safelist.css`)
 
 ---
 
@@ -40,8 +41,21 @@ In your app's CSS entry file, import Tailwind and the Davis core styles:
 @import "@libretexts/davis-core/base.v4.css";
 ```
 
-- **`theme.css`** — Configures Tailwind v4 utility classes: `bg-primary`, `text-sm`, `shadow-md`, `rounded-lg`, etc.
+- **`theme.css`** — Registers all Davis design tokens as Tailwind v4 utilities: `bg-primary`, `text-sm`, `shadow-md`, `rounded-lg`, etc.
 - **`base.v4.css`** — CSS custom properties, heading scale, focus rings, typography defaults
+
+### Using component variants
+
+If you are building your own components with the variant functions exported from `@libretexts/davis-core` (see [Building Custom Components](#building-custom-components) below), also import the component safelist:
+
+```css
+@import 'tailwindcss';
+@import "@libretexts/davis-core/theme.css";
+@import "@libretexts/davis-core/base.v4.css";
+@import "@libretexts/davis-core/safelist.css";
+```
+
+`safelist.css` is auto-generated from `variants.ts` at build time and uses `@source inline()` to guarantee every utility class emitted by the variant functions is included in your CSS bundle — including in PostCSS-based builds (Next.js, etc.) where `@source` file scanning of imported CSS is not propagated.
 
 ---
 

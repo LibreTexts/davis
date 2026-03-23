@@ -118,8 +118,8 @@ export const navigation: NavGroup[] = [
       { title: 'Existing Projects', href: '/docs/guides/existing-projects' },
       { title: 'Accessibility', href: '/docs/guides/accessibility' },
       { title: 'Component Patterns', href: '/docs/guides/patterns' },
+      { title: 'Custom Components', href: '/docs/guides/custom-components' },
       { title: 'React Hook Form', href: '/docs/guides/react-hook-form' },
-      { title: 'Theming', href: '/docs/guides/theming' },
     ],
   },
   {

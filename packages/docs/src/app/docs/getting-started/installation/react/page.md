@@ -42,7 +42,11 @@ In your app's CSS entry file (e.g. `globals.css`), add:
 @import "@libretexts/davis-react/styles.css";
 ```
 
-`@libretexts/davis-react/styles.css` handles everything in one import: it pulls in the Tailwind v4 theme (colors, typography, shadows, etc.), the base styles (CSS custom properties, heading scale, focus rings), and configures Tailwind to scan all Davis component files for utility classes.
+`@libretexts/davis-react/styles.css` handles everything in one import: it pulls in the Tailwind v4 theme (colors, typography, shadows, etc.), the base styles (CSS custom properties, heading scale, focus rings), and a generated component safelist that guarantees every utility class used by Davis components is included in your CSS bundle.
+
+{% callout type="info" title="How the safelist works" %}
+Davis ships a `safelist.css` that is auto-generated from `variants.ts` at build time. It uses `@source inline()`, which is propagated through `@import` in all build tools — including PostCSS-based builds like Next.js — so no additional `@source` paths or `content` configuration are needed on your end.
+{% /callout %}
 
 Optionally, add the Tailwind Typography plugin if you render dynamic/Markdown content:
 

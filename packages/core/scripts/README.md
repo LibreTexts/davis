@@ -1,45 +1,28 @@
-# Design Token Build Scripts
+# Design Token & Variant Build Scripts
 
 ## Overview
 
-This directory contains scripts that generate Tailwind CSS configuration files from the TypeScript design tokens.
+`generate-tailwind-configs.mjs` reads the two sources of truth in `src/` and produces all CSS output files in `dist/`. It runs automatically as the second step of `npm run build`.
 
-## Single Source of Truth
+## Sources of truth
 
-**`src/tokens.ts`** is the single source of truth for all Davis design tokens.
-
-It automatically generates:
-- **`src/theme.css`** - Tailwind CSS v4 theme
-- **`src/base.css`** - Global base styles with CSS custom properties
-- **`src/base.scoped.css`** - Scoped base styles under `.davis` selector (for standalone/embedded usage)
+| File | Generates |
+|---|---|
+| `src/tokens.ts` | `theme.css`, `base.css`, `base.scoped.css`, `base.v4.css` |
+| `src/variants.ts` | `safelist.css` |
 
 ## Usage
 
-### After modifying `tokens.ts`:
-
 ```bash
+# Full build (tsc + generate)
+npm run build
+
+# Regenerate CSS files only (requires tsc to have run first)
 npm run generate:configs
 ```
 
-### During build:
-
-The configs are automatically regenerated during `npm run build`:
-
-```bash
-npm run build  # Runs: tsc && npm run generate:configs
-```
-
-## Why?
-
-- **No duplication** - Design tokens defined once
-- **Type safety** - TypeScript constants can be imported in code
-- **Auto-generated** - Tailwind configs stay in sync
-- **Version compatibility** - Tailwind v4
-
 ## Files
 
-- **`generate-tailwind-configs.mjs`** - Main generation script
-- **`../src/tokens.ts`** - Source of truth for design tokens (EDIT THIS)
-- **`../src/theme.css`** - Generated Tailwind v4 theme (do not edit)
-- **`../src/base.css`** - Generated global base styles (do not edit)
-- **`../src/base.scoped.css`** - Generated scoped base styles (do not edit)
+- **`generate-tailwind-configs.mjs`** — Main generation script. See the package `README.md` for a description of each output file.
+- **`../src/tokens.ts`** — Source of truth for all design tokens. Edit this to change colors, typography, spacing, etc.
+- **`../src/variants.ts`** — Source of truth for all component variant class strings. Edit this to change how components look.
