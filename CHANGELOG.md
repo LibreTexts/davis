@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/LibreTexts/davis/compare/v1.3.1...v1.3.2) (2026-03-24)
+
+
+### Bug Fixes
+
+* **Menu:** ensure SSOT in the core package ([9464f78](https://github.com/LibreTexts/davis/commit/9464f78525ee19e5417d2b1bfc7d66f37125ec73))
+
 ## [1.3.1](https://github.com/LibreTexts/davis/compare/v1.3.0...v1.3.1) (2026-03-23)
 
 
