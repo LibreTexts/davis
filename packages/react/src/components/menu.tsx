@@ -2,6 +2,7 @@
 
 import {
   Menu as HeadlessMenu,
+  type MenuProps as HeadlessMenuProps,
   MenuButton,
   MenuItem,
   MenuItems,
@@ -14,15 +15,17 @@ import {
   type MouseEventHandler,
   type KeyboardEventHandler,
 } from "react";
+import { menu as menuVariants } from "@libretexts/davis-core";
 
-export type MenuProps = {
+export type MenuProps = HeadlessMenuProps & {
   children: ReactNode;
   className?: string;
 };
 
-export function Menu({ children, className }: MenuProps) {
+export function Menu({ children, className, ...props }: MenuProps) {
+  const { root } = menuVariants();
   return (
-    <HeadlessMenu as="div" className={clsx("relative inline-block text-left", className)}>
+    <HeadlessMenu as="div" className={clsx(root(), className)} {...props}>
       {children}
     </HeadlessMenu>
   );
@@ -58,6 +61,7 @@ const MenuTrigger = forwardRef<HTMLButtonElement, MenuTriggerProps>(
     "aria-controls": ariaControls,
     "aria-expanded": ariaExpanded,
   }, ref) => {
+    const { trigger, triggerIcon } = menuVariants();
     return (
       <MenuButton
         ref={ref}
@@ -71,18 +75,10 @@ const MenuTrigger = forwardRef<HTMLButtonElement, MenuTriggerProps>(
         {...(ariaDescribedBy !== undefined ? { "aria-describedby": ariaDescribedBy } : {})}
         {...(ariaControls !== undefined ? { "aria-controls": ariaControls } : {})}
         {...(ariaExpanded !== undefined ? { "aria-expanded": ariaExpanded } : {})}
-        className={clsx(
-          "inline-flex items-center justify-center gap-2",
-          "px-4 py-2 text-sm font-medium",
-          "text-gray-700 bg-white border border-gray-300 rounded-md",
-          "hover:bg-gray-50",
-          "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
-          "disabled:opacity-50 disabled:cursor-not-allowed",
-          className
-        )}
+        className={clsx(trigger(), className)}
       >
         {children}
-        <ChevronDownIcon className="w-4 h-4 text-gray-500" aria-hidden="true" />
+        <ChevronDownIcon className={triggerIcon()} aria-hidden="true" />
       </MenuButton>
     );
   }
@@ -97,33 +93,21 @@ export type MenuItemsContainerProps = {
   width?: "auto" | "sm" | "md" | "lg" | "full";
 };
 
-const widthClasses = {
-  auto: "w-auto min-w-[160px]",
-  sm: "w-40",
-  md: "w-56",
-  lg: "w-72",
-  full: "w-full",
-};
-
 function MenuItemsContainer({
   children,
   className,
   align = "left",
   width = "auto",
 }: MenuItemsContainerProps) {
+  const { items } = menuVariants({ align, width });
   return (
     <MenuItems
       transition
       className={clsx(
-        "absolute z-50 mt-2",
         "transition ease-out duration-100",
         "data-[closed]:opacity-0 data-[closed]:scale-95",
         "data-[enter]:opacity-100 data-[enter]:scale-100",
-        align === "left" ? "left-0 origin-top-left" : "right-0 origin-top-right",
-        widthClasses[width],
-        "bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5",
-        "py-1",
-        "focus:outline-none",
+        items(),
         className
       )}
     >
@@ -155,31 +139,24 @@ function MenuItemComponent({
 }: MenuItemProps) {
   return (
     <MenuItem disabled={disabled}>
-      {({ focus, disabled: itemDisabled }: { focus: boolean; disabled: boolean }) => (
-        <button
-          type="button"
-          onClick={onClick}
-          disabled={itemDisabled}
-          className={clsx(
-            "flex items-center w-full px-4 py-2 text-sm text-left",
-            "transition-colors duration-75",
-            focus && variant === "default" && "bg-gray-100 text-gray-900",
-            focus && variant === "danger" && "bg-red-50 text-red-700",
-            !focus && variant === "default" && "text-gray-700",
-            !focus && variant === "danger" && "text-red-600",
-            itemDisabled && "opacity-50 cursor-not-allowed",
-            className
-          )}
-        >
-          {icon && (
-            <span className="mr-3 flex-shrink-0 w-4 h-4">{icon}</span>
-          )}
-          <span className="flex-1">{children}</span>
-          {shortcut && (
-            <span className="ml-auto pl-4 text-xs text-gray-400">{shortcut}</span>
-          )}
-        </button>
-      )}
+      {({ focus, disabled: itemDisabled }: { focus: boolean; disabled: boolean }) => {
+        const { item, itemIcon, itemShortcut } = menuVariants({
+          itemVariant: variant,
+          itemFocused: focus,
+        });
+        return (
+          <button
+            type="button"
+            onClick={onClick}
+            disabled={itemDisabled}
+            className={clsx(item(), itemDisabled && "opacity-50 cursor-not-allowed", className)}
+          >
+            {icon && <span className={itemIcon()}>{icon}</span>}
+            <span className="flex-1">{children}</span>
+            {shortcut && <span className={itemShortcut()}>{shortcut}</span>}
+          </button>
+        );
+      }}
     </MenuItem>
   );
 }
@@ -191,9 +168,10 @@ export type MenuDividerProps = {
 };
 
 function MenuDivider({ className }: MenuDividerProps) {
+  const { divider } = menuVariants();
   return (
     <div
-      className={clsx("my-1 h-px bg-gray-200", className)}
+      className={clsx(divider(), className)}
       role="separator"
       aria-orientation="horizontal"
     />
@@ -208,13 +186,9 @@ export type MenuLabelProps = {
 };
 
 function MenuLabel({ children, className }: MenuLabelProps) {
+  const { label } = menuVariants();
   return (
-    <div
-      className={clsx(
-        "px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider",
-        className
-      )}
-    >
+    <div className={clsx(label(), className)}>
       {children}
     </div>
   );
