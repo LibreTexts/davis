@@ -973,8 +973,8 @@ export const heading = tv({
 export const formSection = tv({
   slots: {
     root:        'border border-gray-200 rounded-lg p-6 min-w-0',
-    legend:      'px-1 text-base font-semibold text-gray-900 float-left',
-    description: 'clear-both mt-1 mb-4 text-sm text-gray-500',
+    legend:      'text-base font-semibold text-gray-900',
+    description: 'mt-1 mb-4 text-sm text-gray-500',
     content:     'flex flex-col gap-4',
   },
 });
