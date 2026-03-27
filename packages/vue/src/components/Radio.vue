@@ -70,10 +70,10 @@ function handleChange() {
             sizeClasses[props.size],
             isDisabled
               ? 'border-gray-300 bg-gray-100'
-              : props.error
-                ? 'border-red-500 bg-red-100'
-                : isChecked
-                  ? 'border-primary bg-primary'
+              : isChecked
+                ? 'border-primary bg-primary'
+                : props.error
+                  ? 'border-red-500 bg-red-100'
                   : 'border-gray-300 bg-white'
           )"
         />

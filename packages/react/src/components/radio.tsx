@@ -64,7 +64,7 @@ export function Radio({
               "group-data-[checked]:border-primary group-data-[checked]:bg-primary",
               "group-data-[disabled]:border-gray-300 group-data-[disabled]:bg-gray-100",
               sizeClasses[size],
-              error && "!border-red-500 !bg-red-100"
+              error && "border-red-500 bg-red-100"
             )}
           />
           {/* Inner dot for selected state */}
