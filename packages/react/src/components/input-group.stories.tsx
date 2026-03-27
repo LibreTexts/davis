@@ -39,13 +39,13 @@ export const Sizes: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <InputGroup prefix="$" size="sm">
-        <Input name="sm-amount" label="Small" placeholder="0.00" />
+        <Input name="sm-amount" label="Small" placeholder="0.00" size="sm" />
       </InputGroup>
       <InputGroup prefix="$" size="md">
-        <Input name="md-amount" label="Medium" placeholder="0.00" />
+        <Input name="md-amount" label="Medium" placeholder="0.00" size="md" />
       </InputGroup>
       <InputGroup prefix="$" size="lg">
-        <Input name="lg-amount" label="Large" placeholder="0.00" />
+        <Input name="lg-amount" label="Large" placeholder="0.00" size="lg" />
       </InputGroup>
     </div>
   ),

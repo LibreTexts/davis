@@ -15,7 +15,7 @@ export type InputGroupProps = {
 export function InputGroup({ prefix, suffix, children, size = "md", className }: InputGroupProps) {
   const { root, addon, prefix: prefixClass, suffix: suffixClass, inputSlot, inputFirst, inputLast } = inputGroupVariants({ size });
   return (
-    <div className={clsx(root(), className)}>
+    <div className={clsx(root(), "items-end", className)}>
       {prefix && (
         <span className={clsx(addon(), prefixClass())}>{prefix}</span>
       )}

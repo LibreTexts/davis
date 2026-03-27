@@ -20,7 +20,7 @@ const { root, addon, prefix: prefixClass, suffix: suffixClass, inputSlot, inputF
 </script>
 
 <template>
-  <div :class="clsx(root(), props.class)">
+  <div :class="clsx(root(), 'items-end', props.class)">
     <span v-if="$slots.prefix" :class="clsx(addon(), prefixClass())">
       <slot name="prefix" />
     </span>
