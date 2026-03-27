@@ -13,9 +13,9 @@ export function FormSection({ title, description, children, className }: FormSec
   const { root, legend, description: descClass, content } = formSectionVariants();
   return (
     <fieldset className={clsx(root(), className)}>
-      <legend className={legend()}>{title}</legend>
+      <legend className={clsx(legend(), "!px-0")}>{title}</legend>
       {description && <p className={descClass()}>{description}</p>}
-      <div className={content()}>{children}</div>
+      <div className={clsx(content(), "clear-both")}>{children}</div>
     </fieldset>
   );
 }
