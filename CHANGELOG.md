@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/LibreTexts/davis/compare/v1.3.2...v1.4.0) (2026-03-30)
+
+
+### Features
+
+* added storybook compnents to vue ([411ac30](https://github.com/LibreTexts/davis/commit/411ac3021bbb911a02fef706aedb8fccad0e04b7))
+
 ## [1.3.2](https://github.com/LibreTexts/davis/compare/v1.3.1...v1.3.2) (2026-03-24)
 
 
