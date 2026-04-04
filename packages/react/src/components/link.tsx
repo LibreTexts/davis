@@ -1,21 +1,12 @@
+import { link, type LinkVariantProps } from "@libretexts/davis-core";
 import clsx from "clsx";
 import { forwardRef, type AnchorHTMLAttributes, type ReactNode } from "react";
 
-type LinkVariant = "default" | "muted" | "danger";
-type LinkUnderline = "always" | "hover" | "none";
-type LinkSize = "sm" | "md" | "lg";
-
-export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
+export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & LinkVariantProps & {
   /** Link content */
   children: ReactNode;
   /** URL to navigate to */
   href: string;
-  /** Visual variant */
-  variant?: LinkVariant;
-  /** Underline behavior */
-  underline?: LinkUnderline;
-  /** Size of the link text */
-  size?: LinkSize;
   /** Mark as external link (opens in new tab, shows icon) */
   external?: boolean;
   /** Show external link icon (only when external is true) */
@@ -24,29 +15,6 @@ export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   icon?: ReactNode;
   /** Additional class names */
   className?: string;
-  /** Disable the link */
-  disabled?: boolean;
-};
-
-// Variant classes
-const variantClasses: Record<LinkVariant, string> = {
-  default: "text-primary hover:text-primary-600",
-  muted: "text-gray-500 hover:text-gray-700",
-  danger: "text-danger hover:text-red-700",
-};
-
-// Underline classes
-const underlineClasses: Record<LinkUnderline, string> = {
-  always: "underline underline-offset-2",
-  hover: "hover:underline underline-offset-2",
-  none: "no-underline",
-};
-
-// Size classes
-const sizeClasses: Record<LinkSize, string> = {
-  sm: "text-sm",
-  md: "text-base",
-  lg: "text-lg",
 };
 
 // External link icon
@@ -108,12 +76,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     if (disabled) {
       return (
         <span
-          className={clsx(
-            "inline-flex items-center gap-1",
-            sizeClasses[size],
-            "text-gray-400 cursor-not-allowed",
-            className
-          )}
+          className={clsx(link({ size, disabled: true }), className)}
           aria-disabled="true"
         >
           {icon && <span className="shrink-0 w-4 h-4">{icon}</span>}
@@ -126,15 +89,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       <a
         ref={ref}
         href={href}
-        className={clsx(
-          "inline-flex items-center gap-1",
-          "transition-colors duration-150",
-          "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm",
-          variantClasses[variant],
-          underlineClasses[underline],
-          sizeClasses[size],
-          className
-        )}
+        className={clsx(link({ variant, underline, size }), className)}
         {...externalProps}
         {...props}
       >
