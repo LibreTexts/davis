@@ -116,7 +116,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
           )}
           aria-disabled="true"
         >
-          {icon && <span className="flex-shrink-0 w-4 h-4">{icon}</span>}
+          {icon && <span className="shrink-0 w-4 h-4">{icon}</span>}
           {children}
         </span>
       );
@@ -138,10 +138,13 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
         {...externalProps}
         {...props}
       >
-        {icon && <span className="flex-shrink-0 w-4 h-4">{icon}</span>}
+        {icon && <span className="shrink-0 w-4 h-4">{icon}</span>}
         {children}
         {isExternal && showExternalIcon && (
-          <ExternalLinkIcon className="flex-shrink-0 w-3.5 h-3.5 ml-0.5" />
+          <ExternalLinkIcon className="shrink-0 w-3.5 h-3.5 ml-0.5" />
+        )}
+        {isExternal && (
+          <span className="sr-only">(opens in new tab)</span>
         )}
       </a>
     );
