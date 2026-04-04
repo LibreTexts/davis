@@ -64,7 +64,7 @@ const isExternal = computed(() =>
     )"
     aria-disabled="true"
   >
-    <span v-if="$slots.icon" class="flex-shrink-0 w-4 h-4">
+    <span v-if="$slots.icon" class="shrink-0 w-4 h-4">
       <slot name="icon" />
     </span>
     <slot />
@@ -84,7 +84,7 @@ const isExternal = computed(() =>
     :target="isExternal ? '_blank' : undefined"
     :rel="isExternal ? 'noopener noreferrer' : undefined"
   >
-    <span v-if="$slots.icon" class="flex-shrink-0 w-4 h-4">
+    <span v-if="$slots.icon" class="shrink-0 w-4 h-4">
       <slot name="icon" />
     </span>
     <slot />
@@ -93,7 +93,7 @@ const isExternal = computed(() =>
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 20 20"
       fill="currentColor"
-      class="flex-shrink-0 w-3.5 h-3.5 ml-0.5"
+      class="shrink-0 w-3.5 h-3.5 ml-0.5"
       aria-hidden="true"
     >
       <path
@@ -107,5 +107,6 @@ const isExternal = computed(() =>
         clip-rule="evenodd"
       />
     </svg>
+    <span v-if="isExternal" class="sr-only">(opens in new tab)</span>
   </a>
 </template>
