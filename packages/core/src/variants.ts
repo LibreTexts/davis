@@ -1054,6 +1054,51 @@ export const combobox = tv({
 
 // ─── Navigation ──────────────────────────────────────────────────────────────
 
+export const link = tv({
+  base: 'inline-flex items-center gap-1',
+  variants: {
+    variant: {
+      default: 'text-primary hover:text-primary-600',
+      muted:   'text-gray-500 hover:text-gray-700',
+      danger:  'text-danger hover:text-red-700',
+    },
+    underline: {
+      always: 'underline underline-offset-2',
+      hover:  'hover:underline underline-offset-2',
+      none:   'no-underline',
+    },
+    size: {
+      sm: 'text-sm',
+      md: 'text-base',
+      lg: 'text-lg',
+    },
+    disabled: {
+      true:  'text-gray-400 cursor-not-allowed',
+      false: [
+        'transition-colors duration-150',
+        'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm',
+      ].join(' '),
+    },
+  },
+  defaultVariants: {
+    variant:  'default' as const,
+    underline: 'hover' as const,
+    size:     'md' as const,
+    disabled: false as const,
+  },
+});
+
+export type LinkVariant   = 'default' | 'muted' | 'danger';
+export type LinkUnderline = 'always' | 'hover' | 'none';
+export type LinkSize      = 'sm' | 'md' | 'lg';
+
+export interface LinkVariantProps {
+  variant?:  LinkVariant;
+  underline?: LinkUnderline;
+  size?:     LinkSize;
+  disabled?: boolean;
+}
+
 export const breadcrumb = tv({
   slots: {
     root:      '',

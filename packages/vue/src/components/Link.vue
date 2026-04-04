@@ -1,10 +1,7 @@
 <script setup lang="ts">
+import { link, type LinkVariant, type LinkUnderline, type LinkSize } from "@libretexts/davis-core";
 import { computed } from "vue";
 import clsx from "clsx";
-
-type LinkVariant = "default" | "muted" | "danger";
-type LinkUnderline = "always" | "hover" | "none";
-type LinkSize = "sm" | "md" | "lg";
 
 const props = withDefaults(
   defineProps<{
@@ -27,24 +24,6 @@ const props = withDefaults(
   }
 );
 
-const variantClasses: Record<LinkVariant, string> = {
-  default: "text-primary hover:text-primary-600",
-  muted: "text-gray-500 hover:text-gray-700",
-  danger: "text-danger hover:text-red-700",
-};
-
-const underlineClasses: Record<LinkUnderline, string> = {
-  always: "underline underline-offset-2",
-  hover: "hover:underline underline-offset-2",
-  none: "no-underline",
-};
-
-const sizeClasses: Record<LinkSize, string> = {
-  sm: "text-sm",
-  md: "text-base",
-  lg: "text-lg",
-};
-
 const isExternal = computed(() =>
   props.external ||
   props.href.startsWith("http://") ||
@@ -56,12 +35,7 @@ const isExternal = computed(() =>
 <template>
   <span
     v-if="props.disabled"
-    :class="clsx(
-      'inline-flex items-center gap-1',
-      sizeClasses[props.size],
-      'text-gray-400 cursor-not-allowed',
-      props.class
-    )"
+    :class="clsx(link({ size: props.size, disabled: true }), props.class)"
     aria-disabled="true"
   >
     <span v-if="$slots.icon" class="shrink-0 w-4 h-4">
@@ -72,15 +46,7 @@ const isExternal = computed(() =>
   <a
     v-else
     :href="props.href"
-    :class="clsx(
-      'inline-flex items-center gap-1',
-      'transition-colors duration-150',
-      'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm',
-      variantClasses[props.variant],
-      underlineClasses[props.underline],
-      sizeClasses[props.size],
-      props.class
-    )"
+    :class="clsx(link({ variant: props.variant, underline: props.underline, size: props.size }), props.class)"
     :target="isExternal ? '_blank' : undefined"
     :rel="isExternal ? 'noopener noreferrer' : undefined"
   >
