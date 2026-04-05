@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, useSlots } from "vue";
 import clsx from "clsx";
-import { input } from "@libretexts/davis-core";
-
-type InputVariant = "default" | "error";
-type InputSize = "sm" | "md" | "lg";
+import { input, type InputVariant, type InputSize } from "@libretexts/davis-core";
 
 const props = withDefaults(
   defineProps<{
@@ -38,29 +35,31 @@ const emit = defineEmits<{
   "update:modelValue": [value: string];
 }>();
 
+const slots = useSlots();
+
 const showError = computed(() => props.error && props.errorMessage);
 const showHelper = computed(() => !showError.value && props.helperText);
-const computedVariant = computed(() => props.error ? "error" : props.variant);
+
+const styles = computed(() => input({
+  variant: props.error ? "error" : props.variant,
+  size: props.size,
+  hasLeftIcon: !!slots.leftIcon,
+  hasRightIcon: !!slots.rightIcon,
+}));
 </script>
 
 <template>
-  <div :class="props.class">
+  <div :class="clsx(styles.root(), props.class)">
     <label
       :for="props.name"
-      :class="clsx(
-        'block text-base/6 font-medium text-gray-700',
-        props.labelClass
-      )"
+      :class="clsx(styles.label(), props.labelClass)"
     >
       {{ props.label }}
-      <span v-if="props.required" class="text-danger ml-0.5">*</span>
+      <span v-if="props.required" :class="styles.required()">*</span>
     </label>
-    <div class="mt-1.5">
-      <div class="relative">
-        <div
-          v-if="$slots.leftIcon"
-          class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-        >
+    <div :class="styles.inputWrapper()">
+      <div :class="styles.iconWrapper()">
+        <div v-if="$slots.leftIcon" :class="styles.leftIcon()">
           <slot name="leftIcon" />
         </div>
         <input
@@ -72,26 +71,18 @@ const computedVariant = computed(() => props.error ? "error" : props.variant);
           :aria-describedby="showError ? `${props.name}-error` : showHelper ? `${props.name}-helper` : undefined"
           :placeholder="props.placeholder || props.label"
           :disabled="props.disabled"
-          :class="clsx(
-            input({ variant: computedVariant, size: props.size }),
-            props.inputClass,
-            $slots.leftIcon ? 'pl-10' : 'pl-3',
-            $slots.rightIcon ? 'pr-10' : 'pr-3'
-          )"
+          :class="clsx(styles.field(), props.inputClass)"
           @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
         />
-        <div
-          v-if="$slots.rightIcon"
-          class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
-        >
+        <div v-if="$slots.rightIcon" :class="styles.rightIcon()">
           <slot name="rightIcon" />
         </div>
       </div>
     </div>
-    <p v-if="showError" :id="`${props.name}-error`" class="mt-1.5 text-sm text-danger">
+    <p v-if="showError" :id="`${props.name}-error`" :class="styles.errorMessage()">
       {{ props.errorMessage }}
     </p>
-    <p v-if="showHelper" :id="`${props.name}-helper`" class="mt-1.5 text-sm text-gray-500">
+    <p v-if="showHelper" :id="`${props.name}-helper`" :class="styles.helperText()">
       {{ props.helperText }}
     </p>
   </div>

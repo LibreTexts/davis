@@ -107,7 +107,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
                 if (!isNaN(parsed)) onChange(parsed);
               }}
               className={clsx(
-                input({ variant: error ? "error" : "default", size }),
+                input({ variant: error ? "error" : "default", size }).field(),
                 inputClass()
               )}
             />

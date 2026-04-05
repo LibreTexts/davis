@@ -55,6 +55,29 @@ If using a non-default surface token, ONLY `text` or `text-neutral` should be us
 
 ---
 
+## Interactive State Tokens
+
+These tokens standardize how surfaces respond to user interaction. They apply to "on-white" elements — ghost/outline buttons, menu items, table rows, nav links, accordion triggers, and any element that sits on a white or light background.
+
+| Token | Value | Tailwind class | Use |
+|-------|-------|----------------|-----|
+| `surface-hover` | `#F4F4F5` (neutral-100) | `bg-surface-hover` | Background tint on pointer entry |
+| `surface-active` | `#E4E4E7` (neutral-200) | `bg-surface-active` | Background tint on press/click |
+| `surface-disabled` | `#F4F4F5` (neutral-100) | `bg-surface-disabled` | Background for unavailable form fields — always pair with `opacity-50` and `cursor-not-allowed` |
+
+**Why `surface-hover` and `surface-disabled` share a hex value:** These tokens communicate *intent*, not just color. Contextual signals — cursor change, `opacity-50`, `aria-disabled`, and `pointer-events: none` — disambiguate disabled states from hovered elements at runtime.
+
+For solid-fill semantic color elements (primary, secondary, danger, etc. buttons), interactive states use the established shade convention rather than the surface tokens:
+
+| State | Shade | Example |
+|-------|-------|---------|
+| Hover | 600 | `hover:bg-primary-600` (`#106098`) |
+| Active/Press | 700 | `active:bg-primary-700` (`#0f4b75`) |
+
+This pattern applies to all seven semantic color families. See `INTERACTIVE` in `packages/core/src/tokens.ts` for the full named alias reference.
+
+---
+
 ## Usage Guidelines
 
 ### When to use each color
@@ -70,7 +93,7 @@ If using a non-default surface token, ONLY `text` or `text-neutral` should be us
 
 ### Shade Usage
 
-As noted earlier, the 500 shade is the base color and should be used for most applications. The 600-800 shades can be used for hover/active states. Lighter shades (50-400) are generally not recommended for UI elements due to contrast issues but can be very sparingly used for large background areas or decorative purposes.
+As noted earlier, the 500 shade is the base color and should be used for most applications. The **600 shade is the standard hover state** and the **700 shade is the standard active/pressed state** for solid-fill colored elements. Lighter shades (50-400) are generally not recommended for UI elements due to contrast issues but can be very sparingly used for large background areas or decorative purposes. For white-surface elements (ghost buttons, menus, table rows), use the dedicated `surface-hover` and `surface-active` tokens instead of raw shade values.
 
 If you're making use of the Davis React or Vue libraries, the components and their variants will automatically apply the appropriate shades based on the design system guidelines, so you can focus on using the semantic color tokens without worrying about specifying shade values. Thus, it's recommended to stick to these variants and avoid manually applying shades (or any styling, for that matter) unless you have a specific need that isn't covered by the existing components.
 

@@ -99,9 +99,10 @@ ${fontSizeVars}
 ${colorVars}
 
   /* Surface */
-  --color-surface: ${SURFACE.DEFAULT};
-  --color-surface-muted: ${SURFACE.muted};
-  --color-surface-subtle: ${SURFACE.subtle};
+${Object.entries(SURFACE).map(([key, value]) => {
+  const varName = key === 'DEFAULT' ? '--color-surface' : `--color-surface-${key}`;
+  return `  ${varName}: ${value};`;
+}).join('\n')}
 
   /* ─── Border Radius ───────────────────────────────────────── */
 
@@ -307,9 +308,10 @@ function generateBaseCSS() {
     --davis-color-neutral: ${COLORS.neutral[900]};
 
     /* Surface */
-    --davis-surface: ${SURFACE.DEFAULT};
-    --davis-surface-muted: ${SURFACE.muted};
-    --davis-surface-subtle: ${SURFACE.subtle};
+${Object.entries(SURFACE).map(([key, value]) => {
+  const varName = key === 'DEFAULT' ? '--davis-surface' : `--davis-surface-${key}`;
+  return `    ${varName}: ${value};`;
+}).join('\n')}
 
     /* Typography */
     --davis-font-family: ${fontFamilyValue};
@@ -471,9 +473,10 @@ function generateScopedBaseCSS() {
   --davis-color-neutral: ${COLORS.neutral[900]};
 
   /* Surface */
-  --davis-surface: ${SURFACE.DEFAULT};
-  --davis-surface-muted: ${SURFACE.muted};
-  --davis-surface-subtle: ${SURFACE.subtle};
+${Object.entries(SURFACE).map(([key, value]) => {
+  const varName = key === 'DEFAULT' ? '--davis-surface' : `--davis-surface-${key}`;
+  return `  ${varName}: ${value};`;
+}).join('\n')}
 
   /* Typography */
   --davis-font-family: ${fontFamilyValue};

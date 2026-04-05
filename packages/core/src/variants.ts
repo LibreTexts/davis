@@ -12,9 +12,18 @@
  *   Level 4: xl/2xl      — Reserved for rare high-emphasis overlays
  *
  * Focus patterns:
- *   - Buttons/controls: focus:ring-2 focus:ring-offset-2 focus:ring-{color}
- *   - Inputs: focus:outline-2 focus:-outline-offset-2 focus:outline-primary
+ *   - Buttons/controls: focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-{color}
+ *   - Inputs: focus:outline-2 focus:-outline-offset-2 focus:outline-primary (always-visible; user needs to know which field is active)
  *   - Links: focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2
+ *
+ * Interactive surface state tokens (white/light surfaces):
+ *   - Hover  → bg-surface-hover  (neutral-100, #F4F4F5)
+ *   - Active → bg-surface-active (neutral-200, #E4E4E7)
+ *   - Disabled bg → bg-surface-disabled (neutral-100, #F4F4F5, always paired with opacity-50)
+ *
+ * Semantic color interactive states (solid-fill elements):
+ *   - Hover  → {color}-600 (e.g. primary-600, danger-600)
+ *   - Active → {color}-700 (e.g. primary-700, danger-700)
  */
 import { tv } from 'tailwind-variants';
 
@@ -23,9 +32,10 @@ export const BUTTON_BASE_CLASSES = [
   'font-medium',
   'transition-all',
   'duration-200',
-  'focus:outline-none',
-  'focus:ring-2',
-  'focus:ring-offset-2',
+  // Show ring only on keyboard focus (not mouse click) — suppress global outline, use ring instead
+  'focus-visible:outline-none',
+  'focus-visible:ring-2',
+  'focus-visible:ring-offset-2',
   'hover:cursor-pointer',
   // Native <button disabled> pseudo-class
   'disabled:opacity-50',
@@ -41,45 +51,52 @@ export const BUTTON_VARIANTS = {
     'bg-primary',
     'text-white',
     'hover:bg-primary-600',
-    'focus:ring-primary',
+    'active:bg-primary-700',
+    'focus-visible:ring-primary',
   ].join(' '),
   secondary: [
     'bg-secondary',
     'text-white',
     'hover:bg-secondary-600',
-    'focus:ring-secondary',
+    'active:bg-secondary-700',
+    'focus-visible:ring-secondary',
   ].join(' '),
   tertiary: [
     'bg-tertiary',
     'text-white',
     'hover:bg-tertiary-600',
-    'focus:ring-tertiary',
+    'active:bg-tertiary-700',
+    'focus-visible:ring-tertiary',
   ].join(' '),
   destructive: [
     'bg-danger',
     'text-white',
     'hover:bg-danger-600',
-    'focus:ring-danger',
+    'active:bg-danger-700',
+    'focus-visible:ring-danger',
   ].join(' '),
   warning: [
     'bg-warning',
     'text-white',
     'hover:bg-warning-600',
-    'focus:ring-warning',
+    'active:bg-warning-700',
+    'focus-visible:ring-warning',
   ].join(' '),
   ghost: [
     'bg-transparent',
     'text-gray-700',
-    'hover:bg-gray-100',
-    'focus:ring-gray-500',
+    'hover:bg-surface-hover',
+    'active:bg-surface-active',
+    'focus-visible:ring-gray-500',
   ].join(' '),
   outline: [
     'border',
     'border-gray-300',
     'bg-transparent',
     'text-gray-700',
-    'hover:bg-gray-50',
-    'focus:ring-gray-500',
+    'hover:bg-surface-hover',
+    'active:bg-surface-active',
+    'focus-visible:ring-gray-500',
   ].join(' '),
 };
 
@@ -95,7 +112,7 @@ export const BUTTON_DEFAULT_VARIANTS = {
 };
 
 export const INPUTS_FOCUS = 'focus:outline-2 focus:-outline-offset-2 focus:outline-primary';
-export const INPUTS_DISABLED = 'disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-gray-100';
+export const INPUTS_DISABLED = 'disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-surface-disabled';
 
 export const INPUT_SIZE_VARIANTS = {
   sm: 'px-3 py-1.5 text-sm',
@@ -150,33 +167,44 @@ export const iconButton = tv({
   defaultVariants: BUTTON_DEFAULT_VARIANTS,
 });
 
+export type InputVariant = 'default' | 'error';
+export type InputSize   = 'sm' | 'md' | 'lg';
+
+export interface InputVariantProps {
+  variant?: InputVariant;
+  size?:    InputSize;
+}
+
 export const input = tv({
-  base: [
-    'block w-full',
-    'rounded-md',
-    'bg-white',
-    'text-gray-900',
-    'border',
-    'placeholder:text-gray-400',
-    'transition-colors',
-    'duration-200',
-    INPUTS_FOCUS,
-    INPUTS_DISABLED,
-  ].join(' '),
+  slots: {
+    root:         '',
+    label:        'block text-base/6 font-medium text-gray-700',
+    required:     'text-danger ml-0.5',
+    inputWrapper: 'mt-1.5',
+    iconWrapper:  'relative',
+    leftIcon:     'absolute left-3 top-1/2 -translate-y-1/2 text-gray-400',
+    rightIcon:    'absolute right-3 top-1/2 -translate-y-1/2 text-gray-400',
+    field: [
+      'block w-full rounded-md bg-white text-gray-900 border',
+      'placeholder:text-neutral-500 transition-colors duration-200',
+      INPUTS_FOCUS,
+      INPUTS_DISABLED,
+    ].join(' '),
+    errorMessage: 'mt-1.5 text-sm text-danger',
+    helperText:   'mt-1.5 text-sm text-gray-500',
+  },
   variants: {
     variant: {
-      default: [
-        'border-gray-400',
-        'focus:border-primary',
-      ].join(' '),
-      error: [
-        'border-danger',
-        'focus:border-danger',
-        'focus:outline-danger',
-        'bg-red-50',
-      ].join(' '),
+      default: { field: 'border-gray-400 focus:border-primary' },
+      error:   { field: 'border-danger focus:border-danger focus:outline-danger bg-red-50' },
     },
-    size: INPUT_SIZE_VARIANTS,
+    size: {
+      sm: { field: 'px-3 py-1.5 text-sm' },
+      md: { field: 'px-3 py-2 text-base' },
+      lg: { field: 'px-4 py-3 text-lg' },
+    },
+    hasLeftIcon:  { true: { field: 'pl-10' } },
+    hasRightIcon: { true: { field: 'pr-10' } },
   },
   defaultVariants: INPUT_DEFAULT_VARIANTS,
 });
@@ -188,7 +216,7 @@ export const textarea = tv({
     'bg-white',
     'text-gray-900',
     'border',
-    'placeholder:text-gray-400',
+    'placeholder:text-neutral-500',
     'transition-colors',
     'duration-200',
     'resize-vertical',
@@ -258,7 +286,7 @@ export const checkbox = tv({
     'border-gray-400',
     'group-data-[checked]:border-primary group-data-[checked]:bg-primary',
     'group-data-[indeterminate]:border-primary group-data-[indeterminate]:bg-primary',
-    'group-data-[disabled]:border-gray-300 group-data-[disabled]:bg-gray-100',
+    'group-data-[disabled]:border-gray-300 group-data-[disabled]:bg-surface-disabled',
   ].join(' '),
   variants: {
     variant: {
@@ -275,7 +303,7 @@ export const radio = tv({
     'rounded-full border bg-white',
     'border-gray-400',
     'group-data-[checked]:border-primary group-data-[checked]:bg-primary',
-    'group-data-[disabled]:border-gray-300 group-data-[disabled]:bg-gray-100',
+    'group-data-[disabled]:border-gray-300 group-data-[disabled]:bg-surface-disabled',
   ].join(' '),
   variants: {
     variant: {
@@ -292,7 +320,7 @@ export const switchToggle = tv({
     track: [
       'relative inline-flex shrink-0 cursor-pointer rounded-full border-2 border-transparent',
       'transition-colors duration-200 ease-in-out',
-      'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
       'disabled:cursor-not-allowed disabled:opacity-50',
     ].join(' '),
     thumb: [
@@ -344,7 +372,7 @@ export const alert = tv({
     action:    'mt-2',
     closeBtn: [
       'shrink-0 self-start rounded p-0.5 -mt-0.5 -mr-0.5',
-      'focus:outline-none focus:ring-2 focus:ring-offset-1',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1',
       'transition-colors duration-150',
     ].join(' '),
   },
@@ -389,7 +417,7 @@ export const badge = tv({
   slots: {
     root:   'inline-flex items-center gap-1.5 rounded-full font-medium',
     dot:    'rounded-full shrink-0',
-    remove: 'inline-flex items-center justify-center rounded hover:bg-black/10 focus:outline-none focus:ring-1 focus:ring-inset transition-colors duration-150',
+    remove: 'inline-flex items-center justify-center rounded hover:bg-black/10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset transition-colors duration-150',
   },
   variants: {
     variant: {
@@ -465,8 +493,8 @@ export const notification = tv({
     action: 'mt-2',
     closeBtn: [
       'shrink-0 self-start rounded p-0.5 -mt-0.5 -mr-0.5',
-      'text-gray-400 hover:text-gray-600 hover:bg-gray-100',
-      'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1',
+      'text-gray-400 hover:text-gray-600 hover:bg-surface-hover',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1',
       'transition-colors duration-150',
     ].join(' '),
   },
@@ -518,7 +546,7 @@ export const card = tv({
       lg:   { headerContent: 'px-8 py-6', body: 'px-8 py-6', footer: 'px-8 py-6' },
     },
     clickable: {
-      true: { root: 'cursor-pointer transition-shadow duration-200 hover:shadow-md hover:border-primary hover:border-2 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2' },
+      true: { root: 'cursor-pointer transition-shadow duration-200 hover:shadow-md hover:border-primary hover:border-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2' },
     },
   },
   defaultVariants: {
@@ -627,7 +655,7 @@ export const tabs = tv({
     tab: [
       'relative inline-flex items-center justify-center whitespace-nowrap',
       'font-medium transition-all duration-200',
-      'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm',
       'disabled:opacity-50 disabled:cursor-not-allowed',
     ].join(' '),
     panels: 'mt-4',
@@ -691,8 +719,8 @@ export const accordion = tv({
     trigger: [
       'group flex w-full items-center justify-between',
       'text-left font-medium text-gray-900 bg-white',
-      'hover:bg-gray-50 transition-colors duration-200',
-      'focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary',
+      'hover:bg-surface-hover active:bg-surface-active transition-colors duration-200',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
       'disabled:opacity-50 disabled:cursor-not-allowed',
     ].join(' '),
     icon:  'shrink-0 ml-2 text-gray-400 transition-transform duration-200 group-data-[open]:rotate-180',
@@ -1011,9 +1039,9 @@ export const numberInput = tv({
     stepper: [
       'inline-flex items-center justify-center shrink-0',
       'border border-gray-400 bg-white text-gray-600',
-      'hover:bg-gray-50 active:bg-gray-100',
+      'hover:bg-surface-hover active:bg-surface-active',
       'transition-colors duration-200',
-      'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
       'disabled:opacity-50 disabled:cursor-not-allowed',
       'select-none',
     ].join(' '),
@@ -1037,7 +1065,7 @@ export const combobox = tv({
   slots: {
     root:      'relative w-full',
     inputWrap: 'relative',
-    button:    'absolute inset-y-0 right-0 flex items-center pr-2 text-gray-400 hover:text-gray-600 focus:outline-none',
+    button:    'absolute inset-y-0 right-0 flex items-center pr-2 text-gray-400 hover:text-gray-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
     options: [
       'absolute z-10 mt-1 w-full overflow-auto rounded-md bg-white py-1',
       'shadow-lg ring-1 ring-black/5 focus:outline-none',
@@ -1076,7 +1104,7 @@ export const link = tv({
       true:  'text-gray-400 cursor-not-allowed',
       false: [
         'transition-colors duration-150',
-        'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm',
       ].join(' '),
     },
   },
@@ -1121,8 +1149,9 @@ export const pagination = tv({
     button: [
       'inline-flex items-center justify-center rounded-md',
       'border border-gray-300 bg-white text-gray-700',
-      'hover:bg-gray-50 hover:border-gray-400',
-      'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+      'hover:bg-surface-hover hover:border-gray-400',
+      'active:bg-surface-active',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
       'disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-gray-300',
       'transition-colors duration-200 select-none font-medium',
     ].join(' '),
@@ -1243,7 +1272,7 @@ export const tableHead = tv({
 });
 
 export const tableRow = tv({
-  base: 'border-b border-gray-100 hover:bg-gray-50 transition-colors',
+  base: 'border-b border-gray-100 hover:bg-surface-hover transition-colors',
 });
 
 export const tableCell = tv({
@@ -1317,22 +1346,27 @@ export const menu = tv({
     trigger: [
       'inline-flex items-center justify-center gap-2',
       'px-4 py-2 text-sm font-medium',
-      'bg-white text-gray-700 border border-gray-300 rounded-md',
-      'hover:bg-gray-50 hover:cursor-pointer',
-      'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+      'bg-primary text-white border border-primary rounded-md',
+      'hover:bg-primary-600 hover:cursor-pointer',
+      'active:bg-primary-700',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
       'disabled:opacity-50 disabled:cursor-not-allowed',
       'transition-colors duration-200',
     ].join(' '),
-    triggerIcon:  'size-4 text-gray-400 shrink-0',
+    triggerIcon:  'size-4 text-white shrink-0',
     items: [
       'absolute z-50 mt-2',
       'bg-white rounded-md shadow-lg',
       'ring-1 ring-black/5',
       'py-1',
       'focus:outline-none',
+      'transition ease-out duration-100',
+      'data-[closed]:opacity-0 data-[closed]:scale-95',
+      'data-[enter]:opacity-100 data-[enter]:scale-100'
     ].join(' '),
     item: [
       'flex items-center w-full px-4 py-2 text-sm text-left',
+      'hover:bg-surface-hover hover:text-gray-900',
       'transition-colors duration-150',
       'disabled:opacity-50 disabled:cursor-not-allowed',
     ].join(' '),
@@ -1361,12 +1395,16 @@ export const menu = tv({
       true:  {},
       false: {},
     },
+    itemDisabled: {
+      true:  { item: 'opacity-50 cursor-not-allowed' },
+      false: {},
+    },
   },
   compoundVariants: [
     {
       itemVariant: 'default',
       itemFocused: true,
-      class: { item: 'bg-gray-100 text-gray-900' },
+      class: { item: 'bg-surface-hover text-gray-900' },
     },
     {
       itemVariant: 'danger',
@@ -1379,5 +1417,11 @@ export const menu = tv({
     width:       'auto'    as const,
     itemVariant: 'default' as const,
     itemFocused: false     as const,
+    itemDisabled: false     as const,
   },
 });
+
+
+export type MenuAlign = 'left' | 'right';
+export type MenuWidth = 'auto' | 'sm' | 'md' | 'lg' | 'full';
+export type MenuItemVariant = 'default' | 'danger';

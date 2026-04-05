@@ -96,7 +96,7 @@ const { root, stepper, decrement: decrementClass, increment: incrementClass, inp
           :aria-describedby="showError ? `${props.name}-error` : showHelper ? `${props.name}-helper` : undefined"
           :value="props.modelValue"
           :disabled="props.disabled"
-          :class="clsx(input({ variant: props.error ? 'error' : 'default', size: props.size }), inputClass())"
+          :class="clsx(input({ variant: props.error ? 'error' : 'default', size: props.size }).field(), inputClass())"
           @keydown="handleKeyDown"
           @change="handleChange"
         />
