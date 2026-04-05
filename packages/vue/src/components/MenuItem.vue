@@ -29,8 +29,7 @@ const emit = defineEmits<{
       type="button"
       :disabled="disabled"
       :class="clsx(
-        menuVariants({ itemVariant: props.variant, itemFocused: active }).item(),
-        disabled && 'opacity-50 cursor-not-allowed',
+        menuVariants({ itemVariant: props.variant, itemFocused: active, itemDisabled: disabled }).item(),
         props.class
       )"
       @click="emit('click')"

@@ -15,7 +15,7 @@ import {
   type MouseEventHandler,
   type KeyboardEventHandler,
 } from "react";
-import { menu as menuVariants } from "@libretexts/davis-core";
+import { menu as menuVariants, type MenuAlign, type MenuWidth, type MenuItemVariant } from "@libretexts/davis-core";
 
 export type MenuProps = HeadlessMenuProps & {
   children: ReactNode;
@@ -89,8 +89,8 @@ MenuTrigger.displayName = "Menu.Button";
 export type MenuItemsContainerProps = {
   children: ReactNode;
   className?: string;
-  align?: "left" | "right";
-  width?: "auto" | "sm" | "md" | "lg" | "full";
+  align?: MenuAlign;
+  width?: MenuWidth;
 };
 
 function MenuItemsContainer({
@@ -104,9 +104,6 @@ function MenuItemsContainer({
     <MenuItems
       transition
       className={clsx(
-        "transition ease-out duration-100",
-        "data-[closed]:opacity-0 data-[closed]:scale-95",
-        "data-[enter]:opacity-100 data-[enter]:scale-100",
         items(),
         className
       )}
@@ -123,7 +120,7 @@ export type MenuItemProps = {
   className?: string;
   onClick?: () => void;
   disabled?: boolean;
-  variant?: "default" | "danger";
+  variant?: MenuItemVariant;
   icon?: ReactNode;
   shortcut?: string;
 };
@@ -143,6 +140,7 @@ function MenuItemComponent({
         const { item, itemIcon, itemShortcut } = menuVariants({
           itemVariant: variant,
           itemFocused: focus,
+          itemDisabled,
         });
         return (
           <button

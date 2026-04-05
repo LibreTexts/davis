@@ -1,14 +1,9 @@
 import clsx from "clsx";
 import { forwardRef, type InputHTMLAttributes, type ReactNode } from "react";
-import { input } from "@libretexts/davis-core";
-
-type InputVariants = {
-  variant?: "default" | "error";
-  size?: "sm" | "md" | "lg";
-};
+import { input, type InputVariantProps } from "@libretexts/davis-core";
 
 export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size"> &
-  InputVariants & {
+  InputVariantProps & {
     name: string;
     label: string;
     className?: string;
@@ -34,7 +29,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       rightIcon,
       error,
       required,
-      variant,
+      variant = "default",
       size,
       helperText,
       errorMessage,
@@ -45,24 +40,26 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const showError = error && errorMessage;
     const showHelper = !showError && helperText;
 
+    const styles = input({
+      variant: error ? "error" : variant,
+      size,
+      hasLeftIcon: !!leftIcon,
+      hasRightIcon: !!rightIcon,
+    });
+
     return (
-      <div className={clsx(className)}>
+      <div className={clsx(styles.root(), className)}>
         <label
           htmlFor={name}
-          className={clsx(
-            "block text-base/6 font-medium text-gray-700",
-            labelClassName
-          )}
+          className={clsx(styles.label(), labelClassName)}
         >
           {label}
-          {required && <span className="text-danger ml-0.5">*</span>}
+          {required && <span className={styles.required()}>*</span>}
         </label>
-        <div className="mt-1.5">
-          <div className="relative">
+        <div className={styles.inputWrapper()}>
+          <div className={styles.iconWrapper()}>
             {leftIcon && (
-              <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                {leftIcon}
-              </div>
+              <div className={styles.leftIcon()}>{leftIcon}</div>
             )}
             <input
               ref={ref}
@@ -73,28 +70,21 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                 showError ? `${name}-error` : showHelper ? `${name}-helper` : undefined
               }
               placeholder={props.placeholder || label}
-              className={clsx(
-                input({ variant: error ? "error" : variant, size }),
-                inputClassName,
-                leftIcon ? "pl-10" : "pl-3",
-                rightIcon ? "pr-10" : "pr-3"
-              )}
+              className={clsx(styles.field(), inputClassName)}
               {...props}
             />
             {rightIcon && (
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
-                {rightIcon}
-              </div>
+              <div className={styles.rightIcon()}>{rightIcon}</div>
             )}
           </div>
         </div>
         {showError && (
-          <p id={`${name}-error`} className="mt-1.5 text-sm text-danger">
+          <p id={`${name}-error`} className={styles.errorMessage()}>
             {errorMessage}
           </p>
         )}
         {showHelper && (
-          <p id={`${name}-helper`} className="mt-1.5 text-sm text-gray-500">
+          <p id={`${name}-helper`} className={styles.helperText()}>
             {helperText}
           </p>
         )}

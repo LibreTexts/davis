@@ -64,6 +64,11 @@ export const FONT_SIZE = {
  * Mapping from previous token names:
  * - primary.hover → primary.600
  * - primary.dark  → primary.700
+ *
+ * Interactive state convention for solid-fill elements:
+ * - Hover  → 600 shade  (e.g. primary-600, danger-600)
+ * - Active → 700 shade  (e.g. primary-700, danger-700)
+ * See INTERACTIVE for named aliases of these values.
  */
 export const COLORS = {
   primary: {
@@ -164,11 +169,55 @@ export const COLORS = {
   }
 } as const;
 
-/** Surface tokens for backgrounds */
+/**
+ * Surface tokens for backgrounds.
+ *
+ * Static surfaces:
+ * - DEFAULT / muted / subtle — structural backgrounds (pages, cards, sidebars)
+ *
+ * Interactive surface states (for "on-white" elements: ghost/outline buttons,
+ * menu items, table rows, nav links — anything on a white or light background):
+ * - hover    — subtle tint on pointer entry; neutral-100
+ * - active   — slightly deeper tint on press; neutral-200
+ * - disabled — muted background for unavailable form fields; neutral-100
+ *              Always pair with opacity-50 and cursor-not-allowed.
+ *
+ * Note: hover and disabled share the same hex value intentionally — their
+ * semantic difference is communicated by cursor, opacity, and aria attributes.
+ */
 export const SURFACE = {
   DEFAULT: '#FFFFFF',
   muted: '#F9FAFB',
   subtle: '#F4F4F5',
+  hover: '#F4F4F5',    // neutral-100 — hover state for white-surface interactive elements
+  active: '#E4E4E7',   // neutral-200 — pressed/active state on white surfaces
+  disabled: '#F4F4F5', // neutral-100 — disabled form field backgrounds (use with opacity-50)
+} as const;
+
+/**
+ * Named aliases for interactive states on solid-fill (colored) UI elements.
+ *
+ * These formalize the 600 = hover / 700 = active convention that is implicit
+ * throughout the COLORS palette. Use these in documentation and tooling;
+ * in Tailwind class names continue to use `{color}-600` / `{color}-700`
+ * until Tailwind v4 theme aliasing supports arbitrary key names.
+ *
+ * For neutral / ghost / outline elements on white surfaces, use SURFACE
+ * interactive tokens (surface-hover, surface-active, surface-disabled) instead.
+ */
+export const INTERACTIVE = {
+  primaryHover:    '#106098', // primary-600
+  primaryActive:   '#0f4b75', // primary-700
+  secondaryHover:  '#0e5181', // secondary-600
+  secondaryActive: '#0d3f63', // secondary-700
+  tertiaryHover:   '#335c80', // tertiary-600
+  tertiaryActive:  '#294761', // tertiary-700
+  successHover:    '#1a5b2b', // success-600
+  successActive:   '#164623', // success-700
+  warningHover:    '#A14D1B', // warning-600
+  warningActive:   '#863E16', // warning-700
+  dangerHover:     '#C42828', // danger-600
+  dangerActive:    '#A32222', // danger-700
 } as const;
 
 // ─── Spacing ─────────────────────────────────────────────────────
@@ -250,8 +299,11 @@ export const SHADOWS = {
 export const FOCUS_RING = {
   width: '2px',
   style: 'solid',
-  color: '#127BC4',
+  color: '#127BC4',  // primary-500
   offset: '2px',
+  /** Filled background for focused options within listboxes and comboboxes. */
+  listHighlightBg: '#127BC4',   // primary-500 — 4.5:1 contrast with listHighlightText
+  listHighlightText: '#FFFFFF', // white
 } as const;
 
 // ─── Motion ─────────────────────────────────────────────────────
@@ -316,13 +368,13 @@ export const Z_INDEX = {
 /**
  * Semantic opacity tokens for consistent transparency across components.
  *
- * | Token       | Value | Use                                 |
- * |-------------|-------|-------------------------------------|
- * | disabled    | 0.5   | Disabled controls and text          |
- * | placeholder | 0.6   | Placeholder text in inputs          |
- * | overlay     | 0.5   | Modal/drawer backdrop overlays      |
- * | hoverLight  | 0.04  | Subtle hover background tint        |
- * | hoverMedium | 0.08  | Medium hover background tint        |
+ * | Token       | Value | Use                                                   |
+ * |-------------|-------|-------------------------------------------------------|
+ * | disabled    | 0.5   | Disabled controls and text (pair with surface-disabled for form fields) |
+ * | placeholder | 0.6   | Placeholder text in inputs                            |
+ * | overlay     | 0.5   | Modal/drawer backdrop overlays                        |
+ * | hoverLight  | 0.04  | Subtle hover background tint (alpha overlay approach) |
+ * | hoverMedium | 0.08  | Medium hover background tint (alpha overlay approach) |
  */
 export const OPACITY = {
   disabled: '0.5',
