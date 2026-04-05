@@ -52,7 +52,7 @@ function ComboboxInputComponent({ placeholder, displayValue, onChange, className
     <div className={inputWrap()}>
       <ComboboxInput
         className={clsx(
-          "block w-full rounded-md border border-gray-400 bg-white text-gray-900",
+          "block w-full rounded-md border border-neutral-500 bg-white text-gray-900",
           "py-2 pl-3 pr-10",
           "placeholder:text-gray-400",
           "focus:outline-2 focus:-outline-offset-2 focus:outline-primary focus:border-primary",
