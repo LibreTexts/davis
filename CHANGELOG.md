@@ -1,3 +1,17 @@
+# [1.5.0](https://github.com/LibreTexts/davis/compare/v1.4.0...v1.5.0) (2026-04-05)
+
+
+### Bug Fixes
+
+* **Link:** ensure links announce external nature to screen readers ([0b7fff5](https://github.com/LibreTexts/davis/commit/0b7fff569037a393d939b3da14ab10745334663d))
+* **Link:** move duplicated types and variant definitions to core ([fa64dfd](https://github.com/LibreTexts/davis/commit/fa64dfd169cf5f1f850f8cec1248f6161d78222d))
+
+
+### Features
+
+* standardized border color for inputs and form fields ([55f2ef4](https://github.com/LibreTexts/davis/commit/55f2ef40217c64b5225d34960ce42b3f9b0cac0d))
+* standardized surface color tokens for hover, active, and disabled states ([9a16b27](https://github.com/LibreTexts/davis/commit/9a16b27768b1d42e6219027ab6f13a09a13917a9))
+
 # [1.4.0](https://github.com/LibreTexts/davis/compare/v1.3.2...v1.4.0) (2026-03-30)
 
 
