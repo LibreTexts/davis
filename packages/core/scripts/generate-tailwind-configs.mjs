@@ -16,7 +16,7 @@ const rootDir = join(__dirname, '..');
 
 const {
   COLORS, SURFACE, FONT_FAMILY_SANS, FONT_SIZE, RADIUS, SHADOWS, FOCUS_RING, MOTION, TARGET_SIZE,
-  Z_INDEX, OPACITY, BORDER_WIDTH, FONT_WEIGHT, LETTER_SPACING, BREAKPOINTS, ICON_SIZE, CONTAINER,
+  Z_INDEX, OPACITY, BORDER_WIDTH, BORDER_COLOR, FONT_WEIGHT, LETTER_SPACING, BREAKPOINTS, ICON_SIZE, CONTAINER,
 } = await import('../dist/index.js');
 
 // ─── Helpers ─────────────────────────────────────────────────────────
@@ -142,6 +142,17 @@ ${Object.entries(OPACITY).map(([name, value]) => `  --opacity-${name}: ${value};
   /* ─── Border Width ─────────────────────────────────────────── */
 
 ${Object.entries(BORDER_WIDTH).map(([name, value]) => `  --border-width-${name}: ${value};`).join('\n')}
+
+  /* ─── Border Color ──────────────────────────────────────────── */
+  /* Semantic aliases over neutral shades. See BORDER_COLOR in tokens.ts. */
+  /* Functional (≥3:1 vs white, WCAG SC 1.4.11): DEFAULT, strong          */
+  /* Decorative (no contrast obligation):         subtle, muted            */
+
+${Object.entries(BORDER_COLOR).map(([name, value]) =>
+  name === 'DEFAULT'
+    ? `  --color-border: ${value};`
+    : `  --color-border-${name}: ${value};`
+).join('\n')}
 
   /* ─── Font Weight ──────────────────────────────────────────── */
 
@@ -345,6 +356,13 @@ ${Object.entries(OPACITY).map(([name, value]) => `    --davis-opacity-${name}: $
     /* Border Width */
 ${Object.entries(BORDER_WIDTH).map(([name, value]) => `    --davis-border-width-${name}: ${value};`).join('\n')}
 
+    /* Border Color */
+${Object.entries(BORDER_COLOR).map(([name, value]) =>
+  name === 'DEFAULT'
+    ? `    --davis-border-color: ${value};`
+    : `    --davis-border-color-${name}: ${value};`
+).join('\n')}
+
     /* Font Weight */
 ${Object.entries(FONT_WEIGHT).map(([name, value]) => `    --davis-font-weight-${name}: ${value};`).join('\n')}
 
@@ -509,6 +527,13 @@ ${Object.entries(OPACITY).map(([name, value]) => `  --davis-opacity-${name}: ${v
 
   /* Border Width */
 ${Object.entries(BORDER_WIDTH).map(([name, value]) => `  --davis-border-width-${name}: ${value};`).join('\n')}
+
+  /* Border Color */
+${Object.entries(BORDER_COLOR).map(([name, value]) =>
+  name === 'DEFAULT'
+    ? `  --davis-border-color: ${value};`
+    : `  --davis-border-color-${name}: ${value};`
+).join('\n')}
 
   /* Font Weight */
 ${Object.entries(FONT_WEIGHT).map(([name, value]) => `  --davis-font-weight-${name}: ${value};`).join('\n')}

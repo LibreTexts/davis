@@ -78,6 +78,25 @@ This pattern applies to all seven semantic color families. See `INTERACTIVE` in 
 
 ---
 
+## Border Color Semantic Tokens
+
+Border colors are split into two categories with different WCAG 2.2 obligations.
+
+**Decorative borders** (dividers, card edges, table rules) visually separate content but do not mark the boundary of an operable UI component. WCAG SC 1.4.11 Non-text Contrast does not apply to them — lighter neutral shades are acceptable.
+
+**Functional borders** (inputs, selects, textareas, checkboxes, radio buttons) define the perceivable boundary of a UI component and **must meet SC 1.4.11: ≥3:1 contrast** against all adjacent colors. Against a white (`#FFFFFF`) background, `neutral-500` (`#71717A`, 4.83:1) is the minimum compliant shade.
+
+| Token | Value | Shade | Contrast vs. white | Use |
+|-------|-------|-------|--------------------|-----|
+| `border-color-subtle` | `#E4E4E7` | neutral-200 | 1.27:1 | Hairline dividers, tight separators |
+| `border-color-muted` | `#D4D4D8` | neutral-300 | 1.48:1 | Card edges, panels, table rules |
+| `border-color` | `#71717A` | neutral-500 | **4.83:1 ✓** | Default input / field border |
+| `border-color-strong` | `#52525B` | neutral-600 | **7.73:1 ✓** | Hover state for field borders |
+
+Disabled form fields are exempt from SC 1.4.11 per the WCAG specification and continue to use `neutral-300` at reduced opacity.
+
+---
+
 ## Usage Guidelines
 
 ### When to use each color

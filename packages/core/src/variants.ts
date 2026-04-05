@@ -195,7 +195,7 @@ export const input = tv({
   },
   variants: {
     variant: {
-      default: { field: 'border-gray-400 focus:border-primary' },
+      default: { field: 'border-neutral-500 focus:border-primary' },
       error:   { field: 'border-danger focus:border-danger focus:outline-danger bg-red-50' },
     },
     size: {
@@ -226,7 +226,7 @@ export const textarea = tv({
   variants: {
     variant: {
       default: [
-        'border-gray-400',
+        'border-neutral-500',
         'focus:border-primary',
       ].join(' '),
       error: [
@@ -265,7 +265,7 @@ export const select = tv({
   variants: {
     variant: {
       default: [
-        'border-gray-400',
+        'border-neutral-500',
         'focus:border-primary',
       ].join(' '),
       error: [
@@ -283,10 +283,10 @@ export const select = tv({
 export const checkbox = tv({
   base: [
     'rounded border bg-white',
-    'border-gray-400',
+    'border-neutral-500',
     'group-data-[checked]:border-primary group-data-[checked]:bg-primary',
     'group-data-[indeterminate]:border-primary group-data-[indeterminate]:bg-primary',
-    'group-data-[disabled]:border-gray-300 group-data-[disabled]:bg-surface-disabled',
+    'group-data-[disabled]:border-neutral-300 group-data-[disabled]:bg-surface-disabled',
   ].join(' '),
   variants: {
     variant: {
@@ -301,9 +301,9 @@ export const checkbox = tv({
 export const radio = tv({
   base: [
     'rounded-full border bg-white',
-    'border-gray-400',
+    'border-neutral-500',
     'group-data-[checked]:border-primary group-data-[checked]:bg-primary',
-    'group-data-[disabled]:border-gray-300 group-data-[disabled]:bg-surface-disabled',
+    'group-data-[disabled]:border-neutral-300 group-data-[disabled]:bg-surface-disabled',
   ].join(' '),
   variants: {
     variant: {
@@ -1012,7 +1012,7 @@ export const inputGroup = tv({
     root:         'flex',
     addon: [
       'inline-flex shrink-0 items-center',
-      'border border-gray-400 bg-gray-50 text-gray-500',
+      'border border-neutral-500 bg-gray-50 text-gray-500',
       'transition-colors duration-200',
     ].join(' '),
     prefix: 'rounded-l-md border-r-0 rounded-r-none',
@@ -1038,7 +1038,7 @@ export const numberInput = tv({
     root:      'inline-flex w-full',
     stepper: [
       'inline-flex items-center justify-center shrink-0',
-      'border border-gray-400 bg-white text-gray-600',
+      'border border-neutral-500 bg-white text-gray-600',
       'hover:bg-surface-hover active:bg-surface-active',
       'transition-colors duration-200',
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',

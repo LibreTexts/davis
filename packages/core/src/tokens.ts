@@ -403,6 +403,40 @@ export const BORDER_WIDTH = {
   thick: '3px',
 } as const;
 
+// ─── Border Color ────────────────────────────────────────────────
+
+/**
+ * Semantic border color tokens.
+ *
+ * Two categories with distinct WCAG 2.2 obligations:
+ *
+ * **Decorative** — visually separate content areas (dividers, card edges,
+ * table rules). These do not convey the boundary of a UI component, so
+ * WCAG SC 1.4.11 Non-text Contrast does NOT apply. Lighter shades (200–300)
+ * are acceptable here.
+ *
+ * **Interactive / Functional** — mark the visual boundary of a UI component
+ * that the user must be able to perceive and operate (inputs, selects,
+ * textareas, checkboxes, radio buttons). These MUST meet SC 1.4.11: ≥3:1
+ * contrast against all adjacent colors.
+ *
+ * neutral-500 (#71717A) is the minimum compliant shade at 4.83:1 against
+ * white. Use `strong` (neutral-600, 7.73:1) for hover emphasis on fields.
+ *
+ * | Token    | Value   | Shade        | Contrast vs. white | Use                                   |
+ * |----------|---------|--------------|--------------------|---------------------------------------|
+ * | subtle   | #E4E4E7 | neutral-200  | 1.27:1             | Hairline dividers, tight separators   |
+ * | muted    | #D4D4D8 | neutral-300  | 1.48:1             | Card edges, panels, table rules       |
+ * | DEFAULT  | #71717A | neutral-500  | 4.83:1 ✓ WCAG AA   | Default input / field border          |
+ * | strong   | #52525B | neutral-600  | 7.73:1 ✓ WCAG AA   | Hover state for field borders         |
+ */
+export const BORDER_COLOR = {
+  subtle:  '#E4E4E7',  // neutral-200 — decorative only
+  muted:   '#D4D4D8',  // neutral-300 — decorative only
+  DEFAULT: '#71717A',  // neutral-500 — 4.83:1 — functional field borders
+  strong:  '#52525B',  // neutral-600 — 7.73:1 — field border hover state
+} as const;
+
 // ─── Font Weight ────────────────────────────────────────────────
 
 /**

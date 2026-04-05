@@ -79,6 +79,12 @@
     --davis-border-width-medium: 2px;
     --davis-border-width-thick: 3px;
 
+    /* Border Color */
+    --davis-border-color-subtle: #E4E4E7;
+    --davis-border-color-muted: #D4D4D8;
+    --davis-border-color: #71717A;
+    --davis-border-color-strong: #52525B;
+
     /* Font Weight */
     --davis-font-weight-light: 300;
     --davis-font-weight-regular: 400;
