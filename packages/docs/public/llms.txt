@@ -1,0 +1,882 @@
+# Davis Design System
+
+> Davis is an accessibility-first design system built by LibreTexts for education technology. It provides a framework-agnostic core (design tokens + CSS) with React 18+ and Vue 3 component libraries on top of Tailwind CSS v4, Headless UI, and tailwind-variants. All 48+ components meet WCAG 2.2 AA contrast and interaction requirements out of the box.
+
+---
+
+## Choosing a Package
+
+```
+Do you need pre-built components?
+│
+├─ No  → npm install @libretexts/davis-core
+│         (design tokens, CSS variables, Tailwind preset only)
+│
+└─ Yes → Which framework?
+         │
+         ├─ React → npm install @libretexts/davis-react
+         │          (includes davis-core automatically)
+         │
+         ├─ Vue   → npm install @libretexts/davis-vue
+         │          (includes davis-core automatically — in active development)
+         │
+         └─ Other → npm install @libretexts/davis-core
+                    (build your own components using the design tokens)
+```
+
+Installing `@libretexts/davis-react` or `@libretexts/davis-vue` automatically installs `@libretexts/davis-core` as a dependency. You do not need to install core separately.
+
+---
+
+## Quick Start
+
+### React
+
+**1. Install**
+
+```bash
+npm install @libretexts/davis-react
+```
+
+Peer dependencies (install alongside Davis):
+
+```bash
+npm install @headlessui/react react react-dom tailwindcss
+```
+
+**2. Import styles**
+
+In your app's entry point or root layout:
+
+```ts
+import "@libretexts/davis-react/styles.css";
+```
+
+**3. Wrap with DavisProvider**
+
+```tsx
+import { DavisProvider } from "@libretexts/davis-react";
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        <DavisProvider>{children}</DavisProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+**4. Use components**
+
+```tsx
+import { Button, Input, Card } from "@libretexts/davis-react";
+
+export default function Page() {
+  return (
+    <Card>
+      <Card.Body>
+        <Input label="Email" type="email" />
+        <Button className="mt-4">Submit</Button>
+      </Card.Body>
+    </Card>
+  );
+}
+```
+
+### Vue
+
+**1. Install**
+
+```bash
+npm install @libretexts/davis-vue
+```
+
+Peer dependencies:
+
+```bash
+npm install @headlessui/vue vue tailwindcss
+```
+
+**2. Import styles and use components**
+
+```ts
+// main.ts
+import { createApp } from "vue";
+import App from "./App.vue";
+import "@libretexts/davis-vue/styles.css";
+
+createApp(App).mount("#app");
+```
+
+```vue
+<script setup>
+import { Button, Input } from "@libretexts/davis-vue";
+</script>
+
+<template>
+  <Input label="Email" type="email" />
+  <Button>Submit</Button>
+</template>
+```
+
+### Tokens Only (Svelte, Angular, vanilla, etc.)
+
+```bash
+npm install @libretexts/davis-core
+```
+
+```css
+/* your global stylesheet */
+@import "@libretexts/davis-core/theme.css";   /* Tailwind @theme block */
+@import "@libretexts/davis-core/base.v4.css"; /* global base styles    */
+```
+
+Then reference CSS custom properties in your own styles:
+
+```css
+.my-button {
+  background: var(--color-primary-500);
+  color: var(--color-text-white);
+  border-radius: var(--radius-md);
+}
+```
+
+---
+
+## CSS Setup
+
+Davis ships one primary stylesheet per component package. Import **one** of these at your app's entry point — do not import multiple:
+
+| Import | When to use |
+|--------|-------------|
+| `@libretexts/davis-react/styles.css` | Standard: new React app built on Davis |
+| `@libretexts/davis-core/base.v4.css` | Tailwind v4 projects using tokens only |
+| `@libretexts/davis-core/base.css` | Tailwind v3 / CSS-in-JS projects |
+| `@libretexts/davis-core/base.scoped.css` | Embedded widget: styles scoped under `.davis` |
+
+`styles.css` contains everything: the Tailwind `@theme` block (CSS variables), base reset, typography, and component safelist. It is the recommended import for React apps.
+
+---
+
+## DavisProvider
+
+`DavisProvider` is a lightweight wrapper that renders `<div class="davis">` and sets a React context. It is required for standalone/scoped mode and optional (but recommended) in standard mode.
+
+```tsx
+import { DavisProvider } from "@libretexts/davis-react";
+
+// Props
+type DavisProviderProps = {
+  children: ReactNode;
+  className?: string; // forwarded to the wrapper div
+};
+```
+
+**What it does:**
+- Renders `<div class="davis">` which activates scoped CSS custom properties and Tailwind utilities.
+- Provides `DavisContext` (`{ standalone: true }`) to all descendant components.
+
+**When you need it:**
+- Always in standalone/existing-project mode (the `.davis` class is the style boundary).
+- Recommended in new projects for consistency and in case you later adopt standalone mode.
+
+**Using `className`:**
+
+```tsx
+<DavisProvider className="min-h-screen bg-surface p-8">
+  {/* content */}
+</DavisProvider>
+```
+
+---
+
+## Standalone Mode (Existing Projects)
+
+If you are adding Davis components to an app that already has its own CSS, use standalone mode to prevent Davis's global styles (font family, heading scale, focus rings, Preflight resets) from affecting your existing UI.
+
+**How it works:** all Davis styles are scoped under `.davis`. `DavisProvider` creates that boundary by rendering `<div class="davis">`. Styles do not leak outside it.
+
+**Setup:**
+
+```bash
+npm install @libretexts/davis-react @headlessui/react tailwindcss
+```
+
+```ts
+import "@libretexts/davis-react/styles.css";
+```
+
+**Page-section pattern** — wrap only the Davis-powered parts:
+
+```tsx
+import { DavisProvider, Card, Input, Button } from "@libretexts/davis-react";
+
+function Dashboard() {
+  return (
+    <main>
+      {/* Your existing header — untouched */}
+      <header className="my-existing-header">
+        <h1>Dashboard</h1>
+      </header>
+
+      {/* Davis-powered section */}
+      <DavisProvider className="mt-8">
+        <Card>
+          <Card.Body>
+            <Input label="Search" placeholder="Find something..." />
+            <Button className="mt-4">Go</Button>
+          </Card.Body>
+        </Card>
+      </DavisProvider>
+    </main>
+  );
+}
+```
+
+**Full-app wrapper** — for gradual migration:
+
+```tsx
+function App() {
+  return (
+    <DavisProvider>
+      <RouterOutlet />
+    </DavisProvider>
+  );
+}
+```
+
+Multiple `DavisProvider` instances on the same page are supported. Each is an independent `.davis` scope. There is no performance penalty — `DavisProvider` is a thin `<div>` + React context.
+
+**Headless UI portals:** `Dialog`, `Menu`, `Popover`, and `Drawer` use Headless UI portals. Ensure `DavisProvider` is high enough in the tree to contain the trigger element — Headless UI resolves the portal context from the nearest parent.
+
+---
+
+## Component API Patterns
+
+### Dot notation for compound components
+
+Composite components expose sub-components via dot notation in React:
+
+```tsx
+<Dialog open={open} onClose={() => setOpen(false)}>
+  <Dialog.Header>
+    <Dialog.Title>Confirm deletion</Dialog.Title>
+  </Dialog.Header>
+  <Dialog.Body>
+    <p>This action cannot be undone.</p>
+  </Dialog.Body>
+  <Dialog.Footer>
+    <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
+    <Button variant="destructive" onClick={handleDelete}>Delete</Button>
+  </Dialog.Footer>
+</Dialog>
+```
+
+In Vue, sub-components are imported individually (no dot notation):
+
+```vue
+<script setup>
+import { Dialog, DialogHeader, DialogTitle, DialogBody, DialogFooter, Button } from "@libretexts/davis-vue";
+</script>
+```
+
+Compound components: `Dialog`, `Drawer`, `Card`, `Tabs`, `Accordion`, `Menu`, `Breadcrumb`, `Table`.
+
+### Polymorphic `as` prop
+
+Most interactive components accept an `as` prop to render as a different HTML element or router component while keeping Davis styling:
+
+```tsx
+{/* Render a button as a native anchor */}
+<Button as="a" href="/dashboard">Go to Dashboard</Button>
+
+{/* Render as a Next.js Link */}
+import NextLink from "next/link";
+<Button as={NextLink} href="/dashboard">Go to Dashboard</Button>
+```
+
+### `className` override
+
+Every component forwards `className` to its root element. Use it to apply layout, spacing, or one-off overrides:
+
+```tsx
+<Button className="mt-4 w-full">Submit</Button>
+<Card className="shadow-lg">...</Card>
+<Input label="Email" className="max-w-sm" />
+```
+
+### Form input error state
+
+All form inputs accept `error` (boolean) and `errorMessage` (string) props:
+
+```tsx
+<Input
+  label="Email"
+  error={!!errors.email}
+  errorMessage={errors.email?.message}
+/>
+```
+
+### Controlled vs uncontrolled form components
+
+Most inputs work uncontrolled (spread `register()` from react-hook-form directly):
+
+- **Uncontrolled** (use `register()`): `Input`, `Textarea`, `Select`, `Checkbox`, `Switch`
+- **Controlled** (require `Controller`): `Combobox`, `NumberInput`, `RadioGroup`
+
+---
+
+## Forms with react-hook-form
+
+Install react-hook-form separately — it is not bundled with Davis:
+
+```bash
+npm install react-hook-form
+```
+
+### Uncontrolled inputs (spread `register`)
+
+```tsx
+import { useForm } from "react-hook-form";
+import { Input, Select, Textarea, Checkbox, Switch, Button } from "@libretexts/davis-react";
+
+type FormValues = {
+  name: string;
+  email: string;
+  role: string;
+};
+
+export default function ProfileForm() {
+  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
+
+  return (
+    <form onSubmit={handleSubmit(console.log)} className="flex flex-col gap-4">
+      <Input
+        label="Name"
+        {...register("name", { required: "Name is required" })}
+        error={!!errors.name}
+        errorMessage={errors.name?.message}
+      />
+      <Select
+        label="Role"
+        options={[
+          { value: "engineer", label: "Engineer" },
+          { value: "designer", label: "Designer" },
+        ]}
+        {...register("role", { required: "Role is required" })}
+        error={!!errors.role}
+        errorMessage={errors.role?.message}
+      />
+      <Button type="submit">Save</Button>
+    </form>
+  );
+}
+```
+
+### Controlled inputs (use `Controller`)
+
+```tsx
+import { useForm, Controller } from "react-hook-form";
+import { Combobox, NumberInput, RadioGroup, Button } from "@libretexts/davis-react";
+
+export default function OrderForm() {
+  const { control, handleSubmit } = useForm({
+    defaultValues: { quantity: 1, priority: "medium" },
+  });
+
+  return (
+    <form onSubmit={handleSubmit(console.log)} className="flex flex-col gap-4">
+      <Controller
+        name="priority"
+        control={control}
+        render={({ field }) => (
+          <RadioGroup
+            label="Priority"
+            options={[
+              { value: "low", label: "Low" },
+              { value: "medium", label: "Medium" },
+              { value: "high", label: "High" },
+            ]}
+            value={field.value}
+            onChange={field.onChange}
+          />
+        )}
+      />
+      <Controller
+        name="quantity"
+        control={control}
+        render={({ field }) => (
+          <NumberInput label="Quantity" value={field.value} onChange={field.onChange} min={1} max={99} />
+        )}
+      />
+      <Button type="submit">Order</Button>
+    </form>
+  );
+}
+```
+
+### Zod schema validation
+
+```bash
+npm install @hookform/resolvers zod
+```
+
+```tsx
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Input, Button } from "@libretexts/davis-react";
+
+const schema = z.object({
+  email: z.string().email("Enter a valid email address"),
+  name: z.string().min(2, "Name must be at least 2 characters"),
+});
+
+type FormValues = z.infer<typeof schema>;
+
+export default function SignupForm() {
+  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+  });
+
+  return (
+    <form onSubmit={handleSubmit(console.log)} className="flex flex-col gap-4">
+      <Input label="Name" {...register("name")} error={!!errors.name} errorMessage={errors.name?.message} />
+      <Input label="Email" type="email" {...register("email")} error={!!errors.email} errorMessage={errors.email?.message} />
+      <Button type="submit">Sign up</Button>
+    </form>
+  );
+}
+```
+
+### FormSection for long forms
+
+```tsx
+import { FormSection, Stack, Input, Textarea, Button } from "@libretexts/davis-react";
+
+<form onSubmit={handleSubmit(console.log)}>
+  <Stack gap="lg">
+    <FormSection title="Personal Information" description="Your name and contact details.">
+      <Stack gap="md">
+        <Input label="First name" {...register("firstName")} />
+        <Input label="Last name" {...register("lastName")} />
+      </Stack>
+    </FormSection>
+
+    <FormSection title="About" description="A short biography.">
+      <Textarea label="Bio" {...register("bio")} helperText="Tell us about yourself." />
+    </FormSection>
+
+    <div className="flex justify-end gap-3">
+      <Button variant="outline" type="button">Cancel</Button>
+      <Button type="submit">Save</Button>
+    </div>
+  </Stack>
+</form>
+```
+
+---
+
+## Notifications
+
+Davis provides two patterns for in-app feedback:
+
+- **Alert** — persistent, inline feedback (form errors, page-level warnings). Stays visible until resolved.
+- **Notification / Toast** — ephemeral floating feedback in response to user actions. Auto-dismisses.
+
+### Standalone Notification
+
+```tsx
+import { Notification, Button } from "@libretexts/davis-react";
+import { useState } from "react";
+
+export default function Example() {
+  const [show, setShow] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setShow(true)}>Save</Button>
+      <Notification
+        show={show}
+        onClose={() => setShow(false)}
+        title="Saved"
+        message="Your changes have been saved."
+      />
+    </>
+  );
+}
+```
+
+### Toast system via useNotifications
+
+Wrap your app with `NotificationsProvider` once, then call `useNotifications()` anywhere in the tree:
+
+```tsx
+// Root layout
+import { DavisProvider, NotificationsProvider } from "@libretexts/davis-react";
+
+export default function RootLayout({ children }) {
+  return (
+    <DavisProvider>
+      <NotificationsProvider>
+        {children}
+      </NotificationsProvider>
+    </DavisProvider>
+  );
+}
+```
+
+```tsx
+// Any component
+import { useNotifications, Button } from "@libretexts/davis-react";
+
+export default function SaveButton() {
+  const { addNotification } = useNotifications();
+
+  async function handleSave() {
+    await saveData();
+    addNotification({ title: "Saved", message: "Changes saved successfully.", type: "success" });
+  }
+
+  return <Button onClick={handleSave}>Save</Button>;
+}
+```
+
+---
+
+## Accessibility Utilities
+
+### SkipLink
+
+Place as the first element in your layout. Provides a keyboard-visible "Skip to main content" link:
+
+```tsx
+import { SkipLink } from "@libretexts/davis-react";
+
+function Layout({ children }) {
+  return (
+    <>
+      <SkipLink />
+      <nav>...</nav>
+      <main id="main-content">{children}</main>
+    </>
+  );
+}
+```
+
+### VisuallyHidden
+
+Hides content visually while keeping it in the accessibility tree. Use for icon-only buttons and screen-reader-only labels:
+
+```tsx
+import { VisuallyHidden, IconButton } from "@libretexts/davis-react";
+
+<button type="button">
+  <SearchIcon aria-hidden="true" />
+  <VisuallyHidden>Search</VisuallyHidden>
+</button>
+```
+
+### LiveAnnouncer
+
+Manages a shared `aria-live` region for announcing dynamic content updates to screen readers. Set it up once at the root:
+
+```tsx
+import { LiveAnnouncerProvider, useAnnounce } from "@libretexts/davis-react";
+
+// Root layout (add alongside DavisProvider)
+<LiveAnnouncerProvider>
+  <App />
+</LiveAnnouncerProvider>
+```
+
+```tsx
+// Any component that has dynamic content changes
+import { useAnnounce } from "@libretexts/davis-react";
+import { useEffect } from "react";
+
+function SearchResults({ count }: { count: number }) {
+  const announce = useAnnounce();
+
+  useEffect(() => {
+    announce(`${count} results found`);
+  }, [count, announce]);
+
+  return <p>{count} results</p>;
+}
+```
+
+---
+
+## WCAG 2.2 Compliance Reference
+
+Key WCAG 2.2 AA criteria and how Davis addresses them:
+
+| Criterion | Level | How Davis addresses it |
+|-----------|-------|------------------------|
+| 1.4.3 Contrast (Minimum) | AA | Color tokens verified at 4.5:1 / 3:1 |
+| 1.4.11 Non-text Contrast | AA | Focus indicators and UI components meet 3:1 |
+| 2.1.1 Keyboard | A | All components support full keyboard navigation |
+| 2.4.1 Bypass Blocks | A | `SkipLink` component |
+| 2.4.7 Focus Visible | AA | `:focus-visible` with 2px ring + offset |
+| 2.4.11 Focus Not Obscured | AA | `outline-offset` keeps focus rings visible |
+| 2.5.8 Target Size (Minimum) | AA | All interactive components meet 24×24px minimum |
+| 4.1.3 Status Messages | AA | `LiveAnnouncerProvider` for dynamic announcements |
+
+Safe color pairings on white backgrounds:
+
+- Body text: `text-neutral-900` (14.5:1) or `text-neutral-700` (9.5:1)
+- Secondary text: `text-neutral-500` (4.6:1 — minimum passing)
+- Avoid: `text-neutral-400` on white (fails AA for normal text)
+- On colored backgrounds (`bg-primary-500` and darker): use `text-white`
+- On light tints (`bg-primary-50` to `bg-primary-100`): use `text-primary-700` or darker
+
+---
+
+## Building Custom Components Alongside Davis
+
+When you need a component Davis does not provide, use the same conventions to stay visually consistent.
+
+**1. Use `tailwind-variants` for style logic:**
+
+```tsx
+import { tv } from "tailwind-variants";
+
+const chip = tv({
+  base: [
+    "inline-flex items-center gap-1.5 rounded-full px-3 py-1",
+    "text-xs font-medium border transition-colors duration-150",
+    "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
+  ].join(" "),
+  variants: {
+    selected: {
+      true:  "bg-primary text-white border-primary",
+      false: "bg-white text-neutral-700 border-neutral-300 hover:border-primary hover:text-primary",
+    },
+  },
+  defaultVariants: { selected: false as const },
+});
+```
+
+**2. Accept and forward `className`:**
+
+```tsx
+import clsx from "clsx";
+
+export function Chip({ children, selected = false, onClick, className }: ChipProps) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={selected}
+      className={clsx(chip({ selected }), className)}
+    >
+      {children}
+    </button>
+  );
+}
+```
+
+**3. Reference Davis CSS custom properties for tokens not exposed as Tailwind utilities:**
+
+```css
+.my-component {
+  --ring-color: var(--color-primary-500);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition-duration: var(--davis-motion-duration-default); /* 200ms */
+}
+```
+
+Available token categories in `@libretexts/davis-core/base.css`:
+- `--color-{palette}-{shade}` (e.g., `--color-primary-500`)
+- `--color-surface`, `--color-surface-muted`, `--color-surface-hover`, `--color-surface-active`
+- `--color-text`, `--color-text-neutral`, `--color-text-white`
+- `--radius-sm/md/lg/xl/2xl/full`
+- `--shadow-sm/md/lg/xl/2xl`
+- `--davis-target-size-minimum` (24px) / `--davis-target-size-comfortable` (44px)
+- `--davis-motion-duration-fast` (150ms) / `--davis-motion-duration-default` (200ms) / `--davis-motion-duration-slow` (300ms)
+
+---
+
+## TypeScript
+
+Davis exports full TypeScript types. Import variant types directly for use in your own components and prop tables:
+
+```tsx
+import type {
+  ButtonVariant,      // 'primary' | 'secondary' | 'tertiary' | 'destructive' | 'warning' | 'ghost' | 'outline'
+  BadgeVariant,
+  AlertVariant,
+  InputSize,          // 'sm' | 'md' | 'lg'
+} from "@libretexts/davis-react";
+```
+
+All component props are exported as named types (e.g., `ButtonProps`, `InputProps`, `DialogProps`).
+
+### Next.js / SSR
+
+All Davis React components are marked `"use client"` at the source level. When consumed by Next.js App Router, they work in both Server and Client components — the `"use client"` boundary is established inside the Davis package so you do not need to add it in your own code.
+
+---
+
+## Design Tokens
+
+All tokens are defined in `packages/core/src/tokens.ts` and exported as CSS custom properties via the generated CSS files.
+
+### Typography
+
+Font: **Atkinson Hyperlegible** — designed for low-vision readers; falls back to system-ui. Scale follows a Major Third ratio (1.250) with a 16px base:
+
+| Token | rem    | px   | Use case               |
+|-------|--------|------|------------------------|
+| xs    | 0.640  | 10.2 | Captions               |
+| sm    | 0.800  | 12.8 | Labels, helper text    |
+| base  | 1.000  | 16   | Body, buttons          |
+| lg    | 1.250  | 20   | Lead / intro text      |
+| xl    | 1.563  | 25   | h4                     |
+| 2xl   | 1.953  | 31.3 | h3                     |
+| 3xl   | 2.441  | 39.1 | h2                     |
+| 4xl   | 3.052  | 48.8 | h1                     |
+
+### Color Palette
+
+Seven semantic colors, each with a full 50–950 shade range. All 500-level shades meet WCAG AA contrast against white.
+
+| Token      | 500 value | Role                                  |
+|------------|-----------|---------------------------------------|
+| primary    | #127BC4   | Primary actions, links, focus rings   |
+| secondary  | #0F67A6   | Secondary actions, accents            |
+| tertiary   | #4076a4   | Decorative / supporting elements      |
+| success    | #207537   | Confirmations, positive feedback      |
+| warning    | #BB5C21   | Caution states                        |
+| danger     | #DC3838   | Errors, destructive actions           |
+| neutral    | #18181B   | Text, borders, backgrounds            |
+
+Interactive state convention: hover → shade 600, active → shade 700.
+
+### Semantic Surface & Text Tokens
+
+| Token            | Value   | Use                              |
+|------------------|---------|----------------------------------|
+| surface          | #FFFFFF | Default page background          |
+| surface-muted    | #F9FAFB | Subtle section differentiation   |
+| surface-subtle   | #F4F4F5 | Sidebars, footers                |
+| surface-hover    | #F4F4F5 | Hover state backgrounds          |
+| surface-active   | #E4E4E7 | Pressed / active state           |
+| text             | #162032 | Primary text (WCAG AAA)          |
+| text-neutral     | #71717A | Secondary / muted text           |
+| text-white       | #FFFFFF | Text on colored surfaces         |
+
+### Spacing
+
+4px base grid. Every spacing value is a multiple of 4px (matches Tailwind defaults).
+
+### Border Radius
+
+`sm` (0.125rem), `md` / DEFAULT (0.375rem), `lg` (0.5rem), `xl` (0.75rem), `2xl` (1rem), `full` (9999px).
+
+### Shadows (Elevation)
+
+Five levels: none (level 0, flat), sm/DEFAULT (level 1, cards), md (level 2, hovered cards), lg (level 3, dialogs/popovers), xl/2xl (level 4, high-emphasis overlays).
+
+---
+
+## Component Catalog
+
+All 48 components are available in both React (`@libretexts/davis-react`) and Vue (`@libretexts/davis-vue`).
+
+### Forms
+`Input`, `Select`, `Textarea`, `Checkbox`, `Radio` / `RadioGroup`, `Switch`, `Combobox`, `FormSection`, `InputGroup`, `NumberInput`
+
+### Display
+`Button`, `IconButton`, `Badge`, `Card` (with `Card.Header`, `Card.Body`, `Card.Footer`, `Card.Image`), `Avatar` / `AvatarGroup`, `Heading`, `Text`, `Link`, `StatCard`, `Table` (with `Table.Head`, `Table.Body`, `Table.Row`, `Table.Cell`, `Table.HeaderCell`, `Table.Caption`), `Accordion` (with `Accordion.Item`, `Accordion.Trigger`, `Accordion.Panel`)
+
+### Navigation
+`Breadcrumb` (with `Breadcrumb.Item`), `Menu` (with `Menu.Button`, `Menu.Items`, `Menu.Item`, `Menu.Divider`, `Menu.Label`), `Pagination`, `Stepper`, `Tabs` (with `Tabs.List`, `Tabs.Tab`, `Tabs.Panels`, `Tabs.Panel`)
+
+### Layout
+`Stack`, `Grid`, `Container`, `Divider`
+
+### Feedback
+`Alert`, `Notification` / `Toast` / `ToastContainer`, `Progress`, `Skeleton`, `Spinner`, `EmptyState`
+
+### Overlays
+`Dialog` (with `Dialog.Header`, `Dialog.Title`, `Dialog.Description`, `Dialog.Footer`, `Dialog.Close`), `Drawer` (with `Drawer.Header`, `Drawer.Title`, `Drawer.Body`, `Drawer.Footer`, `Drawer.Close`), `Popover` (with `Popover.Button`, `Popover.Panel`)
+
+### Accessibility Utilities
+`SkipLink`, `VisuallyHidden`, `LiveAnnouncerProvider` / `useAnnounce`
+
+### Providers & Context (React)
+`DavisProvider` / `DavisContext` / `useDavisContext`, `NotificationsProvider` / `NotificationContext` / `useNotifications`
+
+---
+
+## Adding a New Component (Contributors)
+
+1. Define variants in `packages/core/src/variants.ts` using `tv()`.
+2. Create `packages/react/src/components/component-name.tsx` (kebab-case filename).
+3. Create `packages/react/src/components/component-name.stories.tsx` for Storybook.
+4. Export from `packages/react/src/index.ts`.
+5. Mirror in `packages/vue/src/components/ComponentName.vue` (PascalCase filename).
+6. Export from `packages/vue/src/index.ts`.
+
+---
+
+## Key Conventions (Contributors)
+
+- **No manual CSS edits** — all CSS is generated from `tokens.ts`. Run `generate:configs` after token changes.
+- **tailwind-variants** (`tv()`) is used for all component styles; compound variants handle state combinations.
+- React components use `forwardRef`, support a polymorphic `as` prop, and preserve `"use client"` directives.
+- Vue components use `<script setup lang="ts">` with `defineProps` and `defineEmits`.
+- **clsx** is used in React for conditional class merging.
+- Strict TypeScript (`noUnusedLocals`, `noUnusedParameters`, `exactOptionalPropertyTypes`, `verbatimModuleSyntax`) is enforced across all packages.
+- All packages output dual ESM (`.mjs`) + CJS (`.cjs`) via Vite.
+- Versioning is managed by semantic-release with conventional commits. Never manually bump `package.json` versions.
+- Use `npm` (not pnpm or yarn) for all commands.
+
+---
+
+## Repository Layout (Contributors)
+
+```
+packages/
+├── core/
+│   ├── src/tokens.ts          ← EDIT HERE: all design tokens
+│   ├── src/variants.ts        ← EDIT HERE: all component variant styles
+│   └── src/index.ts           ← exports tokens and variants
+├── react/
+│   ├── src/components/        ← React .tsx components + .stories.tsx
+│   ├── src/context/           ← DavisContext, NotificationContext
+│   ├── src/providers/         ← DavisProvider, NotificationsProvider
+│   └── src/index.ts           ← exports all components and types
+├── vue/
+│   ├── src/components/        ← Vue .vue components + .stories.ts
+│   └── src/index.ts           ← exports all components and types
+└── docs/
+    └── src/app/docs/
+        ├── getting-started/   ← Overview, Installation, Fonts, License
+        ├── foundation/        ← Architecture, Colors, Typography, Spacing, Layout
+        ├── components/        ← One page per component (47 pages)
+        ├── guides/            ← A11y, Patterns, Custom Components, Integration, React Hook Form
+        └── templates/         ← Dashboard, List Page, Form Page, Detail Page
+```
+
+---
+
+## Common Commands (Contributors)
+
+```bash
+npm run build                                          # Build all packages
+npm run dev                                            # Dev mode for all packages
+npm run lint                                           # Lint all packages
+npm run test                                           # Run all tests
+npm run typecheck                                      # TypeScript check all packages
+npm run storybook -w @libretexts/davis-react           # Storybook on :6006
+npm run storybook -w @libretexts/davis-vue             # Storybook on :6007
+npm run generate:configs -w @libretexts/davis-core     # Regenerate CSS from tokens
+npm run docs:dev                                       # Docs site on localhost
+npx vitest run packages/react/src/components/__tests__/a11y.test.tsx
+```
