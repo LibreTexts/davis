@@ -32,6 +32,14 @@ type ButtonBaseProps = {
   size?: ButtonSize;
   loading?: boolean;
   disabled?: boolean;
+  /**
+   * "Soft" disabled: renders `aria-disabled="true"` instead of the native
+   * `disabled` attribute so the button stays in the keyboard tab order and is
+   * announced by screen readers. Clicks and keyboard activations are
+   * suppressed. Prefer this over `disabled` for controls users should still be
+   * able to discover (e.g. pagination arrows on the first/last page).
+   */
+  softDisabled?: boolean;
   fullWidth?: boolean;
   className?: string;
   icon?: ReactNode;
@@ -82,17 +90,26 @@ export const Button = forwardRef(function Button<C extends ElementType = "button
     size = "md",
     loading = false,
     disabled = false,
+    softDisabled = false,
     fullWidth = false,
     className,
     icon,
     iconPosition = "left",
     iconClassName,
     children,
+    onClick,
     ...props
   }: ButtonProps<C>,
   ref: React.Ref<Element>
 ) {
-  const isDisabled = disabled || loading;
+  const isHardDisabled = disabled || loading;
+  const isSoftDisabled = softDisabled && !isHardDisabled;
+  const handleClick = isSoftDisabled
+    ? (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    : (onClick as ((event: React.MouseEvent<HTMLButtonElement>) => void) | undefined);
 
   const iconElement = icon && !loading && (
     <span
@@ -118,8 +135,10 @@ export const Button = forwardRef(function Button<C extends ElementType = "button
     <HeadlessButton
       as={as as ElementType}
       ref={ref as React.Ref<HTMLButtonElement>}
-      disabled={isDisabled}
+      disabled={isHardDisabled}
+      aria-disabled={isSoftDisabled || undefined}
       aria-busy={loading || undefined}
+      onClick={handleClick}
       className={clsx(
         button({ variant, size, fullWidth }),
         loading && "cursor-wait",

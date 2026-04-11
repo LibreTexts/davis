@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": ["src", "env.d.ts"],
+  "compilerOptions": {
+    "rootDir": "src",
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "composite": false,
+    "noEmit": true,
+    "types": ["vite/client"]
+  },
+  "exclude": ["node_modules", "dist"]
+}

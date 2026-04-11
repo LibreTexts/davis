@@ -18,7 +18,7 @@ if (!version) {
 console.log(`Syncing all packages to version ${version}`);
 
 const packagesDir = path.join(__dirname, '../packages');
-const packages = ['core', 'react', 'vue', 'docs'];
+const packages = ['core', 'react', 'vue', 'react-table', 'vue-table', 'docs'];
 
 for (const pkg of packages) {
   const packageJsonPath = path.join(packagesDir, pkg, 'package.json');

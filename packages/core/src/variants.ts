@@ -43,6 +43,10 @@ export const BUTTON_BASE_CLASSES = [
   // HeadlessUI data-disabled attribute (e.g. when rendered as <a>)
   'data-[disabled]:opacity-50',
   'data-[disabled]:cursor-not-allowed',
+  // Soft-disabled (aria-disabled) — stays in keyboard tab order for a11y
+  'aria-disabled:opacity-50',
+  'aria-disabled:cursor-not-allowed',
+  'aria-disabled:pointer-events-none',
   'rounded-md',
 ].join(' ');
 
@@ -1263,24 +1267,72 @@ export const popover = tv({
 
 // ─── Data Display ─────────────────────────────────────────────────────────────
 
-export const table = tv({
-  base: 'w-full text-sm text-left border-collapse',
-});
-
-export const tableHead = tv({
-  base: 'border-b border-gray-200 bg-gray-50',
-});
-
-export const tableRow = tv({
-  base: 'border-b border-gray-100 hover:bg-surface-hover transition-colors',
-});
-
-export const tableCell = tv({
-  base: 'px-4 py-3 text-gray-700',
-});
-
-export const tableHeaderCell = tv({
-  base: 'px-4 py-3 font-medium text-gray-900',
+// DataTable — full-featured table styling (consumed by
+// @libretexts/davis-react-table and @libretexts/davis-vue-table)
+export const dataTable = tv({
+  slots: {
+    wrapper:            'relative w-full overflow-auto rounded-lg border border-gray-200 bg-white',
+    toolbar:            'flex flex-wrap items-center justify-between gap-3 border-b border-gray-200 bg-white px-3 py-2',
+    toolbarStart:       'flex flex-1 items-center gap-2',
+    toolbarEnd:         'flex items-center gap-2',
+    globalSearch:       'w-64 max-w-full',
+    table:              'w-full border-collapse text-base text-left',
+    header:             'bg-gray-50',
+    headerRow:          'border-b border-gray-200',
+    headerCell:         'relative font-medium text-gray-900 whitespace-nowrap select-none align-middle',
+    headerCellSortable: 'cursor-pointer hover:bg-gray-100 transition-colors',
+    headerCellContent:  'flex items-center gap-2',
+    sortIcon:           'inline-block size-4 shrink-0 text-gray-400',
+    sortIconActive:     'text-primary',
+    resizer:            'absolute right-0 top-0 h-full w-1 cursor-col-resize touch-none select-none bg-transparent hover:bg-primary/40 active:bg-primary',
+    body:               '',
+    row:                'border-b border-gray-100 transition-colors',
+    rowInteractive:     'hover:bg-surface-hover cursor-pointer',
+    rowSelected:        'bg-primary-50',
+    cell:               'text-gray-700 align-middle whitespace-nowrap',
+    expandedRow:        'bg-gray-50',
+    expandedCell:       'px-4 py-3',
+    empty:              'px-4 py-12 text-center text-sm text-gray-500',
+    loadingCell:        'px-4 py-8 text-center',
+    pagination:         'flex flex-wrap items-center justify-between gap-3 border-t border-gray-200 bg-white px-3 py-2 text-sm text-gray-700',
+    paginationInfo:     'text-gray-600',
+    paginationControls: 'flex items-center gap-2',
+    pageSizeSelect:     'rounded-md border border-gray-200 bg-white px-2 py-1 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30',
+    checkboxCell:       'w-10 px-3',
+    expandCell:         'w-10 px-2',
+    expandButton:       'inline-flex items-center justify-center rounded-md p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
+  },
+  variants: {
+    density: {
+      comfortable: {
+        headerCell: 'px-4 py-3',
+        cell:       'px-4 py-3',
+      },
+      compact: {
+        headerCell: 'px-3 py-2',
+        cell:       'px-3 py-2',
+      },
+      relaxed: {
+        headerCell: 'px-5 py-4',
+        cell:       'px-5 py-4',
+      },
+    },
+    striped: {
+      true: { row: 'odd:bg-white even:bg-gray-50/60' },
+    },
+    stickyHeader: {
+      true: { header: 'sticky top-0 z-10 shadow-sm' },
+    },
+    bordered: {
+      true: {
+        headerCell: 'border-r border-gray-200 last:border-r-0',
+        cell:       'border-r border-gray-100 last:border-r-0',
+      },
+    },
+  },
+  defaultVariants: {
+    density: 'comfortable' as const,
+  },
 });
 
 export const statCard = tv({

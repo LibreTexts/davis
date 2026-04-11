@@ -1,0 +1,86 @@
+{
+  "name": "@libretexts/davis-vue-table",
+  "version": "1.5.0",
+  "description": "Full-featured, accessible DataTable for Vue 3 built on TanStack Table, styled with the Davis Design System",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "README.md",
+    "dist",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "peerDependencies": {
+    "vue": "^3.4.0",
+    "tailwindcss": "^4.0.0"
+  },
+  "dependencies": {
+    "@libretexts/davis-core": "*",
+    "@libretexts/davis-vue": "*",
+    "@tanstack/vue-table": "^8.20.5",
+    "@tanstack/vue-virtual": "^3.10.8",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.0.0",
+    "tailwind-variants": "^0.3.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "^8.6.18",
+    "@storybook/addon-docs": "^8.6.18",
+    "@storybook/addon-essentials": "^8.6.18",
+    "@storybook/addon-interactions": "^8.6.18",
+    "@storybook/vue3-vite": "^8.6.18",
+    "@storybook/testing-library": "^0.2.2",
+    "@tailwindcss/vite": "^4.2.1",
+    "@types/node": "^22.0.0",
+    "@vitejs/plugin-vue": "^5.0.0",
+    "storybook": "^8.6.18",
+    "tailwindcss": "^4.2.1",
+    "typescript": "^5.6.0",
+    "vite": "^6.0.0",
+    "vue": "^3.4.0",
+    "vue-tsc": "^2.0.0"
+  },
+  "scripts": {
+    "build": "vue-tsc -p tsconfig.build.json && vite build",
+    "dev": "vite build --watch",
+    "storybook": "storybook dev -p 6009",
+    "build-storybook": "storybook build",
+    "typecheck": "vue-tsc --noEmit",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "vue",
+    "ui",
+    "table",
+    "datatable",
+    "tanstack",
+    "tailwind",
+    "accessibility",
+    "a11y"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "author": "LibreTexts, Inc.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LibreTexts/davis.git",
+    "directory": "packages/vue-table"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

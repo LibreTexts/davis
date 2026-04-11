@@ -39,36 +39,9 @@ jobs:
             exit 1
           fi
 
-  build-all:
-    name: Build All Packages
-    needs: authorize
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build all packages
-        run: |
-          npm run build -w @libretexts/davis-core
-          npm run build -w @libretexts/davis-react
-          npm run build -w @libretexts/davis-vue
-          npm run build -w @libretexts/davis-docs
-
   release:
     name: Release All Packages
-    needs: [authorize, build-all]
+    needs: authorize
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -104,6 +77,8 @@ jobs:
           npm run build -w @libretexts/davis-react
           npm run build -w @libretexts/davis-vue
           npm run build -w @libretexts/davis-docs
+          npm run build -w @libretexts/davis-react-table
+          npm run build -w @libretexts/davis-vue-table
 
       - name: Release all packages
         env:

@@ -60,6 +60,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       ? { value }
       : { defaultValue: defaultValue ?? "" };
 
+    // Only render the disabled placeholder option when no real value is
+    // selected. Leaving a `<option disabled>` in the DOM after selection
+    // triggers a11y warnings (ANDI) about disabled elements being removed
+    // from the tab order without offering any user value.
+    const currentValue = value !== undefined ? value : defaultValue ?? "";
+    const showPlaceholderOption = currentValue === "";
+
     return (
       <div className={clsx(className)}>
         <label
@@ -89,9 +96,11 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             )}
             {...props}
           >
-            <option value="" disabled>
-              {placeholder}
-            </option>
+            {showPlaceholderOption && (
+              <option value="" disabled>
+                {placeholder}
+              </option>
+            )}
             {options.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}

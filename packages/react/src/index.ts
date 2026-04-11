@@ -218,18 +218,6 @@ export type {
   PopoverPanelProps,
 } from "./components/popover";
 
-export { Table } from "./components/table";
-export type {
-  TableProps,
-  TableAlign,
-  TableHeadProps,
-  TableBodyProps,
-  TableRowProps,
-  TableCellProps,
-  TableHeaderCellProps,
-  TableCaptionProps,
-} from "./components/table";
-
 export { StatCard } from "./components/stat-card";
 export type { StatCardProps, StatCardVariant, StatCardTrend } from "./components/stat-card";
 

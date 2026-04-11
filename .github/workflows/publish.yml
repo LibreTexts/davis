@@ -8,10 +8,12 @@ on:
         required: true
         type: choice
         options:
+          - 'all'
           - 'core'
           - 'react'
           - 'vue'
-          - 'all'
+          - 'react-table'
+          - 'vue-table'
 
 jobs:
   authorize:
@@ -53,7 +55,7 @@ jobs:
     name: Publish Core to NPM
     needs: authorize
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.package == 'core' || github.event.inputs.package == 'all' || github.event.inputs.package == 'react' || github.event.inputs.package == 'vue' }}
+    if: ${{ github.event.inputs.package == 'core' || github.event.inputs.package == 'all' || github.event.inputs.package == 'react' || github.event.inputs.package == 'vue' || github.event.inputs.package == 'react-table' || github.event.inputs.package == 'vue-table' }}
     permissions:
       contents: read
       id-token: write
@@ -146,5 +148,72 @@ jobs:
 
       - name: Publish vue to NPM
         run: npm publish --workspace @libretexts/davis-vue --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  
+  publish-react-table:
+    name: Publish React Table to NPM
+    needs: [authorize, publish-core]
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.package == 'react-table' || github.event.inputs.package == 'all' }}
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build core package
+        run: npm run build -w @libretexts/davis-core
+
+      - name: Build react-table package
+        run: npm run build -w @libretexts/davis-react-table
+
+      - name: Publish react-table to NPM
+        run: npm publish --workspace @libretexts/davis-react-table --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  
+  publish-vue-table:
+    name: Publish Vue Table to NPM
+    needs: [authorize, publish-core]
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.package == 'vue-table' || github.event.inputs.package == 'all' }}
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build core package
+        run: npm run build -w @libretexts/davis-core
+      
+      - name: Build vue-table package
+        run: npm run build -w @libretexts/davis-vue-table
+
+      - name: Publish vue-table to NPM
+        run: npm publish --workspace @libretexts/davis-vue-table --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
