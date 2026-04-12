@@ -177,6 +177,9 @@ jobs:
       - name: Build core package
         run: npm run build -w @libretexts/davis-core
 
+      - name: Build react package
+        run: npm run build -w @libretexts/davis-react
+
       - name: Build react-table package
         run: npm run build -w @libretexts/davis-react-table
 
@@ -209,7 +212,10 @@ jobs:
       
       - name: Build core package
         run: npm run build -w @libretexts/davis-core
-      
+
+      - name: Build vue package
+        run: npm run build -w @libretexts/davis-vue
+
       - name: Build vue-table package
         run: npm run build -w @libretexts/davis-vue-table
 
