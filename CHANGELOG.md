@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/LibreTexts/davis/compare/v1.5.0...v1.6.0) (2026-04-12)
+
+
+### Features
+
+* dedicated DataTable packages ([e400b07](https://github.com/LibreTexts/davis/commit/e400b07ad951e9251ae5fe3e155c95eff3277873))
+
 # [1.5.0](https://github.com/LibreTexts/davis/compare/v1.4.0...v1.5.0) (2026-04-05)
 
 
