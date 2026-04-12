@@ -79,7 +79,14 @@ jobs:
 
       - name: Publish core to NPM
         if: ${{ github.event.inputs.package == 'core' || github.event.inputs.package == 'all' }}
-        run: npm publish --workspace @libretexts/davis-core --access public
+        run: |
+          PKG_NAME=$(node -p "require('./packages/core/package.json').name")
+          PKG_VERSION=$(node -p "require('./packages/core/package.json').version")
+          if npm view "$PKG_NAME@$PKG_VERSION" version > /dev/null 2>&1; then
+            echo "✅ $PKG_NAME@$PKG_VERSION already published, skipping."
+          else
+            npm publish --workspace @libretexts/davis-core --access public
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -113,7 +120,14 @@ jobs:
         run: npm run build -w @libretexts/davis-react
 
       - name: Publish react to NPM
-        run: npm publish --workspace @libretexts/davis-react --access public
+        run: |
+          PKG_NAME=$(node -p "require('./packages/react/package.json').name")
+          PKG_VERSION=$(node -p "require('./packages/react/package.json').version")
+          if npm view "$PKG_NAME@$PKG_VERSION" version > /dev/null 2>&1; then
+            echo "✅ $PKG_NAME@$PKG_VERSION already published, skipping."
+          else
+            npm publish --workspace @libretexts/davis-react --access public
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -147,7 +161,14 @@ jobs:
         run: npm run build -w @libretexts/davis-vue
 
       - name: Publish vue to NPM
-        run: npm publish --workspace @libretexts/davis-vue --access public
+        run: |
+          PKG_NAME=$(node -p "require('./packages/vue/package.json').name")
+          PKG_VERSION=$(node -p "require('./packages/vue/package.json').version")
+          if npm view "$PKG_NAME@$PKG_VERSION" version > /dev/null 2>&1; then
+            echo "✅ $PKG_NAME@$PKG_VERSION already published, skipping."
+          else
+            npm publish --workspace @libretexts/davis-vue --access public
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
   
@@ -184,7 +205,14 @@ jobs:
         run: npm run build -w @libretexts/davis-react-table
 
       - name: Publish react-table to NPM
-        run: npm publish --workspace @libretexts/davis-react-table --access public
+        run: |
+          PKG_NAME=$(node -p "require('./packages/react-table/package.json').name")
+          PKG_VERSION=$(node -p "require('./packages/react-table/package.json').version")
+          if npm view "$PKG_NAME@$PKG_VERSION" version > /dev/null 2>&1; then
+            echo "✅ $PKG_NAME@$PKG_VERSION already published, skipping."
+          else
+            npm publish --workspace @libretexts/davis-react-table --access public
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
   
@@ -220,6 +248,13 @@ jobs:
         run: npm run build -w @libretexts/davis-vue-table
 
       - name: Publish vue-table to NPM
-        run: npm publish --workspace @libretexts/davis-vue-table --access public
+        run: |
+          PKG_NAME=$(node -p "require('./packages/vue-table/package.json').name")
+          PKG_VERSION=$(node -p "require('./packages/vue-table/package.json').version")
+          if npm view "$PKG_NAME@$PKG_VERSION" version > /dev/null 2>&1; then
+            echo "✅ $PKG_NAME@$PKG_VERSION already published, skipping."
+          else
+            npm publish --workspace @libretexts/davis-vue-table --access public
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
