@@ -103,6 +103,7 @@ function MenuItemsContainer({
   return (
     <MenuItems
       transition
+      modal={false}
       className={clsx(
         items(),
         className
