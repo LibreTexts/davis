@@ -131,6 +131,21 @@ export const AsLink: Story = {
   },
 };
 
+// Simulates using as={Link} from react-router-dom or similar router libraries.
+// The component must receive all button styles despite being a custom React component.
+const MockRouterLink = ({ children, href, className, ...rest }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
+  <a href={href} className={className} {...rest}>{children}</a>
+);
+
+export const AsRouterLink: Story = {
+  args: {
+    as: MockRouterLink,
+    href: "/dashboard",
+    children: "Go to Dashboard",
+    variant: "primary",
+  },
+};
+
 export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4">

@@ -131,25 +131,56 @@ export const Button = forwardRef(function Button<C extends ElementType = "button
     </span>
   );
 
+  const computedClassName = clsx(
+    button({ variant, size, fullWidth }),
+    loading && "cursor-wait",
+    className
+  );
+
+  const innerContent = (
+    <>
+      {spinnerElement}
+      {iconPosition === "left" && iconElement}
+      {children}
+      {iconPosition === "right" && iconElement}
+    </>
+  );
+
+  if (as) {
+    const Component = as as ElementType;
+    const handleAsClick =
+      isHardDisabled || isSoftDisabled
+        ? (event: React.MouseEvent<HTMLElement>) => {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+        : (onClick as ((event: React.MouseEvent<HTMLElement>) => void) | undefined);
+    return (
+      <Component
+        ref={ref}
+        aria-disabled={isSoftDisabled || isHardDisabled || undefined}
+        aria-busy={loading || undefined}
+        tabIndex={isHardDisabled ? -1 : undefined}
+        onClick={handleAsClick}
+        className={computedClassName}
+        {...(props as object)}
+      >
+        {innerContent}
+      </Component>
+    );
+  }
+
   return (
     <HeadlessButton
-      as={as as ElementType}
       ref={ref as React.Ref<HTMLButtonElement>}
       disabled={isHardDisabled}
       aria-disabled={isSoftDisabled || undefined}
       aria-busy={loading || undefined}
       onClick={handleClick}
-      className={clsx(
-        button({ variant, size, fullWidth }),
-        loading && "cursor-wait",
-        className
-      )}
+      className={computedClassName}
       {...(props as object)}
     >
-      {spinnerElement}
-      {iconPosition === "left" && iconElement}
-      {children}
-      {iconPosition === "right" && iconElement}
+      {innerContent}
     </HeadlessButton>
   );
 }) as <C extends ElementType = "button">(
