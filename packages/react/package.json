@@ -1,6 +1,6 @@
 {
   "name": "@libretexts/davis-react",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "An a11y-first UI library for React",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",

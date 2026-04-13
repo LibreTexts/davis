@@ -1,3 +1,13 @@
+## [1.6.1](https://github.com/LibreTexts/davis/compare/v1.6.0...v1.6.1) (2026-04-13)
+
+
+### Bug Fixes
+
+* **Menu:** add pointer cursor to Menu.Item hover state ([a4901ee](https://github.com/LibreTexts/davis/commit/a4901ee0f22ce154e1b51bdedccb0b28a3a6c6c9))
+* **react-table:** storybook spies ([e019d2e](https://github.com/LibreTexts/davis/commit/e019d2e9668a92686d4f78d4c35490a0020c1777))
+* **React:** disable default modal prop for Menu causing scroll issues ([6bd0525](https://github.com/LibreTexts/davis/commit/6bd0525b5a9a878578e29ae29979a44a4396d0cc))
+* **Typography:** shift heading sizes down one Tailwind scale step ([66a792d](https://github.com/LibreTexts/davis/commit/66a792dc8160d7c945b86e7677c43917be76a8c6))
+
 # [1.6.0](https://github.com/LibreTexts/davis/compare/v1.5.0...v1.6.0) (2026-04-12)
 
 
