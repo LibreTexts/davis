@@ -41,6 +41,12 @@ export function DocsHeader({ title }: { title?: string }) {
                             >
                                 Documentation
                             </Link>
+                            <Link
+                                href="/showcase"
+                                className="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors"
+                            >
+                                Showcase
+                            </Link>
                             <a
                                 href="https://github.com/LibreTexts/davis"
                                 target="_blank"
