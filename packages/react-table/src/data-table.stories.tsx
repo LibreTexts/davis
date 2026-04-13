@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { fn } from "@storybook/test";
 import type { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "./data-table";
 
@@ -29,6 +30,10 @@ const meta: Meta<typeof DataTable<User>> = {
   title: "Components/DataTable",
   component: DataTable,
   parameters: { layout: "padded" },
+  args: {
+    onTableReady: fn(),
+    onRowClick: fn(),
+  },
 };
 export default meta;
 
