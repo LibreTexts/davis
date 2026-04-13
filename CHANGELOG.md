@@ -1,3 +1,11 @@
+## [1.6.2](https://github.com/LibreTexts/davis/compare/v1.6.1...v1.6.2) (2026-04-13)
+
+
+### Bug Fixes
+
+* **Button:** ensure Atkinson Hyperlegible used as preferred font ([4f81afa](https://github.com/LibreTexts/davis/commit/4f81afadd7b5d58c3b2a290cda1776a625ec5e1a))
+* **React:** ensure styling kept when using Button as prop ([82cf721](https://github.com/LibreTexts/davis/commit/82cf7212660a8c60057a415038ef33c4ff2e90b1))
+
 ## [1.6.1](https://github.com/LibreTexts/davis/compare/v1.6.0...v1.6.1) (2026-04-13)
 
 
