@@ -545,10 +545,14 @@ export const card = tv({
       outline:  { root: 'border-gray-300' },
     },
     padding: {
-      none: { headerContent: '',           body: '',           footer: ''           },
-      sm:   { headerContent: 'px-4 py-3', body: 'px-4 py-3', footer: 'px-4 py-3' },
-      md:   { headerContent: 'px-6 py-4', body: 'px-6 py-4', footer: 'px-6 py-4' },
-      lg:   { headerContent: 'px-8 py-6', body: 'px-8 py-6', footer: 'px-8 py-6' },
+      // Padding lives on `root` so it applies whether or not sub-components are used.
+      // `header` uses negative margins to break out to root edges (full-bleed images).
+      // `footer` likewise breaks out so its border-t spans the full card width.
+      // `body` inherits root padding — no additional classes needed.
+      none: { root: '',           header: '',             headerContent: '',           body: '', footer: ''                       },
+      sm:   { root: 'px-4 py-3', header: '-mx-4 -mt-3', headerContent: 'px-4 py-3', body: '', footer: '-mx-4 -mb-3 px-4 py-3' },
+      md:   { root: 'px-6 py-4', header: '-mx-6 -mt-4', headerContent: 'px-6 py-4', body: '', footer: '-mx-6 -mb-4 px-6 py-4' },
+      lg:   { root: 'px-8 py-6', header: '-mx-8 -mt-6', headerContent: 'px-8 py-6', body: '', footer: '-mx-8 -mb-6 px-8 py-6' },
     },
     clickable: {
       true: { root: 'cursor-pointer transition-shadow duration-200 hover:shadow-md hover:border-primary hover:border-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2' },

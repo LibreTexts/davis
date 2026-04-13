@@ -1,10 +1,10 @@
 <script lang="ts">
-import type { InjectionKey } from "vue";
+import type { ComputedRef, InjectionKey } from "vue";
 import { card as cardVariants } from "@libretexts/davis-core";
 export type CardVariant = "default" | "elevated" | "outline";
 export type CardPadding = "none" | "sm" | "md" | "lg";
-type CardStyles = ReturnType<typeof cardVariants>;
-export const CardStylesKey: InjectionKey<CardStyles> = Symbol("CardStyles");
+export type CardStyles = ReturnType<typeof cardVariants>;
+export const CardStylesKey: InjectionKey<ComputedRef<CardStyles>> = Symbol("CardStyles");
 </script>
 
 <script setup lang="ts">
@@ -30,7 +30,7 @@ const attrs = useAttrs();
 const clickable = computed(() => props.href !== undefined || !!attrs.onClick);
 const styles = computed(() => cardVariants({ variant: props.variant, padding: props.padding, clickable: clickable.value }));
 
-provide(CardStylesKey, styles.value);
+provide(CardStylesKey, styles);
 
 function handleKeyDown(e: KeyboardEvent) {
   if (e.key === "Enter" || e.key === " ") {
