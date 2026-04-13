@@ -1,3 +1,11 @@
+## [1.6.3](https://github.com/LibreTexts/davis/compare/v1.6.2...v1.6.3) (2026-04-13)
+
+
+### Bug Fixes
+
+* **Alert:** ensure text and background color combos meet contrast specs ([810186e](https://github.com/LibreTexts/davis/commit/810186e70a2f0fae9d49c370d073f16fbb3d5de6))
+* **Card:** padding prop not applying when Card.Body not explicitly passed ([d658577](https://github.com/LibreTexts/davis/commit/d658577a7d15c96354d656b19dd1d563ae36c3d5))
+
 ## [1.6.2](https://github.com/LibreTexts/davis/compare/v1.6.1...v1.6.2) (2026-04-13)
 
 

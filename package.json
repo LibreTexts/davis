@@ -1,6 +1,6 @@
 {
   "name": "davis",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "private": true,
   "description": "An a11y-first UI library for React and Vue",
   "scripts": {
