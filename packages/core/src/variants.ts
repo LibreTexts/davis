@@ -29,6 +29,7 @@ import { tv } from 'tailwind-variants';
 
 export const BUTTON_BASE_CLASSES = [
   'inline-flex items-center justify-center',
+  'font-sans',
   'font-medium',
   'transition-all',
   'duration-200',
