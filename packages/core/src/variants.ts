@@ -972,12 +972,12 @@ export const heading = tv({
   base: 'text-gray-900 leading-tight',
   variants: {
     level: {
-      1: 'text-4xl font-bold',
-      2: 'text-3xl font-bold',
-      3: 'text-2xl font-semibold',
-      4: 'text-xl  font-semibold',
-      5: 'text-lg  font-semibold',
-      6: 'text-base font-semibold',
+      1: 'text-3xl font-bold',
+      2: 'text-2xl font-bold',
+      3: 'text-xl  font-semibold',
+      4: 'text-lg  font-semibold',
+      5: 'text-base font-semibold',
+      6: 'text-sm  font-semibold',
     },
     color: {
       default: 'text-gray-900',
