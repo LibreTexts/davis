@@ -1,6 +1,6 @@
 {
   "name": "@libretexts/davis-vue",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "description": "An a11y-first UI library for Vue",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

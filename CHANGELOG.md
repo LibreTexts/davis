@@ -1,3 +1,10 @@
+## [1.6.4](https://github.com/LibreTexts/davis/compare/v1.6.3...v1.6.4) (2026-04-15)
+
+
+### Bug Fixes
+
+* scroll behavior on Menu and label margins on Input ([bb7539f](https://github.com/LibreTexts/davis/commit/bb7539fd25b910d8ef5165d2c1b85bff1d0e8662))
+
 ## [1.6.3](https://github.com/LibreTexts/davis/compare/v1.6.2...v1.6.3) (2026-04-13)
 
 

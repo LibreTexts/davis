@@ -1,6 +1,6 @@
 {
   "name": "@libretexts/davis-vue-table",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "description": "Full-featured, accessible DataTable for Vue 3 built on TanStack Table, styled with the Davis Design System",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

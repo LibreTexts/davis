@@ -1,6 +1,6 @@
 {
   "name": "@libretexts/davis-core",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "description": "Shared variant definitions and utilities for Davis UI library",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
