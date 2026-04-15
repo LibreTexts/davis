@@ -46,7 +46,7 @@ const meta: Meta<typeof Menu> = {
   component: Menu,
   decorators: [
     (Story) => (
-      <div className="p-8 min-h-[300px]">
+      <div className="p-8 min-h-[300px] max-h-[500px] overflow-hidden">
         <Story />
       </div>
     ),
@@ -179,6 +179,19 @@ export const DangerItems: Story = {
         <Menu.Divider />
         <Menu.Item variant="danger" onClick={() => {}}>Delete</Menu.Item>
         <Menu.Item variant="danger" onClick={() => {}}>Remove permanently</Menu.Item>
+      </Menu.Items>
+    </Menu>
+  ),
+};
+
+export const LongList: Story = {
+  render: () => (
+    <Menu>
+      <Menu.Button>Select Item</Menu.Button>
+      <Menu.Items>
+        {Array.from({ length: 50 }, (_, i) => (
+          <Menu.Item key={i} onClick={() => {}}>Item {i + 1}</Menu.Item>
+        ))}
       </Menu.Items>
     </Menu>
   ),

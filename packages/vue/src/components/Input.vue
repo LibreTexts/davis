@@ -45,6 +45,7 @@ const styles = computed(() => input({
   size: props.size,
   hasLeftIcon: !!slots.leftIcon,
   hasRightIcon: !!slots.rightIcon,
+  hasLabel: !!props.label,
 }));
 </script>
 

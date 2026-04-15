@@ -210,6 +210,7 @@ export const input = tv({
     },
     hasLeftIcon:  { true: { field: 'pl-10' } },
     hasRightIcon: { true: { field: 'pr-10' } },
+    hasLabel:     { true: {}, false: { inputWrapper: 'mt-0' } },
   },
   defaultVariants: INPUT_DEFAULT_VARIANTS,
 });
@@ -1412,10 +1413,11 @@ export const menu = tv({
     ].join(' '),
     triggerIcon:  'size-4 text-white shrink-0',
     items: [
-      'absolute z-50 mt-2',
+      'fixed z-50',
       'bg-white rounded-md shadow-lg',
       'ring-1 ring-black/5',
       'py-1',
+      'max-h-72 overflow-y-auto',
       'focus:outline-none',
       'transition ease-out duration-100',
       'data-[closed]:opacity-0 data-[closed]:scale-95',

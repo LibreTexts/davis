@@ -100,14 +100,13 @@ function MenuItemsContainer({
   width = "auto",
 }: MenuItemsContainerProps) {
   const { items } = menuVariants({ align, width });
+  const anchor = { to: align === "right" ? "bottom end" : "bottom start", gap: 8 } as const;
   return (
     <MenuItems
       transition
       modal={false}
-      className={clsx(
-        items(),
-        className
-      )}
+      anchor={anchor}
+      className={clsx(items(), className)}
     >
       {children}
     </MenuItems>

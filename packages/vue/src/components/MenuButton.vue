@@ -2,6 +2,7 @@
 import { MenuButton } from "@headlessui/vue";
 import clsx from "clsx";
 import { menu as menuVariants } from "@libretexts/davis-core";
+import { inject, onMounted, ref, type Ref } from "vue";
 
 const props = defineProps<{
   disabled?: boolean;
@@ -9,10 +10,20 @@ const props = defineProps<{
 }>();
 
 const { trigger, triggerIcon } = menuVariants();
+
+const btnRef = ref<{ $el: HTMLElement } | null>(null);
+const triggerEl = inject<Ref<HTMLElement | null>>('davis:triggerEl');
+
+onMounted(() => {
+  if (triggerEl && btnRef.value) {
+    triggerEl.value = btnRef.value.$el;
+  }
+});
 </script>
 
 <template>
   <MenuButton
+    ref="btnRef"
     :disabled="props.disabled"
     :class="clsx(trigger(), props.class)"
   >

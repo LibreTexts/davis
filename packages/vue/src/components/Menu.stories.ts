@@ -73,6 +73,20 @@ export const WithShortcuts: Story = {
   }),
 };
 
+export const LongList: Story = {
+  render: () => ({
+    components: { Menu, MenuButton, MenuItems, MenuItem },
+    template: `
+      <Menu>
+        <MenuButton>Select Item</MenuButton>
+        <MenuItems>
+          <MenuItem v-for="i in 20" :key="i">Item {{ i }}</MenuItem>
+        </MenuItems>
+      </Menu>
+    `,
+  }),
+};
+
 export const WithDisabledItems: Story = {
   render: () => ({
     components: { Menu, MenuButton, MenuItems, MenuItem, MenuDivider },

@@ -45,6 +45,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       size,
       hasLeftIcon: !!leftIcon,
       hasRightIcon: !!rightIcon,
+      hasLabel: !!label,
     });
 
     return (
