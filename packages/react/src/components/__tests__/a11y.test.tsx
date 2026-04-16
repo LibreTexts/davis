@@ -129,6 +129,19 @@ describe("RadioGroup", () => {
       </RadioGroup>
     );
   });
+
+  it("has no a11y violations with options prop", async () => {
+    await expectNoA11yViolations(
+      <RadioGroup
+        label="Billing cycle"
+        name="billing"
+        options={[
+          { value: "monthly", label: "Monthly" },
+          { value: "annual", label: "Annual" },
+        ]}
+      />
+    );
+  });
 });
 
 describe("Switch", () => {

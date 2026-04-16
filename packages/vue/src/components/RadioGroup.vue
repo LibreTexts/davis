@@ -10,7 +10,10 @@ export const RadioGroupContextKey: InjectionKey<RadioGroupContextValue> = Symbol
 
 <script setup lang="ts">
 import { computed, provide, toRef } from "vue";
+import { radioOptionButton } from "@libretexts/davis-core";
 import clsx from "clsx";
+
+type RadioOptionItem = { label: string; value: string; disabled?: boolean };
 
 const props = withDefaults(
   defineProps<{
@@ -24,6 +27,8 @@ const props = withDefaults(
     orientation?: "vertical" | "horizontal";
     helperText?: string;
     errorMessage?: string;
+    /** Convenience prop: renders pre-styled button-style radio tiles. Use the default slot for custom radio options. */
+    options?: RadioOptionItem[];
     class?: string;
     labelClass?: string;
   }>(),
@@ -42,11 +47,30 @@ const emit = defineEmits<{
 const showError = computed(() => props.error && props.errorMessage);
 const showHelper = computed(() => !showError.value && props.helperText);
 
+const modelValueRef = toRef(props, "modelValue") as Ref<string | undefined>;
+const disabledRef = toRef(props, "disabled") as Ref<boolean>;
+
 provide(RadioGroupContextKey, {
-  modelValue: toRef(props, "modelValue") as Ref<string | undefined>,
+  modelValue: modelValueRef,
   onChange: (value: string) => emit("update:modelValue", value),
-  disabled: toRef(props, "disabled") as Ref<boolean>,
+  disabled: disabledRef,
 });
+
+function optionClasses(opt: RadioOptionItem): string {
+  const isChecked = props.modelValue === opt.value;
+  const isDisabled = (opt.disabled ?? false) || props.disabled;
+  return clsx(
+    radioOptionButton(),
+    isChecked && "!border-primary !bg-primary !text-white",
+    isDisabled && "opacity-50 cursor-not-allowed pointer-events-none"
+  );
+}
+
+function selectOption(opt: RadioOptionItem) {
+  if (!opt.disabled && !props.disabled) {
+    emit("update:modelValue", opt.value);
+  }
+}
 </script>
 
 <template>
@@ -73,7 +97,23 @@ provide(RadioGroupContextKey, {
         props.disabled && 'opacity-50 cursor-not-allowed'
       )"
     >
-      <slot />
+      <template v-if="props.options">
+        <div
+          v-for="opt in props.options"
+          :key="opt.value"
+          role="radio"
+          :aria-checked="props.modelValue === opt.value"
+          :aria-disabled="(opt.disabled || props.disabled) ? 'true' : undefined"
+          :tabindex="(opt.disabled || props.disabled) ? -1 : 0"
+          :class="optionClasses(opt)"
+          @click="selectOption(opt)"
+          @keydown.space.prevent="selectOption(opt)"
+          @keydown.enter.prevent="selectOption(opt)"
+        >
+          {{ opt.label }}
+        </div>
+      </template>
+      <slot v-else />
     </div>
     <p v-if="showError" :id="`${props.name}-error`" class="mt-2 text-sm text-danger">
       {{ props.errorMessage }}

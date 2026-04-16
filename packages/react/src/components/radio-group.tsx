@@ -2,11 +2,19 @@
 
 import {
   RadioGroup as HeadlessRadioGroup,
+  Radio as HeadlessRadio,
   Label,
   Field,
 } from "@headlessui/react";
+import { radioOptionButton } from "@libretexts/davis-core";
 import clsx from "clsx";
 import { type ReactNode } from "react";
+
+export type RadioOption = {
+  label: string;
+  value: string;
+  disabled?: boolean;
+};
 
 export type RadioGroupProps = {
   name: string;
@@ -22,8 +30,22 @@ export type RadioGroupProps = {
   orientation?: "vertical" | "horizontal";
   helperText?: string;
   errorMessage?: string;
-  children: ReactNode;
+  /** Convenience prop: renders pre-styled button-style radio tiles. Use children for custom radio options. */
+  options?: RadioOption[];
+  children?: ReactNode;
 };
+
+function RadioOptionButton({ value, label, disabled = false }: RadioOption) {
+  return (
+    <HeadlessRadio
+      value={value}
+      disabled={disabled}
+      className={radioOptionButton()}
+    >
+      {label}
+    </HeadlessRadio>
+  );
+}
 
 export function RadioGroup({
   name,
@@ -39,6 +61,7 @@ export function RadioGroup({
   orientation = "vertical",
   helperText,
   errorMessage,
+  options,
   children,
 }: RadioGroupProps) {
   const showError = error && errorMessage;
@@ -75,6 +98,9 @@ export function RadioGroup({
           showError ? `${name}-error` : showHelper ? `${name}-helper` : undefined
         }
       >
+        {options?.map((opt) => (
+          <RadioOptionButton key={opt.value} {...opt} />
+        ))}
         {children}
       </HeadlessRadioGroup>
       {showError && (

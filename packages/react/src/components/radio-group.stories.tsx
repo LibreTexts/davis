@@ -101,3 +101,27 @@ export const WithDisabledOption: Story = {
     </RadioGroup>
   ),
 };
+
+export const WithOptions: Story = {
+  args: {
+    orientation: "horizontal",
+    options: [
+      { value: "monthly", label: "Monthly" },
+      { value: "annual", label: "Annual" },
+      { value: "enterprise", label: "Enterprise" },
+    ],
+  },
+  render: (args) => <RadioGroup {...args} />,
+};
+
+export const WithOptionsDisabledItem: Story = {
+  args: {
+    orientation: "horizontal",
+    options: [
+      { value: "monthly", label: "Monthly" },
+      { value: "annual", label: "Annual", disabled: true },
+      { value: "enterprise", label: "Enterprise" },
+    ],
+  },
+  render: (args) => <RadioGroup {...args} />,
+};
