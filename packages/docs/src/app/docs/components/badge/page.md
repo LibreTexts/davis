@@ -38,7 +38,7 @@ Vue components are in development. This documentation will be updated when compo
 import { Badge } from '@libretexts/davis-react';
 
 export default function Example() {
-  return <Badge>New</Badge>;
+  return <Badge label="New" />;
 }
 ```
 {% /tab %}
@@ -49,7 +49,7 @@ import { Badge } from '@libretexts/davis-vue';
 </script>
 
 <template>
-  <Badge>New</Badge>
+  <Badge label="New" />
 </template>
 ```
 
@@ -64,20 +64,18 @@ Coming soon
 {% framework-tabs %}
 {% tab framework="react" %}
 ```tsx
-<Badge variant="primary">Primary</Badge>
-<Badge variant="secondary">Secondary</Badge>
-<Badge variant="success">Success</Badge>
-<Badge variant="warning">Warning</Badge>
-<Badge variant="danger">Danger</Badge>
+<Badge variant="primary" label="Primary" />
+<Badge variant="success" label="Success" />
+<Badge variant="warning" label="Warning" />
+<Badge variant="danger" label="Danger" />
 ```
 {% /tab %}
 {% tab framework="vue" %}
 ```vue
-<Badge variant="primary">Primary</Badge>
-<Badge variant="secondary">Secondary</Badge>
-<Badge variant="success">Success</Badge>
-<Badge variant="warning">Warning</Badge>
-<Badge variant="danger">Danger</Badge>
+<Badge variant="primary" label="Primary" />
+<Badge variant="success" label="Success" />
+<Badge variant="warning" label="Warning" />
+<Badge variant="danger" label="Danger" />
 ```
 
 Coming soon

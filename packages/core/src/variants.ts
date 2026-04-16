@@ -461,29 +461,29 @@ export const badge = tv({
   variants: {
     variant: {
       default: {
-        root:   'bg-gray-100 text-gray-800',
-        dot:    'bg-gray-500',
-        remove: 'text-gray-500 focus:ring-gray-400',
+        root:   'bg-neutral-100 text-neutral-800',
+        dot:    'bg-neutral-500',
+        remove: 'text-neutral-500 focus:ring-neutral-400',
       },
       primary: {
-        root:   'bg-blue-100 text-primary',
+        root:   'bg-primary-100 text-primary-700',
         dot:    'bg-primary',
-        remove: 'text-primary/70 focus:ring-primary',
+        remove: 'text-primary-500 focus:ring-primary',
       },
       success: {
-        root:   'bg-green-100 text-success',
+        root:   'bg-success-100 text-success-700',
         dot:    'bg-success',
-        remove: 'text-success/70 focus:ring-success',
+        remove: 'text-success-500 focus:ring-success',
       },
       warning: {
-        root:   'bg-amber-100 text-warning',
+        root:   'bg-warning-100 text-warning-700',
         dot:    'bg-warning',
-        remove: 'text-warning/70 focus:ring-warning',
+        remove: 'text-warning-500 focus:ring-warning',
       },
       danger: {
-        root:   'bg-red-100 text-danger',
+        root:   'bg-danger-100 text-danger-700',
         dot:    'bg-danger',
-        remove: 'text-danger/70 focus:ring-danger',
+        remove: 'text-danger-500 focus:ring-danger',
       },
     },
     size: {
