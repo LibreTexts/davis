@@ -1,3 +1,15 @@
+# [1.7.0](https://github.com/LibreTexts/davis/compare/v1.6.4...v1.7.0) (2026-04-16)
+
+
+### Bug Fixes
+
+* **Badge:** ensure sufficient text contrast and accurate docs ([7d8c9fc](https://github.com/LibreTexts/davis/commit/7d8c9fc8b8a502fd34d99aad8c933342e67a718d))
+
+
+### Features
+
+* **RadioGroup:** default radio group presentation with optional custom composition ([9fa5f38](https://github.com/LibreTexts/davis/commit/9fa5f38a6ba109a9d6f5b7c98d23a3e873a74bd0))
+
 ## [1.6.4](https://github.com/LibreTexts/davis/compare/v1.6.3...v1.6.4) (2026-04-15)
 
 
