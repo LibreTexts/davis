@@ -172,6 +172,39 @@ export const iconButton = tv({
   defaultVariants: BUTTON_DEFAULT_VARIANTS,
 });
 
+// Pre-built radio option tile — button-outline style, semantics via HeadlessUI Radio (React)
+// or manual role="radio" + aria-checked (Vue). data-[checked]/data-[disabled] are set by HeadlessUI.
+export const radioOptionButton = tv({
+  base: [
+    'inline-flex items-center justify-center',
+    'font-sans font-medium',
+    'transition-all duration-200',
+    'rounded-md',
+    'border border-gray-300',
+    'bg-transparent text-gray-700',
+    'hover:bg-surface-hover',
+    'active:bg-surface-active',
+    'focus-visible:outline-none',
+    'focus-visible:ring-2',
+    'focus-visible:ring-offset-2',
+    'focus-visible:ring-primary',
+    'cursor-pointer',
+    'data-[checked]:border-primary',
+    'data-[checked]:bg-primary',
+    'data-[checked]:text-white',
+    'data-[disabled]:opacity-50',
+    'data-[disabled]:cursor-not-allowed',
+  ].join(' '),
+  variants: {
+    size: {
+      sm: 'px-3 py-1.5 text-sm',
+      md: 'px-4 py-2 text-sm',
+      lg: 'px-5 py-2.5 text-base',
+    },
+  },
+  defaultVariants: { size: 'md' as const },
+});
+
 export type InputVariant = 'default' | 'error';
 export type InputSize   = 'sm' | 'md' | 'lg';
 

@@ -14,7 +14,7 @@ export { Radio } from "./components/radio";
 export type { RadioProps } from "./components/radio";
 
 export { RadioGroup } from "./components/radio-group";
-export type { RadioGroupProps } from "./components/radio-group";
+export type { RadioGroupProps, RadioOption } from "./components/radio-group";
 
 export { Switch } from "./components/switch";
 export type { SwitchProps } from "./components/switch";
