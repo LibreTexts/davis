@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/LibreTexts/davis/compare/v1.8.0...v1.8.1) (2026-04-17)
+
+
+### Bug Fixes
+
+* **Card:** improve border and shadow variants ([105596f](https://github.com/LibreTexts/davis/commit/105596f97aa9825a5369eb1894d084f70c5ab070))
+
 # [1.8.0](https://github.com/LibreTexts/davis/compare/v1.7.0...v1.8.0) (2026-04-17)
 
 
