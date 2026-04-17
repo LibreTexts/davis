@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { ComboboxOptions } from "@headlessui/vue";
+import { ListboxOptions } from "@headlessui/vue";
 import clsx from "clsx";
-import { combobox as comboboxVariants } from "@libretexts/davis-core";
+import { listbox as listboxVariants } from "@libretexts/davis-core";
 
 const props = defineProps<{
   class?: string;
 }>();
 
-const { options } = comboboxVariants();
+const { options } = listboxVariants();
 </script>
 
 <template>
@@ -19,8 +19,8 @@ const { options } = comboboxVariants();
     leave-from-class="opacity-100 translate-y-0"
     leave-to-class="opacity-0 -translate-y-1"
   >
-    <ComboboxOptions :class="clsx('absolute z-10 mt-1 w-full', options(), props.class)">
+    <ListboxOptions :class="clsx('absolute z-10 mt-1 w-full', options(), props.class)">
       <slot />
-    </ComboboxOptions>
+    </ListboxOptions>
   </transition>
 </template>

@@ -6,13 +6,14 @@ import ComboboxOptionsList from "./ComboboxOptionsList.vue";
 import ComboboxOptionItem from "./ComboboxOptionItem.vue";
 import ComboboxEmpty from "./ComboboxEmpty.vue";
 
-const meta: Meta<typeof Combobox> = {
+const meta: Meta = {
   title: "Forms/Combobox",
-  component: Combobox,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  component: Combobox as any,
   parameters: { layout: "padded" },
 };
 export default meta;
-type Story = StoryObj<typeof Combobox>;
+type Story = StoryObj;
 
 const FRUITS = ["Apple", "Banana", "Cherry", "Date", "Elderberry", "Fig", "Grape", "Honeydew", "Kiwi", "Lemon"];
 

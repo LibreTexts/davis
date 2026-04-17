@@ -182,12 +182,23 @@ export type { HeadingProps, HeadingLevel, HeadingColor, HeadingAlign } from "./c
 export { Combobox } from "./components/combobox";
 export type {
   ComboboxProps,
+  ComboboxLabelProps,
   ComboboxInputProps,
   ComboboxOptionsProps,
   ComboboxOptionItemProps,
   ComboboxEmptyProps,
-  ComboboxOption,
 } from "./components/combobox";
+export type { ComboboxSize } from "@libretexts/davis-core";
+
+export { Listbox } from "./components/listbox";
+export type {
+  ListboxProps,
+  ListboxLabelProps,
+  ListboxButtonProps,
+  ListboxOptionsProps,
+  ListboxOptionProps,
+} from "./components/listbox";
+export type { ListboxSize } from "@libretexts/davis-core";
 
 export { Breadcrumb } from "./components/breadcrumb";
 export type { BreadcrumbProps, BreadcrumbItemProps } from "./components/breadcrumb";

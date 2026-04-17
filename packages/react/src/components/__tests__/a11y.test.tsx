@@ -32,6 +32,8 @@ import { EmptyState } from "../empty-state";
 import { VisuallyHidden } from "../visually-hidden";
 import { SkipLink } from "../skip-link";
 import { LiveAnnouncerProvider, useAnnounce } from "../live-announcer";
+import { Combobox } from "../combobox";
+import { Listbox } from "../listbox";
 
 // Helper: renders component and checks for axe violations
 async function expectNoA11yViolations(ui: React.ReactElement) {
@@ -296,5 +298,117 @@ describe("LiveAnnouncer", () => {
       </LiveAnnouncerProvider>
     );
     expect(getByText("Announce")).toBeInTheDocument();
+  });
+});
+
+describe("Combobox", () => {
+  it("has no a11y violations in default state", async () => {
+    await expectNoA11yViolations(
+      <Combobox value={null} onChange={() => {}}>
+        <Combobox.Label>Framework</Combobox.Label>
+        <Combobox.Input aria-label="Framework" />
+        <Combobox.Options static>
+          <Combobox.Option value="react">React</Combobox.Option>
+          <Combobox.Option value="vue">Vue</Combobox.Option>
+        </Combobox.Options>
+      </Combobox>
+    );
+  });
+
+  it("has no a11y violations when disabled", async () => {
+    await expectNoA11yViolations(
+      <Combobox value={null} onChange={() => {}} disabled>
+        <Combobox.Input aria-label="Framework" />
+        <Combobox.Options static>
+          <Combobox.Option value="react">React</Combobox.Option>
+        </Combobox.Options>
+      </Combobox>
+    );
+  });
+
+  it("has no a11y violations with label", async () => {
+    await expectNoA11yViolations(
+      <Combobox value={null} onChange={() => {}}>
+        <Combobox.Label>Pick a framework</Combobox.Label>
+        <Combobox.Input />
+        <Combobox.Options static>
+          <Combobox.Option value="react">React</Combobox.Option>
+        </Combobox.Options>
+      </Combobox>
+    );
+  });
+
+  it("has no a11y violations in multiple mode with pre-selected value", async () => {
+    await expectNoA11yViolations(
+      <Combobox value={["react"] as unknown as string} onChange={() => {}} multiple>
+        <Combobox.Label>Frameworks</Combobox.Label>
+        <Combobox.Input
+          aria-label="Frameworks"
+          displayValue={(v) => (v as unknown as string[]).join(", ")}
+        />
+        <Combobox.Options static>
+          <Combobox.Option value="react">React</Combobox.Option>
+          <Combobox.Option value="vue">Vue</Combobox.Option>
+        </Combobox.Options>
+      </Combobox>
+    );
+  });
+});
+
+describe("Listbox", () => {
+  it("has no a11y violations in default state", async () => {
+    await expectNoA11yViolations(
+      <Listbox value={null} onChange={() => {}}>
+        <Listbox.Label>Framework</Listbox.Label>
+        <Listbox.Button aria-label="Framework" />
+        <Listbox.Options static>
+          <Listbox.Option value="react">React</Listbox.Option>
+          <Listbox.Option value="vue">Vue</Listbox.Option>
+        </Listbox.Options>
+      </Listbox>
+    );
+  });
+
+  it("has no a11y violations when disabled", async () => {
+    await expectNoA11yViolations(
+      <Listbox value={null} onChange={() => {}} disabled>
+        <Listbox.Button aria-label="Framework" />
+        <Listbox.Options static>
+          <Listbox.Option value="react">React</Listbox.Option>
+        </Listbox.Options>
+      </Listbox>
+    );
+  });
+
+  it("has no a11y violations with label", async () => {
+    await expectNoA11yViolations(
+      <Listbox value={null} onChange={() => {}}>
+        <Listbox.Label>Pick a framework</Listbox.Label>
+        <Listbox.Button />
+        <Listbox.Options static>
+          <Listbox.Option value="react">React</Listbox.Option>
+        </Listbox.Options>
+      </Listbox>
+    );
+  });
+
+  it("has no a11y violations in multiple mode with pre-selected value", async () => {
+    await expectNoA11yViolations(
+      <Listbox
+        value={["react"] as unknown as string}
+        onChange={() => {}}
+        multiple
+      >
+        <Listbox.Label>Frameworks</Listbox.Label>
+        <Listbox.Button
+          aria-label="Frameworks"
+          displayValue={(v) => (Array.isArray(v) ? (v as string[]).join(", ") : "")}
+        />
+        <Listbox.Options static>
+          <Listbox.Option value="react">React</Listbox.Option>
+          <Listbox.Option value="vue">Vue</Listbox.Option>
+        </Listbox.Options>
+      </Listbox>
+    );
   });
 });
