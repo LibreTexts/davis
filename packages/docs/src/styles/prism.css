@@ -1,15 +1,40 @@
 /**
  * Syntax highlighting theme for Davis docs
- * Based on popular dark editor themes (VS Code Dark+ / GitHub Dark)
- * Uses generic colors since Davis design system focuses on UI, not code highlighting
+ * Dark editor theme inspired by VS Code Dark+ / One Dark Pro
+ *
+ * Token color strategy:
+ *   HTML element tags (div, span):           green   #4ade80
+ *   JSX component names (Button, MyComp):    blue    #60a5fa  (class-name inside tag)
+ *   Props / attr-names:                      purple  #c084fc
+ *   Strings / attr-values:                   green   #86efac
+ *   Keywords (import, const, return):        violet  #a78bfa
+ *   Functions:                               amber   #fbbf24
+ *   Types / standalone class-names:          blue    #60a5fa
+ *   Numbers / booleans / constants:          orange  #fb923c
+ *   Operators:                               gray    #9ca3af
+ *   Punctuation / braces:                    yellow  #fbbf24
+ *   Comments:                               gray    #6b7280
+ *   Base text:                              white   #e4e4e7
+ *
+ * Cascade order matters: .token.tag is placed FIRST so that tokens with
+ * multiple types (e.g. a JSX prop span has classes "tag" AND "attr-name")
+ * are overridden by the later, more specific rules — not locked to red.
  */
 
-/* Base text color for code */
+/* Base text color */
 pre[class*='language-'] {
-  color: #e4e4e7; /* Light gray for readability on dark background */
+  color: #e4e4e7;
 }
 
-/* Comments - muted gray */
+/* ─── Tags (MUST be first) ──────────────────────────────────────────────────
+ * HTML element names (div, span, input…) that carry only the "tag" type.
+ * Tokens with additional types (attr-name, attr-value, class-name, punctuation)
+ * will be overridden by the later rules below at the same specificity. */
+.token.tag {
+  color: #4ade80; /* green */
+}
+
+/* ─── Comments ──────────────────────────────────────────────────────────── */
 .token.comment,
 .token.prolog,
 .token.doctype,
@@ -18,100 +43,97 @@ pre[class*='language-'] {
   font-style: italic;
 }
 
-/* Keywords - purple/violet */
+/* ─── Keywords ──────────────────────────────────────────────────────────── */
 .token.keyword,
 .token.control,
 .token.directive,
 .token.unit,
 .token.rule,
-.token.pseudo-class,
-.token.important {
-  color: #c084fc;
+.token.pseudo-class {
+  color: #a78bfa; /* violet */
 }
 
-/* Strings and text - green */
+/* ─── Strings & attribute values ────────────────────────────────────────── */
 .token.string,
 .token.attr-value,
 .token.char {
-  color: #86efac;
+  color: #86efac; /* light green */
 }
 
-/* Functions and methods - yellow */
+/* ─── Functions & methods ───────────────────────────────────────────────── */
 .token.function,
 .token.function-name,
 .token.method {
-  color: #fbbf24;
+  color: #fbbf24; /* amber */
 }
 
-/* Class names and types - cyan/blue */
+/* ─── Class names & types (blue)
+ * Covers both standalone TypeScript types AND JSX component names.
+ * A JSX component token carries both "tag" and "class-name" classes;
+ * since this rule comes after .token.tag, it wins and renders blue. ──── */
 .token.class-name,
 .token.type,
 .token.builtin,
 .token.selector {
-  color: #7dd3fc;
+  color: #60a5fa; /* blue */
 }
 
-/* Properties and attributes - light blue */
+/* ─── Props / attribute names (purple) ──────────────────────────────────── */
 .token.property,
-.token.attr-name,
+.token.attr-name {
+  color: #c084fc; /* purple */
+}
+
+/* ─── Numbers, booleans & constants ────────────────────────────────────── */
+.token.number,
+.token.boolean,
 .token.constant,
 .token.symbol {
-  color: #60a5fa;
+  color: #fb923c; /* orange */
 }
 
-/* Numbers and booleans - orange */
-.token.number,
-.token.boolean {
-  color: #fb923c;
-}
-
-/* Operators and punctuation - subtle gray */
+/* ─── Operators ─────────────────────────────────────────────────────────── */
 .token.operator,
-.token.punctuation,
 .token.attr-equals {
-  color: #9ca3af;
+  color: #9ca3af; /* muted gray */
 }
 
-/* Tags - red/pink for HTML/JSX */
-.token.tag {
-  color: #f87171;
+/* ─── Punctuation / braces / angle brackets (white)
+ * Placed AFTER .token.tag so that < > in JSX/HTML get white, not green. ─ */
+.token.punctuation {
+  color: #fff; /* white */
 }
 
-/* Regex and special - magenta */
+/* ─── Regex & variables ─────────────────────────────────────────────────── */
 .token.regex,
-.token.important,
 .token.variable {
-  color: #e879f9;
+  color: #e879f9; /* magenta */
 }
 
-/* Deleted text in diffs */
+/* ─── Diff helpers ──────────────────────────────────────────────────────── */
 .token.deleted {
   color: #fca5a5;
 }
 
-/* Inserted text in diffs */
 .token.inserted {
   color: #86efac;
 }
 
-/* URLs and links */
+/* ─── Misc ──────────────────────────────────────────────────────────────── */
 .token.url {
   color: #60a5fa;
   text-decoration: underline;
 }
 
-/* Make certain tokens bold */
 .token.bold,
 .token.important {
   font-weight: bold;
 }
 
-/* Italic tokens */
 .token.italic {
   font-style: italic;
 }
 
-/* Namespace opacity */
 .token.namespace {
   opacity: 0.7;
 }
