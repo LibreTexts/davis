@@ -575,8 +575,8 @@ export const card = tv({
   variants: {
     variant: {
       default:  { root: 'border-gray-200' },
-      elevated: { root: 'border-gray-400 shadow-lg' },
-      outline:  { root: 'border-gray-400' },
+      elevated: { root: 'border-gray-300 shadow-md' },
+      outline:  { root: 'border-gray-300' },
     },
     padding: {
       // Padding lives on `root` so it applies whether or not sub-components are used.
