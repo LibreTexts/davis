@@ -1107,21 +1107,83 @@ export const numberInput = tv({
 export const combobox = tv({
   slots: {
     root:      'relative w-full',
-    inputWrap: 'relative',
+    label:     'block text-base/6 font-medium text-gray-700',
+    inputWrap: 'relative mt-1.5',
+    input: [
+      'block w-full rounded-md bg-white text-gray-900 border border-neutral-500',
+      'pr-10',
+      'placeholder:text-neutral-500 transition-colors duration-200',
+      INPUTS_FOCUS,
+      INPUTS_DISABLED,
+    ].join(' '),
     button:    'absolute inset-y-0 right-0 flex items-center pr-2 text-gray-400 hover:text-gray-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
     options: [
-      'absolute z-10 mt-1 w-full overflow-auto rounded-md bg-white py-1',
+      'overflow-auto rounded-md bg-white py-1',
       'shadow-lg ring-1 ring-black/5 focus:outline-none',
       'max-h-60',
+      'data-[closed]:opacity-0 data-[closed]:-translate-y-1',
+      'data-[enter]:opacity-100 data-[enter]:translate-y-0',
+      'transition duration-100 ease-out',
     ].join(' '),
     option: [
       'relative cursor-default select-none px-4 py-2 text-sm',
       'data-[focus]:bg-primary data-[focus]:text-white',
+      'data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed',
       'text-gray-900',
     ].join(' '),
     noResults: 'px-4 py-2 text-sm text-gray-500 text-center',
   },
+  variants: {
+    size: {
+      sm: { input: INPUT_SIZE_VARIANTS.sm, option: 'px-3 py-1.5 text-xs' },
+      md: { input: INPUT_SIZE_VARIANTS.md, option: 'px-4 py-2 text-sm'   },
+      lg: { input: INPUT_SIZE_VARIANTS.lg, option: 'px-5 py-2.5 text-sm' },
+    },
+  },
+  defaultVariants: { size: 'md' as const },
 });
+export type ComboboxSize = 'sm' | 'md' | 'lg';
+
+// ─── Listbox ──────────────────────────────────────────────────────────────────
+
+export const listbox = tv({
+  slots: {
+    root:       'relative w-full',
+    label:      'block text-base/6 font-medium text-gray-700',
+    buttonWrap: 'relative mt-1.5',
+    button: [
+      'relative block w-full rounded-md bg-white text-gray-900 border border-neutral-500',
+      'text-left cursor-default select-none pr-10',
+      INPUTS_FOCUS,
+      INPUTS_DISABLED,
+      'transition-colors duration-200',
+    ].join(' '),
+    chevron:  'absolute inset-y-0 right-0 flex items-center pr-2 text-gray-400 pointer-events-none',
+    options: [
+      'overflow-auto rounded-md bg-white py-1',
+      'shadow-lg ring-1 ring-black/5 focus:outline-none',
+      'max-h-60',
+      'data-[closed]:opacity-0 data-[closed]:-translate-y-1',
+      'data-[enter]:opacity-100 data-[enter]:translate-y-0',
+      'transition duration-100 ease-out',
+    ].join(' '),
+    option: [
+      'relative cursor-default select-none px-4 py-2 text-sm',
+      'data-[focus]:bg-primary data-[focus]:text-white',
+      'data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed',
+      'text-gray-900',
+    ].join(' '),
+  },
+  variants: {
+    size: {
+      sm: { button: INPUT_SIZE_VARIANTS.sm, option: 'px-3 py-1.5 text-xs' },
+      md: { button: INPUT_SIZE_VARIANTS.md, option: 'px-4 py-2 text-sm'   },
+      lg: { button: INPUT_SIZE_VARIANTS.lg, option: 'px-5 py-2.5 text-sm' },
+    },
+  },
+  defaultVariants: { size: 'md' as const },
+});
+export type ListboxSize = 'sm' | 'md' | 'lg';
 
 // ─── Navigation ──────────────────────────────────────────────────────────────
 

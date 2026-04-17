@@ -1,9 +1,9 @@
 <script setup lang="ts" generic="T extends string | number | boolean | object | null">
-import { ComboboxOption } from "@headlessui/vue";
+import { ListboxOption } from "@headlessui/vue";
 import clsx from "clsx";
 import { inject, ref } from "vue";
-import { combobox as comboboxVariants } from "@libretexts/davis-core";
-import { ComboboxMultipleKey } from "./combobox-context";
+import { listbox as listboxVariants } from "@libretexts/davis-core";
+import { ListboxMultipleKey } from "./listbox-context";
 
 const props = withDefaults(
   defineProps<{
@@ -16,12 +16,12 @@ const props = withDefaults(
   }
 );
 
-const isMultiple = inject(ComboboxMultipleKey, ref(false));
-const { option } = comboboxVariants();
+const isMultiple = inject(ListboxMultipleKey, ref(false));
+const { option } = listboxVariants();
 </script>
 
 <template>
-  <ComboboxOption
+  <ListboxOption
     :value="props.value"
     v-bind="props.disabled ? { disabled: true } : {}"
     :class="clsx(option(), props.class)"
@@ -41,5 +41,5 @@ const { option } = comboboxVariants();
         </svg>
       </span>
     </span>
-  </ComboboxOption>
+  </ListboxOption>
 </template>

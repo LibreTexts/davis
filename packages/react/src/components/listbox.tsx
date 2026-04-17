@@ -1,136 +1,139 @@
 "use client";
 
 import {
-  Combobox as HeadlessCombobox,
-  ComboboxInput,
-  ComboboxButton,
-  ComboboxOptions,
-  ComboboxOption,
-  ComboboxLabel,
+  Listbox as HeadlessListbox,
+  ListboxButton,
+  ListboxLabel,
+  ListboxOptions,
+  ListboxOption,
 } from "@headlessui/react";
 import clsx from "clsx";
 import { type ReactNode, type ReactElement, createContext, useContext } from "react";
-import { combobox as comboboxVariants, type ComboboxSize } from "@libretexts/davis-core";
+import { listbox as listboxVariants, type ListboxSize } from "@libretexts/davis-core";
 
 // ─── Context ──────────────────────────────────────────────────────────────────
 
-const ComboboxMultipleContext = createContext<boolean>(false);
+const ListboxMultipleContext = createContext<boolean>(false);
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-export type ComboboxProps<T = string> = {
+export type ListboxProps<T = string> = {
   value: T | null;
-  onChange: (value: T | null) => void;
+  onChange: (value: T) => void;
   disabled?: boolean;
   multiple?: boolean;
-  nullable?: boolean;
   name?: string;
   by?: keyof T & string | ((a: T, b: T) => boolean);
-  onClose?: () => void;
   children: ReactNode;
   className?: string;
   [key: string]: unknown;
 };
 
-export type ComboboxLabelProps = {
+export type ListboxLabelProps = {
   children: ReactNode;
   className?: string;
 };
 
-export type ComboboxInputProps<T = string> = {
-  placeholder?: string;
+export type ListboxButtonProps<T = string> = {
   displayValue?: (value: T | null) => string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  size?: ComboboxSize;
+  placeholder?: string;
+  size?: ListboxSize;
+  disabled?: boolean;
   className?: string;
   "aria-label"?: string;
 };
 
-export type ComboboxOptionsProps = {
+export type ListboxOptionsProps = {
   children: ReactNode;
   className?: string;
   static?: boolean;
 };
 
-type OptionRenderBag = { selected: boolean; active: boolean; disabled: boolean; focus: boolean };
+type OptionRenderBag = { selected: boolean; active: boolean; disabled: boolean; focus: boolean; selectedOption: boolean };
 
-export type ComboboxOptionItemProps<T = string> = {
+export type ListboxOptionProps<T = string> = {
   value: T;
   children: ReactNode | ((bag: OptionRenderBag) => ReactElement);
   disabled?: boolean;
   className?: string;
 };
 
-export type ComboboxEmptyProps = {
-  children?: ReactNode;
-  className?: string;
-};
-
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-function ComboboxLabelComponent({ children, className }: ComboboxLabelProps) {
-  const { label } = comboboxVariants();
+function ListboxLabelComponent({ children, className }: ListboxLabelProps) {
+  const { label } = listboxVariants();
   return (
-    <ComboboxLabel className={clsx(label(), className)}>
+    <ListboxLabel className={clsx(label(), className)}>
       {children}
-    </ComboboxLabel>
+    </ListboxLabel>
   );
 }
-ComboboxLabelComponent.displayName = "Combobox.Label";
+ListboxLabelComponent.displayName = "Listbox.Label";
 
-function ComboboxInputComponent<T = string>({
-  placeholder,
+function ListboxButtonComponent<T = string>({
   displayValue,
-  onChange,
+  placeholder,
   size,
+  disabled,
   className,
   "aria-label": ariaLabel,
-}: ComboboxInputProps<T>) {
-  const { inputWrap, input, button } = comboboxVariants({ size });
+}: ListboxButtonProps<T>) {
+  const { buttonWrap, button, chevron } = listboxVariants({ size });
   return (
-    <div className={inputWrap()}>
-      <ComboboxInput
-        className={clsx(input(), className)}
-        placeholder={placeholder}
-        displayValue={
-          (displayValue ?? ((v) => (v == null ? "" : String(v)))) as (item: unknown) => string
-        }
-        {...(onChange !== undefined ? { onChange } : {})}
+    <div className={buttonWrap()}>
+      <ListboxButton
+        className={clsx(button(), className)}
+        {...(disabled !== undefined ? { disabled } : {})}
         {...(ariaLabel !== undefined ? { "aria-label": ariaLabel } : {})}
-      />
-      <ComboboxButton className={button()} aria-label="Toggle options">
-        <ChevronUpDownIcon />
-      </ComboboxButton>
+      >
+        {({ value }: { value: T | null }) => {
+          const isEmpty = value == null || (Array.isArray(value) && (value as unknown[]).length === 0);
+          return (
+          <>
+            <span className="block truncate">
+              {!isEmpty ? (
+                displayValue ? displayValue(value as T) : String(value)
+              ) : (
+                <span className="text-neutral-500">{placeholder ?? "Select\u2026"}</span>
+              )}
+            </span>
+            <span className={chevron()} aria-hidden="true">
+              <ChevronUpDownIcon />
+            </span>
+          </>
+          );
+        }}
+      </ListboxButton>
     </div>
   );
 }
-ComboboxInputComponent.displayName = "Combobox.Input";
+ListboxButtonComponent.displayName = "Listbox.Button";
 
-function ComboboxOptionsComponent({ children, className, static: isStatic }: ComboboxOptionsProps) {
-  const { options } = comboboxVariants();
+function ListboxOptionsComponent({ children, className, static: isStatic }: ListboxOptionsProps) {
+  const { options } = listboxVariants();
   return (
-    <ComboboxOptions
+    <ListboxOptions
       transition
       anchor={{ to: "bottom start", gap: 4 }}
       className={clsx(options(), className)}
       {...(isStatic !== undefined ? { static: isStatic } : {})}
     >
       {children}
-    </ComboboxOptions>
+    </ListboxOptions>
   );
 }
-ComboboxOptionsComponent.displayName = "Combobox.Options";
+ListboxOptionsComponent.displayName = "Listbox.Options";
 
-function ComboboxOptionComponent<T = string>({
+function ListboxOptionComponent<T = string>({
   value,
   children,
   disabled,
   className,
-}: ComboboxOptionItemProps<T>) {
-  const { option } = comboboxVariants();
-  const isMultiple = useContext(ComboboxMultipleContext);
+}: ListboxOptionProps<T>) {
+  const { option } = listboxVariants();
+  const isMultiple = useContext(ListboxMultipleContext);
   return (
-    <ComboboxOption
+    <ListboxOption
       value={value}
       {...(disabled !== undefined ? { disabled } : {})}
       className={clsx(option(), className)}
@@ -147,61 +150,49 @@ function ComboboxOptionComponent<T = string>({
               )}
             </span>
           )}
-    </ComboboxOption>
+    </ListboxOption>
   );
 }
-ComboboxOptionComponent.displayName = "Combobox.Option";
-
-function ComboboxEmpty({ children = "No results found.", className }: ComboboxEmptyProps) {
-  const { noResults } = comboboxVariants();
-  return <p className={clsx(noResults(), className)}>{children}</p>;
-}
-ComboboxEmpty.displayName = "Combobox.Empty";
+ListboxOptionComponent.displayName = "Listbox.Option";
 
 // ─── Root ─────────────────────────────────────────────────────────────────────
 
-function ComboboxRoot<T = string>({
+function ListboxRoot<T = string>({
   value,
   onChange,
   disabled,
   multiple,
-  nullable,
   name,
   by,
-  onClose,
   children,
   className,
   ...props
-}: ComboboxProps<T>) {
-  const { root } = comboboxVariants();
+}: ListboxProps<T>) {
+  const { root } = listboxVariants();
   return (
-    <ComboboxMultipleContext.Provider value={!!multiple}>
-      <HeadlessCombobox
+    <ListboxMultipleContext.Provider value={!!multiple}>
+      <HeadlessListbox
         value={value as T}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        onChange={onChange as (v: any) => void}
+        onChange={onChange}
         {...(disabled !== undefined ? { disabled } : {})}
         {...(multiple !== undefined ? { multiple } : {})}
-        {...(nullable !== undefined ? { nullable } : {})}
         {...(name !== undefined ? { name } : {})}
         {...(by !== undefined ? { by } : {})}
-        {...(onClose !== undefined ? { onClose } : {})}
         {...props}
       >
         <div className={clsx(root(), className)}>{children}</div>
-      </HeadlessCombobox>
-    </ComboboxMultipleContext.Provider>
+      </HeadlessListbox>
+    </ListboxMultipleContext.Provider>
   );
 }
 
 // ─── Compound assembly ────────────────────────────────────────────────────────
 
-export const Combobox = Object.assign(ComboboxRoot, {
-  Label: ComboboxLabelComponent,
-  Input: ComboboxInputComponent,
-  Options: ComboboxOptionsComponent,
-  Option: ComboboxOptionComponent,
-  Empty: ComboboxEmpty,
+export const Listbox = Object.assign(ListboxRoot, {
+  Label: ListboxLabelComponent,
+  Button: ListboxButtonComponent,
+  Options: ListboxOptionsComponent,
+  Option: ListboxOptionComponent,
 });
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
