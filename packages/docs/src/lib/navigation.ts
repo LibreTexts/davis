@@ -52,6 +52,7 @@ export const navigation: NavGroup[] = [
       { title: 'Form Section', href: '/docs/components/form-section' },
       { title: 'Input', href: '/docs/components/input' },
       { title: 'Input Group', href: '/docs/components/input-group' },
+      { title: 'Listbox', href: '/docs/components/listbox' },
       { title: 'Number Input', href: '/docs/components/number-input' },
       { title: 'Radio Group', href: '/docs/components/radio-group' },
       { title: 'Select', href: '/docs/components/select' },
