@@ -1,3 +1,15 @@
+# [1.8.0](https://github.com/LibreTexts/davis/compare/v1.7.0...v1.8.0) (2026-04-17)
+
+
+### Bug Fixes
+
+* **Card:** increase border and shadow visibility ([651bedc](https://github.com/LibreTexts/davis/commit/651bedc9ec5cc1393526d1e1168c415f3e0074c0))
+
+
+### Features
+
+* combobox and listbox improvements ([c07483b](https://github.com/LibreTexts/davis/commit/c07483b2028ed1a4e5ffc44ff7df70762071cf5e))
+
 # [1.7.0](https://github.com/LibreTexts/davis/compare/v1.6.4...v1.7.0) (2026-04-16)
 
 
