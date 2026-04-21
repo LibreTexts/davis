@@ -53,6 +53,18 @@ export type {
   DialogCloseProps,
 } from "./components/dialog";
 
+export { Modal } from "./components/modal";
+export type {
+  ModalProps,
+  ModalSize,
+  ModalHeaderProps,
+  ModalTitleProps,
+  ModalDescriptionProps,
+  ModalBodyProps,
+  ModalFooterProps,
+  ModalCloseProps,
+} from "./components/modal";
+
 export { Toast, ToastContainer } from "./components/notification";
 export type { ToastContainerProps } from "./components/notification";
 
