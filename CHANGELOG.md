@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/LibreTexts/davis/compare/v1.8.1...v1.9.0) (2026-04-22)
+
+
+### Features
+
+* add modal component ([#18](https://github.com/LibreTexts/davis/issues/18)) ([cbaaf8c](https://github.com/LibreTexts/davis/commit/cbaaf8cd210f746ec453f3fdd7086f32186f8d97))
+
 ## [1.8.1](https://github.com/LibreTexts/davis/compare/v1.8.0...v1.8.1) (2026-04-17)
 
 
