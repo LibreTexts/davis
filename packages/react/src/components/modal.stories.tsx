@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { Button } from "./button";
+import { Input } from "./input";
 import { Modal } from "./modal";
 
 const meta: Meta<typeof Modal> = {
@@ -144,26 +145,8 @@ export const WithForm: Story = {
             <Modal.Close />
           </Modal.Header>
           <div className="px-6 py-4 space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Name
-              </label>
-              <input
-                type="text"
-                defaultValue="Jane Doe"
-                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Email
-              </label>
-              <input
-                type="email"
-                defaultValue="jane@example.com"
-                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-            </div>
+            <Input name="name" label="Name" defaultValue="Jane Doe" />
+            <Input name="email" label="Email" type="email" defaultValue="jane@example.com" />
           </div>
           <Modal.Footer>
             <Button variant="outline" onClick={() => setOpen(false)}>
