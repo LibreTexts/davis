@@ -320,19 +320,41 @@ export const select = tv({
 });
 
 export const checkbox = tv({
-  base: [
-    'rounded border bg-white',
-    'border-neutral-500',
-    'group-data-[checked]:border-primary group-data-[checked]:bg-primary',
-    'group-data-[indeterminate]:border-primary group-data-[indeterminate]:bg-primary',
-    'group-data-[disabled]:border-neutral-300 group-data-[disabled]:bg-surface-disabled',
-  ].join(' '),
+  slots: {
+    // React: outer HeadlessCheckbox wrapper (grid container)
+    group: 'group grid grid-cols-1 cursor-pointer data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50',
+    // React: visual <span> / Vue: native <input appearance-none>
+    box: [
+      'col-start-1 row-start-1 rounded border cursor-pointer',
+      'appearance-none absolute inset-0 w-full h-full m-0',
+      'border-neutral-500 bg-white',
+      'group-data-[checked]:border-primary group-data-[checked]:bg-primary',
+      'group-data-[indeterminate]:border-primary group-data-[indeterminate]:bg-primary',
+      'group-data-[disabled]:border-gray-300 group-data-[disabled]:bg-surface-disabled group-data-[disabled]:cursor-not-allowed',
+    ].join(' '),
+    // Both: SVG checkmark/indeterminate overlay
+    icon: [
+      'col-start-1 row-start-1 self-center justify-self-center',
+      'absolute inset-0 z-10 m-auto',
+      'pointer-events-none stroke-white',
+      'group-data-[disabled]:stroke-gray-950/25',
+    ].join(' '),
+    // Vue: relative sizing wrapper around the native input + svg
+    wrapper: 'relative',
+  },
   variants: {
     variant: {
-      default: '',
-      error: 'border-danger bg-red-50 group-data-[checked]:bg-danger',
+      default: {},
+      error: {
+        box: '!border-danger !bg-red-50 group-data-[checked]:!bg-danger',
+        icon: 'stroke-danger',
+      },
     },
-    size: CHECKBOX_RADIO_SIZE_VARIANTS,
+    size: {
+      sm: { group: 'size-3.5', box: 'size-3.5', icon: 'size-2.5', wrapper: 'size-3.5' },
+      md: { group: 'size-4', box: 'size-4', icon: 'size-3', wrapper: 'size-4' },
+      lg: { group: 'size-5', box: 'size-5', icon: 'size-3.5', wrapper: 'size-5' },
+    },
   },
   defaultVariants: INPUT_DEFAULT_VARIANTS,
 });
@@ -510,6 +532,45 @@ export const dialog = tv({
   base: 'relative w-full bg-white rounded-lg shadow-lg',
   variants: {
     size: DIALOG_SIZE_VARIANTS,
+  },
+  defaultVariants: {
+    size: 'md' as const,
+  },
+});
+
+export const modal = tv({
+  slots: {
+    backdrop: [
+      'fixed inset-0 bg-black/50',
+      'transition duration-200 ease-out',
+      'data-[closed]:opacity-0',
+      'data-[enter]:opacity-100',
+    ].join(' '),
+    panel: [
+      'relative w-full bg-white rounded-lg shadow-lg',
+      'transition duration-200 ease-out',
+      'data-[closed]:opacity-0 data-[closed]:scale-95',
+      'data-[enter]:opacity-100 data-[enter]:scale-100',
+    ].join(' '),
+    header:      'flex items-center justify-between px-6 py-4 border-b border-gray-200',
+    title:       'text-lg font-semibold text-gray-900',
+    description: 'text-sm text-gray-500',
+    body:        'flex-1 overflow-y-auto px-6 py-4',
+    footer:      'flex items-center justify-end gap-3 px-6 py-4 border-t border-gray-200',
+    closeBtn: [
+      'rounded-md p-1 text-gray-400 hover:text-gray-500 hover:bg-gray-100',
+      'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+      'transition-colors duration-150',
+    ].join(' '),
+  },
+  variants: {
+    size: {
+      sm:   { panel: 'max-w-sm'   },
+      md:   { panel: 'max-w-md'   },
+      lg:   { panel: 'max-w-lg'   },
+      xl:   { panel: 'max-w-xl'   },
+      full: { panel: 'max-w-full' },
+    },
   },
   defaultVariants: {
     size: 'md' as const,
