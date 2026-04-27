@@ -1,6 +1,6 @@
 {
   "name": "@libretexts/davis-react-table",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "Full-featured, accessible DataTable for React built on TanStack Table, styled with the Davis Design System",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",

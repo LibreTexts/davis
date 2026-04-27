@@ -1,3 +1,11 @@
+## [1.9.1](https://github.com/LibreTexts/davis/compare/v1.9.0...v1.9.1) (2026-04-27)
+
+
+### Bug Fixes
+
+* **Core:** convert default Tailwind colors used to hex for a11y-tool compat ([a5379d9](https://github.com/LibreTexts/davis/commit/a5379d9d93931105a06b37ae1bd80ad694503b7a))
+* **Core:** incorrect padding when Card subcomponents used ([4522b77](https://github.com/LibreTexts/davis/commit/4522b772ae30e3fc15ced3040a01106e2a92a59b))
+
 # [1.9.0](https://github.com/LibreTexts/davis/compare/v1.8.1...v1.9.0) (2026-04-22)
 
 
