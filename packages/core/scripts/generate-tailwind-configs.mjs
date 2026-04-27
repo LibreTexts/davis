@@ -17,6 +17,7 @@ const rootDir = join(__dirname, '..');
 const {
   COLORS, SURFACE, FONT_FAMILY_SANS, FONT_SIZE, RADIUS, SHADOWS, FOCUS_RING, MOTION, TARGET_SIZE,
   Z_INDEX, OPACITY, BORDER_WIDTH, BORDER_COLOR, FONT_WEIGHT, LETTER_SPACING, BREAKPOINTS, ICON_SIZE, CONTAINER,
+  TAILWIND_HEX_OVERRIDES,
 } = await import('../dist/index.js');
 
 // ─── Helpers ─────────────────────────────────────────────────────────
@@ -173,6 +174,15 @@ ${Object.entries(ICON_SIZE).map(([name, value]) => `  --icon-size-${name}: ${val
   /* ─── Container / Content Width ────────────────────────────── */
 
 ${Object.entries(CONTAINER).map(([name, value]) => `  --container-${name}: ${value};`).join('\n')}
+
+  /* ─── Tailwind Default Color Overrides (hex for a11y tool compat) ── */
+  /* Tailwind v4 defines its built-in palettes using oklch(), which     */
+  /* some accessibility tools cannot parse. These hex equivalents       */
+  /* ensure color contrast checking works in all tools (e.g. ANDI).    */
+
+${Object.entries(TAILWIND_HEX_OVERRIDES).map(([name, shades]) =>
+  colorShadeVars(name, shades)
+).join('\n\n')}
 }
 `;
 
