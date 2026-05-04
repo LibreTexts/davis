@@ -1,6 +1,8 @@
 <script lang="ts">
 export type AlertVariant = "info" | "success" | "warning" | "error";
 
+export type AlertHeadingElement = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+
 export type AlertAction = {
   label: string;
   onClick: () => void;
@@ -15,6 +17,7 @@ const props = withDefaults(
   defineProps<{
     variant?: AlertVariant;
     title?: string;
+    asHeading?: AlertHeadingElement;
     message: string;
     showIcon?: boolean;
     dismissible?: boolean;
@@ -23,6 +26,7 @@ const props = withDefaults(
   }>(),
   {
     variant: "info",
+    asHeading: "h2",
     showIcon: true,
     dismissible: false,
   }
@@ -65,7 +69,7 @@ const ACTION_TEXT_CLASSES: Record<AlertVariant, string> = {
     </template>
 
     <div :class="styles.body()">
-      <p v-if="props.title" :class="styles.title()">{{ props.title }}</p>
+      <component v-if="props.title" :is="props.asHeading" :class="styles.title()">{{ props.title }}</component>
       <p :class="styles.message()">{{ props.message }}</p>
 
       <div v-if="props.action" :class="styles.action()">

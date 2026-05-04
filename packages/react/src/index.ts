@@ -39,6 +39,7 @@ export { Alert } from "./components/alert";
 export type {
   AlertProps,
   AlertVariant,
+  AlertHeadingElement,
   AlertAction,
 } from "./components/alert";
 

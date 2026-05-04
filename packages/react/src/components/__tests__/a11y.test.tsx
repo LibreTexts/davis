@@ -161,6 +161,38 @@ describe("Alert", () => {
       );
     }
   });
+
+  it("has no a11y violations with title", async () => {
+    await expectNoA11yViolations(
+      <Alert title="Heads up" message="This is an informational alert." />
+    );
+  });
+
+  it("renders title as h2 by default", () => {
+    const { container } = render(
+      <Alert title="Heads up" message="This is an informational alert." />
+    );
+    const heading = container.querySelector("h2");
+    expect(heading).not.toBeNull();
+    expect(heading!.textContent).toBe("Heads up");
+  });
+
+  it("renders title with custom heading level", () => {
+    const { container } = render(
+      <Alert title="Heads up" message="Info" asHeading="h4" />
+    );
+    expect(container.querySelector("h4")).not.toBeNull();
+  });
+
+  it("renders title as p when asHeading is p", () => {
+    const { container } = render(
+      <Alert title="Heads up" message="Info" asHeading="p" />
+    );
+    expect(container.querySelector("h2")).toBeNull();
+    const paragraphs = container.querySelectorAll("p");
+    const titleP = Array.from(paragraphs).find((p) => p.textContent === "Heads up");
+    expect(titleP).not.toBeUndefined();
+  });
 });
 
 describe("Badge", () => {

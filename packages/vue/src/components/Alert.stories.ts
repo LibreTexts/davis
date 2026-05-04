@@ -7,6 +7,7 @@ const meta: Meta<typeof Alert> = {
   parameters: { layout: "padded" },
   argTypes: {
     variant: { control: "select", options: ["info", "success", "warning", "error"] },
+    asHeading: { control: "select", options: ["h1", "h2", "h3", "h4", "h5", "h6", "p"] },
     showIcon: { control: "boolean" },
     dismissible: { control: "boolean" },
   },
@@ -44,6 +45,18 @@ export const WithTitle: Story = {
     title: "Success!",
     message: "Your changes have been saved successfully.",
   },
+};
+
+export const CustomHeadingLevel: Story = {
+  render: () => ({
+    components: { Alert },
+    template: `
+      <div class="flex flex-col gap-4 max-w-xl">
+        <Alert variant="info" title="Rendered as h3" message="Using asHeading='h3' for nested sections." asHeading="h3" />
+        <Alert variant="warning" title="Rendered as p" message="Using asHeading='p' to opt out of heading semantics." asHeading="p" />
+      </div>
+    `,
+  }),
 };
 
 export const Dismissible: Story = {

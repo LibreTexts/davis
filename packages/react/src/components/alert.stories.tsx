@@ -12,6 +12,7 @@ const meta: Meta<typeof Alert> = {
   argTypes: {
     variant:     { control: "select", options: ["info", "success", "warning", "error"] },
     title:       { control: "text" },
+    asHeading:   { control: "select", options: ["h1", "h2", "h3", "h4", "h5", "h6", "p"] },
     message:     { control: "text" },
     showIcon:    { control: "boolean" },
     dismissible: { control: "boolean" },
@@ -107,6 +108,16 @@ export const CustomIcon: Story = {
       action={{ label: "Upgrade now", onClick: () => console.log("Upgrade") }}
       className="max-w-xl"
     />
+  ),
+  args: {},
+};
+
+export const CustomHeadingLevel: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4 max-w-xl">
+      <Alert variant="info"    title="Rendered as h3" message="Using asHeading='h3' for nested sections." asHeading="h3" />
+      <Alert variant="warning" title="Rendered as p"  message="Using asHeading='p' to opt out of heading semantics." asHeading="p" />
+    </div>
   ),
   args: {},
 };

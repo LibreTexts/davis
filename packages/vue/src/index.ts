@@ -87,7 +87,7 @@ export { default as AccordionTrigger } from "./components/AccordionTrigger.vue";
 export { default as AccordionPanel } from "./components/AccordionPanel.vue";
 
 // Re-export types from components
-export type { AlertVariant, AlertAction } from "./components/Alert.vue";
+export type { AlertVariant, AlertHeadingElement, AlertAction } from "./components/Alert.vue";
 export type { AvatarSize } from "./components/Avatar.vue";
 export type { BadgeVariant, BadgeSize } from "./components/Badge.vue";
 export type { CardVariant, CardPadding } from "./components/Card.vue";

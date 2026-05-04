@@ -9,9 +9,12 @@ export type AlertAction = {
   onClick: () => void;
 };
 
+export type AlertHeadingElement = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+
 export type AlertProps = {
   variant?: AlertVariant;
   title?: string;
+  asHeading?: AlertHeadingElement;
   message: string;
   icon?: ReactNode;
   showIcon?: boolean;
@@ -80,6 +83,7 @@ const ACTION_TEXT_CLASSES: Record<AlertVariant, string> = {
 export function Alert({
   variant = "info",
   title,
+  asHeading: TitleTag = "h2",
   message,
   icon,
   showIcon = true,
@@ -102,7 +106,7 @@ export function Alert({
       {iconElement}
 
       <div className={styles.body()}>
-        {title && <p className={styles.title()}>{title}</p>}
+        {title && <TitleTag className={styles.title()}>{title}</TitleTag>}
         <p className={styles.message()}>{message}</p>
 
         {action && (
