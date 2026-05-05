@@ -1,3 +1,10 @@
+## [1.9.2](https://github.com/LibreTexts/davis/compare/v1.9.1...v1.9.2) (2026-05-05)
+
+
+### Bug Fixes
+
+* **Alert:** use programmatic heading for Alert title by default ([6eab38f](https://github.com/LibreTexts/davis/commit/6eab38f50ab1efa30133114b3e5a4b9860e39aa2))
+
 ## [1.9.1](https://github.com/LibreTexts/davis/compare/v1.9.0...v1.9.1) (2026-04-27)
 
 
