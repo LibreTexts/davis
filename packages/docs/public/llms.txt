@@ -8,20 +8,11 @@
 
 ```
 Do you need pre-built components?
-│
-├─ No  → npm install @libretexts/davis-core
-│         (design tokens, CSS variables, Tailwind preset only)
-│
-└─ Yes → Which framework?
-         │
-         ├─ React → npm install @libretexts/davis-react
-         │          (includes davis-core automatically)
-         │
-         ├─ Vue   → npm install @libretexts/davis-vue
-         │          (includes davis-core automatically — in active development)
-         │
-         └─ Other → npm install @libretexts/davis-core
-                    (build your own components using the design tokens)
+- No -> npm install @libretexts/davis-core (design tokens, CSS variables, Tailwind preset only)
+- Yes -> Which framework?
+  - React -> npm install @libretexts/davis-react (includes davis-core automatically)
+  - Vue -> npm install @libretexts/davis-vue (includes davis-core automatically — in active development)
+  - Other -> npm install @libretexts/davis-core (build your own components using the design tokens)
 ```
 
 Installing `@libretexts/davis-react` or `@libretexts/davis-vue` automatically installs `@libretexts/davis-core` as a dependency. You do not need to install core separately.
@@ -147,7 +138,7 @@ Then reference CSS custom properties in your own styles:
 
 ## CSS Setup
 
-Davis ships one primary stylesheet per component package. Import **one** of these at your app's entry point — do not import multiple:
+Davis ships one primary stylesheet per component package. Import **one** of these at your app's entry point -- do not import multiple:
 
 | Import | When to use |
 |--------|-------------|
@@ -247,9 +238,9 @@ function App() {
 }
 ```
 
-Multiple `DavisProvider` instances on the same page are supported. Each is an independent `.davis` scope. There is no performance penalty — `DavisProvider` is a thin `<div>` + React context.
+Multiple `DavisProvider` instances on the same page are supported. Each is an independent `.davis` scope. There is no performance penalty - `DavisProvider` is a thin `<div>` + React context.
 
-**Headless UI portals:** `Dialog`, `Menu`, `Popover`, and `Drawer` use Headless UI portals. Ensure `DavisProvider` is high enough in the tree to contain the trigger element — Headless UI resolves the portal context from the nearest parent.
+**Headless UI portals:** `Dialog`, `Menu`, `Popover`, and `Drawer` use Headless UI portals. Ensure `DavisProvider` is high enough in the tree to contain the trigger element -- Headless UI resolves the portal context from the nearest parent.
 
 ---
 
@@ -483,8 +474,8 @@ import { FormSection, Stack, Input, Textarea, Button } from "@libretexts/davis-r
 
 Davis provides two patterns for in-app feedback:
 
-- **Alert** — persistent, inline feedback (form errors, page-level warnings). Stays visible until resolved.
-- **Notification / Toast** — ephemeral floating feedback in response to user actions. Auto-dismisses.
+- **Alert** - persistent, inline feedback (form errors, page-level warnings). Stays visible until resolved.
+- **Notification / Toast** - ephemeral floating feedback in response to user actions. Auto-dismisses.
 
 ### Standalone Notification
 
@@ -718,7 +709,7 @@ All component props are exported as named types (e.g., `ButtonProps`, `InputProp
 
 ### Next.js / SSR
 
-All Davis React components are marked `"use client"` at the source level. When consumed by Next.js App Router, they work in both Server and Client components — the `"use client"` boundary is established inside the Davis package so you do not need to add it in your own code.
+All Davis React components are marked `"use client"` at the source level. When consumed by Next.js App Router, they work in both Server and Client components - the `"use client"` boundary is established inside the Davis package so you do not need to add it in your own code.
 
 ---
 
@@ -728,7 +719,7 @@ All tokens are defined in `packages/core/src/tokens.ts` and exported as CSS cust
 
 ### Typography
 
-Font: **Atkinson Hyperlegible** — designed for low-vision readers; falls back to system-ui. Scale follows a Major Third ratio (1.250) with a 16px base:
+Font: **Atkinson Hyperlegible** - designed for low-vision readers; falls back to system-ui. Scale follows a Major Third ratio (1.250) with a 16px base:
 
 | Token | rem    | px   | Use case               |
 |-------|--------|------|------------------------|
@@ -844,24 +835,24 @@ All 48 components are available in both React (`@libretexts/davis-react`) and Vu
 ```
 packages/
 ├── core/
-│   ├── src/tokens.ts          ← EDIT HERE: all design tokens
-│   ├── src/variants.ts        ← EDIT HERE: all component variant styles
-│   └── src/index.ts           ← exports tokens and variants
+│   ├── src/tokens.ts          <- EDIT HERE: all design tokens
+│   ├── src/variants.ts        <- EDIT HERE: all component variant styles
+│   └── src/index.ts           <- exports tokens and variants
 ├── react/
-│   ├── src/components/        ← React .tsx components + .stories.tsx
-│   ├── src/context/           ← DavisContext, NotificationContext
-│   ├── src/providers/         ← DavisProvider, NotificationsProvider
-│   └── src/index.ts           ← exports all components and types
+│   ├── src/components/        <- React .tsx components + .stories.tsx
+│   ├── src/context/           <- DavisContext, NotificationContext
+│   ├── src/providers/         <- DavisProvider, NotificationsProvider
+│   └── src/index.ts           <- exports all components and types
 ├── vue/
-│   ├── src/components/        ← Vue .vue components + .stories.ts
-│   └── src/index.ts           ← exports all components and types
+│   ├── src/components/        <- Vue .vue components + .stories.ts
+│   └── src/index.ts           <- exports all components and types
 └── docs/
     └── src/app/docs/
-        ├── getting-started/   ← Overview, Installation, Fonts, License
-        ├── foundation/        ← Architecture, Colors, Typography, Spacing, Layout
-        ├── components/        ← One page per component (47 pages)
-        ├── guides/            ← A11y, Patterns, Custom Components, Integration, React Hook Form
-        └── templates/         ← Dashboard, List Page, Form Page, Detail Page
+        ├── getting-started/   <- Overview, Installation, Fonts, License
+        ├── foundation/        <- Architecture, Colors, Typography, Spacing, Layout
+        ├── components/        <- One page per component (47 pages)
+        ├── guides/            <- A11y, Patterns, Custom Components, Integration, React Hook Form
+        └── templates/         <- Dashboard, List Page, Form Page, Detail Page
 ```
 
 ---
