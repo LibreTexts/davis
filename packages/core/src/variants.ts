@@ -90,7 +90,7 @@ export const BUTTON_VARIANTS = {
   ghost: [
     'bg-transparent',
     'text-gray-700',
-    'hover:bg-surface-hover',
+    'hover:bg-surface-hover hover:ring-1 hover:ring-gray-500',
     'active:bg-surface-active',
     'focus-visible:ring-gray-500',
   ].join(' '),
@@ -99,7 +99,7 @@ export const BUTTON_VARIANTS = {
     'border-gray-300',
     'bg-transparent',
     'text-gray-700',
-    'hover:bg-surface-hover',
+    'hover:bg-surface-hover hover:border-gray-500',
     'active:bg-surface-active',
     'focus-visible:ring-gray-500',
   ].join(' '),
@@ -1580,8 +1580,8 @@ export const menu = tv({
       'data-[enter]:opacity-100 data-[enter]:scale-100'
     ].join(' '),
     item: [
-      'flex items-center w-full px-4 py-2 text-sm text-left',
-      'hover:bg-surface-hover hover:text-gray-900, hover:cursor-pointer',
+      'flex items-center w-full pl-4 pr-4 py-2 text-sm text-left border-l-2 border-transparent',
+      'hover:bg-surface-hover hover:text-gray-900 hover:cursor-pointer hover:border-l-2 hover:border-primary',
       'transition-colors duration-150',
       'disabled:opacity-50 disabled:cursor-not-allowed',
     ].join(' '),
@@ -1619,12 +1619,12 @@ export const menu = tv({
     {
       itemVariant: 'default',
       itemFocused: true,
-      class: { item: 'bg-surface-hover text-gray-900' },
+      class: { item: 'bg-surface-hover text-gray-900 border-l-2 border-primary' },
     },
     {
       itemVariant: 'danger',
       itemFocused: true,
-      class: { item: 'bg-red-50 text-red-700' },
+      class: { item: 'bg-red-50 text-red-700 border-l-2 border-red-600' },
     },
   ],
   defaultVariants: {

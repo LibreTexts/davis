@@ -99,7 +99,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
           <ExternalLinkIcon className="shrink-0 w-3.5 h-3.5 ml-0.5" />
         )}
         {isExternal && (
-          <span className="sr-only">(opens in new tab)</span>
+          <span className="sr-only"> (opens in new tab)</span>
         )}
       </a>
     );

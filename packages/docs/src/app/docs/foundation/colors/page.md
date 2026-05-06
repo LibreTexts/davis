@@ -67,6 +67,8 @@ These tokens standardize how surfaces respond to user interaction. They apply to
 
 **Why `surface-hover` and `surface-disabled` share a hex value:** These tokens communicate *intent*, not just color. Contextual signals — cursor change, `opacity-50`, `aria-disabled`, and `pointer-events: none` — disambiguate disabled states from hovered elements at runtime.
 
+**Accessibility note — focus visibility (SC 2.4.7):** The `surface-hover` background alone is *not* sufficient to indicate focus to keyboard or screen-reader users, because they never experience a pointer-hover state. Additionally, the contrast ratio of `surface-hover` (#F4F4F5) against a white background is approximately 1.09:1 — well below the 3:1 minimum required by SC 1.4.11 Non-text Contrast. When using `surface-hover` on focusable elements, you **must** pair it with an additional high-contrast indicator such as a border (`border-l-2 border-primary`) or ring (`ring-1 ring-gray-500`) that meets the 3:1 threshold against the surrounding background. Davis components handle this automatically; this guidance applies if you are building custom interactive elements using the surface tokens directly.
+
 For solid-fill semantic color elements (primary, secondary, danger, etc. buttons), interactive states use the established shade convention rather than the surface tokens:
 
 | State | Shade | Example |
@@ -112,7 +114,7 @@ Disabled form fields are exempt from SC 1.4.11 per the WCAG specification and co
 
 ### Shade Usage
 
-As noted earlier, the 500 shade is the base color and should be used for most applications. The **600 shade is the standard hover state** and the **700 shade is the standard active/pressed state** for solid-fill colored elements. Lighter shades (50-400) are generally not recommended for UI elements due to contrast issues but can be very sparingly used for large background areas or decorative purposes. For white-surface elements (ghost buttons, menus, table rows), use the dedicated `surface-hover` and `surface-active` tokens instead of raw shade values.
+As noted earlier, the 500 shade is the base color and should be used for most applications. The **600 shade is the standard hover state** and the **700 shade is the standard active/pressed state** for solid-fill colored elements. Lighter shades (50-400) are generally not recommended for UI elements due to contrast issues but can be very sparingly used for large background areas or decorative purposes. For white-surface elements (ghost buttons, menus, table rows), use the dedicated `surface-hover` and `surface-active` tokens instead of raw shade values. These tokens provide a subtle background tint but do not meet 3:1 non-text contrast on their own — Davis components add a secondary focus indicator (border or ring) automatically; custom elements must do the same.
 
 If you're making use of the Davis React or Vue libraries, the components and their variants will automatically apply the appropriate shades based on the design system guidelines, so you can focus on using the semantic color tokens without worrying about specifying shade values. Thus, it's recommended to stick to these variants and avoid manually applying shades (or any styling, for that matter) unless you have a specific need that isn't covered by the existing components.
 

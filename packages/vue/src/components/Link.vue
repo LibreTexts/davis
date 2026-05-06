@@ -73,6 +73,6 @@ const isExternal = computed(() =>
         clip-rule="evenodd"
       />
     </svg>
-    <span v-if="isExternal" class="sr-only">(opens in new tab)</span>
+    <span v-if="isExternal" class="sr-only"> (opens in new tab)</span>
   </a>
 </template>
