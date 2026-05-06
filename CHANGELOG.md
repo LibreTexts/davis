@@ -1,3 +1,10 @@
+## [1.9.3](https://github.com/LibreTexts/davis/compare/v1.9.2...v1.9.3) (2026-05-06)
+
+
+### Bug Fixes
+
+* **a11y:** contrast, VIF, and SR text fixes for Buttons, Menu, and Link ([5c92aab](https://github.com/LibreTexts/davis/commit/5c92aab3de8b5df88062c55b1a1aa4312b4d3a82))
+
 ## [1.9.2](https://github.com/LibreTexts/davis/compare/v1.9.1...v1.9.2) (2026-05-05)
 
 
