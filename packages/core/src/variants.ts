@@ -1563,7 +1563,7 @@ export const menu = tv({
       'bg-primary text-white border border-primary rounded-md',
       'hover:bg-primary-600 hover:cursor-pointer',
       'active:bg-primary-700',
-      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1',
       'disabled:opacity-50 disabled:cursor-not-allowed',
       'transition-colors duration-200',
     ].join(' '),
@@ -1580,8 +1580,8 @@ export const menu = tv({
       'data-[enter]:opacity-100 data-[enter]:scale-100'
     ].join(' '),
     item: [
-      'flex items-center w-full pl-4 pr-4 py-2 text-sm text-left border-l-2 border-transparent',
-      'hover:bg-surface-hover hover:text-gray-900 hover:cursor-pointer hover:border-l-2 hover:border-primary',
+      'flex items-center w-full pl-4 pr-4 py-2 text-sm text-left',
+      'cursor-pointer',
       'transition-colors duration-150',
       'disabled:opacity-50 disabled:cursor-not-allowed',
     ].join(' '),
@@ -1619,12 +1619,12 @@ export const menu = tv({
     {
       itemVariant: 'default',
       itemFocused: true,
-      class: { item: 'bg-surface-hover text-gray-900 border-l-2 border-primary' },
+      class: { item: 'bg-primary text-white' },
     },
     {
       itemVariant: 'danger',
       itemFocused: true,
-      class: { item: 'bg-red-50 text-red-700 border-l-2 border-red-600' },
+      class: { item: 'bg-red-600 text-white' },
     },
   ],
   defaultVariants: {
