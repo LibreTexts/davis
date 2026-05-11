@@ -1640,3 +1640,37 @@ export const menu = tv({
 export type MenuAlign = 'left' | 'right';
 export type MenuWidth = 'auto' | 'sm' | 'md' | 'lg' | 'full';
 export type MenuItemVariant = 'default' | 'danger';
+
+// ─── Comment ─────────────────────────────────────────────────────────────────
+
+export const comment = tv({
+  slots: {
+    root:          'flex flex-col',
+    header:        'flex items-start gap-3',
+    avatar:        'shrink-0',
+    headerContent: 'flex-1 min-w-0',
+    nameRow:       'flex flex-wrap items-center gap-x-2 gap-y-0.5',
+    name:          'text-sm font-semibold text-gray-900',
+    metadata:      'flex flex-wrap items-center gap-2 text-sm text-gray-500',
+    body:          'mt-1 text-sm text-gray-700',
+  },
+  variants: {
+    variant: {
+      default:     { root: '' },
+      highlighted: { root: 'bg-primary-50 border-l-4 border-l-primary' },
+    },
+    padding: {
+      none: { root: '' },
+      sm:   { root: 'px-3 py-2' },
+      md:   { root: 'px-4 py-3' },
+      lg:   { root: 'px-6 py-4' },
+    },
+  },
+  defaultVariants: {
+    variant: 'default' as const,
+    padding: 'md'      as const,
+  },
+});
+
+export type CommentVariant = 'default' | 'highlighted';
+export type CommentPadding = 'none' | 'sm' | 'md' | 'lg';

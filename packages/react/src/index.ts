@@ -247,3 +247,12 @@ export type { StatCardProps, StatCardVariant, StatCardTrend } from "./components
 
 export { Timeline } from "./components/timeline";
 export type { TimelineProps, TimelineItemProps, TimelineStatus } from "./components/timeline";
+
+export { Comment } from "./components/comment";
+export type {
+  CommentProps,
+  CommentHeaderProps,
+  CommentBodyProps,
+  CommentVariant,
+  CommentPadding,
+} from "./components/comment";

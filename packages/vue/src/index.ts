@@ -21,6 +21,9 @@ export { default as ListboxLabel } from "./components/ListboxLabel.vue";
 export { default as ListboxButton } from "./components/ListboxButton.vue";
 export { default as ListboxOptions } from "./components/ListboxOptions.vue";
 export { default as ListboxOption } from "./components/ListboxOption.vue";
+export { default as Comment } from "./components/Comment.vue";
+export { default as CommentHeader } from "./components/CommentHeader.vue";
+export { default as CommentBody } from "./components/CommentBody.vue";
 export { default as Container } from "./components/Container.vue";
 export { default as Dialog } from "./components/Dialog.vue";
 export { default as DialogHeader } from "./components/DialogHeader.vue";
@@ -110,5 +113,6 @@ export type { TextSize, TextWeight, TextColor, TextAlign } from "./components/Te
 export type { TimelineStatus } from "./components/TimelineItem.vue";
 export type { TooltipPlacement } from "./components/Tooltip.vue";
 export type { AccordionVariant, AccordionSize } from "./components/Accordion.vue";
+export type { CommentVariant, CommentPadding } from "./components/Comment.vue";
 export type { AnnounceFunction } from "./components/LiveAnnouncer.vue";
 export { LiveAnnouncerKey } from "./components/LiveAnnouncer.vue";

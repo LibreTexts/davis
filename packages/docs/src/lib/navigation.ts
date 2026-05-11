@@ -97,6 +97,7 @@ export const navigation: NavGroup[] = [
       { title: 'Badge', href: '/docs/components/badge' },
       { title: 'Button', href: '/docs/components/button' },
       { title: 'Card', href: '/docs/components/card' },
+      { title: 'Comment', href: '/docs/components/comment' },
       { title: 'Icon Button', href: '/docs/components/icon-button' },
       { title: 'Link', href: '/docs/components/link' },
       { title: 'DataTable', href: '/docs/components/data-table' },
