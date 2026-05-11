@@ -1,3 +1,15 @@
+# [1.10.0](https://github.com/LibreTexts/davis/compare/v1.9.3...v1.10.0) (2026-05-11)
+
+
+### Bug Fixes
+
+* **Menu:** hover and focus state colors ([65367e9](https://github.com/LibreTexts/davis/commit/65367e9a6f4dde30b1817f3be028d800746be41d))
+
+
+### Features
+
+* add Comment and associated sub-components ([a1abcbe](https://github.com/LibreTexts/davis/commit/a1abcbe4f3c56b9e9641ab4b7e28646ef2b8b7ac))
+
 ## [1.9.3](https://github.com/LibreTexts/davis/compare/v1.9.2...v1.9.3) (2026-05-06)
 
 
