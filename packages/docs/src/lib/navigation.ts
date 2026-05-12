@@ -86,6 +86,7 @@ export const navigation: NavGroup[] = [
     links: [
       { title: 'Dialog', href: '/docs/components/dialog' },
       { title: 'Drawer', href: '/docs/components/drawer' },
+      { title: 'Modal', href: '/docs/components/modal' },
       { title: 'Popover', href: '/docs/components/popover' },
     ],
   },
