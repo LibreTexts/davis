@@ -77,6 +77,15 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       }
     }, [autoResize, adjustHeight, defaultValue]);
 
+    useEffect(() => {
+      if (!autoResize) return;
+      const el = textareaRef.current;
+      if (!el) return;
+      const ro = new ResizeObserver(() => adjustHeight());
+      ro.observe(el);
+      return () => ro.disconnect();
+    }, [autoResize, adjustHeight, textareaRef]);
+
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       if (autoResize) {
         adjustHeight();

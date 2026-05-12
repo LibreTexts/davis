@@ -28,7 +28,7 @@ const { option } = listboxVariants();
     v-slot="{ selected }"
   >
     <span class="flex items-center justify-between gap-x-2">
-      <span class="block truncate"><slot /></span>
+      <span class="block"><slot /></span>
       <span v-if="isMultiple" class="size-4 shrink-0" aria-hidden="true">
         <svg v-if="selected" fill="none" viewBox="0 0 14 14" class="size-3.5" aria-hidden="true">
           <path

@@ -34,7 +34,7 @@ function isEmpty(value: unknown): boolean {
       v-bind="props.ariaLabel ? { 'aria-label': props.ariaLabel } : {}"
       :class="clsx(variants.button(), props.class)"
     >
-      <span class="block truncate">
+      <span class="block">
         <template v-if="!isEmpty(value)">
           <slot :value="value">{{ props.displayValue ? props.displayValue(value) : String(value) }}</slot>
         </template>

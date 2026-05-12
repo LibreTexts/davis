@@ -90,7 +90,7 @@ function ListboxButtonComponent<T = string>({
           const isEmpty = value == null || (Array.isArray(value) && (value as unknown[]).length === 0);
           return (
           <>
-            <span className="block truncate">
+            <span className="block">
               {!isEmpty ? (
                 displayValue ? displayValue(value as T) : String(value)
               ) : (
@@ -142,7 +142,7 @@ function ListboxOptionComponent<T = string>({
         ? children
         : ({ selected }: { selected: boolean }) => (
             <span className="flex items-center justify-between gap-x-2">
-              <span className="block truncate">{children}</span>
+              <span className="block">{children}</span>
               {isMultiple && (
                 <span className="size-4 shrink-0" aria-hidden="true">
                   {selected && <CheckIcon />}
