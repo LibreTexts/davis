@@ -291,6 +291,17 @@ describe("SkipLink", () => {
     const { getByText } = render(<SkipLink>Skip navigation</SkipLink>);
     expect(getByText("Skip navigation")).toBeInTheDocument();
   });
+
+  // Regression: the focus state used to mix `focus:static` and `focus:fixed`
+  // alongside the base `absolute`. `focus:static` won by source order and
+  // dropped top-4/left-4/z-9999, leaving the link buried behind the navbar.
+  it("does not declare a conflicting focus position override", () => {
+    const { container } = render(<SkipLink />);
+    const className = container.querySelector("a")?.className ?? "";
+    expect(className).not.toMatch(/\bfocus:static\b/);
+    expect(className).not.toMatch(/\bfocus:fixed\b/);
+    expect(className).toMatch(/\babsolute\b/);
+  });
 });
 
 describe("LiveAnnouncer", () => {
