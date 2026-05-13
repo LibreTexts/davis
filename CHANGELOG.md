@@ -1,3 +1,11 @@
+## [1.10.1](https://github.com/LibreTexts/davis/compare/v1.10.0...v1.10.1) (2026-05-13)
+
+
+### Bug Fixes
+
+* **a11y:** text spacing and resize fixes for Listbox and Textarea ([09b409d](https://github.com/LibreTexts/davis/commit/09b409d53ce3b111c4387fc978d314727a5dc4c3))
+* **SkipLink:** remove conflicting position classes ([5acc783](https://github.com/LibreTexts/davis/commit/5acc783563b2049baa2d43365db3273f4af07916))
+
 # [1.10.0](https://github.com/LibreTexts/davis/compare/v1.9.3...v1.10.0) (2026-05-11)
 
 
