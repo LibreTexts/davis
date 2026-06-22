@@ -1,3 +1,10 @@
+## [1.10.2](https://github.com/LibreTexts/davis/compare/v1.10.1...v1.10.2) (2026-06-22)
+
+
+### Bug Fixes
+
+* radio group labels and id fixes ([#20](https://github.com/LibreTexts/davis/issues/20)) ([e2b9eac](https://github.com/LibreTexts/davis/commit/e2b9eac88e6c9c588216c57cfb6e434625780955))
+
 ## [1.10.1](https://github.com/LibreTexts/davis/compare/v1.10.0...v1.10.1) (2026-05-13)
 
 
