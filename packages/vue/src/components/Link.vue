@@ -16,7 +16,7 @@ const props = withDefaults(
   }>(),
   {
     variant: "default",
-    underline: "hover",
+    underline: "always",
     size: "md",
     external: false,
     showExternalIcon: true,

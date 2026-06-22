@@ -1276,7 +1276,7 @@ export const link = tv({
   },
   defaultVariants: {
     variant:  'default' as const,
-    underline: 'hover' as const,
+    underline: 'always' as const,
     size:     'md' as const,
     disabled: false as const,
   },
