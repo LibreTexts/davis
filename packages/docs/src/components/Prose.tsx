@@ -25,7 +25,7 @@ export function Prose<T extends React.ElementType = 'div'>({
         // Lead paragraph
         'prose-lead:text-lg prose-lead:text-text-neutral prose-lead:leading-relaxed',
         // Links
-        'prose-a:font-medium prose-a:text-primary-600 prose-a:no-underline prose-a:transition-colors hover:prose-a:text-primary-700',
+        'prose-a:font-medium prose-a:text-primary-600 prose-a:underline prose-a:underline-offset-2 prose-a:transition-colors hover:prose-a:text-primary-700',
         // Strong and emphasis
         'prose-strong:font-bold prose-strong:text-text',
         'prose-em:text-text',

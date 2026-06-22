@@ -47,7 +47,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       children,
       href,
       variant = "default",
-      underline = "hover",
+      underline = "always",
       size = "md",
       external = false,
       showExternalIcon = true,
