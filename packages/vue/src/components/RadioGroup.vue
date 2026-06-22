@@ -77,6 +77,7 @@ function selectOption(opt: RadioOptionItem) {
   <div :class="props.class">
     <label
       v-if="props.label"
+      :id="`${props.name}-label`"
       :class="clsx(
         'block text-base/6 font-medium text-gray-700 mb-2',
         props.error && 'text-danger',
@@ -89,6 +90,7 @@ function selectOption(opt: RadioOptionItem) {
     </label>
     <div
       role="radiogroup"
+      :aria-labelledby="props.label ? `${props.name}-label` : undefined"
       :aria-invalid="props.error ? 'true' : undefined"
       :aria-describedby="showError ? `${props.name}-error` : showHelper ? `${props.name}-helper` : undefined"
       :class="clsx(

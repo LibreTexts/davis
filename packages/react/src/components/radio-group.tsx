@@ -4,7 +4,6 @@ import {
   RadioGroup as HeadlessRadioGroup,
   Radio as HeadlessRadio,
   Label,
-  Field,
 } from "@headlessui/react";
 import { radioOptionButton } from "@libretexts/davis-core";
 import clsx from "clsx";
@@ -68,40 +67,44 @@ export function RadioGroup({
   const showHelper = !showError && helperText;
 
   return (
-    <Field className={className} disabled={disabled}>
-      {label && (
-        <Label
-          className={clsx(
-            "block text-base/6 font-medium text-gray-700 mb-2",
-            error && "text-danger",
-            disabled && "opacity-50",
-            labelClassName
-          )}
-        >
-          {label}
-          {required && <span className="text-danger ml-0.5">*</span>}
-        </Label>
-      )}
+    <div className={className}>
       <HeadlessRadioGroup
         name={name}
         {...(value !== undefined ? { value } : {})}
         {...(defaultValue !== undefined ? { defaultValue } : {})}
         {...(onChange !== undefined ? { onChange } : {})}
         disabled={disabled}
-        className={clsx(
-          "flex",
-          orientation === "vertical" ? "flex-col gap-y-3" : "flex-row gap-x-6 flex-wrap",
-          disabled && "opacity-50 cursor-not-allowed"
-        )}
         aria-invalid={error ? "true" : undefined}
         aria-describedby={
           showError ? `${name}-error` : showHelper ? `${name}-helper` : undefined
         }
       >
-        {options?.map((opt) => (
-          <RadioOptionButton key={opt.value} {...opt} />
-        ))}
-        {children}
+        {label && (
+          <Label
+            passive
+            className={clsx(
+              "block text-base/6 font-medium text-gray-700 mb-2",
+              error && "text-danger",
+              disabled && "opacity-50",
+              labelClassName
+            )}
+          >
+            {label}
+            {required && <span className="text-danger ml-0.5">*</span>}
+          </Label>
+        )}
+        <div
+          className={clsx(
+            "flex",
+            orientation === "vertical" ? "flex-col gap-y-3" : "flex-row gap-x-6 flex-wrap",
+            disabled && "opacity-50 cursor-not-allowed"
+          )}
+        >
+          {options?.map((opt) => (
+            <RadioOptionButton key={opt.value} {...opt} />
+          ))}
+          {children}
+        </div>
       </HeadlessRadioGroup>
       {showError && (
         <p id={`${name}-error`} className="mt-2 text-sm text-danger">
@@ -113,7 +116,7 @@ export function RadioGroup({
           {helperText}
         </p>
       )}
-    </Field>
+    </div>
   );
 }
 
