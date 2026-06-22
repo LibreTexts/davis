@@ -144,6 +144,55 @@ describe("RadioGroup", () => {
       />
     );
   });
+
+  it("gives each Radio child a unique id and associates the group label", () => {
+    const { container } = render(
+      <RadioGroup label="Choose an option" name="unique-children">
+        <Radio value="a" label="Option A" />
+        <Radio value="b" label="Option B" />
+        <Radio value="c" label="Option C" />
+      </RadioGroup>
+    );
+
+    const ids = Array.from(
+      container.querySelectorAll('[role="radio"]'),
+      (el) => el.id
+    );
+    expect(ids).toHaveLength(3);
+    expect(ids.every((id) => id.length > 0)).toBe(true);
+    expect(new Set(ids).size).toBe(ids.length);
+
+    const group = container.querySelector('[role="radiogroup"]')!;
+    const labelId = group.getAttribute("aria-labelledby");
+    expect(labelId).toBeTruthy();
+
+    const labelEl = container.querySelector(`#${labelId}`)!;
+    expect(labelEl.textContent).toContain("Choose an option");
+    // The label must not emit `for`/`htmlFor` — a radiogroup div is not a
+    // labelable element, so a dangling `for` is a downstream a11y error.
+    expect(labelEl.hasAttribute("for")).toBe(false);
+  });
+
+  it("gives each option-prop radio a unique id", () => {
+    const { container } = render(
+      <RadioGroup
+        label="Billing cycle"
+        name="unique-options"
+        options={[
+          { value: "monthly", label: "Monthly" },
+          { value: "annual", label: "Annual" },
+        ]}
+      />
+    );
+
+    const ids = Array.from(
+      container.querySelectorAll('[role="radio"]'),
+      (el) => el.id
+    );
+    expect(ids).toHaveLength(2);
+    expect(ids.every((id) => id.length > 0)).toBe(true);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
 });
 
 describe("Switch", () => {
