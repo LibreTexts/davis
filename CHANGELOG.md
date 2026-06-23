@@ -1,3 +1,10 @@
+## [1.10.3](https://github.com/LibreTexts/davis/compare/v1.10.2...v1.10.3) (2026-06-23)
+
+
+### Bug Fixes
+
+* ensure underline present by default for Link ([#21](https://github.com/LibreTexts/davis/issues/21)) ([164819d](https://github.com/LibreTexts/davis/commit/164819de407647fb55c40de9c6f29abb6fe99c9b))
+
 ## [1.10.2](https://github.com/LibreTexts/davis/compare/v1.10.1...v1.10.2) (2026-06-22)
 
 
