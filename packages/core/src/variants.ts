@@ -106,9 +106,14 @@ export const BUTTON_VARIANTS = {
 };
 
 export const BUTTON_SIZE_VARIANTS = {
-  sm: 'px-3 py-1.5 text-sm',
-  md: 'px-6 py-2 text-base',
-  lg: 'px-8 py-3 text-lg',
+  // Explicit min-heights pin every variant to one height per size regardless of
+  // border (outline) or content (icon vs. no icon). min-h (not h) lets long,
+  // wrapping labels grow without clipping. Heights match iconButton (size-8/10/12)
+  // so text and icon-only buttons agree. box-sizing: border-box (Preflight) means
+  // the outline border is absorbed into the height instead of adding to it.
+  sm: 'min-h-8 px-3 text-sm',
+  md: 'min-h-10 px-6 text-base',
+  lg: 'min-h-12 px-8 text-lg',
 };
 
 export const BUTTON_DEFAULT_VARIANTS = {

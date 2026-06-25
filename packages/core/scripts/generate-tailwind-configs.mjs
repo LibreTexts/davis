@@ -48,9 +48,13 @@ function colorDefaultVar(name, shades, indent = '  ') {
 // ─── Generate Tailwind v4 Theme ──────────────────────────────────────
 
 function generateTailwindV4Theme() {
+  // Tailwind v4 reads the font-size scale from the --text-* namespace (not
+  // --font-size-*). Emitting under the wrong namespace means text-* utilities
+  // silently fall back to Tailwind's defaults, dropping the design-system
+  // line-heights and large-text sizes.
   const fontSizeVars = Object.entries(FONT_SIZE)
     .map(([size, [value, { lineHeight }]]) =>
-      `  --font-size-${size}: ${value};\n  --font-size-${size}--line-height: ${lineHeight};`
+      `  --text-${size}: ${value};\n  --text-${size}--line-height: ${lineHeight};`
     )
     .join('\n\n');
 
