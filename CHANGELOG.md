@@ -1,3 +1,10 @@
+## [1.10.4](https://github.com/LibreTexts/davis/compare/v1.10.3...v1.10.4) (2026-06-29)
+
+
+### Bug Fixes
+
+* inconsistent button heights and font scaling ([#22](https://github.com/LibreTexts/davis/issues/22)) ([a57e463](https://github.com/LibreTexts/davis/commit/a57e46363f1570a7bb76d991448a9334cfcc4f42))
+
 ## [1.10.3](https://github.com/LibreTexts/davis/compare/v1.10.2...v1.10.3) (2026-06-23)
 
 
