@@ -119,8 +119,8 @@ Davis tokens are also available as CSS custom properties:
 }
 
 .my-heading {
-  font-size: var(--font-size-4xl);
-  line-height: var(--line-height-tight);
+  font-size: var(--text-4xl);
+  line-height: var(--text-4xl--line-height);
   font-weight: var(--font-weight-bold);
 }
 ```
