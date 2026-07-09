@@ -1,3 +1,10 @@
+## [1.10.5](https://github.com/LibreTexts/davis/compare/v1.10.4...v1.10.5) (2026-07-09)
+
+
+### Bug Fixes
+
+* **Tabs:** insuff contrast on non-active labels in pill variant ([873773f](https://github.com/LibreTexts/davis/commit/873773f1d411ddb2ba71b5215a7379b96658b955))
+
 ## [1.10.4](https://github.com/LibreTexts/davis/compare/v1.10.3...v1.10.4) (2026-06-29)
 
 
