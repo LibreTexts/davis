@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/LibreTexts/davis/compare/v1.10.5...v1.11.0) (2026-07-20)
+
+
+### Features
+
+* **Typography:** hand-tuned type scale ([6be19b5](https://github.com/LibreTexts/davis/commit/6be19b5ae1963831089ee65f1c53ad55381a3d6d))
+
 ## [1.10.5](https://github.com/LibreTexts/davis/compare/v1.10.4...v1.10.5) (2026-07-09)
 
 
