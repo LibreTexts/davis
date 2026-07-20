@@ -35,12 +35,12 @@ export function TypeScale() {
 
 export function HeadingHierarchy() {
   const headings = [
-    { tag: "h1", size: "4xl (3.052rem)", weight: 700 },
-    { tag: "h2", size: "3xl (2.441rem)", weight: 700 },
-    { tag: "h3", size: "2xl (1.953rem)", weight: 600 },
-    { tag: "h4", size: "xl (1.563rem)", weight: 600 },
-    { tag: "h5", size: "lg (1.250rem)", weight: 600 },
-    { tag: "h6", size: "lg (1.250rem)", weight: 600 },
+    { tag: "h1", size: "4xl (2.250rem)", weight: 700 },
+    { tag: "h2", size: "3xl (1.875rem)", weight: 700 },
+    { tag: "h3", size: "2xl (1.500rem)", weight: 600 },
+    { tag: "h4", size: "xl (1.375rem)", weight: 600 },
+    { tag: "h5", size: "lg (1.1875rem)", weight: 600 },
+    { tag: "h6", size: "lg (1.1875rem)", weight: 600 },
   ] as const;
 
   return (

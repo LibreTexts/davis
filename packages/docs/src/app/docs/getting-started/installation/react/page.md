@@ -126,7 +126,7 @@ Ready to build? Explore our design foundations and component patterns:
 
 - [Architecture](/docs/foundation/architecture) - Understand the package structure
 - [Colors](/docs/foundation/colors) - Seven semantic colors with full shade ranges
-- [Typography](/docs/foundation/typography) - Major Third typographic scale
+- [Typography](/docs/foundation/typography) - Hand-tuned reading type scale
 - [Spacing](/docs/foundation/spacing) - 4px grid spacing system
 - [Layout](/docs/foundation/layout) - Page structure and responsive patterns
 - [Accessibility](/docs/guides/accessibility) - WCAG 2.2 AA guidelines

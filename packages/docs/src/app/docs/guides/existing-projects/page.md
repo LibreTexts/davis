@@ -18,7 +18,7 @@ The standard Davis setup imports `base.css`, which applies styles globally:
 | What changes | How it changes | What breaks |
 |---|---|---|
 | Font family | Sets `html { font-family: Inter, ... }` | Your app's font changes everywhere |
-| Heading sizes | Applies Major Third scale to all `h1`–`h6` | Your existing headings resize unexpectedly |
+| Heading sizes | Applies the Davis reading scale to all `h1`–`h6` | Your existing headings resize unexpectedly |
 | Focus rings | Adds `*:focus-visible` outline to all elements | Focus styles clash with your existing ones |
 | CSS custom properties | Sets `--davis-*` variables on `:root` | Generally safe, but pollutes the global namespace |
 | Tailwind Preflight | Resets margins, padding, borders on all elements | Your non-Tailwind CSS breaks in subtle ways |

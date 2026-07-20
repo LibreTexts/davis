@@ -9,7 +9,7 @@ An accessible, opinionated design system for education technology — built on [
 
 ## Mission
 
-Davis provides a consistent set of UI primitives so LibreTexts developers can build accessible, beautiful interfaces without reinventing design decisions. Every component targets **WCAG AA** compliance, uses a **Major Third typographic scale**, and follows a **4px spacing grid**.
+Davis provides a consistent set of UI primitives so LibreTexts developers can build accessible, beautiful interfaces without reinventing design decisions. Every component targets **WCAG AA** compliance, uses a **hand-tuned reading type scale**, and follows a **4px spacing grid**.
 
 ---
 

@@ -1,11 +1,11 @@
 ---
 title: Typography
-description: Davis typography system with Major Third scale and semantic heading hierarchy
+description: Davis typography system with a hand-tuned reading scale and semantic heading hierarchy
 ---
 
 # Typography
 
-Davis uses a **Major Third** typographic scale (ratio 1.250, base 16px) to create clear visual hierarchy. The scale is intentionally compact — capped at `text-3xl` for headings — to keep interfaces readable without oversized headings.
+Davis uses a **hand-tuned reading scale** (base 17px, a11y floor 12px) to create clear visual hierarchy. Rather than deriving every step from a single fixed ratio, each size is tuned individually: the ceiling is clamped so headings stay readable, body text is sized for comfortable long-form reading, and nothing falls below a 12px accessibility floor.
 
 ---
 
@@ -24,20 +24,20 @@ Atkinson Hyperlegible was designed by the Braille Institute specifically for leg
 
 ## Type Scale
 
-The Major Third scale multiplies each step by 1.250x:
+Each step is tuned individually rather than derived from one ratio:
 
 | Token | Tailwind Class | Size | Line Height | Use |
 |-------|---------------|------|-------------|-----|
-| `xs` | `text-xs` | 0.640rem (10.2px) | 1rem | Captions, fine print |
-| `sm` | `text-sm` | 0.800rem (12.8px) | 1.25rem | Labels, helper text, badges, h6 |
-| `base` | `text-base` | 1rem (16px) | 1.5rem | Body text, buttons, inputs, h5 |
-| `lg` | `text-lg` | 1.250rem (20px) | 1.75rem | Lead text, h4 |
-| `xl` | `text-xl` | 1.563rem (25px) | 2rem | h3 |
-| `2xl` | `text-2xl` | 1.953rem (31.3px) | 2.25rem | h2 |
-| `3xl` | `text-3xl` | 2.441rem (39.1px) | 2.75rem | h1, page titles |
-| `4xl` | `text-4xl` | 3.052rem (48.8px) | 3.25rem | Display text (use sparingly) |
+| `xs` | `text-xs` | 0.750rem (12px) | 1rem | Captions, fine print |
+| `sm` | `text-sm` | 0.875rem (14px) | 1.25rem | Labels, helper text, badges, h6 |
+| `base` | `text-base` | 1.0625rem (17px) | 1.625rem | Body text, buttons, inputs, h5 |
+| `lg` | `text-lg` | 1.1875rem (19px) | 1.75rem | Lead text, h4 |
+| `xl` | `text-xl` | 1.375rem (22px) | 2rem | h3 |
+| `2xl` | `text-2xl` | 1.500rem (24px) | 2rem | h2 |
+| `3xl` | `text-3xl` | 1.875rem (30px) | 2.25rem | h1, page titles |
+| `4xl` | `text-4xl` | 2.250rem (36px) | 2.5rem | Display text (use sparingly) |
 
-**Note:** `text-5xl` through `text-9xl` are not available. Heading levels cap at `text-3xl` — if you need larger display text, `text-4xl` is available but should be used sparingly and only outside of normal heading hierarchy.
+**Note:** `text-5xl` through `text-9xl` are not available. The scale caps at `text-4xl` (36px) for display text, which should be used sparingly and only outside of normal heading hierarchy.
 
 ### Visual Scale
 
@@ -77,9 +77,9 @@ Headings are styled in `base.css` with appropriate sizes and weights:
 
 Every font size token includes a paired line height for comfortable reading:
 
-- **Body text** (`text-base`): 1.5rem line height (24px) — 1.5x ratio for optimal readability.
+- **Body text** (`text-base`): 1.625rem line height (26px) — roughly 1.53x for comfortable long-form reading.
 - **Small text** (`text-sm`, `text-xs`): Tighter line heights (1.25rem, 1rem) for compact UI elements.
-- **Large headings** (`text-2xl`, `text-3xl`): Proportionally tighter line heights to reduce visual gap between lines.
+- **Large headings** (`text-2xl`, `text-3xl`, `text-4xl`): Proportionally tighter line heights to reduce visual gap between lines.
 
 ---
 

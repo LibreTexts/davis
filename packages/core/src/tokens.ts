@@ -9,7 +9,7 @@
  *
  * After modifying this file, run: npm run generate:configs
  *
- * Typography: Major Third scale (ratio 1.250, base 16px)
+ * Typography: Hand-tuned reading scale (base 17px, a11y floor 12px)
  * Colors: Full 50-950 shade ranges, WCAG AA verified against white
  * Spacing: 4px base grid (uses Tailwind default scale)
  */
@@ -30,28 +30,34 @@ export const FONT_FAMILY_SANS = [
 ] as const;
 
 /**
- * Major Third typographic scale (ratio 1.250, base 16px)
+ * Hand-tuned reading scale (base 17px, a11y floor 12px)
  *
- * | Token | rem   | px   | Line height | Use                    |
- * |-------|-------|------|-------------|------------------------|
- * | xs    | 0.640 | 10.2 | 1rem        | Captions, fine print   |
- * | sm    | 0.800 | 12.8 | 1.25rem     | Labels, helper text    |
- * | base  | 1.000 | 16.0 | 1.5rem      | Body text, buttons     |
- * | lg    | 1.250 | 20.0 | 1.75rem     | Lead text, h5, h6      |
- * | xl    | 1.563 | 25.0 | 2rem        | h4                     |
- * | 2xl   | 1.953 | 31.3 | 2.25rem     | h3                     |
- * | 3xl   | 2.441 | 39.1 | 2.75rem     | h2                     |
- * | 4xl   | 3.052 | 48.8 | 3.25rem     | h1, page titles        |
+ * Replaces the former strict Major Third (1.250) scale, whose fixed ratio
+ * diverged too hard at the extremes: h1/h2 read as display sizes and the
+ * floor fell below comfortable reading size. Each step is now tuned rather
+ * than derived from one ratio — the ceiling is clamped, body is raised for
+ * long-form reading, and nothing sits below the 12px a11y floor.
+ *
+ * | Token | rem     | px   | Line height | Use                    |
+ * |-------|---------|------|-------------|------------------------|
+ * | xs    | 0.750   | 12.0 | 1rem        | Captions, fine print   |
+ * | sm    | 0.875   | 14.0 | 1.25rem     | Labels, helper text    |
+ * | base  | 1.0625  | 17.0 | 1.625rem    | Body text, buttons, h5 |
+ * | lg    | 1.1875  | 19.0 | 1.75rem     | Lead text, h4          |
+ * | xl    | 1.375   | 22.0 | 2rem        | h3                     |
+ * | 2xl   | 1.500   | 24.0 | 2rem        | h2                     |
+ * | 3xl   | 1.875   | 30.0 | 2.25rem     | h1                     |
+ * | 4xl   | 2.250   | 36.0 | 2.5rem      | Page/display titles    |
  */
 export const FONT_SIZE = {
-  xs: ['0.640rem', { lineHeight: '1rem' }],
-  sm: ['0.800rem', { lineHeight: '1.25rem' }],
-  base: ['1rem', { lineHeight: '1.5rem' }],
-  lg: ['1.250rem', { lineHeight: '1.75rem' }],
-  xl: ['1.563rem', { lineHeight: '2rem' }],
-  '2xl': ['1.953rem', { lineHeight: '2.25rem' }],
-  '3xl': ['2.441rem', { lineHeight: '2.75rem' }],
-  '4xl': ['3.052rem', { lineHeight: '3.25rem' }],
+  xs: ['0.750rem', { lineHeight: '1rem' }],
+  sm: ['0.875rem', { lineHeight: '1.25rem' }],
+  base: ['1.0625rem', { lineHeight: '1.625rem' }],
+  lg: ['1.1875rem', { lineHeight: '1.75rem' }],
+  xl: ['1.375rem', { lineHeight: '2rem' }],
+  '2xl': ['1.500rem', { lineHeight: '2rem' }],
+  '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
+  '4xl': ['2.250rem', { lineHeight: '2.5rem' }],
 } as const;
 
 // ─── Colors ──────────────────────────────────────────────────────

@@ -142,42 +142,42 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Heading Hierarchy (Major Third Scale, scoped) ──────────── */
+/* ─── Heading Hierarchy (reading scale, scoped) ─────────────── */
 
 .davis h1 {
-  font-size: 3.052rem;
-  line-height: 3.25rem;
+  font-size: 2.250rem;
+  line-height: 2.5rem;
   font-weight: 700;
   letter-spacing: -0.025em;
 }
 
 .davis h2 {
-  font-size: 2.441rem;
-  line-height: 2.75rem;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
   font-weight: 700;
   letter-spacing: -0.02em;
 }
 
 .davis h3 {
-  font-size: 1.953rem;
-  line-height: 2.25rem;
+  font-size: 1.500rem;
+  line-height: 2rem;
   font-weight: 600;
 }
 
 .davis h4 {
-  font-size: 1.563rem;
+  font-size: 1.375rem;
   line-height: 2rem;
   font-weight: 600;
 }
 
 .davis h5 {
-  font-size: 1.250rem;
+  font-size: 1.1875rem;
   line-height: 1.75rem;
   font-weight: 600;
 }
 
 .davis h6 {
-  font-size: 1.250rem;
+  font-size: 1.1875rem;
   line-height: 1.75rem;
   font-weight: 600;
 }

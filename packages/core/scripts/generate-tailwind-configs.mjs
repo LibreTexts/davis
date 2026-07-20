@@ -96,7 +96,7 @@ function generateTailwindV4Theme() {
 
   --font-sans: ${fontFamilyCSS};
 
-  /* Major Third typographic scale (ratio 1.250, base 16px) */
+  /* Hand-tuned reading type scale (base 17px, a11y floor 12px) */
 ${fontSizeVars}
 
   /* ─── Colors ──────────────────────────────────────────────── */
@@ -227,7 +227,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Heading Hierarchy (Major Third Scale) ─────────────────── */
+/* ─── Heading Hierarchy (reading scale) ─────────────────────── */
 
 h1 {
   font-size: ${FONT_SIZE['4xl'][0]};
@@ -402,7 +402,7 @@ ${Object.entries(CONTAINER).map(([name, value]) => `    --davis-container-${name
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* ─── Heading Hierarchy (Major Third Scale) ─────────────────── */
+  /* ─── Heading Hierarchy (reading scale) ─────────────────────── */
 
   h1 {
     font-size: ${FONT_SIZE['4xl'][0]};
@@ -587,7 +587,7 @@ ${Object.entries(CONTAINER).map(([name, value]) => `  --davis-container-${name}:
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Heading Hierarchy (Major Third Scale, scoped) ──────────── */
+/* ─── Heading Hierarchy (reading scale, scoped) ─────────────── */
 
 .davis h1 {
   font-size: ${FONT_SIZE['4xl'][0]};

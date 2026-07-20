@@ -43,7 +43,7 @@ Consumed by:
 | File | Description |
 |---|---|
 | `theme.css` | Tailwind v4 `@theme` block. Registers all Davis design tokens as Tailwind CSS variables (`--color-primary`, `--font-sans`, `--shadow-md`, etc.) so they are available as utility classes (`bg-primary`, `font-sans`, `shadow-md`). **Import this before any Davis component styles.** |
-| `base.v4.css` | Global base styles for Tailwind v4 projects. Sets typography defaults on `html`, defines the heading hierarchy (Major Third scale), installs the global `*:focus-visible` ring, and resets animations under `prefers-reduced-motion`. Import after `@import "tailwindcss"` and `theme.css`. |
+| `base.v4.css` | Global base styles for Tailwind v4 projects. Sets typography defaults on `html`, defines the heading hierarchy (hand-tuned reading scale), installs the global `*:focus-visible` ring, and resets animations under `prefers-reduced-motion`. Import after `@import "tailwindcss"` and `theme.css`. |
 | `base.css` | Same base styles as `base.v4.css` but wrapped in `@layer base` for Tailwind v3 projects and CSS-in-JS setups that manage layer order explicitly. Also exposes all tokens as `--davis-*` CSS custom properties on `:root` for use outside of Tailwind utilities. |
 | `base.scoped.css` | Variant of `base.css` where every rule is scoped under the `.davis` class. Use this when embedding Davis components inside a host application to prevent style leakage — wrap your Davis component tree in `<div class="davis">`. |
 
