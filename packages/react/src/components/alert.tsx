@@ -107,23 +107,26 @@ export function Alert({
 
       <div className={styles.body()}>
         {title && <TitleTag className={styles.title()}>{title}</TitleTag>}
-        <p className={styles.message()}>{message}</p>
 
-        {action && (
-          <div className={styles.action()}>
-            <button
-              type="button"
-              onClick={action.onClick}
-              className={clsx(
-                "text-sm font-medium hover:underline",
-                "focus:outline-none focus:underline",
-                ACTION_TEXT_CLASSES[variant]
-              )}
-            >
-              {action.label}
-            </button>
-          </div>
-        )}
+        <div className={styles.messageRow()}>
+          <p className={styles.message()}>{message}</p>
+
+          {action && (
+            <div className={styles.action()}>
+              <button
+                type="button"
+                onClick={action.onClick}
+                className={clsx(
+                  "text-sm font-medium hover:underline",
+                  "focus:outline-none focus:underline",
+                  ACTION_TEXT_CLASSES[variant]
+                )}
+              >
+                {action.label}
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
       {dismissible && (

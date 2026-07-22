@@ -70,20 +70,23 @@ const ACTION_TEXT_CLASSES: Record<AlertVariant, string> = {
 
     <div :class="styles.body()">
       <component v-if="props.title" :is="props.asHeading" :class="styles.title()">{{ props.title }}</component>
-      <p :class="styles.message()">{{ props.message }}</p>
 
-      <div v-if="props.action" :class="styles.action()">
-        <button
-          type="button"
-          :class="clsx(
-            'text-sm font-medium hover:underline',
-            'focus:outline-none focus:underline',
-            ACTION_TEXT_CLASSES[props.variant]
-          )"
-          @click="props.action.onClick"
-        >
-          {{ props.action.label }}
-        </button>
+      <div :class="styles.messageRow()">
+        <p :class="styles.message()">{{ props.message }}</p>
+
+        <div v-if="props.action" :class="styles.action()">
+          <button
+            type="button"
+            :class="clsx(
+              'text-sm font-medium hover:underline',
+              'focus:outline-none focus:underline',
+              ACTION_TEXT_CLASSES[props.variant]
+            )"
+            @click="props.action.onClick"
+          >
+            {{ props.action.label }}
+          </button>
+        </div>
       </div>
     </div>
 

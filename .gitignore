@@ -154,3 +154,9 @@ example-app/
 # Storybook build output
 **/storybook-static/
 **/storybook-static/*
+
+# Agents
+.claude/
+.agents/
+.codegraph/
+.mcp.json

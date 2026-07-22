@@ -430,12 +430,13 @@ export const switchToggle = tv({
 
 export const alert = tv({
   slots: {
-    container: 'flex gap-3 rounded-md border p-4',
-    icon:      'shrink-0 size-5 mt-0.5',
-    body:      'flex-1 min-w-0',
-    title:     'text-sm font-semibold mb-0.5',
-    message:   'text-sm',
-    action:    'mt-2',
+    container:  'flex gap-3 rounded-md border p-4',
+    icon:       'shrink-0 size-5 mt-0.5',
+    body:       'flex-1 min-w-0',
+    title:      'text-sm font-semibold mb-0.5',
+    messageRow: 'flex flex-row flex-wrap items-baseline gap-x-2',
+    message:    'text-sm',
+    action:     'shrink-0',
     closeBtn: [
       'shrink-0 self-start rounded p-0.5 -mt-0.5 -mr-0.5',
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1',
