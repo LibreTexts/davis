@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/LibreTexts/davis/compare/v1.11.0...v1.11.1) (2026-07-22)
+
+
+### Bug Fixes
+
+* **Alert:** layout when action used ([81e2198](https://github.com/LibreTexts/davis/commit/81e2198989cde29f585aeca8271c1fee0610fb73))
+
 # [1.11.0](https://github.com/LibreTexts/davis/compare/v1.10.5...v1.11.0) (2026-07-20)
 
 
