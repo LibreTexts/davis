@@ -34,6 +34,18 @@ const overridesPath = resolve(__dirname, "props.overrides.json");
  */
 const COMPONENTS = [
   { slug: "button", react: "button.tsx", vue: "Button.vue" },
+  // Forms
+  { slug: "checkbox", react: "checkbox.tsx", vue: "Checkbox.vue" },
+  { slug: "combobox", react: "combobox.tsx", vue: "Combobox.vue" },
+  { slug: "form-section", react: "form-section.tsx", vue: "FormSection.vue" },
+  { slug: "input", react: "input.tsx", vue: "Input.vue" },
+  { slug: "input-group", react: "input-group.tsx", vue: "InputGroup.vue" },
+  { slug: "listbox", react: "listbox.tsx", vue: "Listbox.vue" },
+  { slug: "number-input", react: "number-input.tsx", vue: "NumberInput.vue" },
+  { slug: "radio-group", react: "radio-group.tsx", vue: "RadioGroup.vue" },
+  { slug: "select", react: "select.tsx", vue: "Select.vue" },
+  { slug: "switch", react: "switch.tsx", vue: "Switch.vue" },
+  { slug: "textarea", react: "textarea.tsx", vue: "Textarea.vue" },
 ];
 
 // --- React -----------------------------------------------------------------

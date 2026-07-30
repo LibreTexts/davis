@@ -1,0 +1,50 @@
+---
+title: Form Section
+description: Grouped fieldset for organizing related form controls
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import PropsTable from "../../../components/PropsTable.astro";
+
+Form Section groups related form fields under a labelled fieldset, improving scannability and organization of long forms.
+
+## Installation
+
+<Tabs syncKey="framework">
+<TabItem label="React">
+```bash
+npm install @libretexts/davis-react
+```
+</TabItem>
+<TabItem label="Vue">
+```bash
+npm install @libretexts/davis-vue
+```
+
+</TabItem>
+</Tabs>
+
+## Basic Usage
+
+<Tabs syncKey="framework">
+<TabItem label="React">
+```tsx
+import { FormSection, Input, Stack } from '@libretexts/davis-react';
+
+export default function Example() {
+  return (
+    <FormSection title="Personal Information" description="Your basic contact details.">
+      <Stack gap="md">
+        <Input label="First name" />
+        <Input label="Last name" />
+        <Input label="Email" type="email" />
+      </Stack>
+    </FormSection>
+  );
+}
+```
+</TabItem>
+<TabItem label="Vue">
+
+</TabItem>
+</Tabs>

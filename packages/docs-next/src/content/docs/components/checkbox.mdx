@@ -1,0 +1,45 @@
+---
+title: Checkbox
+description: Allow users to select one or more options
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import PropsTable from "../../../components/PropsTable.astro";
+import Example from "../../../components/Example.astro";
+import CheckboxBasicReact from "../../../examples/react/CheckboxBasic.tsx";
+import CheckboxBasicReactSrc from "../../../examples/react/CheckboxBasic.tsx?raw";
+import CheckboxBasicVue from "../../../examples/vue/CheckboxBasic.vue";
+import CheckboxBasicVueSrc from "../../../examples/vue/CheckboxBasic.vue?raw";
+
+Checkboxes allow users to select one or more options from a set.
+
+## Installation
+
+<Tabs syncKey="framework">
+<TabItem label="React">
+```bash
+npm install @libretexts/davis-react
+```
+</TabItem>
+<TabItem label="Vue">
+```bash
+npm install @libretexts/davis-vue
+```
+
+</TabItem>
+</Tabs>
+
+## Basic Usage
+
+<Tabs syncKey="framework">
+  <TabItem label="React">
+    <Example code={CheckboxBasicReactSrc} lang="tsx">
+      <CheckboxBasicReact client:load />
+    </Example>
+  </TabItem>
+  <TabItem label="Vue">
+    <Example code={CheckboxBasicVueSrc} lang="vue">
+      <CheckboxBasicVue client:load />
+    </Example>
+  </TabItem>
+</Tabs>

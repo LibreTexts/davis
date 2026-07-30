@@ -1,0 +1,58 @@
+---
+title: Number Input
+description: Numeric input with increment and decrement stepper buttons
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import PropsTable from "../../../components/PropsTable.astro";
+
+Number Input provides a numeric field with increment and decrement buttons for precise value entry, ideal for quantities, counts, and bounded numeric values.
+
+## Installation
+
+<Tabs syncKey="framework">
+<TabItem label="React">
+```bash
+npm install @libretexts/davis-react
+```
+</TabItem>
+<TabItem label="Vue">
+```bash
+npm install @libretexts/davis-vue
+```
+
+</TabItem>
+</Tabs>
+
+## Basic Usage
+
+<Tabs syncKey="framework">
+<TabItem label="React">
+```tsx
+import { NumberInput } from '@libretexts/davis-react';
+import { useState } from 'react';
+
+export default function Example() {
+  const [value, setValue] = useState(1);
+
+  return (
+    <NumberInput
+      label="Quantity"
+      value={value}
+      onChange={setValue}
+      min={1}
+      max={99}
+    />
+  );
+}
+```
+</TabItem>
+<TabItem label="Vue">
+
+</TabItem>
+</Tabs>
+
+## When to use
+
+- **Number Input** — Use when users need to increment or decrement a bounded numeric value (quantities, seats, page count). The stepper buttons make it easy to adjust by 1.
+- **Input (type="number")** — Use for unbounded or large numeric values where steppers would be impractical.

@@ -1,0 +1,50 @@
+---
+title: Select
+description: Dropdown for selecting from a list of options
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import PropsTable from "../../../components/PropsTable.astro";
+import Example from "../../../components/Example.astro";
+import SelectBasicReact from "../../../examples/react/SelectBasic.tsx";
+import SelectBasicReactSrc from "../../../examples/react/SelectBasic.tsx?raw";
+import SelectBasicVue from "../../../examples/vue/SelectBasic.vue";
+import SelectBasicVueSrc from "../../../examples/vue/SelectBasic.vue?raw";
+
+Select components allow users to choose one option from a dropdown list.
+
+## Installation
+
+<Tabs syncKey="framework">
+<TabItem label="React">
+```bash
+npm install @libretexts/davis-react
+```
+</TabItem>
+<TabItem label="Vue">
+```bash
+npm install @libretexts/davis-vue
+```
+
+</TabItem>
+</Tabs>
+
+## Basic Usage
+
+<Tabs syncKey="framework">
+  <TabItem label="React">
+    <Example code={SelectBasicReactSrc} lang="tsx">
+      <SelectBasicReact client:load />
+    </Example>
+  </TabItem>
+  <TabItem label="Vue">
+    <Example code={SelectBasicVueSrc} lang="vue">
+      <SelectBasicVue client:load />
+    </Example>
+  </TabItem>
+</Tabs>
+
+## When to use
+
+- **Select** — Use for closed lists of 4–15 options where all options are known and filtering is not needed. The native `<select>` element is accessible and familiar.
+- **Combobox** — Use when the list has many options (15+), when users benefit from type-ahead filtering, or when options can be dynamically fetched (e.g., country search, user lookup).
