@@ -53,10 +53,32 @@ git-ignored — never edit it by hand.
    `<PropsTable>`, and add it to the sidebar in `astro.config.mjs`.
 5. Add manual prop overrides only if docgen can't resolve a type.
 
-## Status / not yet done
+## Migrating pages
 
-This prototype covers one component and the narrative section. Remaining work
-(tracked in the RFC): migrate the other 67 pages from Markdoc → MDX, cover the
-full component set + table packages, wire CI (build + docgen + link-check +
-story/docs coverage), publish Storybook as the linked workshop, add redirects,
-and retire `packages/docs`.
+`scripts/migrate-markdoc.mjs` is a codemod that converts the old Next.js
+Markdoc pages to Starlight MDX:
+
+```sh
+node scripts/migrate-markdoc.mjs input select switch   # one or more slugs
+```
+
+It converts `{% framework-tabs %}`/`{% tab %}` → `<Tabs>`/`<TabItem>`,
+`{% callout %}` → `<Aside>`, strips the stale "Coming Soon" Vue notices,
+replaces the hand-written `## Props` tables with `<PropsTable>`, and drops the
+redundant H1/dividers. Narrative prose and code examples are preserved. After
+migrating, add each slug to `scripts/generate-props.mjs` and the sidebar, then
+upgrade the key examples to live `<Example>` islands (see any Forms page).
+
+## Status
+
+Migrated so far: **Button** + the full **Forms** group (Checkbox, Combobox,
+Form Section, Input, Input Group, Listbox, Number Input, Radio Group, Select,
+Switch, Textarea) — 12 components, all with generated prop tables. Live
+`<Example>` islands are wired for Button, Input, Checkbox, Switch, and Select;
+the remaining Forms pages keep their (now Vue-accurate) code examples until
+their islands are authored.
+
+Remaining work (tracked in the RFC): migrate the other component groups + table
+packages, upgrade remaining examples to live islands, wire CI (build + docgen +
+link-check + story/docs coverage), publish Storybook as the linked workshop,
+add redirects, and retire `packages/docs`.

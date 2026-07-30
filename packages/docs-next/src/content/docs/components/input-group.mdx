@@ -1,0 +1,46 @@
+---
+title: Input Group
+description: Input with prefix or suffix addons for units, icons, or labels
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import PropsTable from "../../../components/PropsTable.astro";
+
+Input Group attaches prefix or suffix addons to a form input, used for currency symbols, units of measurement, URL prefixes, or icon buttons.
+
+## Installation
+
+<Tabs syncKey="framework">
+<TabItem label="React">
+```bash
+npm install @libretexts/davis-react
+```
+</TabItem>
+<TabItem label="Vue">
+```bash
+npm install @libretexts/davis-vue
+```
+
+</TabItem>
+</Tabs>
+
+## Basic Usage
+
+<Tabs syncKey="framework">
+<TabItem label="React">
+```tsx
+import { InputGroup, Input } from '@libretexts/davis-react';
+
+export default function Example() {
+  return (
+    <InputGroup prefix="$" suffix=".00">
+      <Input placeholder="0" />
+    </InputGroup>
+  );
+}
+```
+</TabItem>
+<TabItem label="Vue">
+
+</TabItem>
+</Tabs>

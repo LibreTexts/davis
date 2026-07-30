@@ -1,0 +1,63 @@
+---
+title: Textarea
+description: Multi-line text input for longer content
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import PropsTable from "../../../components/PropsTable.astro";
+
+Textareas allow users to enter and edit multi-line text.
+
+## Installation
+
+<Tabs syncKey="framework">
+<TabItem label="React">
+```bash
+npm install @libretexts/davis-react
+```
+</TabItem>
+<TabItem label="Vue">
+```bash
+npm install @libretexts/davis-vue
+```
+
+</TabItem>
+</Tabs>
+
+## Basic Usage
+
+<Tabs syncKey="framework">
+<TabItem label="React">
+```tsx
+import { Textarea } from '@libretexts/davis-react';
+
+export default function Example() {
+  return (
+    <Textarea
+      name="description"
+      label="Description"
+      rows={4}
+      placeholder="Enter a description..."
+    />
+  );
+}
+```
+</TabItem>
+<TabItem label="Vue">
+```vue
+<script setup>
+import { Textarea } from '@libretexts/davis-vue';
+</script>
+
+<template>
+  <Textarea
+    name="description"
+    label="Description"
+    :rows="4"
+    placeholder="Enter a description..."
+  />
+</template>
+```
+
+</TabItem>
+</Tabs>

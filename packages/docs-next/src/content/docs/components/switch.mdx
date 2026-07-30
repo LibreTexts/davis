@@ -1,0 +1,45 @@
+---
+title: Switch
+description: Toggle control for binary on/off settings
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import PropsTable from "../../../components/PropsTable.astro";
+import Example from "../../../components/Example.astro";
+import SwitchBasicReact from "../../../examples/react/SwitchBasic.tsx";
+import SwitchBasicReactSrc from "../../../examples/react/SwitchBasic.tsx?raw";
+import SwitchBasicVue from "../../../examples/vue/SwitchBasic.vue";
+import SwitchBasicVueSrc from "../../../examples/vue/SwitchBasic.vue?raw";
+
+Switches are toggle controls for binary on/off settings.
+
+## Installation
+
+<Tabs syncKey="framework">
+<TabItem label="React">
+```bash
+npm install @libretexts/davis-react
+```
+</TabItem>
+<TabItem label="Vue">
+```bash
+npm install @libretexts/davis-vue
+```
+
+</TabItem>
+</Tabs>
+
+## Basic Usage
+
+<Tabs syncKey="framework">
+  <TabItem label="React">
+    <Example code={SwitchBasicReactSrc} lang="tsx">
+      <SwitchBasicReact client:load />
+    </Example>
+  </TabItem>
+  <TabItem label="Vue">
+    <Example code={SwitchBasicVueSrc} lang="vue">
+      <SwitchBasicVue client:load />
+    </Example>
+  </TabItem>
+</Tabs>
