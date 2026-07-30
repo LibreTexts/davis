@@ -1,0 +1,28 @@
+---
+/**
+ * A live component example: renders the real component (passed as a hydrated
+ * island in the default slot) inside a framed preview, then shows its source.
+ *
+ * The `code` prop is imported with Vite's `?raw` suffix from the SAME file that
+ * is rendered above — so the displayed source is exactly what runs. No drift
+ * between the demo and its code.
+ *
+ * Usage in MDX:
+ *   import Demo from '../../../examples/react/ButtonVariants.tsx';
+ *   import DemoSrc from '../../../examples/react/ButtonVariants.tsx?raw';
+ *   <Example code={DemoSrc} lang="tsx"><Demo client:load /></Example>
+ */
+import { Code } from "@astrojs/starlight/components";
+
+interface Props {
+  code: string;
+  lang?: string;
+}
+
+const { code, lang = "tsx" } = Astro.props;
+---
+
+<div class="davis-preview not-content">
+  <slot />
+</div>
+<Code code={code} lang={lang} />

@@ -1,0 +1,33 @@
+---
+title: Davis
+description: An accessibility-first design system for React and Vue.
+template: splash
+hero:
+  tagline: An accessibility-first design system for React and Vue, by LibreTexts.
+  actions:
+    - text: Get started
+      link: /getting-started/overview/
+      icon: right-arrow
+      variant: primary
+    - text: View on GitHub
+      link: https://github.com/LibreTexts/davis
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+<CardGrid stagger>
+  <Card title="Live examples" icon="laptop">
+    Every component is rendered live — in React **and** Vue — on the same page.
+  </Card>
+  <Card title="Self-documenting" icon="document">
+    Prop tables are generated from the component source, so the docs can't drift.
+  </Card>
+  <Card title="Accessibility-first" icon="approve-check">
+    Built on HeadlessUI with focus management, ARIA, and keyboard support baked in.
+  </Card>
+  <Card title="One system, two frameworks" icon="puzzle">
+    The same tokens and variants drive matching React and Vue implementations.
+  </Card>
+</CardGrid>

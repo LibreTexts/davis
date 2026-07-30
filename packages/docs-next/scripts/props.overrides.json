@@ -1,0 +1,19 @@
+{
+  "button": {
+    "react": [
+      { "name": "variant", "type": "\"primary\" | \"secondary\" | \"tertiary\" | \"destructive\" | \"warning\" | \"ghost\" | \"outline\"", "default": "\"primary\"", "description": "Visual style variant." },
+      { "name": "size", "type": "\"sm\" | \"md\" | \"lg\"", "default": "\"md\"", "description": "Button size." },
+      { "name": "iconPosition", "type": "\"left\" | \"right\"", "default": "\"left\"", "description": "Which side of the label the icon sits on." },
+      { "name": "loading", "default": "false", "description": "Show a spinner and disable the button while an async action runs." },
+      { "name": "disabled", "default": "false", "description": "Natively disable the button." },
+      { "name": "fullWidth", "default": "false", "description": "Stretch the button to fill its container." },
+      { "name": "as", "type": "ElementType", "default": "\"button\"", "description": "Render as a different element (e.g. \"a\" for a link)." }
+    ],
+    "vue": [
+      { "name": "variant", "type": "\"primary\" | \"secondary\" | \"tertiary\" | \"destructive\" | \"warning\" | \"ghost\" | \"outline\"", "default": "\"primary\"", "description": "Visual style variant." },
+      { "name": "size", "type": "\"sm\" | \"md\" | \"lg\"", "default": "\"md\"", "description": "Button size." },
+      { "name": "iconPosition", "type": "\"left\" | \"right\"", "default": "\"left\"", "description": "Which side of the label the icon sits on." },
+      { "name": "as", "type": "string", "default": "\"button\"", "description": "Render as a different element (e.g. \"a\" for a link)." }
+    ]
+  }
+}
