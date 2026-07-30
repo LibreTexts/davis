@@ -5,6 +5,11 @@ description: Multi-line text input for longer content
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 import PropsTable from "../../../components/PropsTable.astro";
+import Example from "../../../components/Example.astro";
+import TextareaBasicReact from "../../../examples/react/TextareaBasic.tsx";
+import TextareaBasicReactSrc from "../../../examples/react/TextareaBasic.tsx?raw";
+import TextareaBasicVue from "../../../examples/vue/TextareaBasic.vue";
+import TextareaBasicVueSrc from "../../../examples/vue/TextareaBasic.vue?raw";
 
 Textareas allow users to enter and edit multi-line text.
 
@@ -27,37 +32,14 @@ npm install @libretexts/davis-vue
 ## Basic Usage
 
 <Tabs syncKey="framework">
-<TabItem label="React">
-```tsx
-import { Textarea } from '@libretexts/davis-react';
-
-export default function Example() {
-  return (
-    <Textarea
-      name="description"
-      label="Description"
-      rows={4}
-      placeholder="Enter a description..."
-    />
-  );
-}
-```
-</TabItem>
-<TabItem label="Vue">
-```vue
-<script setup>
-import { Textarea } from '@libretexts/davis-vue';
-</script>
-
-<template>
-  <Textarea
-    name="description"
-    label="Description"
-    :rows="4"
-    placeholder="Enter a description..."
-  />
-</template>
-```
-
-</TabItem>
+  <TabItem label="React">
+    <Example code={TextareaBasicReactSrc} lang="tsx">
+      <TextareaBasicReact client:load />
+    </Example>
+  </TabItem>
+  <TabItem label="Vue">
+    <Example code={TextareaBasicVueSrc} lang="vue">
+      <TextareaBasicVue client:load />
+    </Example>
+  </TabItem>
 </Tabs>

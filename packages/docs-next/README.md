@@ -73,12 +73,13 @@ upgrade the key examples to live `<Example>` islands (see any Forms page).
 
 Migrated so far: **Button** + the full **Forms** group (Checkbox, Combobox,
 Form Section, Input, Input Group, Listbox, Number Input, Radio Group, Select,
-Switch, Textarea) — 12 components, all with generated prop tables. Live
-`<Example>` islands are wired for Button, Input, Checkbox, Switch, and Select;
-the remaining Forms pages keep their (now Vue-accurate) code examples until
-their islands are authored.
+Switch, Textarea) — 12 components, all with generated prop tables **and** a live
+`<Example>` island (React + Vue) in their Basic Usage section, including the
+compound Combobox/Listbox and the InputGroup/FormSection wrappers. Later
+sections still show static code examples (now Vue-accurate) until they're
+upgraded.
 
 Remaining work (tracked in the RFC): migrate the other component groups + table
-packages, upgrade remaining examples to live islands, wire CI (build + docgen +
-link-check + story/docs coverage), publish Storybook as the linked workshop,
-add redirects, and retire `packages/docs`.
+packages, upgrade the remaining per-section examples to live islands, wire CI
+(build + docgen + link-check + story/docs coverage), publish Storybook as the
+linked workshop, add redirects, and retire `packages/docs`.

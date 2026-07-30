@@ -5,6 +5,11 @@ description: Allow users to select one option from a set
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 import PropsTable from "../../../components/PropsTable.astro";
+import Example from "../../../components/Example.astro";
+import RadioGroupBasicReact from "../../../examples/react/RadioGroupBasic.tsx";
+import RadioGroupBasicReactSrc from "../../../examples/react/RadioGroupBasic.tsx?raw";
+import RadioGroupBasicVue from "../../../examples/vue/RadioGroupBasic.vue";
+import RadioGroupBasicVueSrc from "../../../examples/vue/RadioGroupBasic.vue?raw";
 
 Radio groups allow users to select a single option from a set of mutually exclusive choices.
 
@@ -27,43 +32,14 @@ npm install @libretexts/davis-vue
 ## Basic Usage
 
 <Tabs syncKey="framework">
-<TabItem label="React">
-```tsx
-import { RadioGroup } from '@libretexts/davis-react';
-
-export default function Example() {
-  return (
-    <RadioGroup
-      name="plan"
-      label="Select a plan"
-      options={[
-        { value: 'basic', label: 'Basic' },
-        { value: 'pro', label: 'Pro' },
-        { value: 'enterprise', label: 'Enterprise' },
-      ]}
-    />
-  );
-}
-```
-</TabItem>
-<TabItem label="Vue">
-```vue
-<script setup>
-import { RadioGroup } from '@libretexts/davis-vue';
-</script>
-
-<template>
-  <RadioGroup
-    name="plan"
-    label="Select a plan"
-    :options="[
-      { value: 'basic', label: 'Basic' },
-      { value: 'pro', label: 'Pro' },
-      { value: 'enterprise', label: 'Enterprise' },
-    ]"
-  />
-</template>
-```
-
-</TabItem>
+  <TabItem label="React">
+    <Example code={RadioGroupBasicReactSrc} lang="tsx">
+      <RadioGroupBasicReact client:load />
+    </Example>
+  </TabItem>
+  <TabItem label="Vue">
+    <Example code={RadioGroupBasicVueSrc} lang="vue">
+      <RadioGroupBasicVue client:load />
+    </Example>
+  </TabItem>
 </Tabs>

@@ -5,6 +5,11 @@ description: Keyboard-navigable styled dropdown for selecting from a list
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 import PropsTable from "../../../components/PropsTable.astro";
+import Example from "../../../components/Example.astro";
+import ListboxBasicReact from "../../../examples/react/ListboxBasic.tsx";
+import ListboxBasicReactSrc from "../../../examples/react/ListboxBasic.tsx?raw";
+import ListboxBasicVue from "../../../examples/vue/ListboxBasic.vue";
+import ListboxBasicVueSrc from "../../../examples/vue/ListboxBasic.vue?raw";
 
 Listbox is a fully styled, accessible dropdown select. Use it when you need custom option rendering — icons, badges, multi-line text — that native `<select>` doesn't support. Built on HeadlessUI with full keyboard navigation and WCAG 2.2 AA compliance.
 
@@ -26,56 +31,16 @@ npm install @libretexts/davis-vue
 ## Basic Usage
 
 <Tabs syncKey="framework">
-<TabItem label="React">
-```tsx
-import { Listbox } from '@libretexts/davis-react';
-import { useState } from 'react';
-
-const frameworks = ['React', 'Vue', 'Angular', 'Svelte', 'Solid'];
-
-export default function Example() {
-  const [value, setValue] = useState<string | null>(null);
-
-  return (
-    <Listbox value={value} onChange={setValue}>
-      <Listbox.Label>Framework</Listbox.Label>
-      <Listbox.Button placeholder="Select a framework…" />
-      <Listbox.Options>
-        {frameworks.map((f) => (
-          <Listbox.Option key={f} value={f}>{f}</Listbox.Option>
-        ))}
-      </Listbox.Options>
-    </Listbox>
-  );
-}
-```
-</TabItem>
-<TabItem label="Vue">
-```vue
-<script setup lang="ts">
-import {
-  Listbox, ListboxLabel, ListboxButton,
-  ListboxOptions, ListboxOption,
-} from '@libretexts/davis-vue';
-import { ref } from 'vue';
-
-const frameworks = ['React', 'Vue', 'Angular', 'Svelte', 'Solid'];
-const value = ref<string | null>(null);
-</script>
-
-<template>
-  <Listbox v-model="value">
-    <ListboxLabel>Framework</ListboxLabel>
-    <ListboxButton placeholder="Select a framework…" />
-    <ListboxOptions>
-      <ListboxOption v-for="f in frameworks" :key="f" :value="f">
-        {{ f }}
-      </ListboxOption>
-    </ListboxOptions>
-  </Listbox>
-</template>
-```
-</TabItem>
+  <TabItem label="React">
+    <Example code={ListboxBasicReactSrc} lang="tsx">
+      <ListboxBasicReact client:load />
+    </Example>
+  </TabItem>
+  <TabItem label="Vue">
+    <Example code={ListboxBasicVueSrc} lang="vue">
+      <ListboxBasicVue client:load />
+    </Example>
+  </TabItem>
 </Tabs>
 
 ## Object Values
