@@ -1,0 +1,24 @@
+/*
+ * Docs styling entry point.
+ *
+ * This pulls Tailwind v4 plus the Davis design tokens and component safelists
+ * into the docs site itself — so every live example renders with the real
+ * design system, and the docs chrome can be built with Davis components too
+ * (dogfooding). See packages/react/src/styles.css for the consumption model.
+ */
+@import "tailwindcss";
+@import "@libretexts/davis-react/styles.css";
+@import "@libretexts/davis-vue/styles.css";
+
+/* The framed box that live component examples render inside. */
+.davis-preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background: var(--sl-color-bg);
+  margin-block: 1rem 0;
+}

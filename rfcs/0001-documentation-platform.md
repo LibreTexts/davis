@@ -1,9 +1,17 @@
 # RFC 0001 — Documentation Platform for Davis
 
-**Status:** Proposed
+**Status:** Accepted — Astro Starlight. Prototype landed in `packages/docs-next`.
 **Author:** Documentation research (Claude Code)
 **Date:** 2026-07-30
 **Branch:** `claude/design-system-docs-research-abtx1l`
+
+> **Prototype (RFC Phases 1–3):** `packages/docs-next` is a working Starlight
+> site proving the architecture on the `Button` component. It renders the real
+> React **and** Vue Button live on the same page, auto-generates prop tables
+> from component source (the `warning` variant and `softDisabled` JSDoc appear
+> with no hand-authoring), and includes a hand-authored **About** section
+> (principles, history, conventions) confirming long-form narrative content is
+> first-class. `npm run build` and `astro check` both pass. See its README.
 
 ---
 

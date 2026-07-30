@@ -1,0 +1,58 @@
+---
+/**
+ * Renders an auto-generated prop table from src/generated/props.json.
+ * Data comes from component source via scripts/generate-props.mjs — never
+ * hand-maintained, so it stays in lockstep with the library.
+ *
+ * Usage in MDX:  <PropsTable component="button" framework="react" />
+ */
+import props from "../generated/props.json";
+
+interface Row {
+  name: string;
+  type: string;
+  default: string;
+  description: string;
+  required: boolean;
+}
+
+interface Props {
+  component: string;
+  framework?: "react" | "vue";
+}
+
+const { component, framework = "react" } = Astro.props;
+const rows: Row[] = (props as any)?.[component]?.[framework] ?? [];
+---
+
+{
+  rows.length === 0 ? (
+    <p>
+      <em>No prop metadata generated for “{component}” ({framework}).</em>
+    </p>
+  ) : (
+    <table>
+      <thead>
+        <tr>
+          <th>Prop</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr>
+            <td>
+              <code>{r.name}</code>
+              {r.required && <span aria-label="required" title="required"> *</span>}
+            </td>
+            <td>{r.type ? <code>{r.type}</code> : "—"}</td>
+            <td>{r.default ? <code>{r.default}</code> : "—"}</td>
+            <td>{r.description || "—"}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
+}

@@ -1,0 +1,4 @@
+dist/
+.astro/
+# Regenerated from component source on every dev/build (see scripts/generate-props.mjs)
+src/generated/

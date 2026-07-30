@@ -1,0 +1,58 @@
+---
+title: Button
+description: Accessible button component with multiple variants and sizes.
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import Example from "../../../components/Example.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+
+import ButtonVariantsReact from "../../../examples/react/ButtonVariants.tsx";
+import ButtonVariantsReactSrc from "../../../examples/react/ButtonVariants.tsx?raw";
+import ButtonVariantsVue from "../../../examples/vue/ButtonVariants.vue";
+import ButtonVariantsVueSrc from "../../../examples/vue/ButtonVariants.vue?raw";
+
+Buttons trigger actions or events. Every example below is the **real** Davis
+component rendered live — switch the framework tab to see React and Vue side by
+side, from the same page.
+
+## Variants
+
+Buttons come in semantic variants to communicate different action types.
+
+<Tabs syncKey="framework">
+  <TabItem label="React">
+    <Example code={ButtonVariantsReactSrc} lang="tsx">
+      <ButtonVariantsReact client:load />
+    </Example>
+  </TabItem>
+  <TabItem label="Vue">
+    <Example code={ButtonVariantsVueSrc} lang="vue">
+      <ButtonVariantsVue client:load />
+    </Example>
+  </TabItem>
+</Tabs>
+
+## Props
+
+The tables below are generated at build time from the component source
+(`react-docgen-typescript` / `vue-docgen-api`) — they cannot drift from the
+library.
+
+<Tabs syncKey="framework">
+  <TabItem label="React">
+    <PropsTable component="button" framework="react" />
+  </TabItem>
+  <TabItem label="Vue">
+    <PropsTable component="button" framework="vue" />
+  </TabItem>
+</Tabs>
+
+## Accessibility
+
+- Uses a semantic `<button>` element by default.
+- Loading state sets `aria-busy="true"`; the button is disabled while loading.
+- Prefer `softDisabled` over `disabled` for controls users should still be able
+  to discover and focus (e.g. pagination arrows) — it uses `aria-disabled`
+  instead of the native attribute, keeping the control in the tab order.
+- Icon-only buttons require an `aria-label`.
