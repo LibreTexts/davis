@@ -5,6 +5,11 @@ description: Input with prefix or suffix addons for units, icons, or labels
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 import PropsTable from "../../../components/PropsTable.astro";
+import Example from "../../../components/Example.astro";
+import InputGroupBasicReact from "../../../examples/react/InputGroupBasic.tsx";
+import InputGroupBasicReactSrc from "../../../examples/react/InputGroupBasic.tsx?raw";
+import InputGroupBasicVue from "../../../examples/vue/InputGroupBasic.vue";
+import InputGroupBasicVueSrc from "../../../examples/vue/InputGroupBasic.vue?raw";
 
 Input Group attaches prefix or suffix addons to a form input, used for currency symbols, units of measurement, URL prefixes, or icon buttons.
 
@@ -27,20 +32,14 @@ npm install @libretexts/davis-vue
 ## Basic Usage
 
 <Tabs syncKey="framework">
-<TabItem label="React">
-```tsx
-import { InputGroup, Input } from '@libretexts/davis-react';
-
-export default function Example() {
-  return (
-    <InputGroup prefix="$" suffix=".00">
-      <Input placeholder="0" />
-    </InputGroup>
-  );
-}
-```
-</TabItem>
-<TabItem label="Vue">
-
-</TabItem>
+  <TabItem label="React">
+    <Example code={InputGroupBasicReactSrc} lang="tsx">
+      <InputGroupBasicReact client:load />
+    </Example>
+  </TabItem>
+  <TabItem label="Vue">
+    <Example code={InputGroupBasicVueSrc} lang="vue">
+      <InputGroupBasicVue client:load />
+    </Example>
+  </TabItem>
 </Tabs>

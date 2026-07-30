@@ -5,6 +5,11 @@ description: Searchable select with type-ahead filtering
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 import PropsTable from "../../../components/PropsTable.astro";
+import Example from "../../../components/Example.astro";
+import ComboboxBasicReact from "../../../examples/react/ComboboxBasic.tsx";
+import ComboboxBasicReactSrc from "../../../examples/react/ComboboxBasic.tsx?raw";
+import ComboboxBasicVue from "../../../examples/vue/ComboboxBasic.vue";
+import ComboboxBasicVueSrc from "../../../examples/vue/ComboboxBasic.vue?raw";
 
 Combobox combines a text input with a dropdown list, letting users type to filter options. Built on HeadlessUI with full keyboard navigation and WCAG 2.2 AA compliance.
 
@@ -26,81 +31,16 @@ npm install @libretexts/davis-vue
 ## Basic Usage
 
 <Tabs syncKey="framework">
-<TabItem label="React">
-```tsx
-import { Combobox } from '@libretexts/davis-react';
-import { useState } from 'react';
-
-const frameworks = ['React', 'Vue', 'Angular', 'Svelte', 'Solid'];
-
-export default function Example() {
-  const [value, setValue] = useState<string | null>(null);
-  const [query, setQuery] = useState('');
-
-  const filtered = query === ''
-    ? frameworks
-    : frameworks.filter(f => f.toLowerCase().includes(query.toLowerCase()));
-
-  return (
-    <Combobox value={value} onChange={setValue}>
-      <Combobox.Label>Framework</Combobox.Label>
-      <Combobox.Input
-        placeholder="Search frameworks…"
-        displayValue={(v) => v ?? ''}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <Combobox.Options>
-        {filtered.length === 0 ? (
-          <Combobox.Empty />
-        ) : (
-          filtered.map((f) => (
-            <Combobox.Option key={f} value={f}>{f}</Combobox.Option>
-          ))
-        )}
-      </Combobox.Options>
-    </Combobox>
-  );
-}
-```
-</TabItem>
-<TabItem label="Vue">
-```vue
-<script setup lang="ts">
-import {
-  Combobox, ComboboxLabel, ComboboxInputField,
-  ComboboxOptionsList, ComboboxOptionItem, ComboboxEmpty,
-} from '@libretexts/davis-vue';
-import { ref, computed } from 'vue';
-
-const frameworks = ['React', 'Vue', 'Angular', 'Svelte', 'Solid'];
-const value = ref<string | null>(null);
-const query = ref('');
-
-const filtered = computed(() =>
-  query.value === ''
-    ? frameworks
-    : frameworks.filter(f => f.toLowerCase().includes(query.value.toLowerCase()))
-);
-</script>
-
-<template>
-  <Combobox v-model="value">
-    <ComboboxLabel>Framework</ComboboxLabel>
-    <ComboboxInputField
-      placeholder="Search frameworks…"
-      :display-value="(v) => v ?? ''"
-      @change="query = ($event.target as HTMLInputElement).value"
-    />
-    <ComboboxOptionsList>
-      <ComboboxEmpty v-if="filtered.length === 0" />
-      <ComboboxOptionItem v-for="f in filtered" :key="f" :value="f">
-        {{ f }}
-      </ComboboxOptionItem>
-    </ComboboxOptionsList>
-  </Combobox>
-</template>
-```
-</TabItem>
+  <TabItem label="React">
+    <Example code={ComboboxBasicReactSrc} lang="tsx">
+      <ComboboxBasicReact client:load />
+    </Example>
+  </TabItem>
+  <TabItem label="Vue">
+    <Example code={ComboboxBasicVueSrc} lang="vue">
+      <ComboboxBasicVue client:load />
+    </Example>
+  </TabItem>
 </Tabs>
 
 ## Object Values

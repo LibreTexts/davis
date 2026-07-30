@@ -5,6 +5,11 @@ description: Numeric input with increment and decrement stepper buttons
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 import PropsTable from "../../../components/PropsTable.astro";
+import Example from "../../../components/Example.astro";
+import NumberInputBasicReact from "../../../examples/react/NumberInputBasic.tsx";
+import NumberInputBasicReactSrc from "../../../examples/react/NumberInputBasic.tsx?raw";
+import NumberInputBasicVue from "../../../examples/vue/NumberInputBasic.vue";
+import NumberInputBasicVueSrc from "../../../examples/vue/NumberInputBasic.vue?raw";
 
 Number Input provides a numeric field with increment and decrement buttons for precise value entry, ideal for quantities, counts, and bounded numeric values.
 
@@ -27,29 +32,16 @@ npm install @libretexts/davis-vue
 ## Basic Usage
 
 <Tabs syncKey="framework">
-<TabItem label="React">
-```tsx
-import { NumberInput } from '@libretexts/davis-react';
-import { useState } from 'react';
-
-export default function Example() {
-  const [value, setValue] = useState(1);
-
-  return (
-    <NumberInput
-      label="Quantity"
-      value={value}
-      onChange={setValue}
-      min={1}
-      max={99}
-    />
-  );
-}
-```
-</TabItem>
-<TabItem label="Vue">
-
-</TabItem>
+  <TabItem label="React">
+    <Example code={NumberInputBasicReactSrc} lang="tsx">
+      <NumberInputBasicReact client:load />
+    </Example>
+  </TabItem>
+  <TabItem label="Vue">
+    <Example code={NumberInputBasicVueSrc} lang="vue">
+      <NumberInputBasicVue client:load />
+    </Example>
+  </TabItem>
 </Tabs>
 
 ## When to use
