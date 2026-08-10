@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { MenuItems } from "@headlessui/vue";
-import { computePosition, flip, offset, shift } from "@floating-ui/dom";
+import { autoUpdate, computePosition, flip, offset, shift } from "@floating-ui/dom";
 import clsx from "clsx";
 import { menu as menuVariants } from "@libretexts/davis-core";
-import { inject, onMounted, ref, type Ref } from "vue";
+import { inject, onBeforeUnmount, onMounted, ref, watch, type Ref } from "vue";
 
 type MenuAlign = "left" | "right";
 type MenuWidth = "auto" | "sm" | "md" | "lg" | "full";
@@ -25,23 +25,48 @@ const { items } = menuVariants({ align: props.align, width: props.width });
 const triggerEl = inject<Ref<HTMLElement | null>>('davis:triggerEl');
 const floatingEl = ref<{ $el: HTMLElement } | null>(null);
 const floatingStyle = ref<Record<string, string>>({ position: 'fixed', top: '0px', left: '0px' });
+const isMounted = ref(false);
 
-onMounted(async () => {
+let stopAutoUpdate: (() => void) | null = null;
+
+function startPositioning() {
   const reference = triggerEl?.value;
   const floating = floatingEl.value?.$el;
   if (!reference || !floating) return;
 
   const placement = props.align === 'right' ? 'bottom-end' : 'bottom-start';
-  const { x, y } = await computePosition(reference, floating, {
-    placement,
-    middleware: [offset(8), flip(), shift({ padding: 8 })],
+  stopAutoUpdate = autoUpdate(reference, floating, async () => {
+    const { x, y } = await computePosition(reference, floating, {
+      placement,
+      middleware: [offset(8), flip(), shift({ padding: 8 })],
+    });
+    floatingStyle.value = { position: 'fixed', top: `${y}px`, left: `${x}px` };
   });
-  floatingStyle.value = { position: 'fixed', top: `${y}px`, left: `${x}px` };
+}
+
+function stopPositioning() {
+  stopAutoUpdate?.();
+  stopAutoUpdate = null;
+}
+
+onMounted(() => {
+  isMounted.value = true;
 });
+
+// HeadlessUI keeps <MenuItems> mounted and toggles only its inner DOM element
+// (exposed as $el) as the menu opens/closes. Watch that element — not the
+// component ref, whose identity never changes — so we reposition on every open
+// and tear the listeners down on close.
+watch(() => floatingEl.value?.$el ?? null, (el) => {
+  stopPositioning();
+  if (el) startPositioning();
+}, { flush: 'post' });
+
+onBeforeUnmount(stopPositioning);
 </script>
 
 <template>
-  <Teleport to="body">
+  <Teleport to="body" :disabled="!isMounted">
     <transition
       enter-active-class="transition ease-out duration-100"
       enter-from-class="opacity-0 scale-95"
