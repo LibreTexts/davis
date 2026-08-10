@@ -1,3 +1,10 @@
+## [1.11.2](https://github.com/LibreTexts/davis/compare/v1.11.1...v1.11.2) (2026-08-10)
+
+
+### Bug Fixes
+
+* **Vue:** ensure overlays SSR-friendly, fix MenuItems display ([65965fc](https://github.com/LibreTexts/davis/commit/65965fc9a1c0dd1ad3ef67bb7ae889c150f32229))
+
 ## [1.11.1](https://github.com/LibreTexts/davis/compare/v1.11.0...v1.11.1) (2026-07-22)
 
 
