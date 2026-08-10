@@ -1,7 +1,13 @@
 <script setup lang="ts">
+import { onMounted, ref } from "vue";
 import clsx from "clsx";
 import Notification from "./Notification.vue";
 import type { NotificationItem, NotificationPosition } from "./Notification.vue";
+
+const isMounted = ref(false);
+onMounted(() => {
+  isMounted.value = true;
+});
 
 const POSITION_CLASSES: Record<NotificationPosition, string> = {
   "top-right":     "top-4 right-4 flex-col items-end",
@@ -28,16 +34,18 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div
-    aria-live="polite"
-    aria-atomic="false"
-    :class="clsx('fixed z-[9999] flex gap-3 pointer-events-none', POSITION_CLASSES[props.position])"
-  >
-    <Notification
-      v-for="n in props.notifications"
-      :key="n.id"
-      :notification="n"
-      @remove="emit('remove', $event)"
-    />
-  </div>
+  <Teleport to="body" :disabled="!isMounted">
+    <div
+      aria-live="polite"
+      aria-atomic="false"
+      :class="clsx('fixed z-[9999] flex gap-3 pointer-events-none', POSITION_CLASSES[props.position])"
+    >
+      <Notification
+        v-for="n in props.notifications"
+        :key="n.id"
+        :notification="n"
+        @remove="emit('remove', $event)"
+      />
+    </div>
+  </Teleport>
 </template>
