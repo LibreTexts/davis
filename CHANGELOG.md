@@ -1,3 +1,10 @@
+## [1.11.3](https://github.com/LibreTexts/davis/compare/v1.11.2...v1.11.3) (2026-08-27)
+
+
+### Bug Fixes
+
+* ensure type declarations bundled with davis-vue ([7718ca9](https://github.com/LibreTexts/davis/commit/7718ca94958d94ddc69ca0de426e9ef7fe2d47f8))
+
 ## [1.11.2](https://github.com/LibreTexts/davis/compare/v1.11.1...v1.11.2) (2026-08-10)
 
 
