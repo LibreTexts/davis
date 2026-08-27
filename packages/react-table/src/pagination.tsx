@@ -19,19 +19,41 @@ export function DataTablePagination<TData extends RowData>({
   const s = getDataTableSlots();
   const { pageIndex, pageSize } = table.getState().pagination;
   const pageCount = table.getPageCount();
-  const totalRows = table.getFilteredRowModel().rows.length;
-  const firstRow = totalRows === 0 ? 0 : pageIndex * pageSize + 1;
-  const lastRow = Math.min((pageIndex + 1) * pageSize, totalRows);
+  const rowsOnPage = table.getRowModel().rows.length;
+
+  // `getRowCount()` resolves to `options.rowCount` when it is supplied and falls
+  // back to the pre-pagination row model otherwise. Reading the filtered row
+  // model directly would report the current page's length under
+  // `manualPagination`, where `data` only holds one page.
+  const totalRows = table.getRowCount();
+
+  // Under manual pagination a consumer may know the page count but not the row
+  // count. Report what is knowable rather than inventing a total.
+  const totalKnown =
+    table.options.manualPagination !== true || table.options.rowCount !== undefined;
+  // TanStack uses a negative page count as the "unknown total" sentinel.
+  const pageCountKnown = pageCount >= 0;
+
+  const firstRow = rowsOnPage === 0 ? 0 : pageIndex * pageSize + 1;
+  const lastRow = totalKnown
+    ? Math.min((pageIndex + 1) * pageSize, totalRows)
+    : pageIndex * pageSize + rowsOnPage;
+
+  const noResults = rowsOnPage === 0 && (!totalKnown || totalRows === 0);
 
   return (
     <div className={clsx(s.pagination(), className)}>
-      <div className={s.paginationInfo()}>
-        {totalRows === 0 ? (
+      <div className={s.paginationInfo()} role="status">
+        {noResults ? (
           "No results"
-        ) : (
+        ) : totalKnown ? (
           <>
             Showing <strong>{firstRow}</strong>–<strong>{lastRow}</strong> of{" "}
             <strong>{totalRows}</strong>
+          </>
+        ) : (
+          <>
+            Showing <strong>{firstRow}</strong>–<strong>{lastRow}</strong>
           </>
         )}
       </div>
@@ -71,7 +93,16 @@ export function DataTablePagination<TData extends RowData>({
             ‹
           </Button>
           <span className="px-2 text-sm tabular-nums">
-            Page <strong>{pageIndex + 1}</strong> of <strong>{Math.max(pageCount, 1)}</strong>
+            {pageCountKnown ? (
+              <>
+                Page <strong>{pageIndex + 1}</strong> of{" "}
+                <strong>{Math.max(pageCount, 1)}</strong>
+              </>
+            ) : (
+              <>
+                Page <strong>{pageIndex + 1}</strong>
+              </>
+            )}
           </span>
           <Button
             variant="outline"
@@ -86,7 +117,7 @@ export function DataTablePagination<TData extends RowData>({
             variant="outline"
             size="sm"
             onClick={() => table.setPageIndex(pageCount - 1)}
-            softDisabled={!table.getCanNextPage()}
+            softDisabled={!table.getCanNextPage() || !pageCountKnown}
             aria-label="Last page"
           >
             »

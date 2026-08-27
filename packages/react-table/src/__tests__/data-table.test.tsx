@@ -79,3 +79,110 @@ describe("DataTable", () => {
     expect(screen.getByLabelText("Next page")).toBeInTheDocument();
   });
 });
+
+// The summary and page label split their numbers across <strong> elements, so
+// assert on the container's normalized text rather than on fragments.
+const summaryText = () => normalize(screen.getByRole("status").textContent);
+const pageLabelText = () =>
+  normalize(
+    screen.getByRole("navigation", { name: "Pagination" }).querySelector("span")
+      ?.textContent
+  );
+
+const normalize = (value: string | null | undefined) =>
+  (value ?? "").replace(/\s+/g, " ").trim();
+
+const manyRows = (count: number, offset = 0): Item[] =>
+  Array.from({ length: count }, (_, i) => ({
+    id: offset + i + 1,
+    name: `Row ${offset + i + 1}`,
+    value: offset + i + 1,
+  }));
+
+describe("DataTable pagination summary", () => {
+  it("reports the dataset total under manualPagination when rowCount is supplied", () => {
+    // The server sends one page of 25; the dataset holds 500.
+    render(
+      <DataTable<Item>
+        data={manyRows(25, 50)}
+        columns={columns}
+        enablePagination
+        pageSize={25}
+        tableOptions={{
+          manualPagination: true,
+          rowCount: 500,
+          pageCount: 20,
+          initialState: { pagination: { pageIndex: 2, pageSize: 25 } },
+        }}
+      />
+    );
+    expect(summaryText()).toBe("Showing 51–75 of 500");
+    expect(pageLabelText()).toBe("Page 3 of 20");
+  });
+
+  it("omits the total under manualPagination when rowCount is unknown", () => {
+    render(
+      <DataTable<Item>
+        data={manyRows(25, 50)}
+        columns={columns}
+        enablePagination
+        pageSize={25}
+        tableOptions={{
+          manualPagination: true,
+          pageCount: -1,
+          initialState: { pagination: { pageIndex: 2, pageSize: 25 } },
+        }}
+      />
+    );
+    expect(summaryText()).toBe("Showing 51–75");
+    expect(summaryText()).not.toContain("of");
+    expect(pageLabelText()).toBe("Page 3");
+    // A negative page count means setPageIndex(pageCount - 1) has no valid target.
+    expect(screen.getByLabelText("Last page")).toHaveAttribute("aria-disabled", "true");
+  });
+
+  it("keeps client-side totals across page changes", () => {
+    render(
+      <DataTable<Item>
+        data={manyRows(50)}
+        columns={columns}
+        enablePagination
+        pageSize={10}
+      />
+    );
+    expect(summaryText()).toBe("Showing 1–10 of 50");
+    fireEvent.click(screen.getByLabelText("Next page"));
+    expect(summaryText()).toBe("Showing 11–20 of 50");
+    expect(pageLabelText()).toBe("Page 2 of 5");
+  });
+
+  it("reports the filtered total, not the raw data length", () => {
+    render(
+      <DataTable<Item>
+        data={manyRows(50)}
+        columns={columns}
+        enablePagination
+        pageSize={10}
+        enableGlobalFilter
+        toolbar
+      />
+    );
+    expect(summaryText()).toBe("Showing 1–10 of 50");
+    // "Row 4" plus "Row 40"…"Row 49" — 11 of the 50 rows.
+    fireEvent.change(screen.getByLabelText("Search"), { target: { value: "Row 4" } });
+    expect(summaryText()).toBe("Showing 1–10 of 11");
+  });
+
+  it("shows no results when a manually paginated page is empty", () => {
+    render(
+      <DataTable<Item>
+        data={[]}
+        columns={columns}
+        enablePagination
+        pageSize={25}
+        tableOptions={{ manualPagination: true, rowCount: 0, pageCount: 0 }}
+      />
+    );
+    expect(summaryText()).toBe("No results");
+  });
+});

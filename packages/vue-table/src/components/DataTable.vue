@@ -133,20 +133,39 @@ const hideableColumns = computed(() =>
   table.getAllLeafColumns().filter((c) => c.getCanHide())
 );
 
+// `getRowCount()` resolves to `options.rowCount` when it is supplied and falls
+// back to the pre-pagination row model otherwise. Reading the filtered row model
+// directly would report the current page's length under `manualPagination`,
+// where `data` only holds one page.
+const totalRows = computed(() => table.getRowCount());
+const rowsOnPage = computed(() => rows.value.length);
+
+// Under manual pagination a consumer may know the page count but not the row
+// count. Report what is knowable rather than inventing a total.
+const totalKnown = computed(
+  () =>
+    table.options.manualPagination !== true ||
+    table.options.rowCount !== undefined
+);
+
 const firstRow = computed(() => {
   if (!props.enablePagination) return 0;
   const { pageIndex, pageSize } = table.getState().pagination;
-  const total = table.getFilteredRowModel().rows.length;
-  return total === 0 ? 0 : pageIndex * pageSize + 1;
+  return rowsOnPage.value === 0 ? 0 : pageIndex * pageSize + 1;
 });
 const lastRow = computed(() => {
   if (!props.enablePagination) return 0;
   const { pageIndex, pageSize } = table.getState().pagination;
-  const total = table.getFilteredRowModel().rows.length;
-  return Math.min((pageIndex + 1) * pageSize, total);
+  return totalKnown.value
+    ? Math.min((pageIndex + 1) * pageSize, totalRows.value)
+    : pageIndex * pageSize + rowsOnPage.value;
 });
-const totalFiltered = computed(() => table.getFilteredRowModel().rows.length);
+const noResults = computed(
+  () => rowsOnPage.value === 0 && (!totalKnown.value || totalRows.value === 0)
+);
 const pageCount = computed(() => table.getPageCount());
+// TanStack uses a negative page count as the "unknown total" sentinel.
+const pageCountKnown = computed(() => pageCount.value >= 0);
 const currentPageIndex = computed(() => table.getState().pagination.pageIndex);
 </script>
 
@@ -377,11 +396,15 @@ const currentPageIndex = computed(() => table.getState().pagination.pageIndex);
 
     <!-- Pagination -->
     <div v-if="enablePagination" :class="slots.pagination()">
-      <div :class="slots.paginationInfo()">
-        <template v-if="totalFiltered === 0">No results</template>
+      <div :class="slots.paginationInfo()" role="status">
+        <template v-if="noResults">No results</template>
+        <template v-else-if="totalKnown">
+          Showing <strong>{{ firstRow }}</strong
+          >–<strong>{{ lastRow }}</strong> of <strong>{{ totalRows }}</strong>
+        </template>
         <template v-else>
           Showing <strong>{{ firstRow }}</strong
-          >–<strong>{{ lastRow }}</strong> of <strong>{{ totalFiltered }}</strong>
+          >–<strong>{{ lastRow }}</strong>
         </template>
       </div>
       <div :class="slots.paginationControls()">
@@ -418,8 +441,10 @@ const currentPageIndex = computed(() => table.getState().pagination.pageIndex);
             ‹
           </button>
           <span class="px-2 text-sm tabular-nums">
-            Page <strong>{{ currentPageIndex + 1 }}</strong> of
-            <strong>{{ Math.max(pageCount, 1) }}</strong>
+            Page <strong>{{ currentPageIndex + 1 }}</strong>
+            <template v-if="pageCountKnown">
+              of <strong>{{ Math.max(pageCount, 1) }}</strong>
+            </template>
           </span>
           <button
             type="button"
@@ -433,7 +458,7 @@ const currentPageIndex = computed(() => table.getState().pagination.pageIndex);
           <button
             type="button"
             class="rounded border border-gray-200 px-2 py-1 text-sm disabled:opacity-50"
-            :disabled="!table.getCanNextPage()"
+            :disabled="!table.getCanNextPage() || !pageCountKnown"
             aria-label="Last page"
             @click="table.setPageIndex(pageCount - 1)"
           >
