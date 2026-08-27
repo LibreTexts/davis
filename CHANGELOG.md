@@ -1,3 +1,10 @@
+## [1.11.4](https://github.com/LibreTexts/davis/compare/v1.11.3...v1.11.4) (2026-08-27)
+
+
+### Bug Fixes
+
+* pagination display when using manualPagination ([e7c341f](https://github.com/LibreTexts/davis/commit/e7c341ff2cbead4e3d6d2e30343cf24e4abaa3a3))
+
 ## [1.11.3](https://github.com/LibreTexts/davis/compare/v1.11.2...v1.11.3) (2026-08-27)
 
 
