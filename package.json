@@ -8,6 +8,7 @@
     "clean": "npm run clean --workspaces --if-present",
     "dev": "npm run dev --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
+    "check:types": "node scripts/check-dist-types.mjs",
     "lint": "npm run lint --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
     "docs:dev": "npm run dev -w @libretexts/davis-docs",

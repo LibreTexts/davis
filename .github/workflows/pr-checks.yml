@@ -34,6 +34,9 @@ jobs:
       - name: Run build
         run: npm run build --workspaces --if-present
 
+      - name: Check type declarations are published
+        run: node scripts/check-dist-types.mjs
+
       - name: Run tests
         run: npm run test --workspaces --if-present
 

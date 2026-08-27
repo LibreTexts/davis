@@ -77,6 +77,9 @@ jobs:
       - name: Build core package
         run: npm run build -w @libretexts/davis-core
 
+      - name: Check type declarations are published
+        run: node scripts/check-dist-types.mjs core
+
       - name: Publish core to NPM
         if: ${{ github.event.inputs.package == 'core' || github.event.inputs.package == 'all' }}
         run: |
@@ -119,6 +122,9 @@ jobs:
       - name: Build react package
         run: npm run build -w @libretexts/davis-react
 
+      - name: Check type declarations are published
+        run: node scripts/check-dist-types.mjs react
+
       - name: Publish react to NPM
         run: |
           PKG_NAME=$(node -p "require('./packages/react/package.json').name")
@@ -159,6 +165,9 @@ jobs:
 
       - name: Build vue package
         run: npm run build -w @libretexts/davis-vue
+
+      - name: Check type declarations are published
+        run: node scripts/check-dist-types.mjs vue
 
       - name: Publish vue to NPM
         run: |
@@ -204,6 +213,9 @@ jobs:
       - name: Build react-table package
         run: npm run build -w @libretexts/davis-react-table
 
+      - name: Check type declarations are published
+        run: node scripts/check-dist-types.mjs react-table
+
       - name: Publish react-table to NPM
         run: |
           PKG_NAME=$(node -p "require('./packages/react-table/package.json').name")
@@ -246,6 +258,9 @@ jobs:
 
       - name: Build vue-table package
         run: npm run build -w @libretexts/davis-vue-table
+
+      - name: Check type declarations are published
+        run: node scripts/check-dist-types.mjs vue-table
 
       - name: Publish vue-table to NPM
         run: |

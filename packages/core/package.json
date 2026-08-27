@@ -35,7 +35,7 @@
     "build": "tsc --project tsconfig.build.json && npm run generate:configs",
     "dev": "tsc --project tsconfig.build.json --watch",
     "typecheck": "tsc --noEmit",
-    "clean": "rm -rf dist",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
     "generate:configs": "node scripts/generate-tailwind-configs.mjs",
     "prepublishOnly": "npm run build"
   },

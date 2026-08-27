@@ -58,7 +58,7 @@
     "storybook": "storybook dev -p 6007",
     "build-storybook": "storybook build",
     "typecheck": "vue-tsc --noEmit",
-    "clean": "rm -rf dist",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
     "prepublishOnly": "npm run build"
   },
   "keywords": [

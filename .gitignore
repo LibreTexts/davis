@@ -159,4 +159,5 @@ example-app/
 .claude/
 .agents/
 .codegraph/
+CLAUDE.md
 .mcp.json

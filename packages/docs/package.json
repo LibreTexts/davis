@@ -12,7 +12,7 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "clean": "rm -rf .next out",
+    "clean": "node -e \"for (const d of ['.next','out']) require('fs').rmSync(d,{recursive:true,force:true})\"",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
