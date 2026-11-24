@@ -1680,3 +1680,36 @@ export const comment = tv({
 
 export type CommentVariant = 'default' | 'highlighted';
 export type CommentPadding = 'none' | 'sm' | 'md' | 'lg';
+
+// ─── Collapsible and execution trace ─────────────────────────────────────────
+
+export const collapsible = tv({
+  slots: {
+    root: 'flex min-w-0 flex-col',
+    trigger: 'inline-flex w-fit max-w-full items-center gap-2 rounded-md text-left text-sm text-gray-700 outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+    content: 'min-w-0',
+  },
+});
+
+export const trace = tv({
+  slots: {
+    root: 'flex w-full min-w-0 flex-col gap-2',
+    line: 'inline-flex max-w-full min-w-0 items-center gap-2 text-sm text-gray-600',
+    icon: 'inline-flex size-4 shrink-0 items-center justify-center [&_svg]:size-4',
+    title: 'min-w-0 truncate',
+    description: 'shrink-0 text-xs text-gray-500 tabular-nums',
+    trigger: 'group/trace py-1 hover:text-gray-900',
+    chevron: 'size-4 shrink-0 transition-transform group-aria-expanded/trace:rotate-90 motion-reduce:transition-none',
+    content: 'my-1 ml-2 min-w-0 border-l border-gray-200 pl-4 text-sm text-gray-700 [overflow-wrap:anywhere]',
+  },
+  variants: {
+    status: {
+      completed: {},
+      running: { line: 'motion-safe:animate-pulse' },
+      pending: { line: 'text-gray-500' },
+      error: { line: 'text-danger' },
+    },
+  },
+});
+
+export type TraceStatus = 'completed' | 'running' | 'pending' | 'error';
