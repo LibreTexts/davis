@@ -98,6 +98,7 @@ export const navigation: NavGroup[] = [
       { title: 'Badge', href: '/docs/components/badge' },
       { title: 'Button', href: '/docs/components/button' },
       { title: 'Card', href: '/docs/components/card' },
+      { title: 'Collapsible', href: '/docs/components/collapsible' },
       { title: 'Comment', href: '/docs/components/comment' },
       { title: 'Icon Button', href: '/docs/components/icon-button' },
       { title: 'Link', href: '/docs/components/link' },
@@ -105,6 +106,7 @@ export const navigation: NavGroup[] = [
       { title: 'Stat Card', href: '/docs/components/stat-card' },
       { title: 'Timeline', href: '/docs/components/timeline' },
       { title: 'Tooltip', href: '/docs/components/tooltip' },
+      { title: 'Trace', href: '/docs/components/trace' },
     ],
   },
   {

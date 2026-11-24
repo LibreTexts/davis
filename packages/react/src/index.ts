@@ -144,6 +144,16 @@ export type {
 } from "./components/tabs";
 
 export { Accordion } from "./components/accordion";
+export { Collapsible, CollapsibleTrigger, CollapsibleContent } from "./components/collapsible";
+export type { CollapsibleProps, CollapsibleTriggerProps, CollapsibleContentProps } from "./components/collapsible";
+export {
+  Trace, TraceLine, TraceIcon, TraceTitle, TraceDescription,
+  TraceCollapsible, TraceCollapsibleTrigger, TraceCollapsibleContent,
+} from "./components/trace";
+export type {
+  TraceProps, TraceLineProps, TraceIconProps, TraceTitleProps, TraceDescriptionProps,
+  TraceStatus, TraceCollapsibleProps, TraceCollapsibleTriggerProps, TraceCollapsibleContentProps,
+} from "./components/trace";
 export type {
   AccordionProps,
   AccordionVariant,

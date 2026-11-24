@@ -4,7 +4,8 @@
   "private": true,
   "description": "An a11y-first UI library for React and Vue",
   "scripts": {
-    "build": "npm run build --workspaces --if-present",
+    "build": "npm run build:packages && npm run docs:build",
+    "build:packages": "npm run build -w @libretexts/davis-core -w @libretexts/davis-react -w @libretexts/davis-vue -w @libretexts/davis-react-table -w @libretexts/davis-vue-table",
     "clean": "npm run clean --workspaces --if-present",
     "dev": "npm run dev --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
